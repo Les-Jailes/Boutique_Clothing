@@ -3,14 +3,14 @@
     background-color: black;
     align-items: center;
     justify-content: center;
-    margin: 0 0.3rem;
+    margin: 0;
     padding: 0.6rem 0;
     gap: 3rem;
 }
 .link{
     text-decoration: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     font-weight: 400;
     position: relative;
 }

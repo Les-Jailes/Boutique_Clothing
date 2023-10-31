@@ -4,6 +4,9 @@ import Dropdown from "../dropdown/Dropdown";
 import style from './menu.module.css'
 import { useState } from "react";
 import Link from "next/link";
+import { FaBars } from "react-icons/fa";
+import { AiOutlineUser } from "react-icons/ai";
+import { BsCart4 } from "react-icons/bs";
 
 const MenuItems = ({ items }) => {
   const [dropdown, setDropdown] = useState(false);
@@ -15,12 +18,11 @@ const MenuItems = ({ items }) => {
           <button type="button" aria-haspopup="menu"
           aria-expanded={dropdown ? "true" : "false"}
           onClick={() => setDropdown((prev) => !prev)}>
-            <Image
-              src={items.src}
-              alt={items.alt}
-              width={40}
-              height={40}
-              className={style.img}
+            <FaBars 
+              size={30}
+              title="Menu Bar"
+              color="black"
+              className={style.icons}
             />
             {items.title}{' '}
           </button>
@@ -28,15 +30,26 @@ const MenuItems = ({ items }) => {
           dropdown = {dropdown} />
         </>
       ) : (
+          items.icon === 'user'?(
             <Link href={items.url}>
-                <Image
-                src={items.src}
-                alt={items.alt}
-                width={40}
-                height={40}
-                className={style.img}
-              />
-            </Link>
+            <AiOutlineUser
+            size={35}
+            title="User"
+            color="black"
+            className={style.icons}
+             />
+          </Link>
+          ) :(
+            <Link href={items.url}>
+            <BsCart4 
+            size={35}
+            title="Shopping cart"
+            color="black"
+            className={style.icons}
+            />
+            
+          </Link>
+          )
       )}
     </li>
   );

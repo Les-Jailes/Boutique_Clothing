@@ -11,6 +11,7 @@
   border-radius: 0.5rem;
   display: none;
   color: black;
+  overflow: hidden;
 }
 
 .dropdown.show {

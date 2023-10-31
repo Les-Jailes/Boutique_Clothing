@@ -3,11 +3,13 @@ export const menuItems = [
     alt: 'user profile website',
     src: '/user-profile.png',
     url: '/user-profile',
+    icon: 'user'
   },
   {
     alt: 'cart website',
     src: '/cart.png',
     url: '/shopping-cart',
+    icon: 'cart'
   },
   {
     alt: 'menu bar',
@@ -27,5 +29,6 @@ export const menuItems = [
         url: '/contact-us',
       },
     ],
+    icon:'bar'
   },
 ];

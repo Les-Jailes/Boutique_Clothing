@@ -10,10 +10,10 @@
     text-align: left;
     padding: 0.7rem 1rem;
   }
-.img{
+.icons{
   transition: 0.2s ease;
 }
-.img:hover{
+.icons:hover{
   transform: scale(1.1);
 }
 @media screen and (max-width: 811px) {
