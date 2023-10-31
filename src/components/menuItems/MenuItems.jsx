@@ -20,6 +20,7 @@ const MenuItems = ({ items }) => {
               alt={items.alt}
               width={40}
               height={40}
+              className={style.img}
             />
             {items.title}{' '}
           </button>
@@ -33,6 +34,7 @@ const MenuItems = ({ items }) => {
                 alt={items.alt}
                 width={40}
                 height={40}
+                className={style.img}
               />
             </Link>
       )}

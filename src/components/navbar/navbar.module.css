@@ -46,3 +46,15 @@
     object-fit: contain;
     margin: 0.5rem 0 0 0;
 }
+.imgContainer {
+    transition: transform 0.3s;
+  }
+  
+  .imgContainer:hover {
+    -webkit-transform: scale(1.2);
+-ms-transform: scale(1.2);
+transform: scale(1.2);
+transition: 1s ease;
+    width: 17px;
+    height: 17px;
+  }

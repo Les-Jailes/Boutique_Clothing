@@ -6,7 +6,6 @@
   font-size: 0.875rem;
   z-index: 9999;
   min-width: 10rem;
-  padding: 0.5rem 0.5rem;
   list-style: none;
   background-color: #fff;
   border-radius: 0.5rem;
@@ -25,6 +24,7 @@
 }
 .menuItems {
   position: relative;
+  border-radius: 0.1rem;
   font-size: 14px;
 }
 
@@ -37,4 +37,7 @@
 .menuItems > .link{
     text-align: left;
     padding: 0.7rem 1rem;
+}
+.menuItems:hover{
+  background-color: #d1d1d1;
 }

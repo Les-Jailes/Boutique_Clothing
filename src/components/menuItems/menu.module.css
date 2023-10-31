@@ -10,3 +10,9 @@
     text-align: left;
     padding: 0.7rem 1rem;
   }
+.img{
+  transition: 0.2s ease;
+}
+.img:hover{
+  transform: scale(1.1);
+}

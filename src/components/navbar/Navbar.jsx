@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import style from './navbar.module.css'
 import Image from 'next/image'
@@ -23,13 +24,15 @@ const Navbar = () => {
             <form action="" className={style.searchBar}>
                 <input type="text" placeholder='Search ...' className={style.searchBar}/>
                 <button type='submit' className={style.searchButton}> 
+                  <div className={style.imgContainer}>
                     <Image
-                        src={"/searcher.png"}
-                        alt='search img'
-                        width={15}
-                        height={15}
-                        className={style.img}
-                     />
+                      src={"/searcher.png"}
+                      alt='search img'
+                      width={15}
+                      height={15}
+                      className={style.img}
+                    />
+                  </div>
                 </button>
             </form>
         </div> 
