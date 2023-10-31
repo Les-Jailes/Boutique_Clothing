@@ -16,3 +16,11 @@
 .img:hover{
   transform: scale(1.1);
 }
+@media screen and (max-width: 811px) {
+  .img{
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+  }
+}

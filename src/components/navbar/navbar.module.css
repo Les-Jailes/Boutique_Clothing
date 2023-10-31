@@ -25,8 +25,6 @@
     display: flex;
     padding: 5px 10px;
     justify-content: space-between;
-}
-.searchBar{
     background: transparent;
     border: 0;
     outline: none;
@@ -48,3 +46,47 @@
 .imgContainer {
     transition: transform 0.3s;
   }
+
+@media screen and (max-width: 1450px) {
+    .searchBar {
+        width: 500px;
+    }
+}
+@media screen and (max-width: 1050px) {
+    .searchBar {
+        width: 300px;
+        padding: 5px 5px;
+    }
+}
+@media screen and (max-width: 811px) {
+    .container{
+        gap: 0.1rem;
+    }
+    .searchContainer {
+        border: 1px solid black;
+        border-radius: 60px;
+    }
+    .menuItems {
+        gap: 0.1rem;
+    }
+
+
+    .searchBar {
+        width: 100%;
+        padding: 5px 10px;
+        font-size: 16px;
+        justify-content: space-between; 
+    }
+
+    .searchButton {
+        margin-left: auto;
+}
+}
+@media screen and (max-width: 650px) {
+    .searchContainer {
+        display: none;
+    }
+    .searchBar{
+        display: none;
+}
+}

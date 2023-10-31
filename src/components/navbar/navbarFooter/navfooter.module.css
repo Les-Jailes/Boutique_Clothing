@@ -31,3 +31,18 @@
     transform-origin: left;
     transform: scaleX(1);
 }
+
+@media screen and (max-width: 750px) {
+    .link{
+        font-size: 1.3rem;
+    }
+}
+@media screen and (max-width: 630px) {
+    .container{
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+    .link{
+        font-size: 1.5rem;
+    }
+}
