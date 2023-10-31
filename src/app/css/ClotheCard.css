@@ -1,0 +1,26 @@
+@import url('../globals.css');
+
+.clothe-card-container {
+    width: var(--width-card);
+    min-height: var(--min-height-card);
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-card);
+    overflow: hidden;
+}
+
+.card-image-section {
+    background-color: beige;
+    width: var(--width-card);
+    height: var(--width-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.clothe-image {
+    width: auto;
+    height: calc(var(--width-card) - 30px);
+    filter: drop-shadow(var(--box-shadow-image-card));
+}
