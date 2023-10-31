@@ -19,7 +19,7 @@ export const menuItems = [
         url: '/settings',
       },
       {
-        title: 'More about Boutique Clothing',
+        title: 'More about us',
         url: '/about-us',
       },
       {

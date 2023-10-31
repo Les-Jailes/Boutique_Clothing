@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:0 1rem;
+    padding:0 0.5rem;
     gap: 3rem;
     margin: 0;
 }
@@ -41,4 +41,8 @@
     height: 40px;
     background-color: #254B5E;
     cursor: pointer;
+}
+.logoImg{
+    object-fit: contain;
+    margin: 0.5rem 0 0 0;
 }
