@@ -12,6 +12,7 @@
   background-color: #fff;
   border-radius: 0.5rem;
   display: none;
+  color: black;
 }
 
 .dropdown.show {
@@ -28,13 +29,13 @@
   font-size: 14px;
 }
 
-.menuItems a {
+.menuItems .link {
   display: block;
   font-size: inherit;
   color: inherit;
   text-decoration: none;
 }
-.menuItems > a{
+.menuItems > .link{
     text-align: left;
     padding: 0.7rem 1rem;
 }

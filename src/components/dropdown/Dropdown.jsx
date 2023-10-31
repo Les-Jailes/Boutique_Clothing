@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import style from './dropdown.module.css'
 const Dropdown = ({ submenus, dropdown }) => {
     return (
         <ul className={`${style.dropdown} ${dropdown ? style.show : ""}`}>
         {submenus.map((submenu, index) => (
           <li key={index} className={style.menuItems}>
-            <a href={submenu.url}>{submenu.title}</a>
+            <Link className={style.link} href={submenu.url}>{submenu.title}</Link>
           </li>
         ))}
       </ul>

@@ -1,7 +1,9 @@
 'use client'
+import Image from "next/image";
 import Dropdown from "../dropdown/Dropdown";
 import style from './menu.module.css'
 import { useState } from "react";
+import Link from "next/link";
 
 const MenuItems = ({ items }) => {
   const [dropdown, setDropdown] = useState(false);
@@ -13,13 +15,26 @@ const MenuItems = ({ items }) => {
           <button type="button" aria-haspopup="menu"
           aria-expanded={dropdown ? "true" : "false"}
           onClick={() => setDropdown((prev) => !prev)}>
+            <Image
+              src={items.src}
+              alt={items.alt}
+              width={40}
+              height={40}
+            />
             {items.title}{' '}
           </button>
           <Dropdown submenus={items.submenu}
           dropdown = {dropdown} />
         </>
       ) : (
-        <a href={items.url}>{items.title}</a>
+            <Link href={items.url}>
+                <Image
+                src={items.src}
+                alt={items.alt}
+                width={40}
+                height={40}
+              />
+            </Link>
       )}
     </li>
   );

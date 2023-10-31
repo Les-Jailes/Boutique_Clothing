@@ -1,19 +1,30 @@
 export const menuItems = [
   {
-    title: 'example',
+    alt: 'user profile website',
+    src: '/user-profile.png',
+    url: '/user-profile',
+  },
+  {
+    alt: 'cart website',
+    src: '/cart.png',
+    url: '/shopping-cart',
+  },
+  {
+    alt: 'menu bar',
+    src: '/menu-bar.png',
     url: '/',
     submenu: [
       {
-        title: 'option1',
-        url: 'option1',
+        title: 'Settings',
+        url: '/settings',
       },
       {
-        title: 'option2',
-        url: 'option2',
+        title: 'More about Boutique Clothing',
+        url: '/about-us',
       },
       {
-        title: 'option3',
-        url: 'option3',
+        title: 'Get in Contact',
+        url: '/contact-us',
       },
     ],
   },
