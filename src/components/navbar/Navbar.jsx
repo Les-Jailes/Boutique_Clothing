@@ -1,10 +1,12 @@
 import React from 'react'
-import styles from './navbar.module.css'
+import style from './navbar.module.css'
 import Image from 'next/image'
+import { menuItems } from '@/utils/menuItems'
+import MenuItems from '@/components/menuItems/MenuItems'
 
 const Navbar = () => {
   return (
-    <div>
+    <div className={style.container}>
         LOGO
         <div>
             <form action="" className='search-bar'>
@@ -20,7 +22,11 @@ const Navbar = () => {
             </form>
         </div> 
         <div>
-            
+        <ul className={style.menus}>
+        {menuItems.map((menu, index) => {
+          return <MenuItems items={menu} key={index} />;
+        })}
+      </ul>
         </div>
     </div>
   )

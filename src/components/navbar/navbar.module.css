@@ -1,0 +1,9 @@
+.container{
+    background-color: rgb(238, 182, 182);
+}
+.menus {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+  }
