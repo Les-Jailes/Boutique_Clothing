@@ -18,7 +18,7 @@ const Navbar = () => {
                      />
                 </button>
             </form>
-        </div>
+        </div> 
         <div>
             
         </div>
