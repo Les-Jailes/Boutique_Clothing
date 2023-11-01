@@ -10,3 +10,15 @@
   --boy-background-gradient: linear-gradient(135deg, #00FFB3 0%, #00604E 100%);
   --font-family-poppins: 'Poppins', sans-serif;
 }
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
