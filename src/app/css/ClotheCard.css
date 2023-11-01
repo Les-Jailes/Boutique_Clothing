@@ -7,6 +7,7 @@
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-card);
     overflow: hidden;
+    font-family: var(--font-family-poppins);
 }
 
 .card-image-section {
@@ -17,10 +18,92 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: var(--border-radius);
+}
+
+.card-image-section.women {
+    background: var(--women-background-gradient);
+}
+
+.card-image-section.men {
+    background: var(--men-background-gradient);
+}
+
+.card-image-section.girl {
+    background: var(--girl-background-gradient);
+}
+
+.card-image-section.boy {
+    background: var(--boy-background-gradient);
 }
 
 .clothe-image {
     width: auto;
     height: calc(var(--width-card) - 30px);
     filter: drop-shadow(var(--box-shadow-image-card));
+}
+
+.information-container {
+    width: 100%;
+    display:grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 50% 50%;
+    grid-template-areas: 
+    "information information"
+    "colors buttons"
+    ;
+}
+
+.section-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-card.clothe-information {
+    grid-area: information;
+    padding: 10px;
+}
+
+.clothe-name {
+    font-size: 24px;
+    width: 100%;
+}
+
+.clothe-price {
+    font-size: 14px;
+    width: 100%;
+}
+
+.colors-container {
+    grid-area: colors;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card-buttons {
+    grid-area: buttons;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.options-card {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    font-size: 24px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border: none;
+}
+
+.options-card.shop-card {
+    background-color: #000;
 }
