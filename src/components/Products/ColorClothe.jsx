@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
-import '@/app/css/ColorClothe.css'
+import '@/css/Products/ColorClothe.css'
 
 export function ColorClothe({ color }) {
 

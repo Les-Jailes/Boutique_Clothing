@@ -1,7 +1,6 @@
 'use client'
 
-import "@/app/css/ClotheCard.css"
-import "@/app/css/General.css"
+import "@/css/Products/ClotheCard.css"
 import { AiOutlineHeart, AiFillHeart, AiOutlineShoppingCart } from "react-icons/ai"
 import { useState } from "react"
 import { ColorClothe } from "./ColorClothe"

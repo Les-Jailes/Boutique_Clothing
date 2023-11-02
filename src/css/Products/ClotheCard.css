@@ -1,4 +1,4 @@
-@import url('../globals.css');
+@import url('../../app/globals.css');
 
 .clothe-card-container {
     width: var(--width-card);
@@ -11,7 +11,7 @@
 }
 
 .card-image-section {
-    background-color: beige;
+    background-color: #f5f5dc;
     width: var(--width-card);
     height: var(--width-card);
     display: flex;

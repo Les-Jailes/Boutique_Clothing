@@ -1,6 +1,6 @@
 .container{
     display: flex;
-    background-color: black;
+    background-color: #000000;
     align-items: center;
     justify-content: center;
     margin: 0;
@@ -9,9 +9,8 @@
 }
 .link{
     text-decoration: none;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 400;
+    color: #ffffff;
+    font-size: 14px;
     position: relative;
 }
 .link::before{
@@ -20,8 +19,8 @@
     width: 100%;
     height: 3px;
     border-radius: 4px;
-    background-color: white;
-    bottom: 0;
+    background-color: #ffffff;
+    bottom: -5px;
     left: 0;
     transform-origin: right;
     transform: scaleX(0);

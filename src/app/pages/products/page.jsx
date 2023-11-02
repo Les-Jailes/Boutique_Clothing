@@ -1,8 +1,7 @@
 'use client'
 
-import { ClotheCard } from "@/app/components/ClotheCard"
-import '@/app/css/General.css'
-import '@/app/css/ProductsPage.css'
+import { ClotheCard } from "@/components/Products/ClotheCard"
+import '@/css/Products/ProductsPage.css'
 import { useState } from "react"
 import { AiFillFilter } from "react-icons/ai";
 

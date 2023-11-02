@@ -1,37 +1,29 @@
 'use client'
 import React from 'react'
 import style from './navbar.module.css'
-import Image from 'next/image'
 import { menuItems } from '@/utils/menuItems'
 import MenuItems from '@/components/navbar/menuItems/MenuItems'
 import NavbarFooter from './navbarFooter/NavbarFooter'
 import Link from 'next/link'
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Navbar = () => {
   return (
-    <div>
+    <>
       <div className={style.container}>
         <Link href={"/"} className={style.logoLink}>
-          <Image
-            src={"/logo.png"}
+          <img
+            src="https://i.postimg.cc/FzHMbWPS/logo.png"
             alt='logo'
-            width={180}
-            height={60}
             className={style.logoImg}
           />
         </Link>
         <div className={style.searchContainer}>
             <form action="" className={style.searchBar}>
-                <input type="text" placeholder='Search ...' className={style.searchBar}/>
+                <input type="text" placeholder='Search ...' className={style.searchBarInput}/>
                 <button type='submit' className={style.searchButton}> 
                   <div className={style.imgContainer}>
-                    <Image
-                      src={"/searcher.png"}
-                      alt='search img'
-                      width={15}
-                      height={15}
-                      className={style.img}
-                    />
+                    <AiOutlineSearch color='#fff' size={24} />
                   </div>
                 </button>
             </form>
@@ -45,7 +37,7 @@ const Navbar = () => {
         </div>
       </div>
       <NavbarFooter />
-    </div>
+    </>
   )
 }
 
