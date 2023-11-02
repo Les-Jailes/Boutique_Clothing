@@ -15,9 +15,9 @@ export const ClotheCard = ({ clothe }) => {
 
   return (
     <div className="clothe-card-container">
-      <div className={ `card-image-section ${ clothe.category }` }>
+      <div className={ `card-image-section ${ clothe.category.toLowerCase() }` }>
         <img
-          src={clothe.image}
+          src={clothe.path[0]}
           alt="Clothe image"
           className="clothe-image"
           draggable="false"
@@ -30,7 +30,7 @@ export const ClotheCard = ({ clothe }) => {
         </div>
         <div className="section-card colors-container">
           {
-            clothe.colors.map((color, index) => (
+            clothe.color.map((color, index) => (
               <ColorClothe key={ index } color={ color } />
             ))
           }
