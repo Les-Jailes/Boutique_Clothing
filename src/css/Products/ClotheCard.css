@@ -1,0 +1,146 @@
+@import url('../../app/globals.css');
+
+.clothe-card-container {
+    width: var(--width-card);
+    height: 700px;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-card);
+    overflow: hidden;
+    font-family: var(--font-family-poppins);
+}
+
+.card-image-section {
+    background-color: #f5f5dc;
+    width: var(--width-card);
+    height: var(--width-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+}
+
+.card-image-section.women {
+    background: var(--women-background-gradient);
+}
+
+.card-image-section.men {
+    background: var(--men-background-gradient);
+}
+
+.card-image-section.girl {
+    background: var(--girl-background-gradient);
+}
+
+.card-image-section.boy {
+    background: var(--boy-background-gradient);
+}
+
+.clothe-image {
+    width: auto;
+    height: calc(var(--width-card) - 30px);
+    filter: drop-shadow(var(--box-shadow-image-card));
+}
+
+.information-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-more-information-and-buttons {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-card {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-card.clothe-information {
+    grid-area: information;
+    padding: 10px;
+}
+
+.clothe-name {
+    font-size: 18px;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.clothe-price {
+    font-size: 14px;
+    width: 100%;
+}
+
+.colors-container {
+    grid-area: colors;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card-buttons {
+    grid-area: buttons;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.options-card {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    font-size: 24px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border: none;
+}
+
+.options-card.shop-card {
+    background-color: #000;
+}
+
+@media (max-width: 570px) {
+    .clothe-card-container {
+        width: 300px;
+        height: 500px;
+    }
+
+    .card-image-section {
+        width: 300px;
+        height: 300px;
+    }
+
+    .clothe-image {
+        height: calc(300px - 40px);
+    }
+
+    .section-card.clothe-information {
+        padding: 5px;
+    }
+    
+    .clothe-name {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+    
+    .clothe-price {
+        font-size: 12px;
+    }
+}

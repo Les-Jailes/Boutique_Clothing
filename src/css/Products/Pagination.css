@@ -1,0 +1,55 @@
+.pagination-container {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-object {
+    width: 600px;
+    height: 40px;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-areas:
+    "left pagination right"
+    ;
+    place-items: center;
+}
+
+.currently-pagination {
+    grid-area: pagination;
+    font-size: 24px;
+}
+
+.pagination-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.pagination-button.disable {
+    display: none;
+}
+
+.left-button {
+    grid-area: left;
+}
+
+.right-button {
+    grid-area: right;
+}
+
+@media (max-width: 630px) {
+    .pagination-object {
+        width: 100%;
+    }
+}

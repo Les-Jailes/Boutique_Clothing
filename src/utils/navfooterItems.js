@@ -1,26 +1,26 @@
 export const navFooterItems = [
     {
-      title:'Women',
-      url: '/women',
+        title: 'Women',
+        url: '/women',
     },
     {
-        title:'Men',
+        title: 'Men',
         url: '/men',
     },
     {
-        title:'Boy',
+        title: 'Boy',
         url: '/boy',
     },
     {
-        title:'Girl',
+        title: 'Girl',
         url: '/girl ',
     },
     {
-        title:'Summer',
+        title: 'Summer',
         url: '/summer',
     },
     {
-        title:'Offer',
+        title: 'Offer',
         url: '/offer',
     },
-  ];
+];
