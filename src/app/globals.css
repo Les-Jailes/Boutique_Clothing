@@ -1,7 +1,7 @@
 :root {
   --border-radius: 10px;
   --box-shadow-card: 10px 10px 20px #00000060;
-  --width-card: 400px;
+  --width-card: 500px;
   --min-height-card: 500px;
   --box-shadow-image-card: 6px 6px 10px #00000060;
   --women-background-gradient: linear-gradient(135deg, #800040 0%, #FD0F0F 100%);

@@ -27,7 +27,6 @@ export default function Page() {
 
   useEffect(() => {
     setPagination(createPagination(products))
-    console.log(pagination)
   }, [products])
 
   const handlePaginationRight = () => {

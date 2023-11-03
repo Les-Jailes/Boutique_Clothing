@@ -2,7 +2,7 @@
 
 .clothe-card-container {
     width: var(--width-card);
-    height: 600px;
+    height: 700px;
     background-color: #fff;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-card);
@@ -47,7 +47,6 @@
     width: 100%;
     display:grid;
     grid-template-columns: 60% 40%;
-    grid-template-rows: 80% 20%;
     grid-template-areas: 
     "information information"
     "colors buttons"
@@ -108,4 +107,33 @@
 
 .options-card.shop-card {
     background-color: #000;
+}
+
+@media (max-width: 570px) {
+    .clothe-card-container {
+        width: 300px;
+        height: 460px;
+    }
+
+    .card-image-section {
+        width: 300px;
+        height: 300px;
+    }
+
+    .clothe-image {
+        height: calc(300px - 40px);
+    }
+
+    .section-card.clothe-information {
+        padding: 5px;
+    }
+    
+    .clothe-name {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+    
+    .clothe-price {
+        font-size: 12px;
+    }
 }
