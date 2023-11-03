@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     background-color: #000000;
     align-items: center;
@@ -7,13 +7,15 @@
     padding: 0.6rem 0;
     gap: 3rem;
 }
-.link{
+
+.link {
     text-decoration: none;
     color: #ffffff;
     font-size: 14px;
     position: relative;
 }
-.link::before{
+
+.link::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -26,22 +28,15 @@
     transform: scaleX(0);
     transition: transform .3s ease-in-out;
 }
-.link:hover::before{
+
+.link:hover::before {
     transform-origin: left;
     transform: scaleX(1);
 }
 
-@media screen and (max-width: 750px) {
-    .link{
-        font-size: 1.3rem;
-    }
-}
-@media screen and (max-width: 630px) {
-    .container{
-        flex-direction: column;
-        gap: 0.2rem;
-    }
-    .link{
-        font-size: 1.5rem;
+@media (max-width: 500px) {
+    .container {
+        padding: 0.1rem 0;
+        gap: 1rem;
     }
 }

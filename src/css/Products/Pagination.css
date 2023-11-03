@@ -47,3 +47,9 @@
 .right-button {
     grid-area: right;
 }
+
+@media (max-width: 630px) {
+    .pagination-object {
+        width: 100%;
+    }
+}

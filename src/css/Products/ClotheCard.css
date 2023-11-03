@@ -2,7 +2,7 @@
 
 .clothe-card-container {
     width: var(--width-card);
-    min-height: var(--min-height-card);
+    height: 600px;
     background-color: #fff;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow-card);
@@ -47,11 +47,12 @@
     width: 100%;
     display:grid;
     grid-template-columns: 60% 40%;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 80% 20%;
     grid-template-areas: 
     "information information"
     "colors buttons"
     ;
+    place-items: center;
 }
 
 .section-card {
@@ -71,7 +72,6 @@
     font-size: 18px;
     width: 100%;
     padding: 20px 0;
-    text-align: left;
 }
 
 .clothe-price {

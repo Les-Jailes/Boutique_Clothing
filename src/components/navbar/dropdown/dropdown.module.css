@@ -2,7 +2,7 @@
   position: absolute;
   right: 0;
   left: auto;
-  box-shadow: 0 0 20px rgba(46, 41, 51, 0.2); 
+  box-shadow: 0 0 20px rgba(46, 41, 51, 0.2);
   font-size: 0.875rem;
   z-index: 9999;
   min-width: 10rem;
@@ -23,6 +23,7 @@
   right: 100%;
   top: -7px;
 }
+
 .menuItems {
   position: relative;
   border-radius: 0.1rem;
@@ -30,17 +31,18 @@
   font-size: 14px;
 }
 
-
 .menuItems .link {
   display: block;
   font-size: inherit;
   color: inherit;
   text-decoration: none;
 }
-.menuItems > .link{
-    text-align: left;
-    padding: 0.7rem 1rem;
+
+.menuItems>.link {
+  text-align: left;
+  padding: 0.7rem 1rem;
 }
-.menuItems:hover{
+
+.menuItems:hover {
   background-color: #d1d1d1;
 }
