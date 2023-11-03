@@ -1,45 +1,71 @@
-"use client";
+"use client"
 
-import { ClotheCard } from "@/components/Products/ClotheCard";
-import "@/css/Products/ProductsPage.css";
-import { useState, useEffect } from "react";
-import { AiFillFilter } from "react-icons/ai";
-import axios from "axios";
+import { useState, useEffect } from "react"
+import axios from "axios"
+import createPagination from "@/utils/Pagination"
+import { ClotheCard } from "@/components/Products/ClotheCard"
+import "@/css/Products/ProductsPage.css"
+import { Pagination } from "@/components/Products/Pagination"
 
-export default function page({ isActive }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const [products, setProducts] = useState([]);
+export default function Page() {
+  const [pagination, setPagination] = useState([])
+  const [products, setProducts] = useState([])
+  const [currentlyPagination, setCurrentlyPagination] = useState(0)
+  const [leftIsDisable, setLeftIsDisable] = useState(true)
+  const [rightIsDisable, setRightIsDisable] = useState(false)
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/product')
+      .get("https://boutique-clothing-api.onrender.com/product")
       .then((response) => {
-        setProducts(response.data);
+        setProducts(response.data)
       })
       .catch((error) => {
-        console.error("Error: ", error);
-      });
-  }, []);
+        console.error("Error: ", error)
+      })
+  }, [])
 
-  const handleOpenFilter = () => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    setPagination(createPagination(products))
+    console.log(pagination)
+  }, [products])
+
+  const handlePaginationRight = () => {
+    let paginationNumber = currentlyPagination + 1;
+    if (paginationNumber < pagination.length) {
+      setCurrentlyPagination(paginationNumber);
+      setLeftIsDisable(false);
+    }
+    if (paginationNumber === pagination.length - 1) {
+      setRightIsDisable(true);
+    }
+  }
+  
+  const handlePaginationLeft = () => {
+    let paginationNumber = currentlyPagination - 1;
+    if (paginationNumber >= 0) {
+      setCurrentlyPagination(paginationNumber);
+      setRightIsDisable(false);
+    }
+    if (paginationNumber === 0) {
+      setLeftIsDisable(true);
+    }
+  }
 
   return (
     <div className="products-page">
-      <button
-        className={` button-filter-container ${isOpen ? "is-open" : ""} `}
-        onClick={() => handleOpenFilter()}
-      >
-        <AiFillFilter color="white" />
-      </button>
-      <div className={` filter-container ${isOpen ? "is-open" : ""} `}></div>
       <div className="product-container">
-        {products.map((product, index) => (
+        {pagination[currentlyPagination]?.map((product, index) => (
           <ClotheCard key={index} clothe={product} />
         ))}
       </div>
+      <Pagination
+        currentlyPagination={currentlyPagination}
+        changePaginationRight={handlePaginationRight}
+        changePaginationLeft={handlePaginationLeft}
+        leftIsDisable={leftIsDisable}
+        rightIsDisable={rightIsDisable}
+      />
     </div>
-  );
+  )
 }
