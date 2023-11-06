@@ -5,7 +5,7 @@ import connect from "@/utils/dbUtil";
 import bcrypt from "bcryptjs";
 
 
-export const authOptions = {
+const authOptions = NextAuth({
     providers: [
         CredentialsProvider({
             id: "credentials",
@@ -14,6 +14,10 @@ export const authOptions = {
               await connect()
               try {
                 const user = await User.findOne({email: credentials.email});
+                console.log(user.name)
+                console.log(user.password)
+                console.log(user.email)
+                console.log(user.lastName)
                 if (user){
                   const isPasswordCorrect = await bcrypt.compare(
                     credentials.password,
@@ -21,6 +25,7 @@ export const authOptions = {
                   )
                   console.log(user.password)
                   console.log(credentials.password)
+                  console.log(isPasswordCorrect)
                   if(isPasswordCorrect){
                     return user
                   }else{
@@ -31,10 +36,10 @@ export const authOptions = {
                 }
               
               } catch (error) {
-                throw new Error(error)
+                throw new Error("pepe")
               }
             }
           })
     ],
-  }
-  export default NextAuth(authOptions)
+  })
+  export {authOptions as GET, authOptions as POST}

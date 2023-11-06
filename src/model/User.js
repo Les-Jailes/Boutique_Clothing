@@ -14,6 +14,10 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        email: {
+            type: String,
+            required: true,
+        },
         password: {
             type: String,
             required: true,
@@ -22,6 +26,7 @@ const userSchema = mongoose.Schema(
         gender: {
             type: String,
             required: true,
+            default: "Not set"
         },        
         imagePath:{
             type: String,
@@ -30,6 +35,7 @@ const userSchema = mongoose.Schema(
     },
     {
         timestamps: true,
+        collection: 'User' 
     }
 );
 export default mongoose.models.User || mongoose.model('User',  userSchema);
