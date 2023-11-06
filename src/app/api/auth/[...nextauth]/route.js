@@ -2,8 +2,6 @@ import NextAuth from "next-auth"
 import CredentialsProvider  from "next-auth/providers/credentials"
 import User from "@/model/User";
 import connect from "@/utils/dbUtil";
-import bcrypt from "bcryptjs";
-
 
 const authOptions = NextAuth({
     providers: [
@@ -19,10 +17,8 @@ const authOptions = NextAuth({
                 console.log(user.email)
                 console.log(user.lastName)
                 if (user){
-                  const isPasswordCorrect = await bcrypt.compare(
-                    credentials.password,
-                    user.password
-                  )
+                  const isPasswordCorrect = (user.password === credentials.password)
+                  
                   console.log(user.password)
                   console.log(credentials.password)
                   console.log(isPasswordCorrect)
@@ -36,10 +32,11 @@ const authOptions = NextAuth({
                 }
               
               } catch (error) {
-                throw new Error("pepe")
+                throw new Error(error)
               }
             }
           })
     ],
+
   })
   export {authOptions as GET, authOptions as POST}
