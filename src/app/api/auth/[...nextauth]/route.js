@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider  from "next-auth/providers/credentials"
 import User from "@/model/User";
 import connect from "@/utils/dbUtil";
+import bcrypt from 'bcryptjs'
 
 const authOptions = NextAuth({
     providers: [
@@ -12,16 +13,11 @@ const authOptions = NextAuth({
               await connect()
               try {
                 const user = await User.findOne({email: credentials.email});
-                console.log(user.name)
-                console.log(user.password)
-                console.log(user.email)
-                console.log(user.lastName)
                 if (user){
-                  const isPasswordCorrect = (user.password === credentials.password)
-                  
-                  console.log(user.password)
-                  console.log(credentials.password)
-                  console.log(isPasswordCorrect)
+                    const isPasswordCorrect = await bcrypt.compare(
+                        credentials.password,
+                        user.password
+                    )
                   if(isPasswordCorrect){
                     return user
                   }else{
