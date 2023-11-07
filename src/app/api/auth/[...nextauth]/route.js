@@ -36,3 +36,4 @@ const authOptions = NextAuth({
 
   })
   export {authOptions as GET, authOptions as POST}
+  
