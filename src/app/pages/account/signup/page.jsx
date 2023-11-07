@@ -119,7 +119,7 @@ const SignUp = () => {
         </form>
         <div className={styles.bottomSignUp}>
           <p className={styles.signUpTxt}>Already have an account?</p>
-          <Link href={"/pages/account/signup"} className={styles.signUpButton}>Log In</Link>
+          <Link href={"/pages/account/login"} className={styles.signUpButton}>Log In</Link>
       </div>
       </div>
     </div>
