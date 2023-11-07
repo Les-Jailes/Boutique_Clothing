@@ -2,8 +2,9 @@ const validateEmail = (email) => {
     if (email.length < 1) {
       return [false, "Email can't be be empty. Enter your email."];
     }
-    if (!/^.+@.+\..+$/.test(email)) {
-      return [false, "Invalid email format. Verify '@' and domain."];
+    const stricterEmailRegex = /^[a-zA-Z0-9._%+-]+(@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    if (!stricterEmailRegex.test(email)) {
+      return [false, "Invalid email format."];
     }
     return [true, ""];
   };

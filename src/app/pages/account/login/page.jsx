@@ -23,16 +23,12 @@ const Login = () => {
   if(session.status === "authenticated"){
     router.push("/");
 }
-  console.log(session)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const email = e.target[0].value
     const password = e.target[1].value
-    
-    const valid = validateEmailInput(email) && validatePasswordInput(password)
-    if (valid) {
-      signIn('credentials', { email, password });
-    }
+    signIn('credentials', { email, password });
   }
 
 

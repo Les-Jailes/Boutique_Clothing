@@ -26,9 +26,8 @@ const authOptions = NextAuth({
                 }else{
                   throw new Error("User not found")
                 }
-              
               } catch (error) {
-                throw new Error(error)
+                throw new Error("Authentication error")
               }
             }
           })
