@@ -4,16 +4,23 @@ import styles from './page.module.css'
 import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const session = useSession()
+  const router = useRouter()
+  if(session.status === "loading"){
+    return <p>Loading Authentication from Server</p>
+  }
+  if(session.status === "authenticated"){
+    router.push("/");
+}
   console.log(session)
   const handleSubmit = async (e) => {
     e.preventDefault()
     const email = e.target[0].value
     const password = e.target[1].value
-    alert(email +" " + password)
     signIn("credentials", {email, password})
   }
 
