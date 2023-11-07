@@ -3,9 +3,11 @@ import React,{useState} from 'react'
 import styles from './page.module.css'
 import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible, AiOutlineFontSize} from 'react-icons/ai'
+import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible, AiOutlineFontSize, AiOutlineMail} from 'react-icons/ai'
+import {PiIdentificationCardLight} from 'react-icons/pi'
 import { useRouter } from 'next/navigation'
 import {validateEmail, validatePassword} from '@/utils/formValidations'
+import api from '@/app/api/api'
 
 const SignUp = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -26,16 +28,24 @@ const SignUp = () => {
     router.push("/");
 }
   console.log(session)
+
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const email = e.target[0].value
-    const password = e.target[1].value
-    
-    const valid = validateEmailInput(email) && validatePasswordInput(password)
-    if (valid) {
-      signIn('credentials', { email, password });
-    }
-  }
+    e.preventDefault();
+  
+    const username = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+  
+    const body = {
+      username,
+      email,
+      password,
+    };
+  
+    const response = await api.post('/users', body);
+  
+    signIn('credentials', { email, password });
+  };
 
 
   const handleEmailChange = (e) => {
@@ -85,12 +95,22 @@ const SignUp = () => {
           <h1 className={styles.title}>Sign Up</h1>
           <div className={styles.inputBox}>
           <AiOutlineFontSize className={styles.icon}/>
-            <input type="text" onChange={handleUsernameChange} value={userNameInput} placeholder='Username' className={styles.input} required/>
+            <input type="text" onChange={handleUsernameChange} value={userNameInput} placeholder='Name' className={styles.input} required/>
             <p className={styles.validation}>{validationEmail ? valiEmailMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
-          <AiOutlineUser className={styles.icon}/>
+          <AiOutlineFontSize className={styles.icon}/>
+            <input type="text" onChange={handleUsernameChange} value={userNameInput} placeholder='Last Name' className={styles.input} required/>
+            <p className={styles.validation}>{validationEmail ? valiEmailMessage : ''}</p>
+          </div>
+          <div className={styles.inputBox}>
+          <AiOutlineMail className={styles.icon}/>
             <input type="email" onChange={handleEmailChange} value={emailInput} placeholder='Email' className={styles.input} required/>
+            <p className={styles.validation}>{validationEmail ? valiEmailMessage : ''}</p>
+          </div>
+          <div className={styles.inputBox}>
+          <PiIdentificationCardLight className={styles.icon}/>
+            <input type="number" onChange={handleUsernameChange} value={userNameInput} placeholder='CI' className={styles.input} required/>
             <p className={styles.validation}>{validationEmail ? valiEmailMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
