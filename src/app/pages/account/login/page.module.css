@@ -67,6 +67,7 @@
   transform: translateY(-50%);
   font-size: 20px;
   right: 5%;
+  cursor: pointer;
 }
 .iconLock:focus{
     color: #b1b1b1;
@@ -110,4 +111,23 @@
 }
 .signUpButton:hover{
     border: 0.1rem solid #000;
+}
+
+.validation{
+    font-size: 12px;
+    color: rgb(185, 17, 17);
+}
+
+@media screen and (max-width: 500px){
+    .formContainer{
+        padding: 2rem 4rem;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .formContainer{
+        padding: 2rem 4rem;
+        gap: 4rem;
+        margin: 2rem;
+    }
 }

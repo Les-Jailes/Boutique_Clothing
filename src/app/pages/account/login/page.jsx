@@ -5,9 +5,14 @@ import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
 import { useRouter } from 'next/navigation'
+import {validateEmail} from '@/utils/formValidations'
+import { set } from 'mongoose'
 
 const Login = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false)
+  const [validationEmail, setValidationEmail] = useState(false);
+  const [valiEmailMessage, setValiEmailMessage] = useState('');
+  const [emailInput, setEmailInput] = useState('');
   const session = useSession()
   const router = useRouter()
   if(session.status === "loading"){
@@ -21,8 +26,29 @@ const Login = () => {
     e.preventDefault()
     const email = e.target[0].value
     const password = e.target[1].value
-    signIn("credentials", {email, password})
+    
+    const valid = validateEmailInput(email)
+    if (valid) {
+      signIn('credentials', { email, password });
+    }
   }
+
+
+  const handleEmailChange = (e) => {
+    const updatedEmail = e.target.value;
+    setEmailInput(updatedEmail);
+    validateEmailInput(updatedEmail);
+  };
+
+  const validateEmailInput = (email) => {
+    const [isValid, validationResult] = validateEmail(email);
+    if (isValid) {
+      setValidationEmail(false);
+    } else {
+      setValidationEmail(true);
+      setValiEmailMessage(validationResult);
+    }
+  };
 
   const handlePasswordToggle = () => {
     setPasswordVisible(!passwordVisible);
@@ -35,8 +61,8 @@ const Login = () => {
           <h1 className={styles.title}>Log In</h1>
           <div className={styles.inputBox}>
           <AiOutlineUser className={styles.icon}/>
-            <input type="email" placeholder='Email' className={styles.input} required/>
-            
+            <input type="email" onChange={handleEmailChange} value={emailInput} placeholder='Email' className={styles.input} required/>
+            <p className={styles.validation}>{validationEmail ? valiEmailMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
             <AiOutlineLock className={styles.icon} />
