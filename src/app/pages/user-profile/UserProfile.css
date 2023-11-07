@@ -1,0 +1,22 @@
+.label-manager{
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.img {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-bar {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
