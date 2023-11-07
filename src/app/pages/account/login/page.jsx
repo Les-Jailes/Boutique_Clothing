@@ -5,14 +5,16 @@ import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
 import { useRouter } from 'next/navigation'
-import {validateEmail} from '@/utils/formValidations'
-import { set } from 'mongoose'
+import {validateEmail, validatePassword} from '@/utils/formValidations'
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [validationEmail, setValidationEmail] = useState(false);
   const [valiEmailMessage, setValiEmailMessage] = useState('');
   const [emailInput, setEmailInput] = useState('');
+  const [validationPassword, setValidationPassword] = useState(false);
+  const [valiPasswordMessage, setValiPasswordMessage] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
   const session = useSession()
   const router = useRouter()
   if(session.status === "loading"){
@@ -27,7 +29,7 @@ const Login = () => {
     const email = e.target[0].value
     const password = e.target[1].value
     
-    const valid = validateEmailInput(email)
+    const valid = validateEmailInput(email) && validatePasswordInput(password)
     if (valid) {
       signIn('credentials', { email, password });
     }
@@ -40,6 +42,12 @@ const Login = () => {
     validateEmailInput(updatedEmail);
   };
 
+  const handlePasswordChange = (e) => {
+    const updatedPassword = e.target.value;
+    setPasswordInput(updatedPassword);
+    validatePasswordInput(updatedPassword);
+  };
+
   const validateEmailInput = (email) => {
     const [isValid, validationResult] = validateEmail(email);
     if (isValid) {
@@ -47,6 +55,16 @@ const Login = () => {
     } else {
       setValidationEmail(true);
       setValiEmailMessage(validationResult);
+    }
+  };
+
+  const validatePasswordInput = (password) => {
+    const [isValid, validationResult] = validatePassword(password);
+    if (isValid) {
+      setValidationPassword(false);
+    } else {
+      setValidationPassword(true);
+      setValiPasswordMessage(validationResult);
     }
   };
 
@@ -70,8 +88,13 @@ const Login = () => {
               type={passwordVisible ? 'text' : 'password'}
               placeholder="Password"
               className={styles.input}
+              value={passwordInput}
+              onChange={handlePasswordChange}
               required
             />
+            <p className={styles.validation}>
+              {validationPassword ? valiPasswordMessage : ''}
+            </p>
             {passwordVisible ? (
               <AiOutlineEyeInvisible
                 className={styles.iconLock}
