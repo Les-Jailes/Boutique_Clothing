@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { AiOutlineUser, AiOutlineMenu } from "react-icons/ai";
-import CartButton from "../CartButton/CartButton";
+import CartButton from "../Cart/CartButton";
 
 const MenuItems = ({ items }) => {
   const [dropdown, setDropdown] = useState(false);
