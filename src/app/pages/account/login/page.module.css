@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("/login-bg.jpeg");
+    background-image: url("/bg-login.png");
     background-size: cover;
     background-position: center;
 }

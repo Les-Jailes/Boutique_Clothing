@@ -75,7 +75,7 @@ const Login = () => {
           <h1 className={styles.title}>Log In</h1>
           <div className={styles.inputBox}>
           <AiOutlineUser className={styles.icon}/>
-            <input type="email" onChange={handleEmailChange} value={emailInput} placeholder='Email' className={styles.input} required/>
+            <input type="email" onChange={handleEmailChange} value={emailInput} maxLength={30} placeholder='Email' className={styles.input} required/>
             <p className={styles.validation}>{validationEmail ? valiEmailMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
@@ -86,6 +86,7 @@ const Login = () => {
               className={styles.input}
               value={passwordInput}
               onChange={handlePasswordChange}
+              maxLength={16}
               required
             />
             <p className={styles.validation}>
