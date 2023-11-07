@@ -1,19 +1,16 @@
 export const menuItems = [
   {
-    alt: 'user profile website',
-    src: '/user-profile.png',
-    url: '/user-profile',
+    url: '/pages/user-profile',
     icon: 'user'
   },
   {
-    alt: 'cart website',
-    src: '/cart.png',
-    url: '/shopping-cart',
+    url: '/pages/shopping-cart',
+    submenu: [
+      
+    ],
     icon: 'cart'
   },
   {
-    alt: 'menu bar',
-    src: '/menu-bar.png',
     url: '/',
     submenu: [
       {

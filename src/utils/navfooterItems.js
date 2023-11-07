@@ -20,7 +20,7 @@ export const navFooterItems = [
         url: '/summer',
     },
     {
-        title: 'Offer',
-        url: '/offer',
+        title: 'Sales',
+        url: '/sales',
     },
 ];

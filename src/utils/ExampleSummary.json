@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Elegant Men's Clothing",
+        "price": 130,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "men"
+    },
+    {
+        "name": "Casual Women's Clothing",
+        "price": 90,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "women"
+    },
+    {
+        "name": "Girl's Fashion for Kids",
+        "price": 50,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "girl"
+    },
+    {
+        "name": "Boy's Sportswear",
+        "price": 70,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "boy"
+    },
+    {
+        "name": "Men's T-shirt",
+        "price": 25,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "men"
+    },
+    {
+        "name": "Women's Party Dress",
+        "price": 180,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "women"
+    },
+    {
+        "name": "Cute Girl's Set",
+        "price": 60,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "girl"
+    },
+    {
+        "name": "Shorts for Boys",
+        "price": 35,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "boy"
+    },
+    {
+        "name": "Formal Men's Suit",
+        "price": 200,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "men"
+    },
+    {
+        "name": "Winter Coat for Women",
+        "price": 150,
+        "image": "https://i.postimg.cc/J4cNBw1s/129-1.png",
+        "category": "women"
+    }
+]
