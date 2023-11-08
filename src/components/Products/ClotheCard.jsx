@@ -9,11 +9,24 @@ import {
 import { useState } from "react";
 import { ColorClothe } from "./ColorClothe";
 
-export const ClotheCard = ({ clothe }) => {
+export const ClotheCard = ({ clothe, addToCart }) => {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
+  };
+
+  const handleAddToCart = () => {
+    addToCart({
+      code: clothe.code,
+      name: clothe.name,
+      price: clothe.price,
+      category: clothe.category,
+      type: clothe.type,
+      color: clothe.color,
+      size: clothe.size,
+      path: clothe.path,
+    });
   };
 
   return (
@@ -48,7 +61,7 @@ export const ClotheCard = ({ clothe }) => {
                 <AiFillHeart color="red" />
               )}
             </button>
-            <button className="options-card shop-card">
+            <button className="options-card shop-card" onClick={handleAddToCart}>
               <AiOutlineShoppingCart color="white" />
             </button>
           </div>

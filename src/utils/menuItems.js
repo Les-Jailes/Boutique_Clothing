@@ -2,13 +2,13 @@ export const menuItems = [
   {
     alt: 'user profile website',
     src: '/user-profile.png',
-    url: '/user-profile',
+    url: '/pages/user-profile',
     icon: 'user'
   },
   {
     alt: 'cart website',
     src: '/cart.png',
-    url: '/shopping-cart',
+    url: '/pages/shopping-cart',
     icon: 'cart'
   },
   {
@@ -18,15 +18,15 @@ export const menuItems = [
     submenu: [
       {
         title: 'Settings',
-        url: '/settings',
+        url: '/pages/settings',
       },
       {
         title: 'More about us',
-        url: '/about-us',
+        url: '/pages/about-us',
       },
       {
         title: 'Get in Contact',
-        url: '/contact-us',
+        url: '/pages/contact-us',
       },
     ],
     icon:'bar'

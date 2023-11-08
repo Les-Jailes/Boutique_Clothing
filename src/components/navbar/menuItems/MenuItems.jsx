@@ -39,7 +39,7 @@ const MenuItems = ({ items }) => {
           />
         </Link>
       ) : (
-        <Link href={items.url}>
+        <Link href={items.url} onClick={() => console.log("Productos en el carrito:", cart)}>
           <AiOutlineShoppingCart
             size={24}
             title="Shopping cart"
