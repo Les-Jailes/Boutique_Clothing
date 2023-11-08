@@ -1,22 +1,27 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "@/firebase/Firebase";
-import User from '@/Models/UserGoogle';
+import api from "@/app/api/api";
 
 export const signInWithGoogle = async () => {
   const googleProvider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, googleProvider);
     const user = result.user;
+
     const userData = {
-      name: user.displayName,
-      lastName: '', 
+      ci: user.uid, 
+      name: user.displayName ? user.displayName.split(' ')[0] : '', 
+      lastName: user.displayName ? user.displayName.split(' ')[1] : '',
       email: user.email,
-      gender: '',
-      imagePath: user.photoURL,
+      password: 'No password', 
+      gender: 'No gender', 
+      imagePath: user.photoURL
     };
 
-    await User.findOneAndUpdate({ email: user.email }, userData, { upsert: true, new: true });
-    console.log('User saved to database');
+    console.log(userData);
+    
+    
+    const response = await api.post('/User', userData);
   } catch (error) {
     console.error('Error during signInWithGoogle:', error);
   }
