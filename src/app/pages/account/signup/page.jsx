@@ -37,7 +37,6 @@ const SignUp = () => {
   if(session.status === "authenticated"){
     router.push("/");
 }
-  console.log(session)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,13 +60,17 @@ const SignUp = () => {
   
     const response = await api.post('/User', body);
 
-    console.log(emailInput);
-    signIn('credentials', { email, password });
+    if(session.status ==="loading"){
+      return <p>Redirecting to Login Page</p>
+    }
+
+    router.push("/pages/account/login");
   };
 
 
   const handleEmailChange = (e) => {
     const updatedEmail = e.target.value;
+    const responseGet = api.get('/User', updatedEmail);
     setEmailInput(updatedEmail);
     validateEmailInput(updatedEmail);
   };
@@ -204,8 +207,8 @@ const SignUp = () => {
           <label>
             <input
               type="radio"
-              value="male"
-              checked={selectedGender === "male"}
+              value="Male"
+              checked={selectedGender === "Male"}
               onChange={handleGenderChange}
 
             />
@@ -214,8 +217,8 @@ const SignUp = () => {
           <label>
             <input
               type="radio"
-              value="female"
-              checked={selectedGender === "female"}
+              value="Female"
+              checked={selectedGender === "Female"}
               onChange={handleGenderChange}
             />
             Female
@@ -223,8 +226,8 @@ const SignUp = () => {
           <label>
             <input
               type="radio"
-              value="ratherNotSay"
-              checked={selectedGender === "ratherNotSay"}
+              value="RatherNotSay"
+              checked={selectedGender === "RatherNotSay"}
               onChange={handleGenderChange}
             />
             Rather not say
