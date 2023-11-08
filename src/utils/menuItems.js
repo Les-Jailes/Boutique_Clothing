@@ -5,9 +5,6 @@ export const menuItems = [
   },
   {
     url: '/pages/shopping-cart',
-    submenu: [
-      
-    ],
     icon: 'cart'
   },
   {
