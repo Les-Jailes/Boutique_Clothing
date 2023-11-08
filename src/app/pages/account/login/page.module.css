@@ -12,7 +12,7 @@
     justify-content: space-between;
     flex-direction: column;
     gap: 5rem;
-    padding: 4rem 6rem;
+    padding: 2.3rem 6rem;
     background-color: #fff;
     border-radius: 20px;
 }
@@ -46,6 +46,19 @@
     color: #000000;
     transition: all 0.2s ease;
     border-bottom: 1.5px solid #000000;
+}
+.text {
+    text-align: center;
+    color: black;   
+    font-size: 14px;
+    font-weight: 300px;
+    margin-top: 44px;
+}
+.googleAuthButtonDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 .input:focus{
     border-color: #646464;
