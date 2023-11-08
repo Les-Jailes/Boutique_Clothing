@@ -1,22 +1,23 @@
+.profile-container {
+  min-height: 100vh;  
+  background-image: url('https://i.pinimg.com/originals/bc/03/dd/bc03dd204fa7ba0cdbb02f91ebd37777.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
 .label-manager{
-  padding: 20px 40px;
+  background-color:aliceblue;
+  padding: 20px 40px 80px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+  height: auto;
+  max-width: 85%;
+  margin: 0 auto;
+  padding-top: 20px;
 }
 
-.img {
-  padding: 20px 40px;
-  display: flex;
-  flex-direction: column;
-}
-
-.filter-bar {
-  padding: 20px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.label-manager__label-first-name {
+  border-bottom: 1px solid black;
 }
