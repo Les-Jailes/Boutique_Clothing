@@ -1,82 +1,124 @@
 'use client'
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import styles from './page.module.css'
 import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
 import { useRouter } from 'next/navigation'
-import {validateEmail, validatePassword} from '@/utils/formValidations'
+import { validateEmail, validatePassword } from '@/utils/formValidations';
+
 
 const Login = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false)
-  const [validationEmail, setValidationEmail] = useState(false);
-  const [valiEmailMessage, setValiEmailMessage] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [emailInput, setEmailInput] = useState('');
-  const [validationPassword, setValidationPassword] = useState(false);
-  const [valiPasswordMessage, setValiPasswordMessage] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
+  const [validation, setValidation] = useState({ email: { valid: true, message: '' }, password: { valid: true, message: '' } });
   const session = useSession()
   const router = useRouter()
-  if(session.status === "loading"){
-    return <p>Loading Authentication from Server</p>
-  }
-  if(session.status === "authenticated"){
-    router.push("/");
-}
+
+  const isEmailValid = () => {
+    if (emailInput.trim() === '') {
+      setValidation((prev) => ({
+        ...prev,
+        email: { valid: true, message: '' },
+      }));
+      return true;
+    }
+
+    const [isValid, validationResult] = validateEmail(emailInput);
+    setValidation((prev) => ({
+      ...prev,
+      email: { valid: isValid, message: validationResult },
+    }));
+    return isValid;
+  };
+
+  const isPasswordValid = () => {
+    if (passwordInput.trim() === '') {
+      setValidation((prev) => ({
+        ...prev,
+        password: { valid: true, message: '' },
+      }));
+      return true;
+    }
+
+    const [isValid, validationResult] = validatePassword(passwordInput);
+    setValidation((prev) => ({
+      ...prev,
+      password: { valid: isValid, message: validationResult },
+    }));
+    return isValid;
+  };
+
+  const handleInputChange = (e, inputType) => {
+    const updatedInput = e.target.value;
+    if (inputType === 'email') {
+      setEmailInput(updatedInput);
+    } else if (inputType === 'password') {
+      setPasswordInput(updatedInput);
+    }
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const email = e.target[0].value
-    const password = e.target[1].value
-    signIn('credentials', { email, password });
-  }
-
-
-  const handleEmailChange = (e) => {
-    const updatedEmail = e.target.value;
-    setEmailInput(updatedEmail);
-    validateEmailInput(updatedEmail);
-  };
-
-  const handlePasswordChange = (e) => {
-    const updatedPassword = e.target.value;
-    setPasswordInput(updatedPassword);
-    validatePasswordInput(updatedPassword);
-  };
-
-  const validateEmailInput = (email) => {
-    const [isValid, validationResult] = validateEmail(email);
-    if (isValid) {
-      setValidationEmail(false);
-    } else {
-      setValidationEmail(true);
-      setValiEmailMessage(validationResult);
+    e.preventDefault();
+    if (isEmailValid() && isPasswordValid()) {
+      signIn('credentials', { email: emailInput, password: passwordInput });
+    }else{
+      alert("fucku yi")
     }
-  };
 
-  const validatePasswordInput = (password) => {
-    const [isValid, validationResult] = validatePassword(password);
-    if (isValid) {
-      setValidationPassword(false);
-    } else {
-      setValidationPassword(true);
-      setValiPasswordMessage(validationResult);
-    }
   };
 
   const handlePasswordToggle = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+
+  useEffect(() => {
+    const [isValid, message] = validateEmail(emailInput);
+  
+    setValidation(prev => ({
+      ...prev, 
+      email: {valid: isValid, message}
+    }));
+  
+  }, [emailInput]);
+  
+  useEffect(() => {
+    const [isValid, message] = validatePassword(passwordInput);
+     
+    setValidation(prev => ({
+     ...prev,
+     password: {valid: isValid, message}
+    }));
+  
+  }, [passwordInput]);
+  
+  useEffect(() => {
+    if(session.status === "authenticated") {
+      router.push("/")
+    }
+  }, [session])
+  
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <h1 className={styles.title}>Log In</h1>
           <div className={styles.inputBox}>
-          <AiOutlineUser className={styles.icon}/>
-            <input type="email" onChange={handleEmailChange} value={emailInput} maxLength={30} placeholder='Email' className={styles.input} required/>
-            <p className={styles.validation}>{validationEmail ? valiEmailMessage : ''}</p>
+            <AiOutlineUser className={styles.icon} />
+            <input
+              type="email"
+              onChange={(e) => handleInputChange(e, 'email')}
+              value={emailInput}
+              maxLength={30}
+              placeholder="Email"
+              className={styles.input}
+              required
+            />
+            <p className={styles.validation}>
+              {validation.email.valid ? '' : validation.email.message}
+            </p>
           </div>
           <div className={styles.inputBox}>
             <AiOutlineLock className={styles.icon} />
@@ -85,12 +127,12 @@ const Login = () => {
               placeholder="Password"
               className={styles.input}
               value={passwordInput}
-              onChange={handlePasswordChange}
-              maxLength={16}
+              onChange={(e) => handleInputChange(e, 'password')}
+              maxLength={20}
               required
             />
             <p className={styles.validation}>
-              {validationPassword ? valiPasswordMessage : ''}
+              {validation.password.valid ? '' : validation.password.message}
             </p>
             {passwordVisible ? (
               <AiOutlineEyeInvisible
@@ -98,7 +140,10 @@ const Login = () => {
                 onClick={handlePasswordToggle}
               />
             ) : (
-              <AiOutlineEye className={styles.iconLock} onClick={handlePasswordToggle} />
+              <AiOutlineEye
+                className={styles.iconLock}
+                onClick={handlePasswordToggle}
+              />
             )}
           </div>
           <button className={styles.button}>Log in</button>
