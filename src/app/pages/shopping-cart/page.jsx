@@ -35,7 +35,7 @@ const page = () => {
             isOpen ? <AiOutlineDown size={18} color="white" /> : <AiOutlineUp color="white" size={18} />
           }
         </button>
-        <CheckOutButton />
+        <CheckOutButton isOpen={ isOpen } />
         <OrderSummary
           quantityProducts={orderSummary[0].products.length}
           totalProducts={orderSummary[0].totalProducts}

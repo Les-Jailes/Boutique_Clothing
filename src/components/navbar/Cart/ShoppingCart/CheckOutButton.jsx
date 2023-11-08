@@ -2,9 +2,9 @@ import React from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import '@/css/Cart/CheckoutButton.css'
 
-const CheckOutButton = () => {
+const CheckOutButton = ({ isOpen }) => {
   return (
-    <a className="checkout-button" href="/pages/checkout">
+    <a className={ `checkout-button ${ !isOpen ? 'is-active' : '' }` } href="/pages/checkout">
         <AiOutlineShoppingCart />
         <p className="checkout-button-text">
             Checkout
