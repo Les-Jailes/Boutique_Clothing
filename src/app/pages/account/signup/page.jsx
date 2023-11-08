@@ -148,12 +148,12 @@ const SignUp = () => {
           <h1 className={styles.title}>Sign Up</h1>
           <div className={styles.inputBox}>
           <AiOutlineUser className={styles.icon}/>
-            <input type="text" onChange={handleNameChange} value={nameInput} placeholder='Name' className={styles.input} maxLength={16} required/>
+            <input type="text" onChange={handleNameChange} value={nameInput} placeholder='Name' className={styles.input} maxLength={16} pattern="[A-Za-z\s]+" required/>
             <p className={styles.validation}>{validationName ? validNameMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
           <AiOutlineFontSize className={styles.icon}/>
-            <input type="text" onChange={handleLastNameChange} value={lastNameInput} placeholder='Last Name' className={styles.input} maxLength={16} required/>
+            <input type="text" onChange={handleLastNameChange} value={lastNameInput} placeholder='Last Name' className={styles.input} maxLength={16} pattern="[A-Za-z\s]+" required/>
             <p className={styles.validation}>{validationLastName ? validLastNameMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
