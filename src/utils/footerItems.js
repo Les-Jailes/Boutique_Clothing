@@ -1,4 +1,4 @@
-import { FaGithub, FaGlobe, FaInstagram, FaYoutube,  } from "react-icons/fa";
+import { FaFacebook, FaGlobe, FaInstagram, FaYoutube,  } from "react-icons/fa";
 export const onlineShop = [
     {
         title: 'Home',
@@ -42,8 +42,8 @@ export const socialLinks = [
         url: "https://dev-boutique-clothing.vercel.app/",
       },
       {
-        icon: <FaGithub />,
-        url: "https://github.com/Les-Jailes/Boutique_Clothing",
+        icon: <FaFacebook />,
+        url: "/",
       },
       {
         icon: <FaInstagram />,
