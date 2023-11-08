@@ -7,6 +7,7 @@
     right: calc(60px + 0.5rem);
     display: none;
     background-color: #fff;
+    z-index: 10;
 }
 
 .list-cart-summary.is-open {
@@ -43,4 +44,13 @@
 
 .go-cart-page:hover::after {
     left: 150px;
+}
+
+@media (max-width: 500px) {
+    .list-cart-summary {
+        width: 100%;
+        height: 400px;
+        top: 60px;
+        left: 0;
+    }
 }

@@ -22,7 +22,7 @@ const page = () => {
         <h2 className="your-cart-title">YOUR CART</h2>
         <div className="list-your-cart-container">
           {exampleProducts.map((product, index) => {
-            return <CardProductCart product={product} />;
+            return <CardProductCart product={product} key={ index } />;
           })}
         </div>
       </div>

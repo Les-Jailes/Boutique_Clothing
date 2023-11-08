@@ -3,6 +3,7 @@
     height: calc(100vh - 100px);
     display: grid;
     grid-template-columns: 60% 40%;
+    z-index: 1;
 }
 
 .your-cart-container {
