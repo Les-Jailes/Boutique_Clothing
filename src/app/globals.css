@@ -11,3 +11,9 @@
   --font-family-poppins: 'Poppins', sans-serif;
   --primary-color: #254B5E;
 }
+.container{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh;
+}
