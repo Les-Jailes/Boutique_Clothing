@@ -41,19 +41,27 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    const username = e.target[0].value;
-    const email = e.target[1].value;
-    const password = e.target[2].value;
+    let imagePath = "";
+
+    const name = nameInput;
+    const lastName = lastNameInput;
+    const email = emailInput;
+    const password = passwordInput;
+    const gender = selectedGender;
   
     const body = {
-      username,
+      name,
+      lastName,
       email,
       password,
+      gender,
+      imagePath
     };
+    console.log(body);
   
-    const response = await api.post('/users', body);
-  
+    const response = await api.post('/User', body);
+
+    console.log(emailInput);
     signIn('credentials', { email, password });
   };
 
@@ -190,7 +198,8 @@ const SignUp = () => {
             )}
           </div>
           <div className={styles.genderBox}>
-        <label className={styles.label}>Gender:</label>
+        <label className={styles.label}>Gender:</label> 
+        
         <div className={styles.radioGroup} required>
           <label>
             <input
@@ -200,7 +209,7 @@ const SignUp = () => {
               onChange={handleGenderChange}
 
             />
-            Male
+             Male
           </label>
           <label>
             <input
