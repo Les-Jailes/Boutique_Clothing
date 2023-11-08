@@ -7,13 +7,14 @@ import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible, AiOutli
 import {PiIdentificationCardLight} from 'react-icons/pi'
 import {BsGenderAmbiguous, BsGenderFemale, BsGenderMale} from 'react-icons/bs'
 import { useRouter } from 'next/navigation'
-import {validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
+import {validateCiField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
 import api from '@/app/api/api'
 
 const SignUp = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [validationEmail, setValidationEmail] = useState(false);
   const [validationName, setValidationName] = useState(false);
+  const [validationCi, setValidationCi] = useState(false);
   const [valiEmailMessage, setValiEmailMessage] = useState('');
   const [validationLastName, setValidationLastName] = useState(false);
   const [emailInput, setEmailInput] = useState('');
@@ -23,6 +24,7 @@ const SignUp = () => {
   const [nameInput, setNameInput] = useState('');
   const [validNameMessage, setValiNameMessage] = useState('');
   const [validLastNameMessage, setValiLastNameMessage] = useState('');
+  const [validCiMessage, setValiCiMessage] = useState('');
   const [ciInput, setCiInput] = useState('');
   const [lastNameInput, setLastNameInput] = useState('');
   const [selectedGender, setSelectedGender] = useState('');
@@ -104,13 +106,14 @@ const SignUp = () => {
   const handleCiChange = (e) => {
     const ci = e.target.value;
     if(ci >= 0) setCiInput(ci);
+    validateCiInput(ci);
   };
 
   const handleGenderChange = (e) => {
     setSelectedGender(e.target.value);
   };
   const validateNameInput = (text) => {
-    const [isValid, validationResult] = validateTextField(text);
+    const [isValid, validationResult] = validateTextField(text, "Name");
     if (isValid) {
       setValidationName(false);
     } else {
@@ -119,7 +122,7 @@ const SignUp = () => {
     }
   };
   const validateLastNameInput = (lastName) => {
-    const [isValid, validationResult] = validateTextField(lastName);
+    const [isValid, validationResult] = validateTextField(lastName, "Last name");
     if (isValid) {
       setValidationLastName(false);
     } else {
@@ -127,6 +130,16 @@ const SignUp = () => {
       setValiLastNameMessage(validationResult);
     }
   };
+  const validateCiInput = (ci) => {
+    const [isValid, validationResult] = validateCiField(ci);
+    if (isValid) {
+      setValidationCi(false);
+    } else {
+      setValidationCi(true);
+      setValiCiMessage(validationResult);
+    }
+  };
+
 
   return (
     <div className={styles.container}>
@@ -150,8 +163,8 @@ const SignUp = () => {
           </div>
           <div className={styles.inputBox}>
           <PiIdentificationCardLight className={styles.icon}/>
-            <input type="number" onChange={handleCiChange} value={ciInput} placeholder='CI' className={styles.input} required/>
-            <p className={styles.validation}>{validationEmail ? valiEmailMessage : ''}</p>
+            <input type="number" onChange={handleCiChange} value={ciInput} placeholder='CI' className={styles.input} maxLength={16} required/>
+            <p className={styles.validation}>{validationCi ? validCiMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
             <AiOutlineLock className={styles.icon} />
