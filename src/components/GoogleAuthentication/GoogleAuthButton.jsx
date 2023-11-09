@@ -1,22 +1,15 @@
 'use client';
 import React from "react";
 import '../../css/GoogleAuthenticationStyles/GoogleButtonStyles.css';
-import { useRouter } from 'next/navigation';
-import { signInWithGoogle } from '@/Context/authContext'; 
+import { signIn } from "next-auth/react";
 
 
 const iconGoogle = "https://i.postimg.cc/2yChFw3L/google-icon.png";
 
 function GoogleAuthButton() {
-  const router = useRouter(); 
-
-  const handleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      router.push('/'); 
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSignIn = (e) => {
+    e.preventDefault(); 
+    signIn("google", { callbackUrl: "/" });
   };
 
   return (
