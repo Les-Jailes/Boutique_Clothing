@@ -1,0 +1,26 @@
+.checkout-button {
+    width: 300px;
+    height: 40px;
+    border: 1px solid #000;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    transition: all 0.5s;
+}
+
+.checkout-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+@media (max-width: 400px) {
+    .checkout-button {
+        width: 100%;
+    }
+}
