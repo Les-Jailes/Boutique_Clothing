@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import style from "./navbar.module.css";
-import { menuItems } from "@/utils/menuItems";
 import MenuItems from "@/components/navbar/menuItems/MenuItems";
 import NavbarFooter from "./navbarFooter/NavbarFooter";
 import Link from "next/link";

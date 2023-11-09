@@ -5,8 +5,12 @@ import '@/css/Cart/CartListSummary.css'
 
 const CartListSummary = ({ isOpen }) => {
 
+  const handleClickInside = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className={`list-cart-summary ${isOpen ? "is-open" : ""}`}>
+    <div className={`list-cart-summary ${isOpen ? "is-open" : ""}`} onClick={handleClickInside}>
       <div className="list-products">
         {exampleProducts.map((product, index) => {
           return <CartCardSummary product={product} key={index} />;

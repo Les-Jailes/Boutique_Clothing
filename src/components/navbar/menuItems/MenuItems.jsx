@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { AiOutlineUser, AiOutlineMenu } from "react-icons/ai";
 import CartButton from "../Cart/CartButton";
+import SideMenu from "../SideMenu/SideMenu";
 
 const MenuItems = ({ items }) => {
   const [dropdown, setDropdown] = useState(false);
@@ -10,6 +10,7 @@ const MenuItems = ({ items }) => {
   return (
     <div className="menu-items-container">
       <CartButton />
+      <SideMenu />
     </div>
   );
 };

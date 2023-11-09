@@ -3,7 +3,7 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useState, useEffect, useRef } from "react";
 import CartListSummary from "./CartListSummary";
-import '@/css/Cart/CartButton.css'
+import "@/css/Cart/CartButton.css";
 
 const CartButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,11 +11,19 @@ const CartButton = () => {
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (cartButtonRef.current && !cartButtonRef.current.contains(event.target) && isOpen) {
+      if (
+        cartButtonRef.current &&
+        !cartButtonRef.current.contains(event.target) &&
+        isOpen
+      ) {
+        const cartListSummary = document.querySelector(".list-cart-summary");
+        if (cartListSummary && cartListSummary.contains(event.target)) {
+          return;
+        }
         setIsOpen(false);
       }
     };

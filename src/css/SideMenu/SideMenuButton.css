@@ -1,0 +1,49 @@
+.side-menu-button-container {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    right: 1em;
+}
+
+.side-menu-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    gap: 6px;
+}
+
+.lines-side-menu {
+    width: 30px;
+    height: 2px;
+    background-color: #000;
+    border-radius: 20px;
+    margin: 0 auto;
+    transition: all 0.2s;
+}
+
+.lines-side-menu.is-open:nth-child(2) {
+    display: none;
+}
+
+.lines-side-menu.is-open:nth-child(1),
+.lines-side-menu.is-open:nth-child(3) {
+    position: absolute;
+    top: calc(50% - 1px);
+    transform: translate(-50%, -50%);
+}
+
+.lines-side-menu.is-open:nth-child(1) {
+    transform: rotate(-45deg);
+}
+
+.lines-side-menu.is-open:nth-child(3) {
+    transform: rotate(45deg);
+}
