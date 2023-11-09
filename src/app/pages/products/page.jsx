@@ -44,9 +44,9 @@ export default function Page() {
 
   useEffect(() => {
     if (cart.length > 0 || total > 0) {
-      console.log("Carrito de compras:", cart);
-      console.log("Total del carrito:", total);
-      console.log("Prendas seleccionadas:", cart.length);
+      console.log("Shopping cart:", cart);
+      console.log("Cart total:", total);
+      console.log("Selected items:", cart.length);
     }
   }, [cart, total]);
 
