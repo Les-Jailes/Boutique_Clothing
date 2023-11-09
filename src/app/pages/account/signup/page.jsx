@@ -1,7 +1,6 @@
 'use client'
 import React,{useState} from 'react'
 import styles from './page.module.css'
-import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible, AiOutlineFontSize, AiOutlineMail} from 'react-icons/ai'
 import {PiIdentificationCardLight} from 'react-icons/pi'
@@ -9,8 +8,8 @@ import { useRouter } from 'next/navigation'
 import {validateCiField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
 import api from '@/app/api/api'
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import Swal from 'sweetalert2';
 import bcrypt from "bcryptjs";
+import { showAccountAlreadyExistsAlert, showAccountCreatedAlert, showErrorMessage } from './confirmationAlert'
 
 const SignUp = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -35,7 +34,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let imagePath = " ";
+    const imagePath = " ";
     const hashedPassword = await bcrypt.hash(passwordInput, 5)
 
     const name = nameInput;
@@ -55,8 +54,6 @@ const SignUp = () => {
       imagePath
     };
 
-
-
     let flag;
     try{
       const user = await api.get('/User/email/'+  email);
@@ -66,46 +63,14 @@ const SignUp = () => {
       flag = true;
     }
     if(!validationCi && !validationEmail && !validationLastName && !validationName && !validationPassword && selectedGender!=''){
-      if(flag===false){
-    
-        setValiEmailMessage("Email address already exists");
-        console.log("Existing user");
-        Swal.fire({
-          title: "There is already an account created with this email. Do you want to log in?",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, go to login page"
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire({
-              title: "You will be redirected to the login page",
-              icon: "success"
-            });
-            router.push("/pages/account/login");
-          }
-        });
-        
-      }
+      if(flag===false)showAccountAlreadyExistsAlert(router);
       else{
           const response = await api.post('/User', body);
-          Swal.fire({
-            title: "Account Created",
-            text: "You will be redirected to the login page",
-            icon: "success"
-          });
+          showAccountCreatedAlert();
           router.push("/pages/account/login");
       }
-  
-    }
-    else{
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Please fill out all fields correctly",
-      });
-    }
+    } 
+    else showErrorMessage();
     }
 
   const handleEmailChange = (e) => { 
