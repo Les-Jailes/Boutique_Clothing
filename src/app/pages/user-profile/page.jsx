@@ -52,7 +52,7 @@ const Profile = () => {
         <h1>Profile</h1>
 
         <div>
-          <BiSolidUserCircle className='image-user' size={200} />
+          <BiSolidUserCircle className='image-user'/>
         </div>
 
         <div className='input-box'>
