@@ -9,7 +9,7 @@ const profile = () => {
   return (
     <div className='profile-container'> 
       <form action=''>
-        <h1>Profile</h1>
+        <h1 className='title'>Profile</h1>
 
         <div>
         <BiSolidUserCircle className='image-user' size={200} />

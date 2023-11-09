@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+.title {
+  transform: translateY(15px);
+}
+
 body {
   justify-content: center;
   align-items: center;
@@ -12,6 +16,7 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  
 }
 
 .profile-container {
@@ -93,3 +98,4 @@ body {
 .options {
   color: black;
 }
+

@@ -2,7 +2,7 @@ export const menuItems = [
   {
     alt: 'user profile website',
     src: '/user-profile.png',
-    url: '/user-profile',
+    url: '/pages/user-profile',
     icon: 'user'
   },
   {
