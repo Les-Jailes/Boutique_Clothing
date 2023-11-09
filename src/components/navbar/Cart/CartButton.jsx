@@ -37,7 +37,11 @@ const CartButton = () => {
 
   return (
     <>
-      <button ref={cartButtonRef} className="cart-button" onClick={handleOpen}>
+      <button
+        ref={cartButtonRef}
+        className="cart-button"
+        onClick={handleOpen}
+      >
         <AiOutlineShoppingCart color="black" size={24} />
       </button>
       <div onClick={(e) => e.stopPropagation()}>

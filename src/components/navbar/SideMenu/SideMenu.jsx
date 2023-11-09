@@ -19,11 +19,14 @@ const SideMenu = () => {
       if (
         sideMenuRef.current &&
         !sideMenuRef.current.contains(event.target) &&
-        SideMenuSection.contains(event.target)
+        isOpen
       ) {
-        return;
+        const sideMenuSection = document.querySelector(".side-menu-container");
+        if (sideMenuSection && sideMenuSection.contains(event.target)) {
+          return;
+        }
+        setIsOpen(false);
       }
-      setIsOpen(false);
     };
     document.addEventListener("click", handleClickOutside);
 
@@ -37,12 +40,11 @@ const SideMenu = () => {
       <SideMenuButton
         handleOpenning={handleOpennig}
         isOpen={isOpen}
-        ref={sideMenuRef}
+        buttonRef={sideMenuRef}
       />
-      <SideMenuSection
-        menuOptions={sideMenuItems}
-        isOpen={isOpen}
-      />
+      <div onClick={ (e) => e.stopPropagation() }>
+        <SideMenuSection menuOptions={sideMenuItems} isOpen={isOpen} />
+      </div>
     </>
   );
 };

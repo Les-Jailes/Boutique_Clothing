@@ -11,15 +11,14 @@ const SideMenuSection = ({ menuOptions, isOpen }) => {
   return (
     <div
       className={`side-menu-container ${isOpen ? "is-open" : ""}`}
-      onClick={(e) => e.stopPropagation()}
     >
       <SearchBarSideMenu />
       <div className="list-options-side-menu-container">
         {menuOptions.map((menuOption, index) => {
           if (menuOption.submenu) {
-            return <SideMenuOptionsWithSubMenu menuOption={menuOption} />;
+            return <SideMenuOptionsWithSubMenu menuOption={menuOption} key={ index } />;
           } else {
-            return <SideMenuOptionsWithinSubMenu menuOption={menuOption} />;
+            return <SideMenuOptionsWithinSubMenu menuOption={menuOption} key={ index } />;
           }
         })}
       </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 
 export const SideMenuOptionsWithinSubMenu = ({ menuOption }) => {
   return (
@@ -31,7 +30,12 @@ export const SideMenuOptionsWithSubMenu = ({ menuOption }) => {
             className="open-submenu-button"
             onClick={() => handleOpenning()}
           >
-            {isOpen ? <AiOutlineDown /> : <AiOutlineUp />}
+            <line
+              className={`line-submenu-button ${isOpen ? "active" : ""}`}
+            ></line>
+            <line
+              className={`line-submenu-button ${isOpen ? "active" : ""}`}
+            ></line>
           </button>
         </div>
         <div
