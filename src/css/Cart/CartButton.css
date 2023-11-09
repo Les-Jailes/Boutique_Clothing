@@ -1,0 +1,9 @@
+.cart-button {
+    width: 60px;
+    height: 60px;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: calc(60px + 0.5em);
+}

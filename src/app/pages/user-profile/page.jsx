@@ -1,3 +1,4 @@
+'use client'
 
 import React from 'react'
 import { BiSolidUser, BiSolidUserCircle } from 'react-icons/bi';

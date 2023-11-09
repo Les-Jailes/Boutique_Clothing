@@ -6,14 +6,10 @@ export const menuItems = [
     icon: 'user'
   },
   {
-    alt: 'cart website',
-    src: '/cart.png',
-    url: '/shopping-cart',
+    url: '/pages/shopping-cart',
     icon: 'cart'
   },
   {
-    alt: 'menu bar',
-    src: '/menu-bar.png',
     url: '/',
     submenu: [
       {
