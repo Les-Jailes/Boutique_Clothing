@@ -51,11 +51,13 @@ export default function Page() {
   }, [cart, total]);
 
   const addToCart = (product) => {
-    const existingProduct = cart.find((item) => item.code === product.code);
+    const existingProduct = cart.find(
+      (item) => item.code === product.code && item.size === product.size
+    );
     if (existingProduct) {
       setCart((prevCart) =>
         prevCart.map((item) =>
-          item.code === product.code
+          item.code === product.code && item.size === product.size
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )

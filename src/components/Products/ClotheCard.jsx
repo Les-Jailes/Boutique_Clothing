@@ -8,15 +8,18 @@ import {
 } from "react-icons/ai";
 import { useState } from "react";
 import { ColorClothe } from "./ColorClothe";
+import SizePopup from "@/utils/SizePopup";
 
 export const ClotheCard = ({ clothe, addToCart }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [isSizePopupOpen, setIsSizePopupOpen] = useState(false);
+  const [selectedSize, setSelectedSize] = useState("");
 
   const handleLike = () => {
     setIsLiked(!isLiked);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (selectedSize) => {
     addToCart({
       code: clothe.code,
       name: clothe.name,
@@ -24,9 +27,19 @@ export const ClotheCard = ({ clothe, addToCart }) => {
       category: clothe.category,
       type: clothe.type,
       color: clothe.color,
-      size: clothe.size,
+      size: selectedSize,
       path: clothe.path,
     });
+  };
+
+  const handleSizeSelection = (size) => {
+    if (isSizePopupOpen) {
+      setIsSizePopupOpen(false);
+      handleAddToCart(size);
+    } else {
+      setIsSizePopupOpen(true);
+      setSelectedSize(size);
+    }
   };
 
   return (
@@ -61,10 +74,16 @@ export const ClotheCard = ({ clothe, addToCart }) => {
                 <AiFillHeart color="red" />
               )}
             </button>
-            <button className="options-card shop-card" onClick={handleAddToCart}>
+            <button
+              className="options-card shop-card"
+              onClick={handleSizeSelection}
+            >
               <AiOutlineShoppingCart color="white" />
             </button>
           </div>
+          {isSizePopupOpen && (
+            <SizePopup handleSizeSelection={handleSizeSelection} sizes={clothe.size}/>
+          )}
         </div>
       </div>
     </div>

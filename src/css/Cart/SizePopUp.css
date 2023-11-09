@@ -1,0 +1,22 @@
+@import url('../../app/globals.css');
+
+.size-popup-container {
+  position: absolute;
+  background: rgb(255, 255, 255);
+  width: 250px;
+  height: 150px;
+  padding: 2em 2em 2em 2em;
+  border-radius: 10px;
+  display: block;
+  box-shadow: var(--box-shadow-card);
+  bottom: 59px;
+  right: 70px;
+}
+
+.size-popup-container__button{
+    background:transparent;
+    border-color: transparent;
+    padding: 10px;
+    font-size: 18px;
+    overflow: hidden;
+}

@@ -8,6 +8,7 @@
     box-shadow: var(--box-shadow-card);
     overflow: hidden;
     font-family: var(--font-family-poppins);
+    position:relative;
 }
 
 .card-image-section {
@@ -67,6 +68,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position:relative;
 }
 
 .section-card.clothe-information {
