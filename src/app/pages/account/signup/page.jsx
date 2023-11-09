@@ -5,10 +5,12 @@ import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible, AiOutlineFontSize, AiOutlineMail} from 'react-icons/ai'
 import {PiIdentificationCardLight} from 'react-icons/pi'
-import {BsGenderAmbiguous, BsGenderFemale, BsGenderMale} from 'react-icons/bs'
 import { useRouter } from 'next/navigation'
 import {validateCiField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
 import api from '@/app/api/api'
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import Swal from 'sweetalert2';
+import bcrypt from "bcryptjs";
 
 const SignUp = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -29,78 +31,93 @@ const SignUp = () => {
   const [lastNameInput, setLastNameInput] = useState('');
   const [selectedGender, setSelectedGender] = useState('');
 
-  const session = useSession()
   const router = useRouter()
-  if(session.status === "loading"){
-    return <p>Loading Authentication from Server</p>
-  }
-  if(session.status === "authenticated"){
-    router.push("/");
-}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let imagePath = "";
+    let imagePath = " ";
+    const hashedPassword = await bcrypt.hash(passwordInput, 5)
 
     const name = nameInput;
     const lastName = lastNameInput;
     const email = emailInput;
     const password = passwordInput;
     const gender = selectedGender;
-  
+    const ci = ciInput;
+
     const body = {
+      ci,
       name,
       lastName,
       email,
-      password,
+      password : hashedPassword,
       gender,
       imagePath
     };
-    console.log(body);
-  
-    const response = await api.post('/User', body);
 
-    if(session.status ==="loading"){
-      return <p>Redirecting to Login Page</p>
+
+
+    let flag;
+    try{
+      const user = await api.get('/User/email/'+  email);
+      flag = false;
+    }
+    catch(error){
+      flag = true;
+    }
+    if(!validationCi && !validationEmail && !validationLastName && !validationName && !validationPassword && selectedGender!=''){
+      if(flag===false){
+    
+        setValiEmailMessage("Email address already exists");
+        console.log("Existing user");
+        Swal.fire({
+          title: "There is already an account created with this email. Do you want to log in?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, go to login page"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "You will be redirected to the login page",
+              icon: "success"
+            });
+            router.push("/pages/account/login");
+          }
+        });
+        
+      }
+      else{
+          const response = await api.post('/User', body);
+          Swal.fire({
+            title: "Account Created",
+            text: "You will be redirected to the login page",
+            icon: "success"
+          });
+          router.push("/pages/account/login");
+      }
+  
+    }
+    else{
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please fill out all fields correctly",
+      });
+    }
     }
 
-    router.push("/pages/account/login");
-  };
-
-
-  const handleEmailChange = (e) => {
+  const handleEmailChange = (e) => { 
     const updatedEmail = e.target.value;
-    const responseGet = api.get('/User', updatedEmail);
     setEmailInput(updatedEmail);
     validateEmailInput(updatedEmail);
   };
-
   const handlePasswordChange = (e) => {
     const updatedPassword = e.target.value;
     setPasswordInput(updatedPassword);
     validatePasswordInput(updatedPassword);
   };
-
-  const validateEmailInput = (email) => {
-    const [isValid, validationResult] = validateEmail(email);
-    if (isValid) {
-      setValidationEmail(false);
-    } else {
-      setValidationEmail(true);
-      setValiEmailMessage(validationResult);
-    }
-  };
-
-  const validatePasswordInput = (password) => {
-    const [isValid, validationResult] = validatePassword(password);
-    if (isValid) {
-      setValidationPassword(false);
-    } else {
-      setValidationPassword(true);
-      setValiPasswordMessage(validationResult);
-    }
-  };
-
   const handlePasswordToggle = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -119,9 +136,27 @@ const SignUp = () => {
     if(ci >= 0) setCiInput(ci);
     validateCiInput(ci);
   };
-
   const handleGenderChange = (e) => {
     setSelectedGender(e.target.value);
+  };
+
+  const validateEmailInput = (email) => {
+    const [isValid, validationResult] = validateEmail(email);
+    if (isValid) {
+      setValidationEmail(false);
+    } else {
+      setValidationEmail(true);
+      setValiEmailMessage(validationResult);
+    }
+  };
+  const validatePasswordInput = (password) => {
+    const [isValid, validationResult] = validatePassword(password);
+    if (isValid) {
+      setValidationPassword(false);
+    } else {
+      setValidationPassword(true);
+      setValiPasswordMessage(validationResult);
+    }
   };
   const validateNameInput = (text) => {
     const [isValid, validationResult] = validateTextField(text, "Name");
@@ -159,7 +194,7 @@ const SignUp = () => {
           <h1 className={styles.title}>Sign Up</h1>
           <div className={styles.inputBox}>
           <AiOutlineUser className={styles.icon}/>
-            <input type="text" onChange={handleNameChange} value={nameInput} placeholder='Name' className={styles.input} maxLength={16} pattern="[A-Za-z\s]+" required/>
+            <input type="text" onChange={handleNameChange} value={nameInput} placeholder='Name' className={styles.input} maxLength={16} pattern="[A-Za-z\s]+"  required/>
             <p className={styles.validation}>{validationName ? validNameMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
@@ -174,7 +209,7 @@ const SignUp = () => {
           </div>
           <div className={styles.inputBox}>
           <PiIdentificationCardLight className={styles.icon}/>
-            <input type="number" onChange={handleCiChange} value={ciInput} placeholder='CI' className={styles.input} maxLength={16} required/>
+            <input type="text" onChange={handleCiChange} value={ciInput} placeholder='CI' className={styles.input} maxLength={16} inputMode='numeric' required/>
             <p className={styles.validation}>{validationCi ? validCiMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
