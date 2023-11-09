@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-.title {
-  transform: translateY(15px);
-}
-
 body {
   justify-content: center;
   align-items: center;
@@ -63,6 +59,7 @@ body {
   color: #fff;
   padding: 20px 45px 20px 20px;
 }
+
 .input-box{
   position: relative;
 }
@@ -70,6 +67,7 @@ body {
   
   background-color: aqua;
 }
+
 .icon{
   transform: translateY(-150px);
   position: absolute;
@@ -99,52 +97,35 @@ body {
   color: #000;
 }
 
-@media (max-width: 800) {
+
+
+@media (max-height: 1000px) {
   .profile-container {
-    width: 50%;
-    height: 70%;
-    top: 50%;
+    width: 800px;
+    height: 500px;
+    padding: 10px 20px;
+    position: absolute;
+    top: 43%;
+    left: 50%;
     transform: translate(-50%, -50%);
+  }
+  
+  .input-box input {
+    transform: translateY(-210px);
+    width: 95%;
+    height: 95%;
+    font-size: 14px;
+    padding: 20px 45px 20px 20px;
+  }
+
+  .icon{
+    transform: translateY(-215px);
+    position: absolute;
+    right: 10%;
   }
 
   .image-user {
-    size: 50%;
+    transform: translateX(500px) translateY(100px);
+      
   }
-
-  .title {
-    size: 50%;
-  }
-
-  .input-box {
-    width: 50%;
-  }
-
-  .input-box input {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .icon {
-    transform: translateY(0);
-    right: 10%;
-    top: 10%;
-  }
-
-  .filter-bar {
-    transform: translateY(0);
-  }
-}
-
-@media (max-height: 500px) {
-  .profile-container {
-    width: 90%;
-    height: auto;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .input-box {
-    width: 90%;
-  }
-
 }
