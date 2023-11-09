@@ -28,7 +28,7 @@ body {
   border-radius: 20px;
   padding: 10px 20px;
   position: absolute;
-  top: 50%;
+  top: 43%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -53,7 +53,7 @@ body {
 .input-box input {
   transform: translateY(-150px);
   width: 100%;
-  height: 100%;
+  height: 105%;
   background: transparent;
   border: none;
   outline: none;
@@ -83,7 +83,7 @@ body {
 }
 
 .filter-bar {
-  transform: translateY(-150px);
+  transform: translateY(-120px);
   width: 100%;
   background: transparent;
   border: none;
@@ -96,6 +96,55 @@ body {
 }
 
 .options {
-  color: black;
+  color: #000;
 }
 
+@media (max-width: 800) {
+  .profile-container {
+    width: 50%;
+    height: 70%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .image-user {
+    size: 50%;
+  }
+
+  .title {
+    size: 50%;
+  }
+
+  .input-box {
+    width: 50%;
+  }
+
+  .input-box input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .icon {
+    transform: translateY(0);
+    right: 10%;
+    top: 10%;
+  }
+
+  .filter-bar {
+    transform: translateY(0);
+  }
+}
+
+@media (max-height: 500px) {
+  .profile-container {
+    width: 90%;
+    height: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .input-box {
+    width: 90%;
+  }
+
+}
