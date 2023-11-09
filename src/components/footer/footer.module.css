@@ -1,0 +1,150 @@
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8rem;
+    color: #fff;
+    background-color: black;
+    padding: 1rem 0;
+}
+
+.footerItem{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.link{
+    text-decoration: none;
+    color: #e7e7e7;
+    font-size: 13px;
+    font-weight: 400;
+    transition: all 0.3s ease;;
+}
+.link:hover{
+    padding-left: 8px;
+    color: #fff;
+}
+.titleBrand{
+    font-size: 26px;
+}
+.copyText{
+    font-size: 11px;
+    font-style: oblique;
+    font-weight: 400;
+    color: #f1f1f1;
+    text-align: center;
+}
+
+.title{
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: #f1f1f1;
+    position: relative;
+    cursor: pointer;
+}
+.title::before{
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 3px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    bottom: -5px;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(1);
+    transition:  0.5s ease-in-out;
+    cursor: pointer;
+}
+.title:hover::before{
+    transform-origin: left;
+    transform: scaleX(1);
+    width: 100%;
+}
+.img{
+    margin:0;
+}
+.socialLink{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.socialLink:hover{
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+.titleFollow{
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: #f1f1f1;
+    position: relative;
+    cursor: pointer;
+}
+
+.titleFollow::before{
+    content: '';
+    position: absolute;
+    width: 25%;
+    height: 3px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    bottom: -5px;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(1);
+    transition:  0.5s ease-in-out;
+    cursor: pointer;
+}
+.titleFollow:hover::before{
+    transform-origin: left;
+    transform: scaleX(1);
+    width: 50%;
+}
+
+@media (max-width: 1000px) {
+    .footer{
+        gap: 5rem;
+    }
+}
+@media (max-width: 840px) {
+    .footer{
+        gap: 2rem;
+    }
+    .img{
+        height: 150px;
+        width: 150px;
+    }
+}
+@media (max-width: 600px) {
+    .footer{
+        gap: 1.5rem;
+    }
+    .img{
+        height: 110px;
+        width: 110px;
+    }
+}
+
+@media (max-width: 500px) {
+    .footer{
+        gap: 1.5rem;
+    }
+    .img{
+        height: 100px;
+        width: 100px;
+    }
+    .title{
+        font-size: 17px;
+    }
+    .footerItem{
+        font-size: 12px;
+    }
+}
