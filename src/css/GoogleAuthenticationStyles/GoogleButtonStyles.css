@@ -15,6 +15,7 @@
     border: none;
     outline: none;
     transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+    transition: transform 0.1s, background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
   }
   
   .google-button-container:hover {
@@ -25,6 +26,9 @@
   .google-button-container:active {
     background-color: #3367d6;
     box-shadow: 0 0 6px #0085ff;
+    transform: scale(0.96);
+    background-color: #2a56c6; 
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15); 
   }
   
   .google-icon-wrapper {
