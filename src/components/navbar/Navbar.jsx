@@ -46,13 +46,7 @@ const Navbar = () => {
             </button>
           </form>
         </div>
-        <div>
-          <ul className={style.menuItems}>
-            {menuItems.map((menu, index) => {
-              return <MenuItems items={menu} key={index} />;
-            })}
-          </ul>
-        </div>
+        <MenuItems />
       </div>
       <NavbarFooter />
     </div>
