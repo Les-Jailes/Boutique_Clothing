@@ -6,9 +6,15 @@ import MenuItems from "@/components/navbar/menuItems/MenuItems";
 import NavbarFooter from "./navbarFooter/NavbarFooter";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
+import { signOut, useSession } from 'next-auth/react'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const session = useSession();
+  const handleSignOut = async () => {
+    await signOut({ redirect: false });
+    window.location.href = '/pages/account/login'; 
+  };
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
@@ -45,8 +51,21 @@ const Navbar = () => {
               </div>
             </button>
           </form>
+        </div>        
+        <div className={style.authContainer}>
+        {session.status === "authenticated" ? (
+          <button className={style.logout} onClick={handleSignOut}>Log Out</button>
+        ) :(
+            <>
+              <Link href={"/pages/account/signup"} className={style.register}>Sign up</Link>
+              <Link href={"/pages/account/login"} className={style.login}>Log in</Link>
+              
+            </>
+        )}
         </div>
         <MenuItems />
+
+
       </div>
       <NavbarFooter />
     </div>
