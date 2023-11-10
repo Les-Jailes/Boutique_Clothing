@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.5s;
+    box-shadow: -1px 0 5px #00000050;
 }
 
 .side-menu-container.is-open {
@@ -96,4 +97,23 @@
 a {
     text-decoration: none;
     color: #000;
+}
+
+.side-menu-option.no-visible {
+    display: none;
+}
+
+@media (max-width: 630px) {
+    .side-menu-option.no-visible {
+        display: block;
+    }
+}
+
+@media (max-width: 410px) {
+    .side-menu-container {
+        position: fixed;
+        top: 60px;
+        right: -100%;
+        width: 100%;
+    }
 }

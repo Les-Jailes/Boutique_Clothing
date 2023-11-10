@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 export const SideMenuOptionsWithinSubMenu = ({ menuOption }) => {
   return (
-    <a href={menuOption.path} className="side-menu-option">
+    <a href={menuOption.path} className={ `side-menu-option ${ !menuOption.isVisibleAllTime ? 'no-visible' : '' }` }>
       {menuOption.name}
     </a>
   );
@@ -18,7 +18,7 @@ export const SideMenuOptionsWithSubMenu = ({ menuOption }) => {
   };
 
   return (
-    <div className="side-menu-option with-submenu">
+    <div className={ `side-menu-option with-submenu ${ !menuOption.isVisibleAllTime ? 'no-visible' : '' }` }>
       <div className="first-option-container" onClick={() => handleOpenning()}>
         <div className="main-button-with-submenu">
           <div className="link-menu-option-with-submenu-container">

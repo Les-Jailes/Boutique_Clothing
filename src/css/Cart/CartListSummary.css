@@ -4,10 +4,11 @@
     overflow: hidden;
     position: fixed;
     top: 60px;
-    right: calc(60px + 0.5rem);
+    right: calc(60px + 1rem);
     display: none;
     background-color: #fff;
     z-index: 10;
+    box-shadow: 0 0 10px #00000050;
 }
 
 .list-cart-summary.is-open {

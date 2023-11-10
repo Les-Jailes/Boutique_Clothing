@@ -33,3 +33,9 @@
     border: none;
     cursor: pointer;
 }
+
+@media (max-width: 630px) {
+    .search-bar-side-menu-container {
+        display: block;
+    }
+}
