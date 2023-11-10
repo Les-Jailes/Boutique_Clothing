@@ -44,7 +44,7 @@ export const SideMenuOptionsWithSubMenu = ({ menuOption }) => {
           }`}
         >
           {menuOption.submenu.map((submenu, index) => {
-            return <SubmenuSideMenu submenu={submenu} />;
+            return <SubmenuSideMenu submenu={submenu} key={ index } />;
           })}
         </div>
       </div>

@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Profile",
+        "path": "/pages/user-profile"
+    },
+    {
+        "name": "Order history",
+        "path": "/pages/user-profile/order-history"
+    },
+    {
+        "name": "My wishlist",
+        "path": "/pages/user-profile/my-wishlist"
+    }
+]
