@@ -1,10 +1,20 @@
-import styles from './page.module.css'
-import React from 'react'
+"use client";
+import styles from './page.module.css';
+import React from 'react';
+import { signOut } from 'next-auth/react';
 
 const Aboutus = () => {
-  return (
-    <div>About us</div>
-  )
-}
+  const handleSignOut = async () => {
+    await signOut({ redirect: false });
+    window.location.href = '/pages/account/login'; 
+  };
 
-export default Aboutus
+  return (
+    <div className={styles.container}>
+      <div>About us</div>
+      <button onClick={handleSignOut}>Sign Out</button>
+    </div>
+  );
+};
+
+export default Aboutus;
