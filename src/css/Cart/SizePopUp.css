@@ -20,3 +20,7 @@
     font-size: 18px;
     overflow: hidden;
 }
+
+.size-popup-container.is-open{
+  display: block;
+}

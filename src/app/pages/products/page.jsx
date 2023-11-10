@@ -5,7 +5,7 @@ import createPagination from "@/utils/Pagination";
 import { ClotheCard } from "@/components/Products/ClotheCard";
 import "@/css/Products/ProductsPage.css";
 import { Pagination } from "@/components/Products/Pagination";
-import data from "@/utils/AddCartProducts.json";
+import data from "@/utils/AddCartProducts.json"
 
 export default function Page() {
   const initialProductData =

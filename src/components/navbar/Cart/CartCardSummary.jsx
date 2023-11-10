@@ -6,9 +6,9 @@ const CartCardSummary = ({ product }) => {
   return (
     <div className="cart-card-container">
       <div className="image-card-container">
-        <div className={` image-background ${product.category} `}>
+        <div className={` image-background ${product.category.toLowerCase()} `}>
           <img
-            src={product.image}
+            src={product.path[0]}
             alt={`${product.name} image`}
             className="image-product-cart"
             draggable="false"

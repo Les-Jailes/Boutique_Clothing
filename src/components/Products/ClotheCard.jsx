@@ -6,13 +6,14 @@ import {
   AiFillHeart,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ColorClothe } from "./ColorClothe";
 import SizePopup from "@/utils/SizePopup";
 
 export const ClotheCard = ({ clothe, addToCart }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSizePopupOpen, setIsSizePopupOpen] = useState(false);
+  const cardRef = useRef(null);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -32,13 +33,25 @@ export const ClotheCard = ({ clothe, addToCart }) => {
   };
 
   const handleSizeSelection = (size) => {
-    if (isSizePopupOpen) {
-      setIsSizePopupOpen(false);
+    setIsSizePopupOpen(!isSizePopupOpen);
+    if (size) {
       handleAddToCart(size);
-    } else {
-      setIsSizePopupOpen(true);
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (cardRef.current && !cardRef.current.contains(event.target) && isSizePopupOpen) {
+        setIsSizePopupOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isSizePopupOpen]);
 
   return (
     <div className="clothe-card-container">
@@ -73,14 +86,19 @@ export const ClotheCard = ({ clothe, addToCart }) => {
               )}
             </button>
             <button
+              ref={cardRef}
               className="options-card shop-card"
-              onClick={handleSizeSelection}
+              onClick={() => {handleSizeSelection();}}
             >
               <AiOutlineShoppingCart color="white" />
             </button>
           </div>
           {isSizePopupOpen && (
-            <SizePopup handleSizeSelection={handleSizeSelection} sizes={clothe.size}/>
+            <SizePopup
+              handleSizeSelection={handleSizeSelection}
+              sizes={clothe.size}
+              isSizePopupOpen={isSizePopupOpen}
+            />
           )}
         </div>
       </div>
