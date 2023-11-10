@@ -112,7 +112,7 @@ const Login = () => {
               type="email"
               onChange={(e) => handleInputChange(e, 'email')}
               value={emailInput}
-              maxLength={30}
+              maxLength={100}
               placeholder="Email"
               className={styles.input}
               required
