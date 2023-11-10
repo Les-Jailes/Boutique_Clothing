@@ -13,7 +13,7 @@
   justify-content: space-between;
   flex-direction: column;
   gap: 5rem;
-  padding: 4rem 6rem;
+  padding: 2rem 6rem;
   background-color: #fff;
   border-radius: 20px;
 }
@@ -26,7 +26,7 @@
   font-size: 36px;
   color: #0b0217;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 .inputBox{
   position: relative;
@@ -74,7 +74,7 @@ cursor: pointer;
 
 .button {
   background: transparent;
-  margin-top: 80px;
+  margin-top: 20px;
   width: 100%;
   padding: 10px 0;
   border-radius: 30px;
@@ -151,4 +151,20 @@ cursor: pointer;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  margin-top: 10px;
+}
+
+.signUpGoogleText {
+  text-align: center;
+  color: black;   
+  font-size: 14px;
+  font-weight: 300px;
+  margin-top: 30px;
+}
+
+.googleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
