@@ -25,6 +25,8 @@ export const ClotheCard = ({ clothe }) => {
           alt="Clothe image"
           className="clothe-image"
           draggable={ false }
+          width={400}
+          height={400}
         />
       </div>
       <div className="information-container">

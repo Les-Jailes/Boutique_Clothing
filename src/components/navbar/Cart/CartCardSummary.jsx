@@ -13,6 +13,8 @@ const CartCardSummary = ({ product }) => {
             alt={`${product.name} image`}
             className="image-product-cart"
             draggable={ false }
+            width={60}
+            height={40}
           />
         </div>
       </div>

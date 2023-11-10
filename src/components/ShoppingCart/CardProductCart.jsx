@@ -14,6 +14,8 @@ const CardProductCart = ({ product }) => {
             alt={`${product.name} image`}
             className="image-card-product-cart"
             draggable={ false }
+            width={60}
+            height={60}
           />
         </div>
       </div>

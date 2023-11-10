@@ -6,16 +6,16 @@ import NavbarFooter from "./navbarFooter/NavbarFooter";
 import Link from "next/link";
 import Image from "next/image";
 import { AiOutlineSearch } from "react-icons/ai";
-import { signOut, useSession } from 'next-auth/react'
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [isLogged, setIsLogged] = useState(false)
+  const [isLogged, setIsLogged] = useState(false);
   const session = useSession();
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });
-    window.location.href = '/pages/account/login'; 
+    window.location.href = "/pages/account/login";
   };
 
   const handleScroll = () => {
@@ -32,9 +32,9 @@ const Navbar = () => {
 
   useEffect(() => {
     if (session.status === "authenticated") {
-      setIsLogged(true)
+      setIsLogged(true);
     }
-  }, [session])
+  }, [session]);
 
   return (
     <div className={`${style.header} ${scrolled ? style.active : ""}`}>
@@ -44,6 +44,8 @@ const Navbar = () => {
             src="https://i.postimg.cc/FzHMbWPS/logo.png"
             alt="logo"
             className={style.logoImg}
+            width={100}
+            height={60}
             draggable={false}
           />
         </Link>
@@ -61,7 +63,7 @@ const Navbar = () => {
             </button>
           </form>
         </div>
-        <MenuItems isLogged={ isLogged } handleLogOut={ () => handleSignOut() } />
+        <MenuItems isLogged={isLogged} handleLogOut={() => handleSignOut()} />
       </div>
       <NavbarFooter />
     </div>
