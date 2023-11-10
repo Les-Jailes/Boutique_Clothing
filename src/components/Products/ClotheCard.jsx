@@ -13,7 +13,6 @@ import SizePopup from "@/utils/SizePopup";
 export const ClotheCard = ({ clothe, addToCart }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSizePopupOpen, setIsSizePopupOpen] = useState(false);
-  const [selectedSize, setSelectedSize] = useState("");
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -38,7 +37,6 @@ export const ClotheCard = ({ clothe, addToCart }) => {
       handleAddToCart(size);
     } else {
       setIsSizePopupOpen(true);
-      setSelectedSize(size);
     }
   };
 

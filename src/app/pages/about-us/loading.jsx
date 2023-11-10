@@ -1,4 +1,4 @@
-const loading = () => {
+zconst loading = () => {
   return <div>Loading ...</div>
 }
 
