@@ -9,7 +9,9 @@ import { signOut, useSession } from 'next-auth/react'
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isLogged, setIsLogged] = useState(false)
   const session = useSession();
+
   const handleSignOut = async () => {
     await signOut({ redirect: false });
     window.location.href = '/pages/account/login'; 
@@ -26,6 +28,12 @@ const Navbar = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      setIsLogged(true)
+    }
+  }, [session])
 
   return (
     <div className={`${style.header} ${scrolled ? style.active : ""}`}>
@@ -50,21 +58,8 @@ const Navbar = () => {
               </div>
             </button>
           </form>
-        </div>        
-        <div className={style.authContainer}>
-        {session.status === "authenticated" ? (
-          <button className={style.logout} onClick={handleSignOut}>Log Out</button>
-        ) :(
-            <>
-              <Link href={"/pages/account/signup"} className={style.register}>Sign up</Link>
-              <Link href={"/pages/account/login"} className={style.login}>Log in</Link>
-              
-            </>
-        )}
         </div>
-        <MenuItems />
-
-
+        <MenuItems isLogged={ isLogged } handleLogOut={ () => handleSignOut() } />
       </div>
       <NavbarFooter />
     </div>

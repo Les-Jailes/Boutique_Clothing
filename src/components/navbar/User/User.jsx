@@ -5,7 +5,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import "@/css/UserOption/User.css";
 import UserListMenu from "./UserListMenu";
 
-const User = () => {
+const User = ({ isLogged, handleLogOut }) => {
   const [isOpenUser, setIsOpenUser] = useState(false);
   const userButtonRef = useRef(null);
 
@@ -44,7 +44,7 @@ const User = () => {
       >
         <AiOutlineUser color="black" size={24} />
       </button>
-      <UserListMenu isLogged={false} isOpen={isOpenUser} />
+      <UserListMenu isLogged={isLogged} isOpen={isOpenUser} handleLogOut={ handleLogOut } />
     </>
   );
 };
