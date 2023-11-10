@@ -11,7 +11,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import bcrypt from "bcryptjs";
 import { showAccountAlreadyExistsAlert, showAccountCreatedAlert, showErrorMessage } from './confirmationAlert'
 
-const SignUp = () => {
+export default function SignUp() {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [validationEmail, setValidationEmail] = useState(false);
   const [validationName, setValidationName] = useState(false);
@@ -244,5 +244,3 @@ const SignUp = () => {
     </div>
   )
 }
-
-export default SignUp
