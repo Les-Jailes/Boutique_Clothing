@@ -1,15 +1,17 @@
 'use client'
-import React,{useState} from 'react'
+import React,{ useState, useEffect } from 'react'
 import styles from './page.module.css'
 import Link from 'next/link'
 import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible, AiOutlineFontSize, AiOutlineMail} from 'react-icons/ai'
 import {PiIdentificationCardLight} from 'react-icons/pi'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import {validateCiField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
 import api from '@/app/api/api'
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import bcrypt from "bcryptjs";
 import { showAccountAlreadyExistsAlert, showAccountCreatedAlert, showErrorMessage } from './confirmationAlert'
+import GoogleAuthButton from '@/components/GoogleAuthentication/GoogleAuthButton'
 
 export default function SignUp() {
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -29,7 +31,7 @@ export default function SignUp() {
   const [ciInput, setCiInput] = useState('');
   const [lastNameInput, setLastNameInput] = useState('');
   const [selectedGender, setSelectedGender] = useState('');
-
+  const session = useSession()
   const router = useRouter()
 
   const handleSubmit = async (e) => {
@@ -151,6 +153,11 @@ export default function SignUp() {
     }
   };
 
+  useEffect(() => {
+    if(session.status === "authenticated") {
+      router.push("/")
+    }
+  }, [session, router])
 
   return (
     <div className={styles.container}>
@@ -235,6 +242,12 @@ export default function SignUp() {
         </div>
       </div>
           <button className={styles.button}>Create account</button>
+          <p className={styles.signUpGoogleText}>
+            or Sign Up with
+          </p>
+          <div className={styles.googleContainer}>
+            <GoogleAuthButton />
+          </div>
         </form>
         <div className={styles.bottomSignUp}>
           <p className={styles.signUpTxt}>Already have an account?</p>

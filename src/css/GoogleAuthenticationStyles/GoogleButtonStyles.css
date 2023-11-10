@@ -62,7 +62,9 @@
   }
 
   .google-button-container {
-    padding: 2px;
     justify-content: center;
+    width: 70px;
+    height: 70px;
+    padding: 0;
   }
 }
