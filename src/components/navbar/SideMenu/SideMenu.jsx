@@ -11,7 +11,6 @@ const SideMenu = () => {
 
   const handleOpennig = () => {
     setIsOpen(!isOpen);
-    console.log(isOpen);
   };
 
   useEffect(() => {
