@@ -1,17 +1,18 @@
 import React from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import "@/css/Cart/CartCardSummary.css";
+import Image from "next/image";
 
 const CartCardSummary = ({ product }) => {
   return (
     <div className="cart-card-container">
       <div className="image-card-container">
         <div className={` image-background ${product.category} `}>
-          <img
+          <Image
             src={product.image}
             alt={`${product.name} image`}
             className="image-product-cart"
-            draggable="false"
+            draggable={ false }
           />
         </div>
       </div>

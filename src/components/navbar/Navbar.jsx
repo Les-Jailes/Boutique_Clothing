@@ -4,6 +4,7 @@ import style from "./navbar.module.css";
 import MenuItems from "@/components/navbar/menuItems/MenuItems";
 import NavbarFooter from "./navbarFooter/NavbarFooter";
 import Link from "next/link";
+import Image from "next/image";
 import { AiOutlineSearch } from "react-icons/ai";
 import { signOut, useSession } from 'next-auth/react'
 
@@ -39,10 +40,11 @@ const Navbar = () => {
     <div className={`${style.header} ${scrolled ? style.active : ""}`}>
       <div className={style.container}>
         <Link href={"/"} className={style.logoLink}>
-          <img
+          <Image
             src="https://i.postimg.cc/FzHMbWPS/logo.png"
             alt="logo"
             className={style.logoImg}
+            draggable={false}
           />
         </Link>
         <div className={style.searchContainer}>

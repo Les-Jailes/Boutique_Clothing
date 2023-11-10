@@ -9,7 +9,7 @@ const UserListOptions = () => {
 		<div className="user-list-options-container">
 			{
 				userMenuItems.map((menuItem, index) => {
-					return <UserMenuItem menuItem={ menuItem } />
+					return <UserMenuItem menuItem={ menuItem } key={ index } />
 				})
 			}
 		</div>
