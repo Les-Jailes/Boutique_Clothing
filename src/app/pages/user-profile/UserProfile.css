@@ -90,7 +90,9 @@ body {
   border-radius: 40px;
   font-size: 16px;
   color: #fff;
-  padding: 17px 45px 15px 15px;
+  padding: 17px 45px 15px 12px;
+  border-left-width: 7px;
+  border-right-width: 10px;
 }
 
 .options {
@@ -140,6 +142,8 @@ body {
     font-size: 14px;
     color: #fff;
     padding: 14px 45px 15px 15px;
+    border-left-width: 7px;
+    border-right-width: 10px;
   }
 } 
 
@@ -181,6 +185,8 @@ body {
     border-radius: 40px;
     font-size: 14px;
     padding: 5px 55px 15px 10px;
+    border-left-width: 7px;
+    border-right-width: 10px;
   }
 
   .profile-container .input-box {
@@ -227,6 +233,8 @@ body {
     border-radius: 40px;
     font-size: 12px;
     padding: 0px 65px 4% 10px;
+    border-left-width: 7px;
+    border-right-width: 10px;
   }
 
   .profile-container .input-box {
@@ -279,6 +287,8 @@ body {
     border-radius: 40px;
     font-size: 12px;
     padding: 0px 65px 4% 10px;
+    border-left-width: 7px;
+    border-right-width: 10px;
   }
 
   .profile-container .input-box {
