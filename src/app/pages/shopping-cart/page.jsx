@@ -9,7 +9,7 @@ import OrderSummary from "@/components/navbar/Cart/ShoppingCart/OrderSummary";
 import { orderSummary } from "@/utils/OrderSummary";
 import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 
-const page = () => {
+const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenning = () => {
@@ -50,4 +50,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Cart;
