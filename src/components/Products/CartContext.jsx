@@ -22,28 +22,31 @@ export const CartProvider = ({ children }) => {
       const existingProductIndex = prevCart.products.findIndex(
         (item) => item.code === newProduct.code && item.size === newProduct.size
       );
-
+  
       let updatedProducts;
       let updatedTotal = prevCart.total;
       let updatedTotalProducts = prevCart.totalProducts;
-
+  
       if (existingProductIndex >= 0) {
         updatedProducts = [...prevCart.products];
-        updatedProducts[existingProductIndex].quantity += 1;
+        updatedProducts[existingProductIndex] = {
+          ...updatedProducts[existingProductIndex],
+          quantity: updatedProducts[existingProductIndex].quantity + 1
+        };
         updatedTotal += parseFloat(newProduct.price);
       } else {
         updatedProducts = [...prevCart.products, { ...newProduct, quantity: 1 }];
         updatedTotal += parseFloat(newProduct.price);
         updatedTotalProducts += 1;
       }
-
+  
       const updatedCart = {
         ...prevCart,
         products: updatedProducts,
         total: updatedTotal,
-        totalProducts: updatedTotalProducts
+        totalProducts: updatedTotalProducts,
       };
-
+  
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       return updatedCart;
     });

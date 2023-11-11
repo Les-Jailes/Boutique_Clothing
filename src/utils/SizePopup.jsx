@@ -1,6 +1,6 @@
-import "@/css/Cart/SizePopUp.css"
+import "@/css/Cart/SizePopUp.css";
 
-const SizePopup = ({ handleSizeSelection, sizes, isSizePopupOpen }) => {
+export const SizePopup = ({ handleSizeSelection, sizes, isSizePopupOpen }) => {
   return (
     <div className={`size-popup-container ${isSizePopupOpen ? "is-open" : ""}`}>
       {sizes.map((size, index) => (
@@ -11,5 +11,3 @@ const SizePopup = ({ handleSizeSelection, sizes, isSizePopupOpen }) => {
     </div>
   );
 };
-
-export default SizePopup;

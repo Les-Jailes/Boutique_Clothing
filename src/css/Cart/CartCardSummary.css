@@ -25,19 +25,19 @@
     justify-content: center;
 }
 
-.image-background.women {
+.image-background.Women {
     background: var(--women-background-gradient);
 }
 
-.image-background.men {
+.image-background.Men {
     background: var(--men-background-gradient);
 }
 
-.image-background.girl {
+.image-background.Girl {
     background: var(--girl-background-gradient);
 }
 
-.image-background.boy {
+.image-background.Boy {
     background: var(--boy-background-gradient);
 }
 

@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "@/css/Cart/ShoppingCart.css";
 import CardProductCart from "@/components/ShoppingCart/CardProductCart";
-import { exampleProducts } from "@/utils/ExampleSummary";
 import CheckOutButton from "@/components/ShoppingCart/CheckOutButton";
 import OrderSummary from "@/components/ShoppingCart/OrderSummary";
 import { orderSummary } from "@/utils/OrderSummary";
 import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
+import { CartContext } from "@/components/Products/CartContext";
 
 const Cart = () => {
+  const { cart } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenning = () => {
@@ -21,7 +22,7 @@ const Cart = () => {
       <div className="your-cart-container">
         <h2 className="your-cart-title">YOUR CART</h2>
         <div className="list-your-cart-container">
-          {exampleProducts.map((product, index) => {
+          {cart.products.map((product, index) => {
             return <CardProductCart product={product} key={ index } />;
           })}
         </div>
@@ -37,7 +38,7 @@ const Cart = () => {
         </button>
         <CheckOutButton isOpen={ isOpen } />
         <OrderSummary
-          quantityProducts={orderSummary[0].products.length}
+          quantityProducts={cart.products.length}
           totalProducts={orderSummary[0].totalProducts}
           taxes={orderSummary[0].tax}
           delivery={orderSummary[0].delivery}

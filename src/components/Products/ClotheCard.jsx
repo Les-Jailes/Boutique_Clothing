@@ -9,7 +9,8 @@ import {
 import Image from 'next/image';
 import { useState, useEffect, useRef, useContext } from "react";
 import { ColorClothe } from "./ColorClothe";
-import Image from "next/image";
+import { SizePopup } from "@/utils/SizePopup";
+import { CartContext } from "./CartContext";
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
