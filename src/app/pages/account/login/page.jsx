@@ -98,7 +98,7 @@ const Login = () => {
     if(session.status === "authenticated") {
       router.push("/")
     }
-  }, [session])
+  }, [session, router])
   
   return (
     <div className={styles.container}>

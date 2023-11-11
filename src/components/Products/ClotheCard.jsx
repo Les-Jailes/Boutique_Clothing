@@ -6,14 +6,17 @@ import {
   AiFillHeart,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { useState, useEffect, useRef } from "react";
+import Image from 'next/image';
+import { useState, useEffect, useRef, useContext } from "react";
 import { ColorClothe } from "./ColorClothe";
 import SizePopup from "@/utils/SizePopup";
+import { CartContext } from "@/components/Products/CartContext";
 
-export const ClotheCard = ({ clothe, addToCart }) => {
+export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSizePopupOpen, setIsSizePopupOpen] = useState(false);
   const cardRef = useRef(null);
+  const { addToCart } = useContext(CartContext);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -21,14 +24,8 @@ export const ClotheCard = ({ clothe, addToCart }) => {
 
   const handleAddToCart = (selectedSize) => {
     addToCart({
-      code: clothe.code,
-      name: clothe.name,
-      price: clothe.price,
-      category: clothe.category,
-      type: clothe.type,
-      color: clothe.color,
+      ...clothe,
       size: selectedSize,
-      path: clothe.path,
     });
   };
 
@@ -56,7 +53,7 @@ export const ClotheCard = ({ clothe, addToCart }) => {
   return (
     <div className="clothe-card-container">
       <div className={`card-image-section ${clothe.category.toLowerCase()}`}>
-        <img
+        <Image
           src={clothe.path[0]}
           alt="Clothe image"
           className="clothe-image"

@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import style from "./navbar.module.css";
-import { menuItems } from "@/utils/menuItems";
 import MenuItems from "@/components/navbar/menuItems/MenuItems";
 import NavbarFooter from "./navbarFooter/NavbarFooter";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
+import Image from 'next/image';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -26,10 +26,12 @@ const Navbar = () => {
     <div className={`${style.header} ${scrolled ? style.active : ""}`}>
       <div className={style.container}>
         <Link href={"/"} className={style.logoLink}>
-          <img
+          <Image
             src="https://i.postimg.cc/FzHMbWPS/logo.png"
             alt="logo"
             className={style.logoImg}
+            width={300}
+            height={30}
           />
         </Link>
         <div className={style.searchContainer}>
