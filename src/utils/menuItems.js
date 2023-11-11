@@ -12,15 +12,15 @@ export const menuItems = [
     submenu: [
       {
         title: 'Settings',
-        url: '/settings',
+        url: '/pages/settings',
       },
       {
         title: 'More about us',
-        url: '/about-us',
+        url: '/pages/about-us',
       },
       {
         title: 'Get in Contact',
-        url: '/contact-us',
+        url: '/pages/contact-us',
       },
     ],
     icon:'bar'

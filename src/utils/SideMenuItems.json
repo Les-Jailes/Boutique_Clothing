@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Home",
+    "path": "/",
+    "isVisibleAllTime": true
+  },
+  {
+    "name": "Categories",
+    "submenu": [
+      {
+        "name": "Women",
+        "path": "/pages/categories/women"
+      },
+      {
+        "name": "Men",
+        "path": "/pages/categories/men"
+      },
+      {
+        "name": "Girl",
+        "path": "/pages/categories/girl"
+      },
+      {
+        "name": "Boy",
+        "path": "/pages/categories/boy"
+      },
+      {
+        "name": "Summer",
+        "path": "/pages/categories/summer"
+      },
+      {
+        "name": "Winter",
+        "path": "/pages/categories/winter"
+      },
+      {
+        "name": "Sales",
+        "path": "/pages/categories/sales"
+      }
+    ],
+    "path": "/pages/categories",
+    "isVisibleAllTime": false
+  },
+  {
+    "name": "Products",
+    "path": "/pages/products",
+    "isVisibleAllTime": true
+  },
+  {
+    "name": "Settings",
+    "path": "/pages/settings",
+    "isVisibleAllTime": true
+  },
+  {
+    "name": "About us",
+    "path": "/pages/about-us",
+    "isVisibleAllTime": true
+  },
+  {
+    "name": "Contact",
+    "path": "/pages/contact-us",
+    "isVisibleAllTime": true
+  }
+]

@@ -1,0 +1,32 @@
+.user-option-button {
+    position: absolute;
+    top: 0;
+    right: calc(120px + 1em);
+    width: 60px;
+    height: 60px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.user-list-container {
+    display: none;
+    width: 400px;
+    position: absolute;
+    top: 60px;
+    right: calc(120px + 1em);
+    background-color: #fff;
+    box-shadow: 0 0 10px #00000050;
+    z-index: 10;
+}
+
+.user-list-container.is-open {
+    display: block;
+}
+
+@media (max-width: 550px) {
+    .user-list-container {
+        width: 100%;
+        right: 0;
+    }
+}

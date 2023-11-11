@@ -6,6 +6,7 @@ import Link from 'next/link'
 import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
 import { useRouter } from 'next/navigation'
 import { validateEmail, validatePassword } from '@/utils/formValidations';
+import GoogleAuthButton from '@/components/GoogleAuthentication/GoogleAuthButton';
 
 
 const Login = () => {
@@ -98,8 +99,8 @@ const Login = () => {
     if(session.status === "authenticated") {
       router.push("/")
     }
-  }, [session])
-  
+  }, [session, router])
+ 
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
@@ -111,7 +112,7 @@ const Login = () => {
               type="email"
               onChange={(e) => handleInputChange(e, 'email')}
               value={emailInput}
-              maxLength={30}
+              maxLength={100}
               placeholder="Email"
               className={styles.input}
               required
@@ -147,6 +148,10 @@ const Login = () => {
             )}
           </div>
           <button className={styles.button}>Log in</button>
+          <p className={styles.text} >or Log In with</p>
+          <div className={styles.googleAuthButtonDiv} >
+            <GoogleAuthButton />
+          </div>
         </form>
         <div className={styles.bottomSignUp}>
           <p className={styles.signUpTxt}>Don&apos;t you have an account?</p>

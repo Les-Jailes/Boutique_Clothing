@@ -1,0 +1,57 @@
+@import url("../../app/globals.css");
+
+.size-popup-container {
+  position: absolute;
+  background: rgb(255, 255, 255);
+  width: 250px;
+  height: 150px;
+  padding: 2em 2em 2em 2em;
+  border-radius: 10px;
+  display: block;
+  box-shadow: var(--box-shadow-card);
+  bottom: 59px;
+  right: 20px;
+}
+
+.size-popup-container__button {
+  background: transparent;
+  border-color: transparent;
+  font-size: 18px;
+  padding: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  margin: 10px;
+  transition: transform 0.3s ease;
+}
+
+.size-popup-container__button:hover{
+  transform: translateY(-5px);
+}
+.size-popup-container.is-open {
+  display: block;
+}
+
+@media (max-width: 780px) {
+  .size-popup-container {
+    position: absolute;
+    width: 150px;
+    height: 250px;
+    padding: 1em 1em 1em 1em;
+    bottom: 59px;
+    right: 20px;
+  }
+
+  .size-popup-container__button {
+    background: transparent;
+    border-color: transparent;
+    border-radius: 30px;
+    margin: 10px;
+    font-size: 18px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .size-popup-container.is-open {
+    display: block;
+  }
+}
