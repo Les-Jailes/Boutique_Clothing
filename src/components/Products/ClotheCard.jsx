@@ -8,6 +8,7 @@ import {
 } from "react-icons/ai";
 import { useState } from "react";
 import { ColorClothe } from "./ColorClothe";
+import Image from "next/image";
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -19,11 +20,13 @@ export const ClotheCard = ({ clothe }) => {
   return (
     <div className="clothe-card-container">
       <div className={`card-image-section ${clothe.category.toLowerCase()}`}>
-        <img
+        <Image
           src={clothe.path[0]}
           alt="Clothe image"
           className="clothe-image"
-          draggable="false"
+          draggable={ false }
+          width={400}
+          height={400}
         />
       </div>
       <div className="information-container">

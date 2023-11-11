@@ -2,16 +2,20 @@ import React from "react";
 import "@/css/Cart/CardProductCart.css";
 import QuantityProduct from "./QuantityProduct";
 import { AiOutlineDelete } from "react-icons/ai";
+import Image from "next/image";
 
 const CardProductCart = ({ product }) => {
   return (
     <div className="card-product-cart-container">
       <div className="image-card-product-cart-container card-cart-container">
         <div className={ ` background-image-product ${product.category} ` }>
-          <img
+          <Image
             src={product.image}
             alt={`${product.name} image`}
             className="image-card-product-cart"
+            draggable={ false }
+            width={60}
+            height={60}
           />
         </div>
       </div>

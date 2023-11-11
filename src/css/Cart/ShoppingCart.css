@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: 60% 40%;
     z-index: 1;
+    font-family: var(--font-family-poppins);
 }
 
 .your-cart-container {
