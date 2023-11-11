@@ -6,13 +6,15 @@ import {
   AiFillHeart,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ColorClothe } from "./ColorClothe";
 import SizePopup from "@/utils/SizePopup";
+import { CartContext } from "@/components/Products/CartContext";
 
-export const ClotheCard = ({ clothe, addToCart }) => {
+export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSizePopupOpen, setIsSizePopupOpen] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -20,14 +22,8 @@ export const ClotheCard = ({ clothe, addToCart }) => {
 
   const handleAddToCart = (selectedSize) => {
     addToCart({
-      code: clothe.code,
-      name: clothe.name,
-      price: clothe.price,
-      category: clothe.category,
-      type: clothe.type,
-      color: clothe.color,
+      ...clothe,
       size: selectedSize,
-      path: clothe.path,
     });
   };
 

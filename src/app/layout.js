@@ -1,7 +1,9 @@
+import React from 'react'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import '@/css/General.css'
 import Navbar from '@/components/navbar/Navbar'
+import { CartProvider } from '@/components/Products/CartContext'
 import AuthProvider from '@/components/authProvider/AuthProvider'
 import Footer from '@/components/footer/Footer'
 
@@ -17,14 +19,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      <AuthProvider>
-          <div className='container'>
+        <AuthProvider>
+          <CartProvider>
             <Navbar />
             {children}
             <Footer />
-          </div>
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>
-  )
+  );
 }

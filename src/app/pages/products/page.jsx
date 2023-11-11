@@ -5,15 +5,10 @@ import createPagination from "@/utils/Pagination";
 import { ClotheCard } from "@/components/Products/ClotheCard";
 import "@/css/Products/ProductsPage.css";
 import { Pagination } from "@/components/Products/Pagination";
-import data from "@/utils/AddCartProducts.json";
+
 
 export default function Page() {
-  const initialProductData =
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("productData")) || data
-      : data;
-
-  const [productData, setProductData] = useState(initialProductData);
+  // Aqui habia algo de cargar los datos al iniciar no recuerdo pero esta en el Context directo
   const [pagination, setPagination] = useState([]);
   const [products, setProducts] = useState([]);
   const [currentlyPagination, setCurrentlyPagination] = useState(0);
@@ -35,11 +30,12 @@ export default function Page() {
     setPagination(createPagination(products));
   }, [products]);
 
-  useEffect(() => {
+  // Este use efect se va usar en el CartContext :v
+  /*useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("productData", JSON.stringify(productData));
     }
-  }, [productData]);
+  }, [productData]);*/
 
   const handlePaginationRight = () => {
     let paginationNumber = currentlyPagination + 1;
@@ -52,7 +48,8 @@ export default function Page() {
     }
   };
 
-  const addToCart = (product) => {
+  // Como estamos usando el Contexto del carrito, no es necesario esto :v 
+  /*const addToCart = (product) => {
     const existingProduct = productData.products.find(
       (item) => item.code === product.code && item.size === product.size
     );
@@ -75,7 +72,7 @@ export default function Page() {
         totalProducts: prevData.totalProducts + 1,
       }));
     }
-  };
+  };*/
 
   const handlePaginationLeft = () => {
     let paginationNumber = currentlyPagination - 1;
@@ -92,7 +89,7 @@ export default function Page() {
     <div className="products-page">
       <div className="product-container">
         {pagination[currentlyPagination]?.map((product, index) => (
-          <ClotheCard key={index} clothe={product} addToCart={addToCart} />
+          <ClotheCard clothe={product} key={index} />
         ))}
       </div>
       <Pagination

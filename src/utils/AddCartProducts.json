@@ -1,8 +1,5 @@
 {
     "products": [],
-    "totalProducts": 0,
-    "taxes": 0,
-    "delivery": 0,
     "total": 0,
-    "currency": "$"
+    "totalProducts": 0
 }
