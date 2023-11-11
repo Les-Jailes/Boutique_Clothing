@@ -18,6 +18,7 @@ const Footer = () => {
           width={180}
           height={180}
           className={styles.img}
+          priority
           />
           <p className={styles.copyText}>Copyright © {currentYear} Boutique Clothing</p>
           <p className={styles.copyText}>All rights reserved</p>

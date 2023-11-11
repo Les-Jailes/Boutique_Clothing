@@ -1,9 +1,12 @@
-import React from "react";
+"use client";
+
+import React, { useContext } from "react";
 import CartCardSummary from "./CartCardSummary";
-import { exampleProducts } from "@/utils/ExampleSummary.js";
-import '@/css/Cart/CartListSummary.css'
+import "@/css/Cart/CartListSummary.css";
+import { CartContext } from "@/components/Products/CartContext";
 
 const CartListSummary = ({ isOpen }) => {
+  const { cart } = useContext(CartContext);
 
   const handleClickInside = (e) => {
     e.stopPropagation();
@@ -12,9 +15,10 @@ const CartListSummary = ({ isOpen }) => {
   return (
     <div className={`list-cart-summary ${isOpen ? "is-open" : ""}`} onClick={handleClickInside}>
       <div className="list-products">
-        {exampleProducts.map((product, index) => {
-          return <CartCardSummary product={product} key={index} />;
-        })}
+        {cart.products &&
+          cart.products.map((product, index) => {
+            return <CartCardSummary product={product} key={index} />;
+          })}
       </div>
       <a href="/pages/shopping-cart" className="go-cart-page">
         View all products

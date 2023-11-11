@@ -47,6 +47,7 @@ const Navbar = () => {
             width={100}
             height={60}
             draggable={false}
+            priority
           />
         </Link>
         <div className={style.searchContainer}>

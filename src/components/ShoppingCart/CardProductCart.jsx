@@ -10,12 +10,13 @@ const CardProductCart = ({ product }) => {
       <div className="image-card-product-cart-container card-cart-container">
         <div className={ ` background-image-product ${product.category} ` }>
           <Image
-            src={product.image}
+            src={product.path[0]}
             alt={`${product.name} image`}
             className="image-card-product-cart"
             draggable={ false }
             width={60}
             height={60}
+            priority
           />
         </div>
       </div>
@@ -25,7 +26,7 @@ const CardProductCart = ({ product }) => {
         <p className="price-product">{`Price: ${product.price} $`}</p>
       </div>
       <div className="quantity-product-card-cart card-cart-container">
-        <QuantityProduct limit={product.limit} />
+        <QuantityProduct limit={10} quantity={product.quantity} />
       </div>
       <div className="delete-option-card-cart card-cart-container">
         <button className="delete-product-cart">

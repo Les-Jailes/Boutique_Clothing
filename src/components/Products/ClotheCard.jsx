@@ -6,16 +6,49 @@ import {
   AiFillHeart,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { useState } from "react";
+import Image from 'next/image';
+import { useState, useEffect, useRef, useContext } from "react";
 import { ColorClothe } from "./ColorClothe";
-import Image from "next/image";
+import { SizePopup } from "@/utils/SizePopup";
+import { CartContext } from "./CartContext";
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [isSizePopupOpen, setIsSizePopupOpen] = useState(false);
+  const cardRef = useRef(null);
+  const { addToCart } = useContext(CartContext);
 
   const handleLike = () => {
     setIsLiked(!isLiked);
   };
+
+  const handleAddToCart = (selectedSize) => {
+    addToCart({
+      ...clothe,
+      size: selectedSize,
+    });
+  };
+
+  const handleSizeSelection = (size) => {
+    setIsSizePopupOpen(!isSizePopupOpen);
+    if (size) {
+      handleAddToCart(size);
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (cardRef.current && !cardRef.current.contains(event.target) && isSizePopupOpen) {
+        setIsSizePopupOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isSizePopupOpen]);
 
   return (
     <div className="clothe-card-container">
@@ -51,10 +84,21 @@ export const ClotheCard = ({ clothe }) => {
                 <AiFillHeart color="red" />
               )}
             </button>
-            <button className="options-card shop-card">
+            <button
+              ref={cardRef}
+              className="options-card shop-card"
+              onClick={() => {handleSizeSelection();}}
+            >
               <AiOutlineShoppingCart color="white" />
             </button>
           </div>
+          {isSizePopupOpen && (
+            <SizePopup
+              handleSizeSelection={handleSizeSelection}
+              sizes={clothe.size}
+              isSizePopupOpen={isSizePopupOpen}
+            />
+          )}
         </div>
       </div>
     </div>
