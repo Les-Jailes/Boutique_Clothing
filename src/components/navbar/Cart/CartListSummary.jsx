@@ -8,8 +8,12 @@ import { CartContext } from "@/components/Products/CartContext";
 const CartListSummary = ({ isOpen }) => {
   const { cart } = useContext(CartContext);
 
+  const handleClickInside = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className={`list-cart-summary ${isOpen ? "is-open" : ""}`}>
+    <div className={`list-cart-summary ${isOpen ? "is-open" : ""}`} onClick={handleClickInside}>
       <div className="list-products">
         {cart.products &&
           cart.products.map((product, index) => {

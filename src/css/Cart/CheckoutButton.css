@@ -12,6 +12,7 @@
     color: #000;
     font-size: 18px;
     transition: all 0.5s;
+    font-family: var(--font-family-poppins);
 }
 
 .checkout-button:hover {

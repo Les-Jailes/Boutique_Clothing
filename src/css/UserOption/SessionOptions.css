@@ -1,0 +1,26 @@
+.session-option-container {
+    width: 100%;
+    height: 40px;
+    background-color: #000;
+    display: none;
+}
+
+.session-option-container.is-not-logged {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.log-in-option,
+.sign-up-option {
+    text-decoration: none;
+    color: #fff;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-family: var(--font-family-poppins);
+}
+
+.log-in-option {
+    border-right: 0.2px solid #656565;
+}

@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {}
 
 module.exports = {
-  images: {
-    domains: ["i.postimg.cc"],
-  },
-};
+    images: {
+        domains: ['i.postimg.cc']
+    }
+}

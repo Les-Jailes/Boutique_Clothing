@@ -32,3 +32,32 @@ export const validatePassword = (password) => {
   return [true, ""];
 };
 
+  export const validateTextField = (text, typeOfText) =>{
+    if(!text || text === ""){
+        return [false, typeOfText + " can not be empty"];
+    }
+    if(text.length>=16){
+      return [false, typeOfText + " can not be more than 16 characters long."];
+    }
+    if (text.length < 3) {
+      return [false, typeOfText + " must be at least 3 characters long."];
+    }
+    const regex = /^[A-Za-z\s]+$/;
+    if (!regex.test(text)) {
+      return [false, typeOfText + " should only contain letters and spaces."];
+    }
+    return [true,""];
+  };
+
+export const validateCiField = (ci) => {
+  if (!ci || ci === "") {
+    return [false, "CI field can not be empty."];
+  }
+  if(ci.length>=16){
+    return [false, "CI can not be more than 16 characters long."];
+  }
+  if(ci.charAt(0) == "0"){
+    return [false, "CI not valid"];
+  }
+  return [true, ""];
+}

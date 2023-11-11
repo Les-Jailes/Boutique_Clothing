@@ -2,14 +2,14 @@
 
 import React, { useState } from "react";
 import "@/css/Cart/ShoppingCart.css";
-import CardProductCart from "@/components/navbar/Cart/ShoppingCart/CardProductCart";
+import CardProductCart from "@/components/ShoppingCart/CardProductCart";
 import { exampleProducts } from "@/utils/ExampleSummary";
-import CheckOutButton from "@/components/navbar/Cart/ShoppingCart/CheckOutButton";
-import OrderSummary from "@/components/navbar/Cart/ShoppingCart/OrderSummary";
+import CheckOutButton from "@/components/ShoppingCart/CheckOutButton";
+import OrderSummary from "@/components/ShoppingCart/OrderSummary";
 import { orderSummary } from "@/utils/OrderSummary";
 import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 
-const Card = () => {
+const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenning = () => {
@@ -50,4 +50,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default Cart;

@@ -9,8 +9,7 @@ import {
 import Image from 'next/image';
 import { useState, useEffect, useRef, useContext } from "react";
 import { ColorClothe } from "./ColorClothe";
-import SizePopup from "@/utils/SizePopup";
-import { CartContext } from "@/components/Products/CartContext";
+import Image from "next/image";
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -57,7 +56,9 @@ export const ClotheCard = ({ clothe }) => {
           src={clothe.path[0]}
           alt="Clothe image"
           className="clothe-image"
-          draggable="false"
+          draggable={ false }
+          width={400}
+          height={400}
         />
       </div>
       <div className="information-container">
