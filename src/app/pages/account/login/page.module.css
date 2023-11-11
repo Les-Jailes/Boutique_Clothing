@@ -6,6 +6,7 @@
     background-image: url("/bg-login.png");
     background-size: cover;
     background-position: center;
+    font-family: var(--font-family-poppins);
 }
 .formContainer{
     display: flex;
