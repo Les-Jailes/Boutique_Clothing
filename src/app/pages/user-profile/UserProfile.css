@@ -78,12 +78,15 @@ body {
   border-radius: 20px;
   font-size: 16px;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 20px 10px 15px;
   appearance: none;
 }
 
-@media (max-width: 800px) {
-  .profile-container .input-box,
+@media (max-width: 799px) {
+  .input-box {
+    width: 100%;
+  }
+
   .filter-bar {
     width: 100%;
   }
@@ -95,11 +98,11 @@ body {
   }
 
   .icon {
-    transform: translateY(-28px) translateX(130px);
+    transform: translateY(-28px) translateX(200px);
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(130px);
+    transform: translateY(-48px) translateX(200px);
   }
 
   .image-user {
@@ -112,6 +115,238 @@ body {
 }
 
 @media (max-width: 600px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(120px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(120px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 595px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(220px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(220px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 496px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(180px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(180px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 485px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(170px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(170px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 478px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(180px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(180px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 435px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(160px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(160px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 398px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(140px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(140px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 357px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(120px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(120px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 378px) {
   .profile-container .input-box,
   .filter-bar {
     width: 100%;
@@ -167,40 +402,5 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
-  }
-}
-
-
-@media (max-width: 719px) {
-  .profile-container .input-box,
-  .filter-bar {
-    width: 100%;
-  }
-
-  .input-box input {
-    font-size: 14px;
-    padding: 8px 15px;
-  }
-
-  .icon {
-    transform: translateY(-28px) translateX(180px);
-  }
-
-  .iconGender {
-    transform: translateY(-48px) translateX(180px);
-  }
-
-  .image-user {
-    font-size: 60px;
-  }
-
-  .profile-container h1 {
-    font-size: 20px;
-  }
-
-  /* Ajustar el ancho del select */
-  .filter-bar {
-    width: calc(100% - -100px);
-    padding-right: 40px; 
   }
 }
