@@ -172,6 +172,35 @@ body {
   }
 }
 
+@media (max-width: 540px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(200px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(200px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
 @media (max-width: 520px) {
   .profile-container .input-box,
   .filter-bar {
@@ -335,6 +364,35 @@ body {
 
   .iconGender {
     transform: translateY(-48px) translateX(160px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 414px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(150px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(150px);
   }
 
   .image-user {
