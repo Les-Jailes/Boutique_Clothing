@@ -127,6 +127,7 @@ const Profile = () => {
               </option>
             ))}
           </select>
+          <BiSolidUser className='iconGender' />
         </div>
       </form>
     </div>
