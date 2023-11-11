@@ -5,7 +5,6 @@ import "@/css/Cart/ShoppingCart.css";
 import CardProductCart from "@/components/ShoppingCart/CardProductCart";
 import CheckOutButton from "@/components/ShoppingCart/CheckOutButton";
 import OrderSummary from "@/components/ShoppingCart/OrderSummary";
-import { orderSummary } from "@/utils/OrderSummary";
 import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { CartContext } from "@/components/Products/CartContext";
 
@@ -39,11 +38,11 @@ const Cart = () => {
         <CheckOutButton isOpen={ isOpen } />
         <OrderSummary
           quantityProducts={cart.products.length}
-          totalProducts={orderSummary[0].totalProducts}
-          taxes={orderSummary[0].tax}
-          delivery={orderSummary[0].delivery}
-          total={orderSummary[0].totalOrder}
-          currency={orderSummary[0].currency}
+          totalProducts={cart.total}
+          taxes={cart.taxes}
+          delivery={cart.delivery}
+          total={cart.total + cart.taxes}
+          currency={cart.currency}
           isOpen={ isOpen }
         />
       </div>

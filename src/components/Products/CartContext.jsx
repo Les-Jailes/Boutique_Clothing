@@ -8,6 +8,9 @@ export const CartProvider = ({ children }) => {
     products: [],
     total: 0,
     totalProducts: 0,
+    taxes: 0,
+    delivery: 0,
+    currency: "$"
   });
 
   useEffect(() => {
@@ -33,10 +36,10 @@ export const CartProvider = ({ children }) => {
           ...updatedProducts[existingProductIndex],
           quantity: updatedProducts[existingProductIndex].quantity + 1
         };
-        updatedTotal += parseFloat(newProduct.price);
+        updatedTotal += parseInt(newProduct.price);
       } else {
         updatedProducts = [...prevCart.products, { ...newProduct, quantity: 1 }];
-        updatedTotal += parseFloat(newProduct.price);
+        updatedTotal += parseInt(newProduct.price);
         updatedTotalProducts += 1;
       }
   
