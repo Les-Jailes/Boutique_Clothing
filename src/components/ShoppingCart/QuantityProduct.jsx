@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import "@/css/Cart/QuantityProducts.css";
 
-const QuantityProduct = ({ limit }) => {
-  const [quantityProduct, setQuantityProduct] = useState(0);
+const QuantityProduct = ({ limit, quantity }) => {
+  
+  const [quantityProduct, setQuantityProduct] = useState(quantity);
 
   const addProduct = () => {
     let quantity = quantityProduct + 1;

@@ -1,0 +1,38 @@
+.user-list-options-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family-poppins);
+}
+
+.user-menu-item {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    transition: all 0.5s;
+}
+
+.user-menu-item:hover {
+    padding-left: 20px;
+    background-color: #dddddd;
+}
+
+.log-out-option {
+    width: 100%;
+    height: 40px;
+    background-color: #000;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-family: var(--font-family-poppins);
+    display: none;
+    cursor: pointer;
+}
+
+.log-out-option.is-logged {
+    display: block;
+}

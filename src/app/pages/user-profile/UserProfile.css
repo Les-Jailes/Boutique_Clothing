@@ -1,0 +1,522 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('https://i.pinimg.com/originals/bc/03/dd/bc03dd204fa7ba0cdbb02f91ebd37777.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.profile-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 10% auto;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  color: #fff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.profile-container h1 {
+  font-size: 24px;
+}
+
+.image-user {
+  font-size: 100px;
+}
+
+.profile-container .input-box {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.input-box input{
+  width: 100%;
+  height: 40px;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  font-size: 16px;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.icon {
+  transform: translateY(-28px) translateX(200px);
+  right: 12%;
+  top: 20%;
+  z-index: 100;
+}
+.iconGender {
+  transform: translateY(-48px) translateX(200px);
+  right: 12%;
+  top: 20%;
+  z-index: 100;
+}
+
+.input-box input::placeholder {
+  color: #fff;
+}
+
+.filter-bar {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  font-size: 16px;
+  color: #fff;
+  padding: 10px 20px 10px 15px;
+  appearance: none;
+}
+
+@media (max-width: 799px) {
+  .input-box {
+    width: 100%;
+  }
+
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(200px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(200px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(220px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(220px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 595px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(220px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(220px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(200px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(200px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(185px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(185px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 510px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(190px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(190px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 496px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(180px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(180px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 485px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(170px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(170px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 478px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(180px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(180px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 435px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(160px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(160px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 414px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(150px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(150px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 398px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(140px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(140px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 357px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(120px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(120px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 378px) {
+  .profile-container .input-box,
+  .filter-bar {
+    width: 100%;
+  }
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(120px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(120px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 355px) {
+  .profile-container .input-box {
+    width: 100%;
+  }
+
+
+
+  .input-box input,
+  .filter-bar {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .icon {
+    transform: translateY(-28px) translateX(100px);
+  }
+
+  .iconGender {
+    transform: translateY(-48px) translateX(100px);
+  }
+
+  .image-user {
+    font-size: 60px;
+  }
+
+  .profile-container h1 {
+    font-size: 20px;
+  }
+}
