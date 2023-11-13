@@ -15,8 +15,6 @@ const Profile = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState('default');
-  const [image, setUserImage] = useState('');
-
   const [isEditing, setIsEditing] = useState(false);
   const [user, setuser] = useState([])
   const session = useSession()
@@ -91,12 +89,8 @@ const Profile = () => {
             setLastName(user.lastName);
             setName(user.name);
             setPassword(user.password);
-            setGender(user.gender);            
+            setGender(user.gender);
           }   
-          if (user !== null && user.imagePath) {
-            // Si el usuario tiene una imagen, actualiza el estado con la URL
-            // Asegúrate de tener un estado para la imagen, como userImage
-            setUserImage(user.imagePath);
         } catch (error) {
           console.error("Error in fetching user data:", error);
         }
@@ -122,8 +116,7 @@ const Profile = () => {
         <h1>Profile</h1>
 
         <div>
-          <BiSolidUserCircle className='image-user'
-          values='image'/>
+          <BiSolidUserCircle className='image-user'/>
         </div>
 
         <div className='input-box'>
