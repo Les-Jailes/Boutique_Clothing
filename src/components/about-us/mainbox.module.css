@@ -24,3 +24,9 @@
     text-align: center;
     color: white;
 }
+
+@media only screen and (max-width: 600px) {
+    .contentContainer{
+        width: 300px;
+    }   
+}

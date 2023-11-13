@@ -1,23 +1,25 @@
 import Image from 'next/image'
 import React from 'react'
+import styles from './infobox.module.css'
 
 const InformationBox = ({title, content, img}) => {
   return (
-    <div >
-        <div>
-            <h2>
+    <div className={styles.container}>
+        <div className={styles.contentContainer}>
+            <h2 className={styles.title}>
                 {title}
             </h2>
-            <p>
+            <p className={styles.content}>
                 {content}
             </p>
         </div>
-        <div>
+        <div className={styles.imgContainer}>
             <Image 
                 src={img}
                 alt= "info img"
-                width={300}
-                height={200}
+                width={600}
+                height={350}
+                className={styles.img}
             />
         </div>
     </div>
