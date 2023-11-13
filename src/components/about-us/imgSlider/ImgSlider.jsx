@@ -6,28 +6,26 @@ import { sliderImgs } from '@/utils/aboutUsUtils'
 import Image from 'next/image'
 
 const ImageSlider = () => {
-  const [currentImg, setCurrent] = useState(0) 
-  const length = sliderImgs.length 
+  const [currentImg, setCurrent] = useState(0)
+  const length = sliderImgs.length
 
   const nextSlide = () => {
-    setCurrent((currentImg + 1) % length);
+      setCurrent((currentImg + 1) % length);
   };
-  
-  const prevSlide = () => {
-    setCurrent((currentImg - 1 + length) % length);
-  };
-  
 
-  if (!Array.isArray(sliderImgs) || sliderImgs.length <= 0) {
-    return null 
-  }
+  const prevSlide = () => {
+      setCurrent((currentImg - 1 + length) % length);
+  };
   const prevIndex = (currentImg - 1 + length) % length;
   const nextIndex = (currentImg + 1) % length;
 
   useEffect(() => {
-    setCurrent((currentImg + length) % length);
+      setCurrent((currentImg + length) % length);
   }, [currentImg, length]);
-  
+
+  if (!Array.isArray(sliderImgs) || sliderImgs.length <= 0) {
+    return null;
+}
   return (
     <div className={styles.container}>
         <h2 className={styles.title}>Our team</h2>
