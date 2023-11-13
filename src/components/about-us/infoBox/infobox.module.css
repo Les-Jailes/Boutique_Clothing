@@ -4,9 +4,9 @@
     align-items: center;
     padding: 1rem;
     justify-content: center;
-    gap: 10rem;
+    gap: 4rem;
     width: 1300px;
-    margin: 0 auto;
+    margin: 2rem auto;
 }
 .contentContainer{
     display: flex;
@@ -29,7 +29,7 @@
 
 @media only screen and (max-width: 600px) {
     .container{
-        flex-direction: column;
+        flex-direction: column !important;
         width: auto;
         gap: 1rem;
     }  

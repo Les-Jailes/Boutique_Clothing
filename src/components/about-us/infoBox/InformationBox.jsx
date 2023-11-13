@@ -2,9 +2,9 @@ import Image from 'next/image'
 import React from 'react'
 import styles from './infobox.module.css'
 
-const InformationBox = ({title, content, img}) => {
+const InformationBox = ({title, content, img, reverse}) => {
   return (
-    <div className={styles.container}>
+    <div className= { styles.container}  style={{flexDirection: `${reverse ? 'row-reverse':''}`}}>
         <div className={styles.contentContainer}>
             <h2 className={styles.title}>
                 {title}
