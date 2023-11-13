@@ -24,3 +24,29 @@ export const aboutUsInfo = [
         reverse: true,
     },
 ]
+export const sliderImgs = [
+    {
+        img: "/axel.jpg",
+        alt: "Hi, I am axel"
+    },
+    {
+        img: "/carlos.jpg",
+        alt: "Hi, I am carlos"
+    },
+    {
+        img: "/dennis.jpg",
+        alt: "Hi, I am dennis"
+    },
+    {
+        img: "/elvis.jpg",
+        alt: "Hi, I am elvis"
+    },
+    {
+        img: "/salet.jpg",
+        alt: "Hi, I am salet"
+    },
+    {
+        img: "/victor.jpg",
+        alt: "Hi, I am victor"
+    },
+]

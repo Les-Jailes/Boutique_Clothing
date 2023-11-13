@@ -2,7 +2,8 @@ import MainBox from '@/components/about-us/MainBox'
 import styles from './page.module.css'
 import React from 'react'
 import InformationBox from '@/components/about-us/infoBox/InformationBox'
-import { aboutUsInfo } from '@/utils/aboutUsInfo'
+import { aboutUsInfo } from '@/utils/aboutUsUtils'
+import ImgSlider from '@/components/about-us/imgSlider/ImgSlider'
 
 const Aboutus = () => {
   return (
@@ -19,6 +20,8 @@ const Aboutus = () => {
           />
         ))}
       </div>
+      <ImgSlider
+      />
     </div>
   )
 }
