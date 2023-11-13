@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import "@/css/Cart/QuantityProducts.css";
+import PropTypes from 'prop-types'
 
 const QuantityProduct = ({ limit, quantity }) => {
   
@@ -21,10 +22,10 @@ const QuantityProduct = ({ limit, quantity }) => {
   const minusProduct = () => {
     let quantity = quantityProduct - 1;
 
-    if (quantity >= 0) {
+    if (quantity >= 1) {
       setQuantityProduct(quantity);
     } else {
-      setQuantityProduct(0);
+      setQuantityProduct(1);
     }
   };
 
@@ -47,5 +48,10 @@ const QuantityProduct = ({ limit, quantity }) => {
     </div>
   );
 };
+
+QuantityProduct.propTypes = {
+  limit: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired
+}
 
 export default QuantityProduct;

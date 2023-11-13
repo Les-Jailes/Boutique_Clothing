@@ -1,5 +1,6 @@
 import React from "react";
 import '@/css/Cart/OrderSummary.css'
+import PropTypes from 'prop-types'
 
 const OrderSummary = ({
   quantityProducts,
@@ -40,5 +41,16 @@ const OrderSummary = ({
     </div>
   );
 };
+
+
+OrderSummary.propTypes = {
+  quantityProducts: PropTypes.number.isRequired,
+  totalProducts: PropTypes.number.isRequired,
+  taxes: PropTypes.number.isRequired,
+  delivery: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+}
 
 export default OrderSummary;

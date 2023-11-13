@@ -1,9 +1,8 @@
 .quantity-container {
-    width: 160px;
-    height: 40px;
+    width: 100px;
+    height: 30px;
     border: 1px solid #000;
     overflow: hidden;
-    border-radius: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -12,7 +11,7 @@
 }
 
 .quantity-product {
-    width: calc(160px - 80px);
+    width: calc(100% - 20px);
     height: 100%;
     text-align: center;
     font-size: 18px;
@@ -20,7 +19,7 @@
 }
 
 .quantity-button {
-    width: 40px;
+    width: 30px;
     height: 100%;
     background-color: #000;
     border: none;

@@ -3,6 +3,7 @@ import "@/css/Cart/CardProductCart.css";
 import QuantityProduct from "./QuantityProduct";
 import { AiOutlineDelete } from "react-icons/ai";
 import Image from "next/image";
+import PropTypes from 'prop-types'
 
 const CardProductCart = ({ product }) => {
   return (
@@ -14,8 +15,8 @@ const CardProductCart = ({ product }) => {
             alt={`${product.name} image`}
             className="image-card-product-cart"
             draggable={ false }
-            width={60}
-            height={60}
+            width={100}
+            height={100}
             priority
           />
         </div>
@@ -36,5 +37,21 @@ const CardProductCart = ({ product }) => {
     </div>
   );
 };
+
+CardProductCart.propTypes = {
+  product: PropTypes.shape({
+    __id: PropTypes.string.isRequired,
+    code: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    color: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    size: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    path: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    description: PropTypes.string,
+    quantity: PropTypes.number.isRequired
+  }).isRequired
+}
 
 export default CardProductCart;
