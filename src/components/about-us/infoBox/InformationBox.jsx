@@ -3,7 +3,7 @@ import React from 'react'
 
 const InformationBox = ({title, content, img}) => {
   return (
-    <div>
+    <div >
         <div>
             <h2>
                 {title}
