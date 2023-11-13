@@ -2,19 +2,37 @@
 import React from "react";
 import { useState } from "react";
 import '@/css/Checkout/CheckoutForm.css'
-import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible, AiOutlineFontSize, AiOutlineGlobal} from 'react-icons/ai'
+import {AiOutlineFontSize, AiOutlineGlobal} from 'react-icons/ai'
 import {BiWorld} from 'react-icons/bi'
 import {LuMap} from 'react-icons/lu'
 import {FiPhone} from 'react-icons/fi'
+import {validateCiField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
 
 
 const CheckoutForm = () => {
   const [fullname, setFullname] = useState("");
+  const [validationFullname, setValidationFullname] = useState(false);
+  const [validFullnameMessage, setValidFullnameMessage] = useState('');
   const [country, setCountry] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [age, setAge] = useState(true);
+
+  const handleFullnameChange = (e) => {
+    const username = e.target.value;
+    setFullname(username);
+    validateFullname(username);
+  };
+  const validateFullname = (text) => {
+    const [isValid, validationResult] = validateTextField(text, "Fullname");
+    if (isValid) {
+      setValidationFullname(false);
+    } else {
+      setValidationFullname(true);
+      setValidFullnameMessage(validationResult);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,8 +58,9 @@ const CheckoutForm = () => {
     label="Full name"
     value={fullname}
     placeholder="Fullname"
-    onChange={(e) => setFullname(e.target.value)}
+    onChange={handleFullnameChange}
   />
+  <p className="validation">{validationFullname ? validFullnameMessage : ''}</p>
   </div>
   <div className="inputBox" >
 
@@ -96,13 +115,12 @@ const CheckoutForm = () => {
   </div>
   
 
-  <div className="checkboxContainer">
+  <div className="inputBox">
   <input type="checkbox" className="checkbox" name="vehicle1" value={age} onChange={()=> handleChange()}/>
   <label className="checkbox-label"> I am over 18 years old or have parental consent. </label>
   </div>
 
   <button type="submit" variant="contained" color="primary" className="button">
-    
     Next
   </button>
   
