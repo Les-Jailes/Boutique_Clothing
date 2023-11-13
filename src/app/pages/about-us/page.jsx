@@ -9,7 +9,7 @@ const Aboutus = () => {
   return (
     <div>
       <MainBox />
-      <div>
+      <div className={styles.container}>
         {aboutUsInfo.map((info, index)=>(
             <InformationBox 
             title={info.title}
@@ -19,9 +19,9 @@ const Aboutus = () => {
             key={index}
           />
         ))}
+        <ImgSlider/>
       </div>
-      <ImgSlider
-      />
+      
     </div>
   )
 }

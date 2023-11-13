@@ -27,26 +27,32 @@ export const aboutUsInfo = [
 export const sliderImgs = [
     {
         img: "/axel.jpg",
-        alt: "Hi, I am axel"
+        alt: "Hi, I am axel",
+        name: "Axel Ayala"
     },
     {
         img: "/carlos.jpg",
-        alt: "Hi, I am carlos"
+        alt: "Hi, I am carlos",
+        name: "Carlos Ballester"
     },
     {
         img: "/dennis.jpg",
-        alt: "Hi, I am dennis"
+        alt: "Hi, I am dennis",
+        name: "Denis Gandarillas"
     },
     {
         img: "/elvis.jpg",
-        alt: "Hi, I am elvis"
+        alt: "Hi, I am elvis",
+        name: "Elvis Castro"
     },
     {
         img: "/salet.jpg",
-        alt: "Hi, I am salet"
+        alt: "Hi, I am salet",
+        name: "Salet Gutierres"
     },
     {
         img: "/victor.jpg",
-        alt: "Hi, I am victor"
+        alt: "Hi, I am victor",
+        name: "Victor Villca"
     },
 ]
