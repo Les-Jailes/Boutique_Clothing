@@ -48,7 +48,32 @@ const Profile = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
- 
+      const [isEmailValid, emailErrorMessage] = validateEmail(email);
+      const [isPasswordValid, passwordErrorMessage] = validatePassword(password);
+      const [isCiValid, ciErrorMessage] = validateCiField(ci);
+      const [isNameValid, nameErrorMessage] = validateTextField(name, 'Name');
+      const [isLastNameValid, lastNameErrorMessage] = validateTextField(lastName, 'Last Name');
+
+      if (!isEmailValid) {
+        console.error('Email Validation Error:', emailErrorMessage);
+        return;
+      }
+      if (!isPasswordValid) {
+        console.error('Password Validation Error:', passwordErrorMessage);
+        return;
+      }
+      if (!isCiValid) {
+        console.error('CI Validation Error:', ciErrorMessage);
+        return;
+      }
+      if (!isNameValid) {
+        console.error('Name Validation Error:', nameErrorMessage);
+        return;
+      }
+      if (!isLastNameValid) {
+        console.error('Last Name Validation Error:', lastNameErrorMessage);
+        return;
+      }
       const userUpdate = await getUser();
 
       if (userUpdate !== null && userUpdate._id !== undefined || user !== null && user.lastName !== undefined || user != null && user.name !== undefined
