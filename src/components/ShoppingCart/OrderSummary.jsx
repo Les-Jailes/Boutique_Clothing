@@ -7,13 +7,18 @@ const OrderSummary = () => {
 
   const {
     totalProducts,
-    totalIndividual,
     taxes,
     delivery,
     total,
     currency,
     isOpen,
   } = cart;
+
+  const individualTotal = cart.products.reduce(
+    (accumulator, product) => accumulator + product.quantity * parseFloat(product.price),
+    0
+  );
+
   return (
     <div className={ `order-summary-container ${ isOpen ? 'active' : '' }` }>
       <h2 className="order-summary-title">Order Summary</h2>
@@ -22,7 +27,7 @@ const OrderSummary = () => {
           {` ${totalProducts} ${totalProducts > 1 ? "items" : "item"} `}
         </p>
         <p className="order-summary-total-section">
-          {`${totalIndividual} ${currency}`}
+          {`${individualTotal.toFixed(2)} ${currency}`}
         </p>
       </div>
       <div className="tax-products-section order-summary-section">

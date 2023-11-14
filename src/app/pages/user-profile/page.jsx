@@ -15,7 +15,6 @@ const Profile = () => {
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState('default');
   const session = useSession()
-  console.log(session)
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

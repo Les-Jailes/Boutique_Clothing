@@ -11,7 +11,7 @@ export const changeQuantity = (newQuantity, id) => {
     let cart = JSON.parse(localStorage.getItem(nameLocalStorage)) || { products: [] };
 
     if (cart.products && cart.products.length > 0) {
-        const productIndex = cart.products.findIndex((item) => item.__id === id);
+        const productIndex = cart.products.findIndex((item) => item.id === id);
 
         if (productIndex !== -1) {
             const updatedCart = { ...cart };

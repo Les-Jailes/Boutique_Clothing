@@ -29,7 +29,7 @@ const CardProductCart = ({ product }) => {
         <p className="price-product">{`Price: ${product.price} $`}</p>
       </div>
       <div className="quantity-product-card-cart card-cart-container">
-        <QuantityProduct limit={10} quantity={product.quantity} onChangeQuantity={ changeQuantity } idProduct={product.__id} />
+        <QuantityProduct limit={10} quantity={product.quantity} onChangeQuantity={ changeQuantity } idProduct={product.id} />
       </div>
       <div className="delete-option-card-cart card-cart-container">
         <button className="delete-product-cart">
