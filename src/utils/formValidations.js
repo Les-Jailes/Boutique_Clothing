@@ -49,15 +49,18 @@ export const validatePassword = (password) => {
     return [true,""];
   };
 
-export const validateCiField = (ci) => {
-  if (!ci || ci === "") {
-    return [false, "CI field can not be empty."];
+  export const validateCiField = (ci) => {
+    if (!ci || ci === "") {
+      return [false, "CI field can not be empty."];
+    }
+    if (!/^\d+$/.test(ci)) {
+      return [false, "CI must contain only numbers."];
+    }  
+    if (ci.length >= 16) {
+      return [false, "CI can not be more than 16 characters long."];
+    }    
+    if (ci.charAt(0) === "0") {
+      return [false, "CI not valid"];
+    }    
+    return [true, ""];
   }
-  if(ci.length>=16){
-    return [false, "CI can not be more than 16 characters long."];
-  }
-  if(ci.charAt(0) == "0"){
-    return [false, "CI not valid"];
-  }
-  return [true, ""];
-}
