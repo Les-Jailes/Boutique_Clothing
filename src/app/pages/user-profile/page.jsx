@@ -3,41 +3,54 @@ import React, { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react';
 import { BiSolidUser, BiSolidUserCircle,BiSolidUserDetail } from 'react-icons/bi';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { validateEmail, validatePassword, validateTextField, validateCiField } from '@/utils/formValidations';
+import { validateTextField, validateCiField } from '@/utils/formValidations';
 import '@/app/pages/user-profile/UserProfile.css'
 import api from '@/app/api/api';
 
 const Profile = () => {
-  const [showPassword, setShowPassword] = useState(false);
   const [ci, setCi] = useState('');
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [gender, setGender] = useState('default');
   const [isEditing, setIsEditing] = useState(false);
   const [user] = useState([])
+  const [validationMessages, setValidationMessages] = useState({
+    ci: '',
+    name: '',
+    lastName: ''
+  });
   const session = useSession()
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
 
     if (id === 'name') {
       setName(value);
+      setValidationMessages((prevMessages) => ({
+        ...prevMessages,
+        name: '' 
+      }));
     } else if (id === 'lastName') {
       setLastName(value);
-    } else if (id === 'email') {
-      setEmail(value);
-    } else if (id === 'password') {
-      setPassword(value);
-    } else if (id === 'ci') {
+      setValidationMessages((prevMessages) => ({
+        ...prevMessages,
+        lastName: '' 
+      }));
+    }  else if (id === 'ci') {
       setCi(value);
+      setValidationMessages((prevMessages) => ({
+        ...prevMessages,
+        ci: ''
+      }));
     }
+  };
+
+  const handleFocus = (field) => {
+    setValidationMessages((prevMessages) => ({
+      ...prevMessages,
+      [field]: ''
+    }));
   };
 
   const handleEdit = (e) => {
@@ -48,42 +61,40 @@ const Profile = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      const [isEmailValid, emailErrorMessage] = validateEmail(email);
-      const [isPasswordValid, passwordErrorMessage] = validatePassword(password);
       const [isCiValid, ciErrorMessage] = validateCiField(ci);
       const [isNameValid, nameErrorMessage] = validateTextField(name, 'Name');
       const [isLastNameValid, lastNameErrorMessage] = validateTextField(lastName, 'Last Name');
 
-      if (!isEmailValid) {
-        console.error('Email Validation Error:', emailErrorMessage);
-        return;
-      }
-      if (!isPasswordValid) {
-        console.error('Password Validation Error:', passwordErrorMessage);
-        return;
-      }
       if (!isCiValid) {
-        console.error('CI Validation Error:', ciErrorMessage);
+        setValidationMessages((prevMessages) => ({
+          ...prevMessages,
+          ci: ciErrorMessage
+        }));
         return;
       }
       if (!isNameValid) {
-        console.error('Name Validation Error:', nameErrorMessage);
+        setValidationMessages((prevMessages) => ({
+          ...prevMessages,
+          name: nameErrorMessage
+        }));
         return;
       }
       if (!isLastNameValid) {
-        console.error('Last Name Validation Error:', lastNameErrorMessage);
+        setValidationMessages((prevMessages) => ({
+          ...prevMessages,
+          lastName: lastNameErrorMessage
+        }));
         return;
       }
       const userUpdate = await getUser();
 
       if (userUpdate !== null && userUpdate._id !== undefined || user !== null && user.lastName !== undefined || user != null && user.name !== undefined
-        || user != null && user.password !== undefined || user != null && user.gender !== undefined || user != null && user.ci !== undefined) {
+        || user != null && user.gender !== undefined || user != null && user.ci !== undefined) {
         const userId = userUpdate._id;
         const data = {
           ci: ci,
           name: name,
           lastName: lastName,
-          password: password,
           gender: gender
         };
 
@@ -118,7 +129,7 @@ const Profile = () => {
           const user = await getUser();
           setEmail(session.data.user.email);
           if (user !== null && user.lastName !== undefined || user != null && user.name !== undefined
-            || user != null && user.password !== undefined || user != null && user.gender !== undefined || user != null && user.ci !== undefined) {
+            || user != null && user.gender !== undefined || user != null && user.ci !== undefined) {
             setCi(user.ci);
             setLastName(user.lastName);
             setName(user.name);
@@ -160,11 +171,15 @@ const Profile = () => {
             id='ci'
             value={ci}
             onChange={handleInputChange}
+            onFocus={() => handleFocus('ci')}
             required
             className='input-field'
             disabled={!isEditing}
           />
           <BiSolidUserDetail className='icon'/>
+        </div>
+        <div className='validation-message'>
+          {validationMessages.ci}
         </div>
 
         <div className='input-box'>
@@ -174,13 +189,16 @@ const Profile = () => {
             id='name'
             value={name}
             onChange={handleInputChange}
+            onFocus={() => handleFocus('name')}
             required
             className='input-field'
             disabled={!isEditing}
           />
           <BiSolidUser className='icon'/>
         </div>
-
+        <div className='validation-message'>
+          {validationMessages.name}
+        </div>
         <div className='input-box'>
           <input
             type="text"
@@ -188,44 +206,29 @@ const Profile = () => {
             id='lastName'
             value={lastName}
             onChange={handleInputChange}
+            onFocus={() => handleFocus('lastName')}
             required
             className='input-field'
             disabled={!isEditing}
           />
           <BiSolidUser className='icon'/>
         </div>
-
+        <div className='validation-message'>
+          {validationMessages.lastName}
+        </div>
         <div className='input-box'>
           <input
             type="text"
             placeholder='Email'
             id='email'
             value={email}
-            onChange={handleInputChange}
             required
             className='input-field'
-            disabled={!isEditing}
+            disabled
           />
           <MdOutlineAlternateEmail className='icon'/>
         </div>
-
         <div className='input-box'>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder='Password'
-            id='password'
-            value={password}
-            onChange={handleInputChange}
-            required
-            className='input-field'
-            disabled={!isEditing}
-          />
-          {showPassword ? (
-            <AiFillEyeInvisible className='icon' onClick={togglePasswordVisibility} />
-          ) : (
-            <AiFillEye className='icon' onClick={togglePasswordVisibility} />
-          )}
-
           <select
             id="filterSelect"
             className='filter-bar'
@@ -243,15 +246,22 @@ const Profile = () => {
         </div>
 
         <div>
-          {isEditing ? (
+        {session.status === 'authenticated' ? (
+          isEditing ? (
             <button className='button-edit' onClick={handleSave}>
               <span>Save Profile</span>
-              </button>
+            </button>
           ) : (
             <button className='button-edit' onClick={handleEdit}>
-              <span>Edit Profile</span>
+                <span>Edit Profile</span>
               </button>
-          )}
+            )
+            ) : (
+              <button className='button-edit' disabled>
+                <span>Edit Profile</span>
+              </button>
+            )
+          }
         </div>
       </form>
     </div>
