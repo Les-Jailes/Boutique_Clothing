@@ -48,7 +48,25 @@ const Profile = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-    
+ 
+      const userUpdate = await getUser();
+
+      if (userUpdate !== null && userUpdate._id !== undefined || user !== null && user.lastName !== undefined || user != null && user.name !== undefined
+        || user != null && user.password !== undefined || user != null && user.gender !== undefined || user != null && user.ci !== undefined) {
+        const userId = userUpdate._id;
+        const data = {
+          ci: ci,
+          name: name,
+          lastName: lastName,
+          password: password,
+          gender: gender
+        };
+
+        const userUpdateResponse = await api.put(`/User/${userId}`, data);
+        console.log('PUT request successful:', userUpdateResponse.data);
+
+        setIsEditing(false);
+      }
     } catch (error) {
       console.error("Error updating user data:", error);
     }
