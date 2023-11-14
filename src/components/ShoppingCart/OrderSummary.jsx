@@ -1,25 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../Products/CartContext";
 import '@/css/Cart/OrderSummary.css'
-import PropTypes from 'prop-types'
 
-const OrderSummary = ({
-  quantityProducts,
-  totalProducts,
-  taxes,
-  delivery,
-  total,
-  currency,
-  isOpen
-}) => {
+const OrderSummary = () => {
+  const { cart } = useContext(CartContext);
+
+  const {
+    totalProducts,
+    totalIndividual,
+    taxes,
+    delivery,
+    total,
+    currency,
+    isOpen,
+  } = cart;
   return (
     <div className={ `order-summary-container ${ isOpen ? 'active' : '' }` }>
       <h2 className="order-summary-title">Order Summary</h2>
       <div className="total-products-section order-summary-section">
         <p className="order-summary-name-section">
-          {` ${quantityProducts} ${quantityProducts > 1 ? "items" : "item"} `}
+          {` ${totalProducts} ${totalProducts > 1 ? "items" : "item"} `}
         </p>
         <p className="order-summary-total-section">
-          {`${totalProducts} ${currency}`}
+          {`${totalIndividual} ${currency}`}
         </p>
       </div>
       <div className="tax-products-section order-summary-section">
@@ -41,16 +44,5 @@ const OrderSummary = ({
     </div>
   );
 };
-
-
-OrderSummary.propTypes = {
-  quantityProducts: PropTypes.number.isRequired,
-  totalProducts: PropTypes.number.isRequired,
-  taxes: PropTypes.number.isRequired,
-  delivery: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
-  currency: PropTypes.string.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-}
 
 export default OrderSummary;

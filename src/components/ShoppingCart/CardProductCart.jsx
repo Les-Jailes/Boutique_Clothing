@@ -4,8 +4,10 @@ import QuantityProduct from "./QuantityProduct";
 import { AiOutlineDelete } from "react-icons/ai";
 import Image from "next/image";
 import PropTypes from 'prop-types'
+import { changeQuantity } from "@/utils/CartShopping/ModifyItems";
 
 const CardProductCart = ({ product }) => {
+
   return (
     <div className="card-product-cart-container">
       <div className="image-card-product-cart-container card-cart-container">
@@ -27,7 +29,7 @@ const CardProductCart = ({ product }) => {
         <p className="price-product">{`Price: ${product.price} $`}</p>
       </div>
       <div className="quantity-product-card-cart card-cart-container">
-        <QuantityProduct limit={10} quantity={product.quantity} />
+        <QuantityProduct limit={10} quantity={product.quantity} onChangeQuantity={ changeQuantity } idProduct={product.__id} />
       </div>
       <div className="delete-option-card-cart card-cart-container">
         <button className="delete-product-cart">
@@ -40,14 +42,14 @@ const CardProductCart = ({ product }) => {
 
 CardProductCart.propTypes = {
   product: PropTypes.shape({
-    __id: PropTypes.string.isRequired,
+    __id: PropTypes.string,
     code: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     color: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    size: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    size: PropTypes.string.isRequired,
     path: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     description: PropTypes.string,
     quantity: PropTypes.number.isRequired
