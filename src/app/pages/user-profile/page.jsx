@@ -100,6 +100,12 @@ const Profile = () => {
 
         const userUpdateResponse = await api.put(`/User/${userId}`, data);
         console.log('PUT request successful:', userUpdateResponse.data);
+        
+        setValidationMessages({
+          ci: '',
+          name: '',
+          lastName: ''
+        });
 
         setIsEditing(false);
       }
@@ -135,7 +141,9 @@ const Profile = () => {
             setName(user.name);
             setPassword(user.password);
             setGender(user.gender);
+            
           }
+          
         } catch (error) {
           console.error("Error in fetching user data:", error);
         }
