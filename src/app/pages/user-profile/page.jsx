@@ -101,7 +101,6 @@ const Profile = () => {
   const getUser = async () => {
     try {
       const u = await api.get('/User/email/' + session.data.user.email);
-      console.log(u);
       return u.data;
     } catch (error) {
       console.error("Error fetching user:", error);
