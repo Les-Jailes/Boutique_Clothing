@@ -4,7 +4,6 @@ import { AiOutlineDelete } from "react-icons/ai";
 import "@/css/Cart/CartCardSummary.css";
 import Image from "next/image";
 import { CartContext } from "@/components/Products/CartContext";
-import "@/css/ProductsDelete/IconDeleteProducts.css"
 
 const CartCardSummary = ({ product }) => {
 
