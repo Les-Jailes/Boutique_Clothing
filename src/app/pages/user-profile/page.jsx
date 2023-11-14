@@ -1,31 +1,32 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react';
-import { BiSolidUser, BiSolidUserCircle } from 'react-icons/bi';
+import { BiSolidUser, BiSolidUserCircle,BiSolidUserDetail } from 'react-icons/bi';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { validateEmail, validatePassword, validateTextField, validateCiField } from '@/utils/formValidations';
 import '@/app/pages/user-profile/UserProfile.css'
-import api from '@/app/api/api'
-
+import api from '@/app/api/api';
 
 const Profile = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [ci, setCi] = useState('');
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState('default');
   const [isEditing, setIsEditing] = useState(false);
-  const [user, setuser] = useState([])
+  const [user] = useState([])
   const session = useSession()
-  console.log(session)
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-  
+
     if (id === 'name') {
       setName(value);
     } else if (id === 'lastName') {
@@ -34,35 +35,26 @@ const Profile = () => {
       setEmail(value);
     } else if (id === 'password') {
       setPassword(value);
+    } else if (id === 'ci') {
+      setCi(value);
     }
   };
-  
 
   const handleEdit = (e) => {
     e.preventDefault();
     setIsEditing(true);
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     try {
-      const updatedUserData = {
-        name,
-        lastName,
-        email,
-        password,
-        gender,
-      };
-  
-      api.put(`/User/email`, updatedUserData.email);
-      setIsEditing(false);
+    
     } catch (error) {
       console.error("Error updating user data:", error);
     }
-    setIsEditing(false);
-
   };
-  
+
+
   const getUser = async () => {
     try {
       const u = await api.get('/User/email/' + session.data.user.email);
@@ -73,33 +65,33 @@ const Profile = () => {
       return null;
     }
   };
-  
+
 
   useEffect(() => {
     const status = session.status;
-  
+
     const fetchData = async () => {
       if (session && status === 'authenticated') {
         try {
           const user = await getUser();
-          console.log(user);
           setEmail(session.data.user.email);
           if (user !== null && user.lastName !== undefined || user != null && user.name !== undefined
-            || user != null && user.password !== undefined || user != null && user.gender !== undefined) {
+            || user != null && user.password !== undefined || user != null && user.gender !== undefined || user != null && user.ci !== undefined) {
+            setCi(user.ci);
             setLastName(user.lastName);
             setName(user.name);
             setPassword(user.password);
             setGender(user.gender);
-          }   
+          }
         } catch (error) {
           console.error("Error in fetching user data:", error);
         }
       }
     };
-  
+
     fetchData();
   }, [session]);
-  
+
 
   const handleSelectChange = (e) => {
     setGender(e.target.value);
@@ -122,6 +114,20 @@ const Profile = () => {
         <div className='input-box'>
           <input
             type="text"
+            placeholder='CI'
+            id='ci'
+            value={ci}
+            onChange={handleInputChange}
+            required
+            className='input-field'
+            disabled={!isEditing}
+          />
+          <BiSolidUserDetail className='icon'/>
+        </div>
+
+        <div className='input-box'>
+          <input
+            type="text"
             placeholder='Name'
             id='name'
             value={name}
@@ -130,21 +136,21 @@ const Profile = () => {
             className='input-field'
             disabled={!isEditing}
           />
-          <BiSolidUser className='icon' />
+          <BiSolidUser className='icon'/>
         </div>
 
         <div className='input-box'>
-        <input
-          type="text"
-          placeholder='Lastname'
-          id='lastName'
-          value={lastName}
-          onChange={handleInputChange}
-          required
-          className='input-field'
-          disabled={!isEditing}
-        />
-          <BiSolidUser className='icon' />
+          <input
+            type="text"
+            placeholder='Lastname'
+            id='lastName'
+            value={lastName}
+            onChange={handleInputChange}
+            required
+            className='input-field'
+            disabled={!isEditing}
+          />
+          <BiSolidUser className='icon'/>
         </div>
 
         <div className='input-box'>
@@ -158,7 +164,7 @@ const Profile = () => {
             className='input-field'
             disabled={!isEditing}
           />
-          <MdOutlineAlternateEmail className='icon' />
+          <MdOutlineAlternateEmail className='icon'/>
         </div>
 
         <div className='input-box'>
