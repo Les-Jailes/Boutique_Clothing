@@ -15,6 +15,8 @@ const CartButton = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
+      const cartData = JSON.parse(localStorage.getItem("cart")) || { products: [] };
+      const cart = cartData.products;
       if (
         cartButtonRef.current &&
         !cartButtonRef.current.contains(event.target) &&
@@ -24,12 +26,15 @@ const CartButton = () => {
         if (cartListSummary && cartListSummary.contains(event.target)) {
           return;
         }
-        setIsOpen(false);
+         else if (cart.length === 0) {
+          setIsOpen(true);
+        } else {
+          setIsOpen(false);
+        }
       }
     };
 
     document.addEventListener("click", handleClickOutside);
-
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
