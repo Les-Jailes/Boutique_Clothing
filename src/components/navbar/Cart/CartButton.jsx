@@ -25,9 +25,6 @@ const CartButton = () => {
         const cartListSummary = document.querySelector(".list-cart-summary");
         if (cartListSummary && cartListSummary.contains(event.target)) {
           return;
-        }
-         else if (cart.length === 0) {
-          setIsOpen(true);
         } else {
           setIsOpen(false);
         }

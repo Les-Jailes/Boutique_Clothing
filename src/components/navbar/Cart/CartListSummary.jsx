@@ -27,7 +27,7 @@ const CartListSummary = ({ isOpen }) => {
         </>
       ) : (
         <div className="empty-cart-message">
-          No hay productos añadidos al carrito.
+          There are no products added to the cart.
         </div>
       )}
     </div>
