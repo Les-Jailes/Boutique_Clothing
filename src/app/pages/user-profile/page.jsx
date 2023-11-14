@@ -245,9 +245,13 @@ const Profile = () => {
 
         <div>
           {isEditing ? (
-            <button className='button-edit' onClick={handleSave}>Save Profile</button>
+            <button className='button-edit' onClick={handleSave}>
+              <span>Save Profile</span>
+              </button>
           ) : (
-            <button className='button-edit' onClick={handleEdit}>Edit Profile</button>
+            <button className='button-edit' onClick={handleEdit}>
+              <span>Edit Profile</span>
+              </button>
           )}
         </div>
       </form>
