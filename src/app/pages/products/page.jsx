@@ -5,6 +5,7 @@ import createPagination from "@/utils/Pagination";
 import { ClotheCard } from "@/components/Products/ClotheCard";
 import "@/css/Products/ProductsPage.css";
 import { Pagination } from "@/components/Products/Pagination";
+import Filter from "@/components/filter/Filter";
 
 export default function Page() {
   const [pagination, setPagination] = useState([]);
@@ -51,19 +52,22 @@ export default function Page() {
   };
 
   return (
-    <div className="products-page">
-      <div className="product-container">
-        {pagination[currentlyPagination]?.map((product, index) => (
-          <ClotheCard key={index} clothe={product}/>
-        ))}
+    <div>
+      <Filter />
+      <div className="products-page">
+        <div className="product-container">
+          {pagination[currentlyPagination]?.map((product, index) => (
+            <ClotheCard key={index} clothe={product}/>
+          ))}
+        </div>
+        <Pagination
+          currentlyPagination={currentlyPagination}
+          changePaginationRight={handlePaginationRight}
+          changePaginationLeft={handlePaginationLeft}
+          leftIsDisable={leftIsDisable}
+          rightIsDisable={rightIsDisable}
+        />
       </div>
-      <Pagination
-        currentlyPagination={currentlyPagination}
-        changePaginationRight={handlePaginationRight}
-        changePaginationLeft={handlePaginationLeft}
-        leftIsDisable={leftIsDisable}
-        rightIsDisable={rightIsDisable}
-      />
     </div>
   );
 }
