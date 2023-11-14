@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../Products/CartContext";
 import '@/css/Cart/OrderSummary.css'
 
-const OrderSummary = () => {
+const OrderSummary = ({ isOpen }) => {
   const { cart } = useContext(CartContext);
 
   const {
@@ -10,8 +10,7 @@ const OrderSummary = () => {
     taxes,
     delivery,
     total,
-    currency,
-    isOpen,
+    currency
   } = cart;
 
   const individualTotal = cart.products.reduce(

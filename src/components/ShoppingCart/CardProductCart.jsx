@@ -4,7 +4,6 @@ import QuantityProduct from "./QuantityProduct";
 import { AiOutlineDelete } from "react-icons/ai";
 import Image from "next/image";
 import PropTypes from 'prop-types'
-import { changeQuantity } from "@/utils/CartShopping/ModifyItems";
 
 const CardProductCart = ({ product }) => {
 
@@ -29,7 +28,7 @@ const CardProductCart = ({ product }) => {
         <p className="price-product">{`Price: ${product.price} $`}</p>
       </div>
       <div className="quantity-product-card-cart card-cart-container">
-        <QuantityProduct limit={10} quantity={product.quantity} onChangeQuantity={ changeQuantity } idProduct={product.id} />
+        <QuantityProduct limit={10} quantity={product.quantity} idProduct={product.id} />
       </div>
       <div className="delete-option-card-cart card-cart-container">
         <button className="delete-product-cart">

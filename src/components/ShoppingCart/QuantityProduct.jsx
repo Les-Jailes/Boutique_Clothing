@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import "@/css/Cart/QuantityProducts.css";
 import PropTypes from "prop-types";
+import { CartContext } from "../Products/CartContext";
 
-const QuantityProduct = ({ limit, quantity, onChangeQuantity, idProduct }) => {
+const QuantityProduct = ({ limit, quantity, idProduct }) => {
+  const { changeQuantity } = useContext(CartContext);
   const [quantityProduct, setQuantityProduct] = useState(quantity);
+
+  useEffect(() => {
+    setQuantityProduct(quantity);
+  }, [quantity]);
 
   const handleInputChange = (e) => {
     let inputValue = e.target.value;
@@ -15,17 +21,17 @@ const QuantityProduct = ({ limit, quantity, onChangeQuantity, idProduct }) => {
       const parsedValue = parseInt(inputValue, 10);
       const validValue = Math.min(Math.max(1, parsedValue), limit);
       setQuantityProduct(validValue);
-      onChangeQuantity(validValue, idProduct);
+      changeQuantity(validValue, idProduct);
     } else {
       setQuantityProduct("")
-      onChangeQuantity(1, idProduct)
+      changeQuantity(1, idProduct)
     }
   };
 
   const handleInputBlur = () => {
     if (quantityProduct === 0 || quantityProduct === '') {
       setQuantityProduct(1);
-      onChangeQuantity(1, idProduct);
+      changeQuantity(1, idProduct);
     }
   };
 
@@ -37,7 +43,7 @@ const QuantityProduct = ({ limit, quantity, onChangeQuantity, idProduct }) => {
     }
 
     setQuantityProduct(auxiliarQuantity);
-    onChangeQuantity(auxiliarQuantity, idProduct);
+    changeQuantity(auxiliarQuantity, idProduct);
   };
 
   const minusProduct = () => {
@@ -48,7 +54,7 @@ const QuantityProduct = ({ limit, quantity, onChangeQuantity, idProduct }) => {
     }
 
     setQuantityProduct(auxiliarQuantity);
-    onChangeQuantity(auxiliarQuantity, idProduct);
+    changeQuantity(auxiliarQuantity, idProduct);
   };
 
   return (
@@ -75,7 +81,7 @@ const QuantityProduct = ({ limit, quantity, onChangeQuantity, idProduct }) => {
 QuantityProduct.propTypes = {
   limit: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
-  onChangeQuantity: PropTypes.func.isRequired,
+  idProduct: PropTypes.string.isRequired,
 };
 
 export default QuantityProduct;

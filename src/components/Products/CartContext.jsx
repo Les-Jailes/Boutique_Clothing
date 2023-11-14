@@ -85,8 +85,38 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const changeQuantity = (newQuantity, productId) => {
+    setCart((prevCart) => {
+      const updatedProducts = prevCart.products.map((product) =>
+        product.id === productId
+          ? { ...product, quantity: newQuantity }
+          : product
+      );
+
+      const updatedTotal = updatedProducts.reduce(
+        (acc, item) => acc + parseFloat(item.price) * item.quantity,
+        0
+      );
+
+      const updatedTotalProducts = updatedProducts.reduce(
+        (acc, item) => acc + item.quantity,
+        0
+      );
+
+      const updatedCart = {
+        ...prevCart,
+        products: updatedProducts,
+        total: parseFloat(updatedTotal.toFixed(2)),
+        totalProducts: updatedTotalProducts,
+      };
+
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, changeQuantity }}>
       {children}
     </CartContext.Provider>
   );

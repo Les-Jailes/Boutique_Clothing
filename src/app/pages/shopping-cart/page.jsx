@@ -37,7 +37,7 @@ const Cart = () => {
             <AiOutlineUp color="white" size={18} />
           )}
         </button>
-        <CheckOutButton isOpen={isOpen} />
+        <CheckOutButton isOpen={isOpen}  />
         <OrderSummary
           quantityProducts={cart.products.length}
           totalProducts={cart.total}
