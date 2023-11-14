@@ -17,6 +17,9 @@ const CheckoutForm = () => {
   const [country, setCountry] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
+  const [validationZipCode, setValidationZipCode] = useState(false);
+  const [validZipCodeMessage, setValidZipCodeMessage] = useState('');
+
   const [phoneNumber, setPhoneNumber] = useState("");
   const [validationPhoneNumber, setValidationPhoneNumber] = useState(false);
   const [validPhoneNumberMessage, setValidPhoneNumberMessage] = useState('');
@@ -38,7 +41,7 @@ const CheckoutForm = () => {
     }
   };
 
-    const validatePhoneNumber = (phoneNumber) => {
+  const validatePhoneNumber = (phoneNumber) => {
     const [isValid, validationResult] = validateNumberField(phoneNumber, "Phone number");
     if (isValid) {
       setValidationPhoneNumber(false);
@@ -51,6 +54,21 @@ const CheckoutForm = () => {
     const phoneNumber = e.target.value;
     if(phoneNumber >= 0) setPhoneNumber(phoneNumber);
     validatePhoneNumber(phoneNumber);
+  }
+
+  const validateZipCode = (zipCode) => {
+    const [isValid, validationResult] = validateNumberField(zipCode, "Zip code");
+    if (isValid) {
+      setValidationZipCode(false);
+    } else {
+      setValidationZipCode(true);
+      setValidZipCodeMessage(validationResult);
+    }
+  };
+  const handleZipCodeChange = (e) => {
+    const phoneNumber = e.target.value;
+    if(phoneNumber >= 0) setZipCode(phoneNumber);
+    validateZipCode(phoneNumber);
   }
 
   const handleSubmit = (e) => {
@@ -115,9 +133,10 @@ const CheckoutForm = () => {
     label="Zip code"
     value={zipCode}
     placeholder="Zip code"
-    onChange={(e) => setZipCode(e.target.value)}
+    onChange={handleZipCodeChange}
     
   />
+  <p className="validation">{validationZipCode ? validZipCodeMessage : ''}</p>
   </div>
   
   <div className="inputBox" >

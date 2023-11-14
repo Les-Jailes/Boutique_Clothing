@@ -85,6 +85,10 @@
     width: 20px;
   }
 
+  .checkbox:hover{
+    cursor: pointer;
+  }
+
   .button:hover {
     background: #000;
     color: white;
