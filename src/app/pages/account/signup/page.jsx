@@ -6,7 +6,7 @@ import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible, AiOutli
 import {PiIdentificationCardLight} from 'react-icons/pi'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import {validateCiField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
+import {validateNumberField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
 import api from '@/app/api/api'
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import bcrypt from "bcryptjs";
@@ -144,7 +144,7 @@ export default function SignUp() {
     }
   };
   const validateCiInput = (ci) => {
-    const [isValid, validationResult] = validateCiField(ci);
+    const [isValid, validationResult] = validateNumberField(ci, "CI");
     if (isValid) {
       setValidationCi(false);
     } else {

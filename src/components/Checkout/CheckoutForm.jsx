@@ -6,17 +6,21 @@ import {AiOutlineFontSize, AiOutlineGlobal} from 'react-icons/ai'
 import {BiWorld} from 'react-icons/bi'
 import {LuMap} from 'react-icons/lu'
 import {FiPhone} from 'react-icons/fi'
-import {validateCiField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
+import {validateNumberField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
 
 
 const CheckoutForm = () => {
   const [fullname, setFullname] = useState("");
   const [validationFullname, setValidationFullname] = useState(false);
   const [validFullnameMessage, setValidFullnameMessage] = useState('');
+
   const [country, setCountry] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [validationPhoneNumber, setValidationPhoneNumber] = useState(false);
+  const [validPhoneNumberMessage, setValidPhoneNumberMessage] = useState('');
+
   const [age, setAge] = useState(true);
 
   const handleFullnameChange = (e) => {
@@ -33,6 +37,21 @@ const CheckoutForm = () => {
       setValidFullnameMessage(validationResult);
     }
   };
+
+    const validatePhoneNumber = (phoneNumber) => {
+    const [isValid, validationResult] = validateNumberField(phoneNumber, "Phone number");
+    if (isValid) {
+      setValidationPhoneNumber(false);
+    } else {
+      setValidationPhoneNumber(true);
+      setValidPhoneNumberMessage(validationResult);
+    }
+  };
+  const handlePhoneNumberChange = (e) => {
+    const phoneNumber = e.target.value;
+    if(phoneNumber >= 0) setPhoneNumber(phoneNumber);
+    validatePhoneNumber(phoneNumber);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,18 +123,22 @@ const CheckoutForm = () => {
   <div className="inputBox" >
     <FiPhone className="icon" />
   <input
+    type="text"
+    inputMode="numeric"
     className="input"
     id="phoneNumber"
     label="Phone number"
     value={phoneNumber}
     placeholder="Phone number"
-    onChange={(e) => setPhoneNumber(e.target.value)}
+    
+    onChange={handlePhoneNumberChange}
     
   />
+  <p className="validation">{validationPhoneNumber ? validPhoneNumberMessage : ''}</p>
   </div>
   
 
-  <div className="inputBox">
+  <div className="checkboxContainer">
   <input type="checkbox" className="checkbox" name="vehicle1" value={age} onChange={()=> handleChange()}/>
   <label className="checkbox-label"> I am over 18 years old or have parental consent. </label>
   </div>
