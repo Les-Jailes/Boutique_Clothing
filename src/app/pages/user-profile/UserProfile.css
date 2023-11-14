@@ -95,7 +95,7 @@ body {
 }
 
 .button-edit span {
-  display: inline-block; /* Añade un display inline-block para mantener el tamaño original */
+  display: inline-block;
   background-color: #111;
   padding: 16px 24px;
   border-radius: 15px;
