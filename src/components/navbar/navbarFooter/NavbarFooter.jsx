@@ -35,7 +35,7 @@ const NavFooter = () => {
   }, [modalIsOpen]);
 
   const handleSubcategoryClick = (url) => {
-    window.location.href = url; // Redirige a la URL de la subcategoría
+    window.location.href = url;
   };
 
   return (
@@ -44,7 +44,7 @@ const NavFooter = () => {
         <div key={index} className={style.dropdownContainer}>
           <div
             onClick={() => openModal(index)}
-            className={`${style.link} ${selectedCategory === index ? style.selected : ''}`}
+            className={`${style.link} ${selectedCategory === index ? style.selected : ''} ${modalIsOpen && selectedCategory === index ? style.modalOpen : ''}`}
           >
             {item.title}
           </div>
@@ -52,19 +52,17 @@ const NavFooter = () => {
       ))}
 
       {modalIsOpen && selectedCategory !== null && (
-        <div ref={modalRef} className={style.modal}>
+        <div ref={modalRef} className={`${style.modal} ${style.modalOpen}`}>
           {navFooterItems[selectedCategory]?.subcategories && (
             <div className={style.horizontalSubcategories}>
-              <ul>
-                {navFooterItems[selectedCategory].subcategories.map((subcategory, index) => (
-                  <li key={index}>
-                    <div className={style.subcategoryItem} onClick={() => handleSubcategoryClick(subcategory.url)}>
-                      {subcategory.img && <img src={subcategory.img} alt={subcategory.alt} />}
-                      <span>{subcategory.name}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              {navFooterItems[selectedCategory].subcategories.map((subcategory, index) => (
+                <li className={style.waypoint} key={index}>
+                  <div className={style.subcategoryItem} onClick={() => handleSubcategoryClick(subcategory.url)}>
+                    {subcategory.img && <img src={subcategory.img} alt={subcategory.alt} />}
+                    <span className={style.nameSubCategory}>{subcategory.name}</span>
+                  </div>
+                </li>
+              ))}
             </div>
           )}
         </div>
