@@ -23,35 +23,54 @@ export default function Page() {
   const [checkedLabels, setCheckedLabels] = useState({});
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-
-  // console.log(products)
   
   const handleFilterButtonClick = () => {
     console.log( checkedLabels);
 
     const filteredItems = []
     products.forEach((product) => {
+      console.log(product)
       Object.keys(checkedLabels).forEach((key) => {
         switch (key) {
           case 'category':
               const categoryFilter = checkedLabels[key].includes(product.category.toString())
-              console.log(categoryFilter ? 'i am filtering': 'nope')
               if(categoryFilter){
                 filteredItems.push(product)
               }
-              
           case 'type':
-            
+            const typeFilter = checkedLabels[key].includes(product.type.toString())
+              if(typeFilter){
+                filteredItems.push(product)
+              }
             break;
           case 'color':
-            
+            let foundMatchingColor = false;
+            for (const color of product.color) {
+              if (checkedLabels[key].includes(color)) {
+                filteredItems.push(product);
+                foundMatchingColor = true;
+                break;
+              }
+            }
             break;
+          case 'size':
+            let foundMatchingSize = false;
+            for (const size of product.size) {
+              if (checkedLabels[key].includes(size)) {
+                filteredItems.push(product);
+                foundMatchingSize = true;
+                break;
+              }
+            }
+          break;
+          case 'price':
+            const productPrice = product.price;
+            
+          break;
           default:
             break;
         }
       })
-      // console.log("helo")
-      // console.log(product)
     });
     console.log(filteredItems)
     setFilteredProducts(filteredItems)
