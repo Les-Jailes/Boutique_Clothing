@@ -23,8 +23,6 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (newProduct) => {
 
-    console.log(newProduct.size)
-
     setCart((prevCart) => {
       const existingProductIndex = prevCart.products.findIndex(
         (item) => item.code === newProduct.code && item.size === newProduct.size
