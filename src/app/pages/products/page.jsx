@@ -24,21 +24,41 @@ export default function Page() {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
 
-  console.log(products)
+  // console.log(products)
+  
   const handleFilterButtonClick = () => {
-    console.log("Checked Labels:", checkedLabels);
+    console.log( checkedLabels);
 
-    const filteredProducts = products.filter((product) => {
-      return Object.entries(checkedLabels).every(([title, labels]) => {
-        if (labels.includes("All")) {
-          return true;
+    const filteredItems = []
+    products.forEach((product) => {
+      Object.keys(checkedLabels).forEach((key) => {
+        switch (key) {
+          case 'category':
+              const categoryFilter = checkedLabels[key].includes(product.category.toString())
+              console.log(categoryFilter ? 'i am filtering': 'nope')
+              if(categoryFilter){
+                filteredItems.push(product)
+              }
+              
+          case 'type':
+            
+            break;
+          case 'color':
+            
+            break;
+          default:
+            break;
         }
-        return labels.some(product[title]);
-      });
+      })
+      // console.log("helo")
+      // console.log(product)
     });
+    console.log(filteredItems)
+    setFilteredProducts(filteredItems)
 
-    setFilteredProducts(filteredProducts);
   };
+
+
 
   useEffect(() => {
     if (Object.keys(checkedLabels).length === 0) {

@@ -4,13 +4,12 @@ import styles from "./filter.module.css";
 import FilterCheckbox from "./filterCheckbox/FilterCheckbox";
 
 const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButtonClick }) => {
-  const addAllOption = (options) => ["All", ...options];
   const filters = [
-    { title: "Category", options: addAllOption(categories) },
-    { title: "Type", options: addAllOption(types) },
-    { title: "Color", options: addAllOption(colors) },
-    { title: "Size", options: addAllOption(sizes) },
-    { title: "Prices", options: ["All", "0 - 50", "51 - 100", "100 - 150", "200 ++"] },
+    { title: "category", options: categories },
+    { title: "type", options: types },
+    { title: "color", options: colors },
+    { title: "size", options: sizes },
+    { title: "price", options: ["0 - 50", "51 - 100", "100 - 150", "200 ++"] },
   ];
 
   return (
