@@ -1,9 +1,19 @@
-import React from "react";
+"use client"
+import React, { useContext } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import "@/css/Cart/CartCardSummary.css";
 import Image from "next/image";
+import { CartContext } from "@/components/Products/CartContext";
 
 const CartCardSummary = ({ product, showDeleteOption }) => {
+
+
+  const { removeFromCart } = useContext(CartContext);
+
+  const handleDelete = () => {
+    removeFromCart(product);
+  };
+
   return (
     <div className="cart-card-container">
       <div className="image-card-container">

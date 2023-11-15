@@ -36,7 +36,7 @@ export const validatePassword = (password) => {
     if(!text || text === ""){
         return [false, typeOfText + " can not be empty"];
     }
-    if(text.length>=16){
+    if(text.length>=25){
       return [false, typeOfText + " can not be more than 16 characters long."];
     }
     if (text.length < 3) {
@@ -61,3 +61,20 @@ export const validateNumberField = (ci, type) => {
   }
   return [true, ""];
 }
+
+  export const validateCiField = (ci) => {
+    if (!ci || ci === "") {
+      return [false, "CI field can not be empty."];
+    }
+    if (!/^\d+$/.test(ci)) {
+      return [false, "CI must contain only numbers."];
+    }  
+    if (ci.length >= 16) {
+      return [false, "CI can not be more than 16 characters long."];
+    }    
+    if (ci.charAt(0) === "0") {
+      return [false, "CI not valid"];
+    }    
+    return [true, ""];
+  }
+
