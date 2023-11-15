@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./filter.module.css";
 import FilterCheckbox from "./filterCheckbox/FilterCheckbox";
 
-const Filter = ({ categories, types, colors, sizes, onFilterChange }) => {
+const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButtonClick }) => {
   const addAllOption = (options) => ["All", ...options];
   const filters = [
     { title: "Category", options: addAllOption(categories) },
@@ -24,7 +24,9 @@ const Filter = ({ categories, types, colors, sizes, onFilterChange }) => {
           onFilterChange={onFilterChange}
         />
       ))}
-      <button className={styles.button}>Filter</button>
+      <button onClick={onFilterButtonClick} className={styles.button}>
+        Filter
+      </button>
     </aside>
   );
 };
