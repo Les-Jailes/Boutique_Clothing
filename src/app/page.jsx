@@ -1,5 +1,9 @@
+import Cover from "@/components/Home/Cover";
+
 export default function Home() {
   return (
-    <div>Home Page</div>
+    <div className="home-page">
+      <Cover />
+    </div>
   )
 }
