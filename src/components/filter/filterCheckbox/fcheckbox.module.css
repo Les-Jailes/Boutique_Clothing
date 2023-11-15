@@ -1,0 +1,57 @@
+.container {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #ddd;
+  }
+  
+  .title {
+    font-size: 18px; 
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .input {
+    width: 18px; 
+    height: 18px;
+    border: 1px solid #bbb; 
+    border-radius: 3px;
+    margin-right: 8px;
+  }
+  .titleContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  }
+  .icon{
+    cursor: pointer;
+  }
+
+
+  .label {
+    font-size: 14px;
+  }
+  
+  .optionContainer {
+    display: flex;
+    flex-direction: column !important;
+  }
+  
+  .option {
+    margin: 5px 0; 
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+  
+    .optionContainer {
+      flex-direction: row;
+      flex-wrap: wrap; 
+    }
+    
+    .option {
+      flex: 1 0 45%;
+      margin: 5px 10px;
+    }
+  
+  }

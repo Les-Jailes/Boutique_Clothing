@@ -6,6 +6,7 @@ import { ClotheCard } from "@/components/Products/ClotheCard";
 import "@/css/Products/ProductsPage.css";
 import { Pagination } from "@/components/Products/Pagination";
 import Filter from "@/components/filter/Filter";
+import styles from './page.module.css'
 
 export default function Page() {
   const [pagination, setPagination] = useState([]);
@@ -52,7 +53,7 @@ export default function Page() {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Filter />
       <div className="products-page">
         <div className="product-container">
