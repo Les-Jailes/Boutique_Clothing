@@ -24,63 +24,69 @@ export default function Page() {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   
+  const filterByCategory = (product, checkedLabels, filteredItems) => {
+    const categoryFilter = checkedLabels.category.includes(product.category.toString());
+    if (categoryFilter) {
+      filteredItems.push(product);
+    }
+  };
+  
+  const filterByType = (product, checkedLabels, filteredItems) => {
+    const typeFilter = checkedLabels.type.includes(product.type.toString());
+    if (typeFilter) {
+      filteredItems.push(product);
+    }
+  };
+  
+  const filterByColorOrSize = (product, checkedLabels, key, filteredItems) => {
+    let foundMatching = false;
+    for (const item of product[key]) {
+      if (checkedLabels[key].includes(item)) {
+        filteredItems.push(product);
+        foundMatching = true;
+        break;
+      }
+    }
+    return foundMatching;
+  };
+  
+  const filterByPrice = (product, checkedLabels, filteredItems) => {
+    const productPrice = product.price;
+    const checkedPrice = checkedLabels.price[0];
+    const [firstNumber, secondNumber] = checkedPrice.split(" - ").map(Number);
+    if (productPrice > firstNumber && productPrice < secondNumber) {
+      filteredItems.push(product);
+    }
+  };
+  
   const handleFilterButtonClick = () => {
-    console.log( checkedLabels);
-
-    const filteredItems = []
+    const filteredItems = [];
+  
     products.forEach((product) => {
-      console.log(product)
       Object.keys(checkedLabels).forEach((key) => {
         switch (key) {
           case 'category':
-              const categoryFilter = checkedLabels[key].includes(product.category.toString())
-              if(categoryFilter){
-                filteredItems.push(product)
-              }
+            filterByCategory(product, checkedLabels, filteredItems);
+            break;
           case 'type':
-            const typeFilter = checkedLabels[key].includes(product.type.toString())
-              if(typeFilter){
-                filteredItems.push(product)
-              }
+            filterByType(product, checkedLabels, filteredItems);
             break;
           case 'color':
-            let foundMatchingColor = false;
-            for (const color of product.color) {
-              if (checkedLabels[key].includes(color)) {
-                filteredItems.push(product);
-                foundMatchingColor = true;
-                break;
-              }
-            }
-            break;
           case 'size':
-            let foundMatchingSize = false;
-            for (const size of product.size) {
-              if (checkedLabels[key].includes(size)) {
-                filteredItems.push(product);
-                foundMatchingSize = true;
-                break;
-              }
-            }
-          break;
+            filterByColorOrSize(product, checkedLabels, key, filteredItems);
+            break;
           case 'price':
-            const productPrice = product.price;
-            const checkedPrice =checkedLabels[key][0];
-            const [firstNumber, secondNumber] = checkedPrice.split(" - ").map(Number);
-            if (productPrice > firstNumber && productPrice< secondNumber){
-              filteredItems.push(product);
-            }
-
-          break;
+            filterByPrice(product, checkedLabels, filteredItems);
+            break;
           default:
             break;
         }
-      })
+      });
     });
-    console.log(filteredItems)
-    setFilteredProducts(filteredItems)
-
+  
+    setFilteredProducts(filteredItems);
   };
+  
 
 
 

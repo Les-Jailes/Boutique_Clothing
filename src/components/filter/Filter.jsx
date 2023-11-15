@@ -2,8 +2,12 @@
 import React, { useState } from "react";
 import styles from "./filter.module.css";
 import FilterCheckbox from "./filterCheckbox/FilterCheckbox";
+import { HiArrowPath } from "react-icons/hi2";
 
 const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButtonClick }) => {
+  const handleRefreshClick = () => {
+    window.location.reload();
+  };
   const filters = [
     { title: "category", options: categories, unique: false },
     { title: "type", options: types,  unique: false },
@@ -24,9 +28,12 @@ const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButt
           unique = {constant.unique}
         />
       ))}
-      <button onClick={onFilterButtonClick} className={styles.button}>
-        Filter
-      </button>
+      <div className={styles.actionContainer}>
+        <button onClick={onFilterButtonClick} className={styles.button}>
+          Filter
+        </button>
+        <button onClick={handleRefreshClick} className={styles.buttonRefresh}><HiArrowPath size={24} className={styles.icon}/></button>
+      </div>
     </aside>
   );
 };

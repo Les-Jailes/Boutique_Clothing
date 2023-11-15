@@ -23,6 +23,7 @@
   }
   .icon{
     cursor: pointer;
+    margin-left: 0.2rem;
   }
 
 
@@ -41,16 +42,20 @@
     gap: 0.5rem;
   }
   
-  @media (min-width: 768px) {
-  
-    .optionContainer {
-      flex-direction: row;
-      flex-wrap: wrap; 
-    }
-    
-    .option {
-      flex: 1 0 45%;
-      margin: 5px 10px;
+  @media (max-width: 600px) {
+    .container {
+      padding: 15px;
     }
   
+    .title {
+      font-size: 16px;
+    }
+  
+    .icon {
+      font-size: 18px;
+    }
+  
+    .label {
+      font-size: 12px;
+    }
   }
