@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const showToast = (message, type = "default") => {
     const options = {
       position: "bottom-right",
-      autoClose: 5000, 
+      autoClose: 5500, 
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
