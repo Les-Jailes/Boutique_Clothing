@@ -4,10 +4,8 @@ import styles from "./filter.module.css";
 import FilterCheckbox from "./filterCheckbox/FilterCheckbox";
 import { HiArrowPath } from "react-icons/hi2";
 
-const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButtonClick }) => {
-  const handleRefreshClick = () => {
-    window.location.reload();
-  };
+const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButtonClick, handleRefreshClick }) => {
+  
   const filters = [
     { title: "category", options: categories, unique: false },
     { title: "type", options: types,  unique: false },

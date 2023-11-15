@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import createPagination from "@/utils/Pagination";
@@ -22,6 +22,7 @@ export default function Page() {
 
   const [checkedLabels, setCheckedLabels] = useState({});
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   const filterByCategory = (product, checkedLabels, filteredItems) => {
     const categoryFilter = checkedLabels.category.includes(
@@ -86,15 +87,9 @@ export default function Page() {
     });
 
     setFilteredProducts(filteredItems);
+    setCurrentlyPagination(0)
+    setLeftIsDisable(true)
   };
-  
-  
-
-
-
-
-
-
 
   useEffect(() => {
     if (Object.keys(checkedLabels).length === 0) {
@@ -131,16 +126,14 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    setPagination(
-      createPagination(
-        filteredProducts.length > 0 ? filteredProducts : products
-      )
-    );
+    setPagination(createPagination(isFiltered ? filteredProducts : products));
   }, [products, filteredProducts]);
 
   useEffect(() => {
     if (pagination.length > 1) {
       setRightIsDisable(false);
+    } else {
+      setRightIsDisable(true)
     }
   }, [pagination]);
 
@@ -166,6 +159,11 @@ export default function Page() {
     }
   };
 
+  const handleRefreshClick = () => {
+    window.location.reload();
+    setIsFiltered(false)
+  };
+
   return (
     <div className={styles.container}>
       <Filter
@@ -180,14 +178,18 @@ export default function Page() {
               selectedOptions.includes(option)
             ),
           }));
+          setIsFiltered(true);
         }}
         onFilterButtonClick={handleFilterButtonClick}
+        handleRefreshClick={handleRefreshClick}
       />
       <div className="products-page">
         <div className="product-container">
-          {filteredProducts.map((product, index) => (
-            <ClotheCard key={index} clothe={product} />
-          ))}
+          {pagination.length > 0 &&
+            pagination[currentlyPagination] &&
+            pagination[currentlyPagination].map((product) => (
+              <ClotheCard key={product.code} clothe={product} />
+            ))}
         </div>
         <Pagination
           currentlyPagination={currentlyPagination}
