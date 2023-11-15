@@ -28,7 +28,6 @@ const CountryDropdown = () => {
 
   return (
     <div className="container">
-      <h1>Country dropdown list with RESTful API</h1>
       <div className="container country-container">
         <span className="flag" style={{ backgroundImage: selectedCountry ? `url(${selectedCountry.flag})` : '' }}></span>
         <select className="countries" name="countries" id="countries" onChange={handleCountryChange}>

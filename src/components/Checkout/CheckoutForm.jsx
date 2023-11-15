@@ -7,6 +7,8 @@ import {BiWorld} from 'react-icons/bi'
 import {LuMap} from 'react-icons/lu'
 import {FiPhone} from 'react-icons/fi'
 import {validateNumberField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
+import CountryDropdown from "./CountryDropdown";
+import { GoArrowRight } from "react-icons/go";
 
 
 const CheckoutForm = () => {
@@ -99,18 +101,6 @@ const CheckoutForm = () => {
   />
   <p className="validation">{validationFullname ? validFullnameMessage : ''}</p>
   </div>
-  <div className="inputBox" >
-
-<BiWorld className="icon" />
-  <input
-    className="input"
-    id="country"
-    label="Country"
-    value={country}
-    placeholder="Country"
-    onChange={(e) => setCountry(e.target.value)}
-  />
-  </div>
 
   <div className="inputBox" >
     <LuMap className="icon" />
@@ -155,6 +145,10 @@ const CheckoutForm = () => {
   />
   <p className="validation">{validationPhoneNumber ? validPhoneNumberMessage : ''}</p>
   </div>
+
+  <div className="containerDropdown">
+    <CountryDropdown />
+  </div>
   
 
   <div className="checkboxContainer">
@@ -162,9 +156,14 @@ const CheckoutForm = () => {
   <label className="checkbox-label"> I am over 18 years old or have parental consent. </label>
   </div>
 
-  <button type="submit" variant="contained" color="primary" className="button">
+
+    
+
+    <button type="submit" variant="contained" color="primary" className="buttonNext">
+    <GoArrowRight className="iconNext" size={24}/>
     Next
   </button>
+    
   
 </form>
 </div>
