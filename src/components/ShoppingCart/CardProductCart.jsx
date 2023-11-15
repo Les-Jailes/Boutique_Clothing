@@ -1,12 +1,20 @@
-import React from "react";
+"use client"
+import React, { useContext } from "react";
 import "@/css/Cart/CardProductCart.css";
 import QuantityProduct from "./QuantityProduct";
 import { AiOutlineDelete } from "react-icons/ai";
-import Image from "next/image";
+import Image from "next/image"
 import PropTypes from 'prop-types'
+import { CartContext } from "@/components/Products/CartContext";
 
 const CardProductCart = ({ product }) => {
 
+  const { removeFromCart } = useContext(CartContext);
+
+  const handleDelete = () => {
+    removeFromCart(product);
+  };
+  
   return (
     <div className="card-product-cart-container">
       <div className="image-card-product-cart-container card-cart-container">
@@ -31,7 +39,7 @@ const CardProductCart = ({ product }) => {
         <QuantityProduct limit={10} quantity={product.quantity} idProduct={product.id} />
       </div>
       <div className="delete-option-card-cart card-cart-container">
-        <button className="delete-product-cart">
+        <button className="delete-product-cart" onClick={handleDelete}>
           <AiOutlineDelete size={24} />
         </button>
       </div>
