@@ -14,15 +14,22 @@ const CartListSummary = ({ isOpen }) => {
 
   return (
     <div className={`list-cart-summary ${isOpen ? "is-open" : ""}`} onClick={handleClickInside}>
-      <div className="list-products">
-        {cart.products &&
-          cart.products.map((product, index) => {
-            return <CartCardSummary product={product} key={index} />;
-          })}
-      </div>
-      <a href="/pages/shopping-cart" className="go-cart-page">
-        View all products
-      </a>
+      {cart.products && cart.products.length > 0 ? (
+        <>
+          <div className="list-products">
+            {cart.products.map((product, index) => (
+              <CartCardSummary product={product} key={index} />
+            ))}
+          </div>
+          <a href="/pages/shopping-cart" className="go-cart-page">
+            View all products
+          </a>
+        </>
+      ) : (
+        <div className="empty-cart-message">
+          There are no products added to the cart.
+        </div>
+      )}
     </div>
   );
 };

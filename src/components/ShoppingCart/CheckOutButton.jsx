@@ -1,6 +1,7 @@
 import React from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import '@/css/Cart/CheckoutButton.css'
+import PropTypes from 'prop-types'
 
 const CheckOutButton = ({ isOpen }) => {
   return (
@@ -12,5 +13,9 @@ const CheckOutButton = ({ isOpen }) => {
     </a>
   )
 };
+
+CheckOutButton.propTypes = {
+  isOpen: PropTypes.bool.isRequired
+}
 
 export default CheckOutButton;
