@@ -5,11 +5,11 @@ import FilterCheckbox from "./filterCheckbox/FilterCheckbox";
 
 const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButtonClick }) => {
   const filters = [
-    { title: "category", options: categories },
-    { title: "type", options: types },
-    { title: "color", options: colors },
-    { title: "size", options: sizes },
-    { title: "price", options: ["0 - 50", "51 - 100", "100 - 150", "200 ++"] },
+    { title: "category", options: categories, unique: false },
+    { title: "type", options: types,  unique: false },
+    { title: "color", options: colors ,  unique: false },
+    { title: "size", options: sizes ,  unique: false },
+    { title: "price", options: ["0 - 50", "51 - 100", "101 - 150", "151 - 300 ", "301 - 500"] ,  unique: true },
   ];
 
   return (
@@ -21,6 +21,7 @@ const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButt
           title={constant.title}
           options={constant.options}
           onFilterChange={onFilterChange}
+          unique = {constant.unique}
         />
       ))}
       <button onClick={onFilterButtonClick} className={styles.button}>

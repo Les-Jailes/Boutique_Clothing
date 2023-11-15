@@ -65,7 +65,12 @@ export default function Page() {
           break;
           case 'price':
             const productPrice = product.price;
-            
+            const checkedPrice =checkedLabels[key][0];
+            const [firstNumber, secondNumber] = checkedPrice.split(" - ").map(Number);
+            if (productPrice > firstNumber && productPrice< secondNumber){
+              filteredItems.push(product);
+            }
+
           break;
           default:
             break;

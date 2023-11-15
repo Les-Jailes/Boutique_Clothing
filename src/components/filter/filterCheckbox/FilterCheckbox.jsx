@@ -3,23 +3,19 @@ import React, { useState } from "react";
 import styles from "./fcheckbox.module.css";
 import { FaSquareCaretDown } from "react-icons/fa6";
 
-const FilterCheckbox = ({ title, options, onFilterChange }) => {
+const FilterCheckbox = ({ title, options, onFilterChange, unique }) => {
   const [isOptionsVisible, setOptionsVisible] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState(options);
-
-
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const toggleOptions = () => {
     setOptionsVisible(!isOptionsVisible);
   };
 
   const handleCheckboxChange = (option) => {
-    const updatedSelectedOptions = selectedOptions.includes(option)
-      ? selectedOptions.filter((selectedOption) => selectedOption !== option)
-      : [...selectedOptions, option];
+    const updatedSelectedOption = selectedOption === option ? null : option;
 
-    setSelectedOptions(updatedSelectedOptions);
-    onFilterChange(title, updatedSelectedOptions);
+    setSelectedOption(updatedSelectedOption);
+    onFilterChange(title, updatedSelectedOption ? [updatedSelectedOption] : []);
   };
 
   return (
@@ -32,12 +28,21 @@ const FilterCheckbox = ({ title, options, onFilterChange }) => {
         <div className={styles.optionContainer}>
           {options.map((option, index) => (
             <div className={styles.option} key={index}>
-              <input
-                type="checkbox"
-                className={styles.input}
-                checked={selectedOptions.includes(option)}
-                onChange={() => handleCheckboxChange(option)}
-              />
+              {unique ? (
+                <input
+                  type="radio"
+                  className={styles.input}
+                  checked={selectedOption === option}
+                  onChange={() => handleCheckboxChange(option)}
+                />
+              ) : (
+                <input
+                  type="checkbox"
+                  className={styles.input}
+                  checked={selectedOption === option}
+                  onChange={() => handleCheckboxChange(option)}
+                />
+              )}
               <p className={styles.label}>{option}</p>
             </div>
           ))}
