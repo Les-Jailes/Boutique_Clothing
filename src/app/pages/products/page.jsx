@@ -15,11 +15,26 @@ export default function Page() {
   const [leftIsDisable, setLeftIsDisable] = useState(true);
   const [rightIsDisable, setRightIsDisable] = useState(false);
 
+  const [categories, setCategories] = useState([]);
+  const [types, setTypes] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [sizes, setSizes] = useState([]);
+
+
   useEffect(() => {
     axios
       .get("https://boutique-clothing-api.onrender.com/Product")
       .then((response) => {
         setProducts(response.data);
+        const uniqueCategories = [...new Set(response.data.map(product => product.category))];
+        const uniqueTypes = [...new Set(response.data.map(product => product.type))];
+        const uniqueColors = [...new Set(response.data.flatMap(product => product.color))];
+        const uniqueSizes = [...new Set(response.data.flatMap(product => product.size))];
+  
+        setCategories(uniqueCategories);
+        setTypes(uniqueTypes);
+        setColors(uniqueColors);
+        setSizes(uniqueSizes);
       })
       .catch((error) => {
         console.error("Error: ", error);
@@ -30,6 +45,7 @@ export default function Page() {
     setPagination(createPagination(products));
   }, [products]);
 
+  console.log(products)
   const handlePaginationRight = () => {
     let paginationNumber = currentlyPagination + 1;
     if (paginationNumber < pagination.length) {
@@ -54,7 +70,7 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
-      <Filter />
+      <Filter categories={categories} types={types} colors={colors} sizes={sizes} />
       <div className="products-page">
         <div className="product-container">
           {pagination[currentlyPagination]?.map((product, index) => (

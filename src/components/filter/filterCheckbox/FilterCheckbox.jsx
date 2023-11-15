@@ -5,6 +5,7 @@ import { FaSquareCaretDown } from "react-icons/fa6";
 
 const FilterCheckbox = ({ title, options }) => {
   const [isOptionsVisible, setOptionsVisible] = useState(false);
+  console.log(options)
 
   const toggleOptions = () => {
     setOptionsVisible(!isOptionsVisible);
@@ -23,7 +24,7 @@ const FilterCheckbox = ({ title, options }) => {
           {options.map((option, index) => (
             <div className={styles.option} key={index}>
               <input type="checkbox" className={styles.input} />
-              <p className={styles.label}>{option.option}</p>
+              <p className={styles.label}>{option}</p>
             </div>
           ))}
         </div>
