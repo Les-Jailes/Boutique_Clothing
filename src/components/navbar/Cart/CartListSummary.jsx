@@ -17,7 +17,7 @@ const CartListSummary = ({ isOpen }) => {
       <div className="list-products">
         {cart.products &&
           cart.products.map((product, index) => {
-            return <CartCardSummary product={product} key={index} />;
+            return <CartCardSummary product={product} key={index} showDeleteOption={true}/>;
           })}
       </div>
       <a href="/pages/shopping-cart" className="go-cart-page">

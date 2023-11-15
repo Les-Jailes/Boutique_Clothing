@@ -3,7 +3,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import "@/css/Cart/CartCardSummary.css";
 import Image from "next/image";
 
-const CartCardSummary = ({ product }) => {
+const CartCardSummary = ({ product, showDeleteOption }) => {
   return (
     <div className="cart-card-container">
       <div className="image-card-container">
@@ -25,11 +25,13 @@ const CartCardSummary = ({ product }) => {
         <p className="card-cart-quantity"> { `Quantity: ${ product.quantity } ` } </p>
         <p className="card-cart-price">{`Price: ${product.price} $`}</p>
       </div>
-      <div className="card-option-container">
-        <button className="delete-option-card">
-          <AiOutlineDelete size={24} />
-        </button>
-      </div>
+      {showDeleteOption && (
+        <div className="card-option-container">
+          <button className="delete-option-card">
+            <AiOutlineDelete size={24} />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

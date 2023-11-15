@@ -9,6 +9,7 @@ import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { CartContext } from "@/components/Products/CartContext";
 import CheckoutForm from "@/components/Checkout/CheckoutForm";
 import CartListSummary from "@/components/navbar/Cart/CartListSummary";
+import ProductsSummary from "@/components/Checkout/ProducstSummary";
 
 const Checkout = () => {
   const { cart } = useContext(CartContext);
@@ -26,6 +27,14 @@ const Checkout = () => {
         </div>
       </div>
       <div className={ `more-information-container ${ isOpen ? 'active' : '' }` }>
+        <button
+          className="open-more-information-button"
+          onClick={() => handleOpenning()}
+        >
+          {
+            isOpen ? <AiOutlineDown size={18} color="white" /> : <AiOutlineUp color="white" size={18} />
+          }
+        </button>
         <OrderSummary
           quantityProducts={cart.products.length}
           totalProducts={cart.total}
@@ -35,8 +44,7 @@ const Checkout = () => {
           currency={cart.currency}
           isOpen={ isOpen }
         />
-
-        <CartListSummary />
+        <ProductsSummary/>
       </div>
     </div>
   );
