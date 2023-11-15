@@ -51,11 +51,6 @@ const authOptions = NextAuth({
               } else if (!existingUser.isGoogleAccount) {
                 return '/pages/account/login?showToast=true';
               }
-              /*if (existingUser.isGoogleAccount) {
-                 return true;
-              } else {
-                return '/pages/account/login?showToast=true';
-              }*/
             } else {
               const newUser = {
                 ci: profile.sub,
