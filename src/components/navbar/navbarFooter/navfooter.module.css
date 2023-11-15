@@ -35,8 +35,17 @@
     transform: scaleX(1);
 }
 
+.modal {
+    width: 100vw;
+    position: absolute;
+    top: 103px;
+    background: white;
+    z-index: 100000;
+  }
+
 @media (max-width: 630px) {
     .container {
         display: none;
     }
 }
+
