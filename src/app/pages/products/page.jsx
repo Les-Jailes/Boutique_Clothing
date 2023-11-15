@@ -55,9 +55,13 @@ export default function Page() {
   const filterByPrice = (product, checkedLabels, filteredItems) => {
     const productPrice = product.price;
     const checkedPrice = checkedLabels.price[0];
-    const [firstNumber, secondNumber] = checkedPrice.split(" - ").map(Number);
-    if (productPrice > firstNumber && productPrice < secondNumber) {
-      filteredItems.push(product);
+    try {
+      const [firstNumber, secondNumber] = checkedPrice.split(" - ").map(Number); 
+      if (productPrice > firstNumber && productPrice < secondNumber) {
+        filteredItems.push(product);
+      }
+    } catch (error) {
+
     }
   };
 
@@ -85,8 +89,12 @@ export default function Page() {
         }
       });
     });
-
-    setFilteredProducts(filteredItems);
+    if (filteredItems.length >= 1){
+      setFilteredProducts(filteredItems);
+    }else{
+      setFilteredProducts(products)
+    }
+    
     setCurrentlyPagination(0)
     setLeftIsDisable(true)
   };

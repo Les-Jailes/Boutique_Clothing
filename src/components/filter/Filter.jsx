@@ -7,11 +7,11 @@ import { HiArrowPath } from "react-icons/hi2";
 const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButtonClick, handleRefreshClick }) => {
   
   const filters = [
-    { title: "category", options: categories, unique: false },
-    { title: "type", options: types,  unique: false },
-    { title: "color", options: colors ,  unique: false },
-    { title: "size", options: sizes ,  unique: false },
-    { title: "price", options: ["0 - 50", "51 - 100", "101 - 150", "151 - 300 ", "301 - 500"] ,  unique: true },
+    { title: "category", options: categories },
+    { title: "type", options: types },
+    { title: "color", options: colors  },
+    { title: "size", options: sizes  },
+    { title: "price", options: ["0 - 50", "51 - 100", "101 - 150", "151 - 300 ", "301 - 500"] },
   ];
 
   return (

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./fcheckbox.module.css";
 import { FaSquareCaretDown } from "react-icons/fa6";
 
-const FilterCheckbox = ({ title, options, onFilterChange, unique }) => {
+const FilterCheckbox = ({ title, options, onFilterChange}) => {
   const [isOptionsVisible, setOptionsVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -28,21 +28,12 @@ const FilterCheckbox = ({ title, options, onFilterChange, unique }) => {
         <div className={styles.optionContainer}>
           {options.map((option, index) => (
             <div className={styles.option} key={index}>
-              {unique ? (
-                <input
-                  type="radio"
-                  className={styles.input}
-                  checked={selectedOption === option}
-                  onChange={() => handleCheckboxChange(option)}
-                />
-              ) : (
-                <input
+              <input
                   type="checkbox"
                   className={styles.input}
                   checked={selectedOption === option}
                   onChange={() => handleCheckboxChange(option)}
                 />
-              )}
               <p className={styles.label}>{option}</p>
             </div>
           ))}
