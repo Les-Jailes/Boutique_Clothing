@@ -41,11 +41,16 @@
     top: 103px;
     background: white;
     z-index: 100000;
-  }
+}
+
+.horizontalSubcategories {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
 @media (max-width: 630px) {
     .container {
         display: none;
     }
 }
-
