@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useRef, useState, useEffect } from 'react';
 import style from './navfooter.module.css';
 import { navFooterItems } from '@/utils/navfooterItems';
@@ -58,7 +59,14 @@ const NavFooter = () => {
               {navFooterItems[selectedCategory].subcategories.map((subcategory, index) => (
                 <li className={style.waypoint} key={index}>
                   <div className={style.subcategoryItem} onClick={() => handleSubcategoryClick(subcategory.url)}>
-                    {subcategory.img && <img src={subcategory.img} alt={subcategory.alt} />}
+                    {subcategory.img && (
+                      <Image
+                        src={subcategory.img}
+                        alt={subcategory.alt}
+                        width={100}
+                        height={100}
+                      />
+                    )}
                     <span className={style.nameSubCategory}>{subcategory.name}</span>
                   </div>
                 </li>
