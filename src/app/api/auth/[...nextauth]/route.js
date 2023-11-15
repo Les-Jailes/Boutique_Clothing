@@ -60,9 +60,9 @@ const authOptions = NextAuth({
               };
               const response = await api.post(`/User`, newUser);
               existingUser = response.data;
+            } else {
+              return '/pages/account/login?showToast=true';
             }
-            
-            return existingUser;
           } catch (error) {
             console.error('Error saving user to MongoDB', error);
             return false; 
