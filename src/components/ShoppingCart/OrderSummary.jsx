@@ -1,24 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../Products/CartContext";
 import '@/css/Cart/OrderSummary.css'
 
-const OrderSummary = ({
-  quantityProducts,
-  totalProducts,
-  taxes,
-  delivery,
-  total,
-  currency,
-  isOpen
-}) => {
+const OrderSummary = ({ isOpen }) => {
+  const { cart } = useContext(CartContext);
+
+  const {
+    totalProducts,
+    taxes,
+    delivery,
+    total,
+    currency
+  } = cart;
+
+  const individualTotal = cart.products.reduce(
+    (accumulator, product) => accumulator + product.quantity * parseFloat(product.price),
+    0
+  );
+
   return (
     <div className={ `order-summary-container ${ isOpen ? 'active' : '' }` }>
       <h2 className="order-summary-title">Order Summary</h2>
       <div className="total-products-section order-summary-section">
         <p className="order-summary-name-section">
-          {` ${quantityProducts} ${quantityProducts > 1 ? "items" : "item"} `}
+          {` ${totalProducts} ${totalProducts > 1 ? "items" : "item"} `}
         </p>
         <p className="order-summary-total-section">
-          {`${totalProducts} ${currency}`}
+          {`${individualTotal.toFixed(2)} ${currency}`}
         </p>
       </div>
       <div className="tax-products-section order-summary-section">
