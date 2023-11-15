@@ -30,7 +30,7 @@ const ImageSlider = () => {
     <div className={styles.container}>
         <h2 className={styles.title}>Our team</h2>
         <div className={styles.slider}>
-            <FaArrowAltCircleLeft size={30} className={styles.leftArrow} onClick={nextSlide} />
+            <FaArrowAltCircleLeft size={30} className={styles.leftArrow} onClick={prevSlide} />
             <div className={styles.imgSliderContainer}>
                 <div className={styles.sideImage}>
                     {sliderImgs[prevIndex] && (
@@ -44,7 +44,7 @@ const ImageSlider = () => {
                 </div>
 
                 <div className={styles.mainImage}>
-                    <FaArrowAltCircleLeft size={80} className={styles.arrowMobile} onClick={nextSlide} />
+                    <FaArrowAltCircleLeft size={80} className={styles.arrowMobile} onClick={prevSlide} />
                         <div>
                             {sliderImgs.map((slide, index) => (
                                 <div
@@ -63,7 +63,7 @@ const ImageSlider = () => {
                             ))}
                             <p className={styles.mainName}>{sliderImgs[currentImg].name}</p>
                         </div>
-                    <FaArrowAltCircleRight size={80} className={styles.arrowMobile} onClick={prevSlide} />
+                    <FaArrowAltCircleRight size={80} className={styles.arrowMobile} onClick={nextSlide} />
                 </div>
                 <div className={styles.sideImage}>
                     {sliderImgs[nextIndex] && (
@@ -76,7 +76,7 @@ const ImageSlider = () => {
                     <p className={styles.sideName}>{sliderImgs[nextIndex].name}</p>
                 </div>
             </div>      
-            <FaArrowAltCircleRight size={30} className={styles.rightArrow} onClick={prevSlide} />
+            <FaArrowAltCircleRight size={30} className={styles.rightArrow} onClick={nextSlide} />
         </div>
     </div>
 
