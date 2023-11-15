@@ -13,7 +13,7 @@ export default function Page() {
   const [products, setProducts] = useState([]);
   const [currentlyPagination, setCurrentlyPagination] = useState(0);
   const [leftIsDisable, setLeftIsDisable] = useState(true);
-  const [rightIsDisable, setRightIsDisable] = useState(false);
+  const [rightIsDisable, setRightIsDisable] = useState(true);
 
   const [categories, setCategories] = useState([]);
   const [types, setTypes] = useState([]);
@@ -23,21 +23,22 @@ export default function Page() {
   const [checkedLabels, setCheckedLabels] = useState({});
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  
   const filterByCategory = (product, checkedLabels, filteredItems) => {
-    const categoryFilter = checkedLabels.category.includes(product.category.toString());
+    const categoryFilter = checkedLabels.category.includes(
+      product.category.toString()
+    );
     if (categoryFilter) {
       filteredItems.push(product);
     }
   };
-  
+
   const filterByType = (product, checkedLabels, filteredItems) => {
     const typeFilter = checkedLabels.type.includes(product.type.toString());
     if (typeFilter) {
       filteredItems.push(product);
     }
   };
-  
+
   const filterByColorOrSize = (product, checkedLabels, key, filteredItems) => {
     let foundMatching = false;
     for (const item of product[key]) {
@@ -49,7 +50,7 @@ export default function Page() {
     }
     return foundMatching;
   };
-  
+
   const filterByPrice = (product, checkedLabels, filteredItems) => {
     const productPrice = product.price;
     const checkedPrice = checkedLabels.price[0];
@@ -58,24 +59,24 @@ export default function Page() {
       filteredItems.push(product);
     }
   };
-  
+
   const handleFilterButtonClick = () => {
     const filteredItems = [];
-  
+
     products.forEach((product) => {
       Object.keys(checkedLabels).forEach((key) => {
         switch (key) {
-          case 'category':
+          case "category":
             filterByCategory(product, checkedLabels, filteredItems);
             break;
-          case 'type':
+          case "type":
             filterByType(product, checkedLabels, filteredItems);
             break;
-          case 'color':
-          case 'size':
+          case "color":
+          case "size":
             filterByColorOrSize(product, checkedLabels, key, filteredItems);
             break;
-          case 'price':
+          case "price":
             filterByPrice(product, checkedLabels, filteredItems);
             break;
           default:
@@ -83,10 +84,15 @@ export default function Page() {
         }
       });
     });
-  
+
     setFilteredProducts(filteredItems);
   };
   
+  
+
+
+
+
 
 
 
@@ -95,15 +101,24 @@ export default function Page() {
       setFilteredProducts(products);
     }
   }, [checkedLabels, products]);
+
   useEffect(() => {
     axios
       .get("https://boutique-clothing-api.onrender.com/Product")
       .then((response) => {
         setProducts(response.data);
-        const uniqueCategories = [...new Set(response.data.map((product) => product.category))];
-        const uniqueTypes = [...new Set(response.data.map((product) => product.type))];
-        const uniqueColors = [...new Set(response.data.flatMap((product) => product.color))];
-        const uniqueSizes = [...new Set(response.data.flatMap((product) => product.size))];
+        const uniqueCategories = [
+          ...new Set(response.data.map((product) => product.category)),
+        ];
+        const uniqueTypes = [
+          ...new Set(response.data.map((product) => product.type)),
+        ];
+        const uniqueColors = [
+          ...new Set(response.data.flatMap((product) => product.color)),
+        ];
+        const uniqueSizes = [
+          ...new Set(response.data.flatMap((product) => product.size)),
+        ];
 
         setCategories(uniqueCategories);
         setTypes(uniqueTypes);
@@ -116,8 +131,18 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    setPagination(createPagination(filteredProducts.length > 0 ? filteredProducts : products));
+    setPagination(
+      createPagination(
+        filteredProducts.length > 0 ? filteredProducts : products
+      )
+    );
   }, [products, filteredProducts]);
+
+  useEffect(() => {
+    if (pagination.length > 1) {
+      setRightIsDisable(false);
+    }
+  }, [pagination]);
 
   const handlePaginationRight = () => {
     let paginationNumber = currentlyPagination + 1;
@@ -151,13 +176,15 @@ export default function Page() {
         onFilterChange={(title, selectedOptions) => {
           setCheckedLabels((prevLabels) => ({
             ...prevLabels,
-            [title]: selectedOptions.filter((option) => selectedOptions.includes(option)),
+            [title]: selectedOptions.filter((option) =>
+              selectedOptions.includes(option)
+            ),
           }));
         }}
         onFilterButtonClick={handleFilterButtonClick}
       />
       <div className="products-page">
-      <div className="product-container">
+        <div className="product-container">
           {filteredProducts.map((product, index) => (
             <ClotheCard key={index} clothe={product} />
           ))}
