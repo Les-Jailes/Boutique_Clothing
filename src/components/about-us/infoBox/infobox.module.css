@@ -27,13 +27,14 @@
     text-align: justify;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1200px) {
     .container{
         flex-direction: column !important;
         width: auto;
         gap: 1rem;
     }  
     .img{
+        object-fit: cover;
         border-radius: 10px;
         width: 400px;
         height: 200px;
