@@ -20,6 +20,13 @@ export default function Page() {
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
 
+  const [checkedLabels, setCheckedLabels] = useState({});
+
+  const handleFilterButtonClick = () => {
+    console.log('Checked Labels:', checkedLabels);
+    setCheckedLabels(checkedLabels);
+  };
+
 
   useEffect(() => {
     axios
@@ -70,8 +77,26 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
-      <Filter categories={categories} types={types} colors={colors} sizes={sizes} />
+      <Filter
+        categories={categories}
+        types={types}
+        colors={colors}
+        sizes={sizes}
+        onFilterChange={(title, selectedOptions) => {
+          setCheckedLabels((prevLabels) => ({
+            ...prevLabels,
+            [title]: selectedOptions.filter((option) => selectedOptions.includes(option)),
+          }));
+        }}
+      />
       <div className="products-page">
+      <p>Checked Labels: 
+      </p>
+      {Object.entries(checkedLabels).map(([title, labels]) => (
+            <p key={title}>
+              {title}: {labels.join(", ")}
+            </p>
+          ))}
         <div className="product-container">
           {pagination[currentlyPagination]?.map((product, index) => (
             <ClotheCard key={index} clothe={product}/>
