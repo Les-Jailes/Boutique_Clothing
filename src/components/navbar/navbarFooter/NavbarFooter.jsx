@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React, { useRef, useState, useEffect } from 'react';
 import style from './navfooter.module.css';
 import { navFooterItems } from '@/utils/navfooterItems';
-import Modal from 'react-modal';
 
 const NavFooter = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -33,7 +32,7 @@ const NavFooter = () => {
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, [modalIsOpen]);
+  }, [modalIsOpen, handleOutsideClick]);
 
   const handleSubcategoryClick = (url) => {
     window.location.href = url;
@@ -41,19 +40,19 @@ const NavFooter = () => {
 
   return (
     <div className={style.container}>
-      {navFooterItems.map((item, index) => (
-        <div key={index} className={style.dropdownContainer}>
+      {navFooterItems.map(({ title, id }, index) => (
+        <div key={id} className={style.dropdownContainer}>
           <div
             onClick={() => openModal(index)}
-            className={`${style.link} ${selectedCategory === index ? style.selected : ''} ${modalIsOpen && selectedCategory === index ? style.modalOpen : ''}`}
+            className={`${style.link} ${selectedCategory === index && style.selected} ${modalIsOpen && selectedCategory === index && style.modalOpen}`}
           >
-            {item.title}
+            {title}
           </div>
         </div>
       ))}
 
       {modalIsOpen && selectedCategory !== null && (
-        <div ref={modalRef} className={`${style.modal} ${style.modalOpen}`}>
+        <div ref={modalRef} className={`${style.modal} ${modalIsOpen && style.modalOpen}`}>
           {navFooterItems[selectedCategory]?.subcategories && (
             <div className={style.horizontalSubcategories}>
               {navFooterItems[selectedCategory].subcategories.map((subcategory, index) => (
