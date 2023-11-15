@@ -24,7 +24,6 @@ const QuantityProduct = ({ limit, quantity, idProduct }) => {
       changeQuantity(validValue, idProduct);
     } else {
       setQuantityProduct("")
-      changeQuantity(1, idProduct)
     }
   };
 
