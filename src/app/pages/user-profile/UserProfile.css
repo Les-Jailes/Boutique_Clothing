@@ -18,7 +18,7 @@ body {
   width: 90%;
   max-width: 600px;
   margin: 10% auto;
-  background: transparent;
+  background: linear-gradient(80deg, rgba(167, 208, 210, 0.2), rgba(167, 208, 210, 0.7), rgba(167, 208, 210, 0.2));
   backdrop-filter: blur(20px);
   color: #fff;
   border-radius: 20px;
@@ -59,7 +59,7 @@ body {
   z-index: 100;
 }
 .iconGender {
-  transform: translateY(-48px) translateX(200px);
+  transform: translateY(-38px) translateX(200px);
   right: 12%;
   top: 20%;
   z-index: 100;
@@ -72,7 +72,7 @@ body {
 .filter-bar {
   width: 100%;
   max-width: 500px;
-  margin: 20px auto;
+  margin: 10px auto;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 20px;
@@ -80,6 +80,35 @@ body {
   color: #fff;
   padding: 10px 20px 10px 15px;
   appearance: none;
+}
+
+.button-edit {
+  text-align: center;
+  border: 0;
+  background-image: linear-gradient(150deg, #254b5e, #546eab, #a7d0d2);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.button-edit span {
+  display: inline-block;
+  background-color: #111;
+  padding: 16px 24px;
+  border-radius: 15px;
+  transition: .3s;
+}
+
+
+.button-edit:hover span{
+  background: none;
+}
+
+.button-edit:active {
+  transform: scale(0.9);
 }
 
 @media (max-width: 799px) {
@@ -102,7 +131,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(200px);
+    transform: translateY(-38px) translateX(200px);
   }
 
   .image-user {
@@ -112,6 +141,13 @@ body {
   .profile-container h1 {
     font-size: 20px;
   }
+}
+
+.validation-message {
+  font-size: 10px;
+  color: red;
+  margin-top: 5px;
+  transform: translateY(-35px) translateX(-140px)
 }
 
 @media (max-width: 600px) {
@@ -131,7 +167,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(220px);
+    transform: translateY(-38px) translateX(220px);
   }
 
   .image-user {
@@ -140,6 +176,9 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+  .validation-message {
+    transform: translateY(-35px) translateX(-180px)
   }
 }
 
@@ -160,7 +199,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(220px);
+    transform: translateY(-38px) translateX(220px);
   }
 
   .image-user {
@@ -169,6 +208,10 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+
+  .validation-message {
+    transform: translateY(-35px) translateX(-170px)
   }
 }
 
@@ -189,7 +232,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(200px);
+    transform: translateY(-38px) translateX(200px);
   }
 
   .image-user {
@@ -198,6 +241,9 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+  .validation-message {
+    transform: translateY(-35px) translateX(-150px)
   }
 }
 
@@ -218,7 +264,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(185px);
+    transform: translateY(-38px) translateX(185px);
   }
 
   .image-user {
@@ -247,7 +293,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(190px);
+    transform: translateY(-38px) translateX(190px);
   }
 
   .image-user {
@@ -257,6 +303,8 @@ body {
   .profile-container h1 {
     font-size: 20px;
   }
+
+
 }
 
 @media (max-width: 496px) {
@@ -276,7 +324,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(180px);
+    transform: translateY(-38px) translateX(180px);
   }
 
   .image-user {
@@ -285,6 +333,9 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+  .validation-message {
+    transform: translateY(-35px) translateX(-130px)
   }
 }
 
@@ -305,7 +356,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(170px);
+    transform: translateY(-38px) translateX(170px);
   }
 
   .image-user {
@@ -314,6 +365,9 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+  .validation-message {
+    transform: translateY(-35px) translateX(-125px)
   }
 }
 
@@ -334,7 +388,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(180px);
+    transform: translateY(-38px) translateX(180px);
   }
 
   .image-user {
@@ -343,6 +397,9 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+  .validation-message {
+    transform: translateY(-35px) translateX(-125px)
   }
 }
 
@@ -363,7 +420,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(160px);
+    transform: translateY(-38px) translateX(160px);
   }
 
   .image-user {
@@ -372,6 +429,10 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+
+  .validation-message {
+    transform: translateY(-35px) translateX(-105px)
   }
 }
 
@@ -392,7 +453,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(150px);
+    transform: translateY(-38px) translateX(150px);
   }
 
   .image-user {
@@ -401,6 +462,10 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+
+  .validation-message {
+    transform: translateY(-35px) translateX(-95px)
   }
 }
 
@@ -421,7 +486,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(140px);
+    transform: translateY(-38px) translateX(140px);
   }
 
   .image-user {
@@ -430,6 +495,9 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+  .validation-message {
+    transform: translateY(-35px) translateX(-90px)
   }
 }
 
@@ -450,7 +518,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(120px);
+    transform: translateY(-38px) translateX(120px);
   }
 
   .image-user {
@@ -489,6 +557,10 @@ body {
   .profile-container h1 {
     font-size: 20px;
   }
+
+  .validation-message {
+    transform: translateY(-35px) translateX(-80px)
+  }
 }
 
 @media (max-width: 355px) {
@@ -509,7 +581,7 @@ body {
   }
 
   .iconGender {
-    transform: translateY(-48px) translateX(100px);
+    transform: translateY(-38px) translateX(100px);
   }
 
   .image-user {
@@ -518,5 +590,9 @@ body {
 
   .profile-container h1 {
     font-size: 20px;
+  }
+
+  .validation-message {
+    transform: translateY(-35px) translateX(-70px)
   }
 }

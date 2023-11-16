@@ -1,4 +1,4 @@
-import { FaFacebook, FaGlobe, FaInstagram, FaYoutube,  } from "react-icons/fa";
+import { FaFacebook, FaGlobe, FaInstagram, FaPinterest,  } from "react-icons/fa";
 export const onlineShop = [
     {
         title: 'Home',
@@ -39,18 +39,18 @@ export const getHelp = [
 export const socialLinks = [
     {
         icon: <FaGlobe />,
-        url: "https://dev-boutique-clothing.vercel.app/",
+        url: "/",
       },
       {
         icon: <FaFacebook />,
-        url: "/",
+        url: "https://www.facebook.com/lesjailes06/",
       },
       {
         icon: <FaInstagram />,
-        url: "/",
+        url: "https://instagram.com/boutique_clothing_06?igshid=MzMyNGUyNmU2YQ==",
       },
       {
-        icon: <FaYoutube />,
-        url: "/",
+        icon: <FaPinterest />,
+        url: "https://pin.it/5fWfuYx",
       },
 ]

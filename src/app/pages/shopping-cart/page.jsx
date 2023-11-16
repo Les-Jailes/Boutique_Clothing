@@ -21,21 +21,23 @@ const Cart = () => {
       <div className="your-cart-container">
         <h2 className="your-cart-title">YOUR CART</h2>
         <div className="list-your-cart-container">
-          {cart.products.map((product, index) => {
-            return <CardProductCart product={product} key={ index } />;
+          {cart.products.map((product) => {
+            return <CardProductCart product={product} key={product.code} editable={true}/>;
           })}
         </div>
       </div>
-      <div className={ `more-information-container ${ isOpen ? 'active' : '' }` }>
+      <div className={`more-information-container ${isOpen ? "active" : ""}`}>
         <button
           className="open-more-information-button"
           onClick={() => handleOpenning()}
         >
-          {
-            isOpen ? <AiOutlineDown size={18} color="white" /> : <AiOutlineUp color="white" size={18} />
-          }
+          {isOpen ? (
+            <AiOutlineDown size={18} color="white" />
+          ) : (
+            <AiOutlineUp color="white" size={18} />
+          )}
         </button>
-        <CheckOutButton isOpen={ isOpen } />
+        <CheckOutButton isOpen={isOpen}  />
         <OrderSummary
           quantityProducts={cart.products.length}
           totalProducts={cart.total}
@@ -43,7 +45,7 @@ const Cart = () => {
           delivery={cart.delivery}
           total={cart.total + cart.taxes}
           currency={cart.currency}
-          isOpen={ isOpen }
+          isOpen={isOpen}
         />
       </div>
     </div>
