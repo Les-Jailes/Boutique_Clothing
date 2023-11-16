@@ -45,24 +45,27 @@ const authOptions = NextAuth({
           await connect();
           try {
             let existingUser = await User.findOne({ email: user.email });
-            const fullName = profile.name.split(' ');
-            const firstName = fullName[0]; 
-            const lastName = fullName.slice(1).join(' ');
-            if (!existingUser) {
+            if (existingUser) {
+              if (existingUser.password === 'No password | Google account') {
+                return true;
+              } else if (!existingUser.isGoogleAccount) {
+                return '/pages/account/login?showToast=true';
+              }
+            } else {
               const newUser = {
                 ci: profile.sub,
-                name: firstName,
-                lastName: lastName || 'No lastname', 
+                name: profile.name.split(' ')[0],
+                lastName: profile.name.split(' ').slice(1).join(' ') || 'No lastname',
                 email: user.email,
-                password: 'No password', 
-                gender: 'No gender', 
-                imagePath: user.image
+                password: 'No password | Google account',
+                gender: 'No gender',
+                imagePath: user.image,
+                isGoogleAccount: true,
               };
-              const response = await api.post(`/User`, newUser);
-              existingUser = response.data;
+              await api.post(`/User`, newUser);
+              return true;
             }
             
-            return existingUser;
           } catch (error) {
             console.error('Error saving user to MongoDB', error);
             return false; 
