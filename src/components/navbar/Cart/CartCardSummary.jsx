@@ -37,7 +37,7 @@ const CartCardSummary = ({ product, showDeleteOption }) => {
       </div>
       {showDeleteOption && (
         <div className="card-option-container">
-          <button className="delete-option-card">
+          <button className="delete-option-card" onClick={handleDelete}>
             <AiOutlineDelete size={24} />
           </button>
         </div>
