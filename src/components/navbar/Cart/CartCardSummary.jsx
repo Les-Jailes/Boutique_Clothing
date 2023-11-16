@@ -35,7 +35,7 @@ const CartCardSummary = ({ product }) => {
         <p className="card-cart-price">{`Price: ${product.price} $`}</p>
       </div>
       <div className="card-option-container">
-        <button className="delete-option-card" onClick={handleDelete}>
+          <button className="delete-option-card" onClick={handleDelete}>
           <AiOutlineDelete size={24} />
         </button>
       </div>
