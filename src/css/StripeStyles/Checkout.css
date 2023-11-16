@@ -47,6 +47,7 @@
 
 @media (min-width: 1200px) {
     .checkout-form {
+        min-width: 540px;
         max-width: 640px; 
         padding: 30px;
     }
