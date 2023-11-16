@@ -4,6 +4,9 @@ export default function Home() {
   return (
     <div className="home-page">
       <Cover />
+      <div className="categories-container">
+        
+      </div>
     </div>
   )
 }
