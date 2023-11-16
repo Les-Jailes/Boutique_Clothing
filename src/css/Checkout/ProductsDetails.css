@@ -1,0 +1,32 @@
+.list-cart-summary {
+    
+    overflow: hidden;
+    position: fixed;
+    top: 60px;
+    right: calc(60px + 1rem);
+    display: none;
+    background-color: #fff;
+    z-index: 10;
+    box-shadow: 0 0 10px #00000050;
+    font-family: var(--font-family-poppins);
+}
+
+.list-cart-summary.is-open {
+    display: block;
+}
+
+.list-products {
+    width: 100%;
+    height: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+@media (max-width: 500px) {
+    .list-cart-summary {
+        width: 100%;
+        top: 60px;
+        left: 0;
+    }
+}
