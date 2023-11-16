@@ -3,9 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import '@/css/Checkout/CountryDropdown.css';
 
-const CountryDropdown = () => {
+const CountryDropdown = ({ onCountryChange }) => {
   const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(null);
 
   useEffect(() => {
     fetch('https://restcountries.com/v3.1/all')
@@ -19,20 +18,16 @@ const CountryDropdown = () => {
   }, []);
 
   const handleCountryChange = (event) => {
-    const selectedCountryCode = event.target.value;
-    const selectedCountryData = countries.find(
-      country => country.alpha2Code === selectedCountryCode
-    );
-    setSelectedCountry(selectedCountryData);
+    const countryCode = event.target.value;
+    onCountryChange(countryCode); 
   };
 
   return (
     <div className="container">
       <div className="container country-container">
-        <span className="flag" style={{ backgroundImage: selectedCountry ? `url(${selectedCountry.flag})` : '' }}></span>
         <select className="countries" name="countries" id="countries" onChange={handleCountryChange}>
           {countries.map(country => (
-            <option key={country.cioc} value={country.cioc}>{country.name.common}</option>
+            <option key={country.cca2} value={country.cca2}>{country.name.common}</option>
           ))}
         </select>
       </div>
@@ -40,4 +35,4 @@ const CountryDropdown = () => {
   );
 };
 
-export default CountryDropdown
+export default CountryDropdown;

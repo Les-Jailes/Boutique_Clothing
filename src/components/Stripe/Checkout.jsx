@@ -44,12 +44,12 @@ function CheckoutPayment() {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(setShippingInfo)
+        //if (!stripe || !elements || !shippingInfo) {
+        //    return;
+         // }
 
-        if (!stripe || !elements || !shippingInfo) {
-            return;
-          }
-
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        /*const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card: elements.getElement(CardElement),
             billing_details: {
@@ -57,15 +57,16 @@ function CheckoutPayment() {
                 phone: shippingInfo.phoneNumber,
                 email: session.data.user.email,
                 address: {
-                   line1: shippingInfo.addressLine1,
-                   line2: shippingInfo.addressLine2,
+                   line1: shippingInfo.streetAddress,
+                   postal_code: shippingInfo.zipCode,
                    country: shippingInfo.country
                 }
             }
-        });
+        });*/
 
-        if (!error) {
-            const { id: paymentMethodId } = paymentMethod;
+        //if (!error) {
+          //  console.log(paymentMethod)
+            /*const { id: paymentMethodId } = paymentMethod;
 
             const checkoutData = {
                 paymentMethodId,
@@ -76,8 +77,8 @@ function CheckoutPayment() {
             await api.post('/checkout', checkoutData).then(response => {
             }).catch(error => {
                 console.log(`Error to send data to API`)
-            });
-        }
+            });*/
+        //}
     }
 
     return (

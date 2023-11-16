@@ -17,7 +17,7 @@ const CheckoutForm = () => {
   const [validationFullname, setValidationFullname] = useState(false);
   const [validFullnameMessage, setValidFullnameMessage] = useState('');
 
-  const [country, setCountry] = useState("");
+  const [countryCode, setCountryCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [validationZipCode, setValidationZipCode] = useState(false);
@@ -75,10 +75,21 @@ const CheckoutForm = () => {
     if(phoneNumber >= 0) setZipCode(phoneNumber);
     validateZipCode(phoneNumber);
   }
+  
+  const handleCountryChange = (newCountryCode) => {
+    setCountryCode(newCountryCode);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(!validationFullname && !validationPhoneNumber && !validationZipCode && age === "verified"){
+      localStorage.setItem('shippingInfo', JSON.stringify({
+        fullname,
+        streetAddress,
+        zipCode,
+        phoneNumber,
+        country: countryCode 
+      }));
       router.push('/pages/checkout/payment')
     }
     else {
@@ -158,7 +169,7 @@ const CheckoutForm = () => {
   </div>
 
   <div className="containerDropdown">
-    <CountryDropdown />
+    <CountryDropdown onCountryChange={handleCountryChange} />
   </div>
   
 
