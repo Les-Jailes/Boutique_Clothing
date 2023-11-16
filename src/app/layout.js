@@ -5,6 +5,8 @@ import Navbar from '@/components/navbar/Navbar'
 import AuthProvider from '@/components/authProvider/AuthProvider'
 import Footer from '@/components/footer/Footer'
 import { CartProvider } from '@/components/Products/CartContext'
+import { ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,14 +20,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      <AuthProvider>
+        <AuthProvider>
           <CartProvider>
             <Navbar />
             {children}
             <Footer />
+            <ToastContainer /> 
           </CartProvider>
         </AuthProvider>
       </body>
     </html>
-  )
+  );
 }
