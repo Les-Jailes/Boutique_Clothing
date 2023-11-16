@@ -105,10 +105,6 @@ const handleFilterButtonClick = () => {
       priceFilter = filterByPrice(product, checkedLabels);
     }
 
-    // console.log(
-    //   `Product: ${product.code}, Category: ${categoryFilter}, Type: ${typeFilter}, Color/Size: ${colorOrSizeFilter}, Price: ${priceFilter}`
-    // );
-
     return categoryFilter && typeFilter && colorOrSizeFilter && priceFilter;
   });
 
