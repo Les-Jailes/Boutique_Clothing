@@ -17,7 +17,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      google-site-verification: googlefcc155273476570c.html
       <body className={inter.className}>
       <AuthProvider>
           <CartProvider>
