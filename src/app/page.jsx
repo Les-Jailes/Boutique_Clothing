@@ -1,4 +1,4 @@
-import Cover from "@/components/Home/Cover";
+import Cover from "@/components/Home/Cover/Cover";
 
 export default function Home() {
   return (

@@ -1,0 +1,21 @@
+.cover-container {
+    width: 100%;
+    height: calc(100vh - 100px);
+    padding: 3rem;
+}
+
+.slider-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+}
+
+.cover-element {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}

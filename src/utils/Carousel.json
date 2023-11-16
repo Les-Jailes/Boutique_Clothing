@@ -1,30 +1,36 @@
 [
     {
+        "id": 1,
         "name": "be-free",
         "phrase": "Set yourself free with fashion that celebrates your individuality and allows you to be authentic in every step.",
         "image": "https://i.postimg.cc/cCnQFtcN/be-free-cover.jpg"
     },
     {
+        "id": 2,
         "name": "be-confortable",
         "phrase": "True elegance begins with comfort: experience the luxury of feeling comfortable and fashionable.",
         "image": "https://i.postimg.cc/G3x3ymRB/be-confortable.jpg"
     },
     {
+        "id": 3,
         "name": "feeling-beautiful",
         "phrase": "Each garment is an expression of your inner beauty, discover the pleasure of feeling truly beautiful.",
         "image": "https://i.postimg.cc/3JGsvLmt/feeling-beautiful.jpg"
     },
     {
+        "id": 4,
         "name": "being-elegant",
         "phrase": "Fashion shouldn't be taken too seriously - have fun with fashion that reflects your playful spirit!",
         "image": "https://i.postimg.cc/MK1LTnJ4/being-elegant.jpg"
     },
     {
+        "id": 5,
         "name": "have-fun",
         "phrase": "Fashion shouldn't be taken too seriously - have fun with fashion that reflects your playful spirit!",
         "image": "https://i.postimg.cc/XqdspzmF/have-fun.jpg"
     },
     {
+        "id": 6,
         "name": "self-confidence",
         "phrase": "True beauty lies in self-confidence. Dress with confidence and conquer the world your way.",
         "image": "https://i.postimg.cc/nhzqWW2k/self-confidence.jpg"

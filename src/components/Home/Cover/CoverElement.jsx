@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const CoverElement = ({ name, phrase, image }) => {
   const backgroundImage = {
-    backgroundImage: image,
+    backgroundImage: `url(${ image })`,
   };
 
   return (
