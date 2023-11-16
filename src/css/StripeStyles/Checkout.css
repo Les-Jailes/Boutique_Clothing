@@ -67,3 +67,52 @@
 .buy-button:active {
     transform: scale(0.98); 
 }
+
+@media (min-width: 1200px) {
+    .checkout-form {
+        max-width: 640px; 
+        padding: 30px;
+    }
+}
+
+@media (max-width: 991px) {
+    .checkout-form {
+        max-width: 500px;
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .checkout-form {
+        max-width: 450px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .checkout-form {
+        max-width: none;
+        padding: 15px;
+    }
+
+    .input-group input {
+        width: 100%; 
+        margin-right: 0; 
+        margin-bottom: 15px;
+    }
+
+    .input-group {
+        padding: 10px;
+    }
+
+    .buy-button {
+        width:250px;
+    }
+
+    .div-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+    }
+}

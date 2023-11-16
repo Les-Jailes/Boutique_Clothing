@@ -70,9 +70,11 @@ function CheckoutForm() {
             <div className="card-details">
                 <CardElement options={CARD_ELEMENT_OPTIONS} />
             </div>
-            <button type="submit" className="buy-button">
-                Buy
-            </button>
+            <div className="div-button">
+                <button type="submit" className="buy-button">
+                    Buy
+                </button>
+            </div>
         </form>
     );
     
