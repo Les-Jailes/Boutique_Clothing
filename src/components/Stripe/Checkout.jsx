@@ -4,6 +4,8 @@ import "@/css/StripeStyles/Checkout.css";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import api from "@/app/api/api";
 import { CartContext } from "@/components/Products/CartContext";
+import Swal from 'sweetalert2';
+
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -26,7 +28,7 @@ const CARD_ELEMENT_OPTIONS = {
 };
 
 function CheckoutPayment() {
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
   const stripe = useStripe();
   const elements = useElements();
 
@@ -81,7 +83,22 @@ function CheckoutPayment() {
       await api
         .post("/CheckoutPayment", checkoutData)
         .then((response) => {
-          console.log("Payment data sent successfully", response.data);
+            console.log("Payment data sent successfully", response.data);
+            if (response.data.requiresAction) {
+              window.location.href = '/pages/checkout/payment';
+            } else {
+                clearCart();
+                Swal.fire({
+                    title: 'Payment Successful!',
+                    text: 'Thank you for your preference.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href = '/';
+                    }
+                  });
+            }
         })
         .catch((error) => {
           console.error("Error sending payment data to API", error);
