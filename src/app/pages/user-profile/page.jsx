@@ -1,7 +1,7 @@
 'use client'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react';
-import { BiSolidUser, BiSolidUserCircle, BiSolidUserDetail } from 'react-icons/bi';
+import { BiSolidUser, BiSolidUserCircle,BiSolidUserDetail } from 'react-icons/bi';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { validateTextField, validateCiField } from '@/utils/formValidations';
 import '@/app/pages/user-profile/UserProfile.css'
@@ -29,15 +29,15 @@ const Profile = () => {
       setName(value);
       setValidationMessages((prevMessages) => ({
         ...prevMessages,
-        name: ''
+        name: '' 
       }));
     } else if (id === 'lastName') {
       setLastName(value);
       setValidationMessages((prevMessages) => ({
         ...prevMessages,
-        lastName: ''
+        lastName: '' 
       }));
-    } else if (id === 'ci') {
+    }  else if (id === 'ci') {
       setCi(value);
       setValidationMessages((prevMessages) => ({
         ...prevMessages,
@@ -88,7 +88,8 @@ const Profile = () => {
       }
       const userUpdate = await getUser();
 
-      if (user && (user.lastName !== undefined || user.name !== undefined || user.gender !== undefined || user.ci !== undefined)) {
+      if (userUpdate !== null && userUpdate._id !== undefined || user !== null && user.lastName !== undefined || user != null && user.name !== undefined
+        || user != null && user.gender !== undefined || user != null && user.ci !== undefined) {
         const userId = userUpdate._id;
         const data = {
           ci: ci,
@@ -99,7 +100,7 @@ const Profile = () => {
 
         const userUpdateResponse = await api.put(`/User/${userId}`, data);
         console.log('PUT request successful:', userUpdateResponse.data);
-
+        
         setValidationMessages({
           ci: '',
           name: '',
@@ -114,7 +115,7 @@ const Profile = () => {
   };
 
 
-  const getUser = useCallback(async () => {
+  const getUser = async () => {
     try {
       const u = await api.get('/User/email/' + session.data.user.email);
       return u.data;
@@ -122,7 +123,7 @@ const Profile = () => {
       console.error("Error fetching user:", error);
       return null;
     }
-  }, [session]);
+  };
 
 
   useEffect(() => {
@@ -133,15 +134,16 @@ const Profile = () => {
         try {
           const user = await getUser();
           setEmail(session.data.user.email);
-          if (user && (user.lastName !== undefined || user.name !== undefined || user.gender !== undefined || user.ci !== undefined)) {
+          if (user !== null && user.lastName !== undefined || user != null && user.name !== undefined
+            || user != null && user.gender !== undefined || user != null && user.ci !== undefined) {
             setCi(user.ci);
             setLastName(user.lastName);
             setName(user.name);
             setPassword(user.password);
             setGender(user.gender);
+            
           }
-
-
+          
         } catch (error) {
           console.error("Error in fetching user data:", error);
         }
@@ -149,7 +151,7 @@ const Profile = () => {
     };
 
     fetchData();
-  }, [session, getUser]);
+  }, [session]);
 
 
   const handleSelectChange = (e) => {
@@ -167,7 +169,7 @@ const Profile = () => {
         <h1>Profile</h1>
 
         <div>
-          <BiSolidUserCircle className='image-user' />
+          <BiSolidUserCircle className='image-user'/>
         </div>
 
         <div className='input-box'>
@@ -182,7 +184,7 @@ const Profile = () => {
             className='input-field'
             disabled={!isEditing}
           />
-          <BiSolidUserDetail className='icon' />
+          <BiSolidUserDetail className='icon'/>
         </div>
         <div className='validation-message'>
           {validationMessages.ci}
@@ -200,7 +202,7 @@ const Profile = () => {
             className='input-field'
             disabled={!isEditing}
           />
-          <BiSolidUser className='icon' />
+          <BiSolidUser className='icon'/>
         </div>
         <div className='validation-message'>
           {validationMessages.name}
@@ -217,7 +219,7 @@ const Profile = () => {
             className='input-field'
             disabled={!isEditing}
           />
-          <BiSolidUser className='icon' />
+          <BiSolidUser className='icon'/>
         </div>
         <div className='validation-message'>
           {validationMessages.lastName}
@@ -232,7 +234,7 @@ const Profile = () => {
             className='input-field'
             disabled
           />
-          <MdOutlineAlternateEmail className='icon' />
+          <MdOutlineAlternateEmail className='icon'/>
         </div>
         <div className='input-box'>
           <select
@@ -252,21 +254,21 @@ const Profile = () => {
         </div>
 
         <div>
-          {session.status === 'authenticated' ? (
-            isEditing ? (
-              <button className='button-edit' onClick={handleSave}>
-                <span>Save Profile</span>
-              </button>
-            ) : (
-              <button className='button-edit' onClick={handleEdit}>
+        {session.status === 'authenticated' ? (
+          isEditing ? (
+            <button className='button-edit' onClick={handleSave}>
+              <span>Save Profile</span>
+            </button>
+          ) : (
+            <button className='button-edit' onClick={handleEdit}>
                 <span>Edit Profile</span>
               </button>
             )
-          ) : (
-            <button className='button-edit' disabled>
-              <span>Edit Profile</span>
-            </button>
-          )
+            ) : (
+              <button className='button-edit' disabled>
+                <span>Edit Profile</span>
+              </button>
+            )
           }
         </div>
       </form>
