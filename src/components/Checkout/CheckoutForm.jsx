@@ -3,12 +3,13 @@ import React from "react";
 import { useState } from "react";
 import '@/css/Checkout/CheckoutForm.css'
 import {AiOutlineFontSize, AiOutlineGlobal} from 'react-icons/ai'
-import {BiWorld} from 'react-icons/bi'
 import {LuMap} from 'react-icons/lu'
 import {FiPhone} from 'react-icons/fi'
 import {validateNumberField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
 import CountryDropdown from "./CountryDropdown";
 import { GoArrowRight } from "react-icons/go";
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation'
 
 
 const CheckoutForm = () => {
@@ -27,6 +28,8 @@ const CheckoutForm = () => {
   const [validPhoneNumberMessage, setValidPhoneNumberMessage] = useState('');
 
   const [age, setAge] = useState(true);
+
+  const router = useRouter();
 
   const handleFullnameChange = (e) => {
     const username = e.target.value;
@@ -75,12 +78,20 @@ const CheckoutForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    alert("Order placed successfully!");
+    if(!validationFullname && !validationPhoneNumber && !validationZipCode && age === "verified"){
+      router.push('/pages/checkout/payment')
+    }
+    else {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please fill out all fields correctly",
+      });
+    }
   };
 
   const handleChange = () => {
-
+    setAge("verified");
   };
 
   return (
