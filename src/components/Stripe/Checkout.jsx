@@ -1,7 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import '@/css/StripeStyles/Checkout.css';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useSession } from 'next-auth/react';
+import api from "@/app/api/api";
+import { CartContext } from "@/components/Products/CartContext";
 
 const CARD_ELEMENT_OPTIONS = {
     style: {
@@ -24,48 +27,62 @@ const CARD_ELEMENT_OPTIONS = {
 };
 
 
-function CheckoutForm() {
-    const [shippingInfo, setShippingInfo] = useState({
-        cardOwner: '',
-        address: '',
-        country: '',
-        phone: ''
-    });
-
+function CheckoutPayment() {
+    const { cart } = useContext(CartContext);
+    const { data: session } = useSession();
     const stripe = useStripe();
     const elements = useElements();
 
-    const handleInputChange = (e) => {
-        setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
-    };
+    const [shippingInfo, setShippingInfo] = useState(null);
 
+    useEffect(() => {
+        const info = JSON.parse(localStorage.getItem('shippingInfo'));
+        if (info) {
+          setShippingInfo(info);
+        }
+      }, []);
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!stripe || !elements || !shippingInfo) {
+            return;
+          }
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card: elements.getElement(CardElement),
             billing_details: {
-                name: shippingInfo.cardOwner,
+                name: shippingInfo.fullname,
+                phone: shippingInfo.phoneNumber,
+                email: session.data.user.email,
                 address: {
-                    line1: shippingInfo.address,
-                    country: shippingInfo.country,
-                },
-                phone: shippingInfo.phone
+                   line1: shippingInfo.addressLine1,
+                   line2: shippingInfo.addressLine2,
+                   country: shippingInfo.country
+                }
             }
-        })
+        });
+
+        if (!error) {
+            const { id: paymentMethodId } = paymentMethod;
+
+            const checkoutData = {
+                paymentMethodId,
+                amount: cart.total + cart.taxes,
+                billingDetails: shippingInfo, 
+            };
+
+            await api.post('/checkout', checkoutData).then(response => {
+            }).catch(error => {
+                console.log(`Error to send data to API`)
+            });
+        }
     }
 
     return (
         <form onSubmit={handleSubmit} className="checkout-form">
             <h2>Shipping Information</h2>
-            <h3>Shipping Address</h3> 
-            <div className="input-group">
-                <input type="text" name="cardOwner" placeholder="Card Owner Name" onChange={handleInputChange} />
-                <input type="text" name="address" placeholder="Address" onChange={handleInputChange} />
-                <input type="text" name="country" placeholder="Country" onChange={handleInputChange} />
-                <input type="tel" name="phone" placeholder="Phone Number" onChange={handleInputChange} />
-            </div>
             <h3>Payment Details</h3> 
             <div className="card-details">
                 <CardElement options={CARD_ELEMENT_OPTIONS} />
@@ -80,4 +97,4 @@ function CheckoutForm() {
     
 };
 
-export default CheckoutForm;
+export default CheckoutPayment;

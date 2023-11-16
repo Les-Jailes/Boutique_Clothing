@@ -17,29 +17,6 @@
     text-align: center;
 }
 
-.input-group {
-    background: #2C2C3C; 
-    border-radius: 12px; 
-    padding: 20px; 
-    margin-bottom: 20px;
-}
-
-.input-group input {
-    width: calc(50% - 20px); 
-    padding: 16px; 
-    margin: 0 10px 20px 0; 
-    border: 2px solid #5D5D81; 
-    border-radius: 8px; 
-    background-color: #2C2C3C;
-    box-sizing: border-box; 
-    font-size: 16px; 
-    color: #FFF;
-}
-
-.input-group input:nth-child(2n) {
-    margin-right: 0;
-}
-
 .card-details {
     background: #2C2C3C;
     border-radius: 12px; 
@@ -93,16 +70,6 @@
     .checkout-form {
         max-width: none;
         padding: 15px;
-    }
-
-    .input-group input {
-        width: 100%; 
-        margin-right: 0; 
-        margin-bottom: 15px;
-    }
-
-    .input-group {
-        padding: 10px;
     }
 
     .buy-button {
