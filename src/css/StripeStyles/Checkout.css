@@ -1,0 +1,86 @@
+.checkout-form {
+    max-width: 540px; 
+    margin: 30px auto;
+    padding: 25px;
+    background: #1E1E2D; 
+    border: none;
+    border-radius: 22px;
+    box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); 
+    color: #FFFFFF; 
+}
+
+.checkout-form h2, .checkout-form h3 {
+    color: #FFF; 
+    text-transform: uppercase; 
+    letter-spacing: 0.1em; 
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.card-details {
+    background: #2C2C3C;
+    border-radius: 12px; 
+    padding: 16px;
+}
+
+.buy-button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 18px 0; 
+    background-color: #F9A826; 
+    color: #1E1E2D; 
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out; 
+    font-size: 18px; 
+    letter-spacing: 0.05em; 
+}
+
+.buy-button:hover {
+    background-color: #FFB547; 
+}
+
+.buy-button:active {
+    transform: scale(0.98); 
+}
+
+@media (min-width: 1200px) {
+    .checkout-form {
+        min-width: 540px;
+        max-width: 640px; 
+        padding: 30px;
+    }
+}
+
+@media (max-width: 991px) {
+    .checkout-form {
+        max-width: 500px;
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .checkout-form {
+        max-width: 450px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .checkout-form {
+        max-width: none;
+        padding: 15px;
+    }
+
+    .buy-button {
+        width:250px;
+    }
+
+    .div-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
+    }
+}

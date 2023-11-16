@@ -5,14 +5,21 @@ import { v4 as uuidv4 } from 'uuid';
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState({
+  const initialCartState = {
     products: [],
     total: 0,
     totalProducts: 0,
     taxes: 0,
     delivery: 0,
     currency: "$"
-  });
+  };
+
+  const [cart, setCart] = useState(initialCartState);
+
+  const clearCart = () => {
+    setCart(initialCartState);
+    localStorage.setItem("cart", JSON.stringify(initialCartState));
+  };
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem("cart"));
@@ -114,7 +121,7 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, changeQuantity }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, changeQuantity, clearCart }}>
       {children}
     </CartContext.Provider>
   );
