@@ -7,7 +7,7 @@ import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible} from 'r
 import { useRouter } from 'next/navigation'
 import { validateEmail, validatePassword } from '@/utils/formValidations';
 import GoogleAuthButton from '@/components/GoogleAuthentication/GoogleAuthButton';
-
+import { showToast } from '@/components/Alerts/CustomToast'
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -94,6 +94,17 @@ const Login = () => {
     }));
   
   }, [passwordInput]);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const showToastParam = queryParams.get('showToast');
+
+    if (showToastParam === 'true') {
+      showToast(`"An account with this email already exists. Please log in with your existing account."`, "error");
+      queryParams.delete('showToast');
+      window.history.replaceState(null, null, "?" + queryParams.toString());
+    }
+  }, []);
   
   useEffect(() => {
     if(session.status === "authenticated") {

@@ -5,7 +5,8 @@ import "@/css/Cart/CartCardSummary.css";
 import Image from "next/image";
 import { CartContext } from "@/components/Products/CartContext";
 
-const CartCardSummary = ({ product }) => {
+const CartCardSummary = ({ product, showDeleteOption }) => {
+
 
   const { removeFromCart } = useContext(CartContext);
 
@@ -34,11 +35,13 @@ const CartCardSummary = ({ product }) => {
         <p className="card-cart-quantity"> { `Quantity: ${ product.quantity } ` } </p>
         <p className="card-cart-price">{`Price: ${product.price} $`}</p>
       </div>
-      <div className="card-option-container">
+      {showDeleteOption && (
+        <div className="card-option-container">
           <button className="delete-option-card" onClick={handleDelete}>
-          <AiOutlineDelete size={24} />
-        </button>
-      </div>
+            <AiOutlineDelete size={24} />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

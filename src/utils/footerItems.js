@@ -39,7 +39,7 @@ export const getHelp = [
 export const socialLinks = [
     {
         icon: <FaGlobe />,
-        url: "https://dev-boutique-clothing.vercel.app/",
+        url: "/",
       },
       {
         icon: <FaFacebook />,
