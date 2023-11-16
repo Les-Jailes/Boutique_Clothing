@@ -22,7 +22,7 @@ const Cart = () => {
         <h2 className="your-cart-title">YOUR CART</h2>
         <div className="list-your-cart-container">
           {cart.products.map((product) => {
-            return <CardProductCart product={product} key={product.code} />;
+            return <CardProductCart product={product} key={product.code} editable={true}/>;
           })}
         </div>
       </div>

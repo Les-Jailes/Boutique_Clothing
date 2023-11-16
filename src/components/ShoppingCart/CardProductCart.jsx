@@ -7,7 +7,7 @@ import Image from "next/image"
 import PropTypes from 'prop-types'
 import { CartContext } from "@/components/Products/CartContext";
 
-const CardProductCart = ({ product }) => {
+const CardProductCart = ({ product, editable }) => {
 
   const { removeFromCart } = useContext(CartContext);
 
@@ -35,14 +35,15 @@ const CardProductCart = ({ product }) => {
         <p className="size-product">{`Size: ${product.size}`}</p>
         <p className="price-product">{`Price: ${product.price} $`}</p>
       </div>
-      <div className="quantity-product-card-cart card-cart-container">
-        <QuantityProduct limit={10} quantity={product.quantity} idProduct={product.id} />
-      </div>
-      <div className="delete-option-card-cart card-cart-container">
+      {editable && ( <div className="quantity-product-card-cart card-cart-container">
+      <QuantityProduct limit={10} quantity={product.quantity} idProduct={product.id} />
+
+      </div> )}
+      {editable && (<div className="delete-option-card-cart card-cart-container">
         <button className="delete-product-cart" onClick={handleDelete}>
           <AiOutlineDelete size={24} />
         </button>
-      </div>
+      </div> )}
     </div>
   );
 };
