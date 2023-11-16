@@ -1,0 +1,61 @@
+.container {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #ddd;
+  }
+  
+  .title {
+    font-size: 18px; 
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .input {
+    width: 18px; 
+    height: 18px;
+    border: 1px solid #bbb; 
+    border-radius: 3px;
+    margin-right: 8px;
+  }
+  .titleContainer{
+    display: flex;
+    justify-content: space-between;
+  }
+  .icon{
+    cursor: pointer;
+    margin-left: 0.2rem;
+  }
+
+
+  .label {
+    font-size: 14px;
+  }
+  
+  .optionContainer {
+    display: flex;
+    flex-direction: column !important;
+  }
+  
+  .option {
+    margin: 5px 0; 
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  @media (max-width: 600px) {
+    .container {
+      padding: 15px;
+    }
+  
+    .title {
+      font-size: 16px;
+    }
+  
+    .icon {
+      font-size: 18px;
+    }
+  
+    .label {
+      font-size: 12px;
+    }
+  }
