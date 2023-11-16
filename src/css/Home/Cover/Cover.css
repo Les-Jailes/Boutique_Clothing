@@ -60,14 +60,17 @@
 .cover-element.center {
     left: 0;
     z-index: 1;
+    opacity: 1;
 }
 
 .cover-element.left {
     left: -100%;
+    opacity: 0;
 }
 
 .cover-element.right {
     left: 100%;
+    opacity: 0;
 }
 
 .cover-pharse {

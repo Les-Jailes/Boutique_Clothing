@@ -30,6 +30,10 @@
     grid-area: men;
 }
 
+.category-name {
+    z-index: 10;
+}
+
 .cateogory-container.boy {
     background: var(--boy-background-gradient);
     grid-area: boy;
