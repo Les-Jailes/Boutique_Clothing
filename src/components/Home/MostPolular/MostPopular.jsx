@@ -54,7 +54,7 @@ const MostPopular = () => {
   const handleRightChange = () => {
     let middleScreen = windowSize * 0.5;
     let newPosition = position - middleScreen;
-    let maxPosition = (containerCarousel.current.scrollWidth + 60) - windowSize;
+    let maxPosition = (containerCarousel.current.scrollWidth + 100) - windowSize;
   
     if (newPosition < -maxPosition) {
       newPosition = -maxPosition;

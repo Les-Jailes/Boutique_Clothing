@@ -86,8 +86,43 @@
     opacity: 0;
     transition: all 0.5s;
     font-family: var(--font-family-poppins);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    padding: 0 100px;
 }
 
 .cover-element:hover .cover-pharse {
     opacity: 1;
+}
+
+@media (max-width: 1240px) {
+    .cover-container {
+        width: 100%;
+        height: calc(100vh - 140px);
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 980px) {
+    .cover-container {
+        width: 100%;
+        height: 600px;
+        padding: 1rem;
+    }
+    .cover-pharse {
+        font-size: 18px;
+        padding: 0 60px;
+    }
+}
+
+@media (max-width: 640px) {
+    .cover-container {
+        width: 100%;
+        height: 400px;
+        padding: 1rem;
+    }
+    .cover-pharse {
+        font-size: 18px;
+        padding: 0 60px;
+    }
 }
