@@ -1,0 +1,23 @@
+.categories-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.categories-section {
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: 300px 300px 300px 300px;
+    grid-template-rows: 300px 300px 300px;
+    grid-template-areas: 
+    "summer summer boy men"
+    "summer summer winter winter"
+    "women girl winter winter"
+    ;
+    gap: 50px;
+}
