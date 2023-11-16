@@ -10,6 +10,8 @@ import CountryDropdown from "./CountryDropdown";
 import { GoArrowRight } from "react-icons/go";
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation'
+import { useSession } from "next-auth/react";
+
 
 
 const CheckoutForm = () => {
@@ -17,7 +19,7 @@ const CheckoutForm = () => {
   const [validationFullname, setValidationFullname] = useState(false);
   const [validFullnameMessage, setValidFullnameMessage] = useState('');
 
-  const [country, setCountry] = useState("");
+  const [countryCode, setCountryCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [validationZipCode, setValidationZipCode] = useState(false);
@@ -75,10 +77,25 @@ const CheckoutForm = () => {
     if(phoneNumber >= 0) setZipCode(phoneNumber);
     validateZipCode(phoneNumber);
   }
+  
+  const handleCountryChange = (newCountryCode) => {
+    setCountryCode(newCountryCode);
+  };
+
+  const session = useSession();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(!validationFullname && !validationPhoneNumber && !validationZipCode && age === "verified"){
+      localStorage.setItem('shippingInfo', JSON.stringify({
+        fullname,
+        phoneNumber,
+        email: session.data.user.email,
+        streetAddress,
+        zipCode,
+        country: countryCode 
+      }));
       router.push('/pages/checkout/payment')
     }
     else {
@@ -158,7 +175,7 @@ const CheckoutForm = () => {
   </div>
 
   <div className="containerDropdown">
-    <CountryDropdown />
+    <CountryDropdown onCountryChange={handleCountryChange} />
   </div>
   
 
