@@ -17,6 +17,7 @@ export default function Home() {
                 category={cateogy.name}
                 image={cateogy.image}
                 isLarge={cateogy.isLarge}
+                key={index}
               />
             );
           })}
