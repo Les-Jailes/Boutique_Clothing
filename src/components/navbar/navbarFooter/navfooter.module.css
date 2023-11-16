@@ -51,7 +51,7 @@
     background: white;
     z-index: 100000;
     overflow: auto; 
-    border-radius: 40px;
+    border-radius: 10px;
     background-image: linear-gradient(200deg, #ffffff, #d8e2e2);
 }
 
@@ -79,12 +79,6 @@
     object-fit:contain;
 }
 
-@media (max-width: 630px) {
-    .container {
-        display: none;
-    }
-}
-
 .nameSubCategory {
     transform: translateX(15px);
     margin-top: 2px; 
@@ -94,4 +88,10 @@
 
 .waypoint {
     list-style-type: none;
+}
+
+@media (max-width: 630px) {
+    .container {
+        display: none;
+    }
 }
