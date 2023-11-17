@@ -65,7 +65,7 @@ const Login = () => {
     if (isEmailValid() && isPasswordValid()) {
       signIn('credentials', { email: emailInput, password: passwordInput });
     }else{
-      alert("fucku yi")
+      
     }
 
   };
