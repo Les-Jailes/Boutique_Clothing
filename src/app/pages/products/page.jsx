@@ -186,6 +186,18 @@ const handleFilterButtonClick = () => {
     setIsFiltered(false)
   };
 
+  useEffect(() => {
+
+    const filteredProducts = filterProductsWithValidSizes(products);
+    setFilteredProducts(filteredProducts);
+  }, [products]);
+
+  const filterProductsWithValidSizes = (products) => {
+    return products.filter((product) => {
+      return product.sizes.some((size) => size.quantity > 0);
+    });
+  };
+
   return (
     <div className={styles.container}>
       <Filter
@@ -206,13 +218,13 @@ const handleFilterButtonClick = () => {
         handleRefreshClick={handleRefreshClick}
       />
       <div className="products-page">
-        <div className="product-container">
-          {pagination.length > 0 &&
-            pagination[currentlyPagination] &&
-            pagination[currentlyPagination].map((product) => (
-              <ClotheCard key={product.code} clothe={product} />
-            ))}
-        </div>
+      <div className="product-container">
+        {pagination.length > 0 &&
+          pagination[currentlyPagination] &&
+          filterProductsWithValidSizes(pagination[currentlyPagination]).map((product) => (
+            <ClotheCard key={product.code} clothe={product} />
+          ))}
+      </div>
         <Pagination
           currentlyPagination={currentlyPagination}
           changePaginationRight={handlePaginationRight}
