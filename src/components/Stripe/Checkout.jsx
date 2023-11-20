@@ -41,6 +41,13 @@ function CheckoutPayment() {
     }
   }, []);
 
+  useEffect(() => {
+    if (cart.products.length === 0) {
+      localStorage.setItem('showCartEmptyToast', 'true');
+      window.location.href = '/pages/products'; 
+    }
+  }, [cart.products]); 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
