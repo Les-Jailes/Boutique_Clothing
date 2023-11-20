@@ -24,7 +24,7 @@ export default function Home() {
         </div>
       </div>
       <div className="most-popular-container">
-        <h2 className="subtitle-home-page">MOST POPULAR</h2>
+        <h2 className="subtitle-home-page">OUR PRODUCTS</h2>
         <a href="/pages/products" className="go-products">
           View all
         </a>

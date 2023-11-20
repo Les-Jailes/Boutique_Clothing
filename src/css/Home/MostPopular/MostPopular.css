@@ -79,6 +79,17 @@
     right: 10px;
 }
 
+.slider-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+}
+
+.clothe-card-container {
+    margin: auto;
+}
+
 @media (max-width: 630px) {
     .subtitle-home-page {
         font-size: 24px;
@@ -89,4 +100,4 @@
     .most-popular-carousel {
         height: 600px;
     }
-} 
+}

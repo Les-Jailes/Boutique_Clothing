@@ -19,7 +19,7 @@ const CoverElement = ({ name, phrase, image, position, idElement }) => {
   return (
     <div className={ `cover-element ${ orientation }` } style={backgroundImage}>
       <p className="cover-pharse">
-        {`&quot; ${ phrase } &quot;`}
+        {`" ${ phrase } "`}
       </p>
     </div>
   );

@@ -32,6 +32,9 @@
 
 .category-name {
     z-index: 10;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
 .cateogory-container.boy {

@@ -16,8 +16,8 @@ const CategorySection = ({ category, image, isLarge }) => {
         alt={`${category} image`}
         className={`category-image ${isLarge ? "large" : "small"}`}
         draggable={false}
-        width={650}
-        height={650}
+        width={700}
+        height={700}
         priority
       />
     </div>
