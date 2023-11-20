@@ -145,7 +145,7 @@ export default function Page() {
           ...new Set(response.data.flatMap((product) => product.color)),
         ];
         const uniqueSizes = [
-          ...new Set(response.data.flatMap((product) => product.size)),
+          ...new Set(response.data.flatMap((product) => product.sizes)),
         ];
 
         setCategories(uniqueCategories);
