@@ -101,6 +101,13 @@ function CheckoutPayment() {
             }
         })
         .catch((error) => {
+          const errorMessage = error.response?.data?.message || "Unknown error occurred";
+          Swal.fire({
+            title: 'Payment Error',
+            text: errorMessage, 
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
           console.error("Error sending payment data to API", error);
         });
     }
