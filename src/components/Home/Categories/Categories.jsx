@@ -5,10 +5,11 @@ import "@/css/Home/Categories/Category.css";
 
 const CategorySection = ({ category, image, isLarge }) => {
   return (
-    <div
+    <a
       className={`cateogory-container ${
         isLarge ? "large" : "small"
       } ${category}`}
+      href={ `/pages/categories?category=${ category }` }
     >
       <h3 className="category-name">{category && category.toUpperCase()}</h3>
       <Image
@@ -20,7 +21,7 @@ const CategorySection = ({ category, image, isLarge }) => {
         height={700}
         priority
       />
-    </div>
+    </a>
   );
 };
 

@@ -6,13 +6,14 @@ import { ClotheCard } from "@/components/Products/ClotheCard";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 const MultiSlider = ({ products }) => {
-  var settings = {
+  let settings = {
     dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
     initialSlide: 0,
+    currentSlide: 0,
     responsive: [
       {
         breakpoint: 1620,
@@ -29,7 +30,7 @@ const MultiSlider = ({ products }) => {
           slidesToScroll: 1,
         },
       },
-    ],
+    ]
   };
 
   return (
