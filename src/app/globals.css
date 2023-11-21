@@ -8,6 +8,8 @@
   --men-background-gradient: linear-gradient(135deg, #001480 0%, #00FFD1 100%);
   --girl-background-gradient: linear-gradient(135deg, #FF0080 0%, #F1E6D2 100%);
   --boy-background-gradient: linear-gradient(135deg, #00FFB3 0%, #00604E 100%);
+  --summer-background-gradient: linear-gradient(135deg, #00FFF0 0%, #F1E6D2 100%);
+  --winter-background-gradient: linear-gradient(135deg, #4697B4 0%, #F1E6D2 100%);
   --font-family-poppins: 'Poppins', sans-serif;
   --primary-color: #254B5E;
 }
