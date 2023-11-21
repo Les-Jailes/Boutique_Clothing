@@ -1,0 +1,32 @@
+[
+    {
+        "name": "women",
+        "image": "https://i.postimg.cc/xCZ4xLYt/image-removebg-preview-2.png",
+        "isLarge": false
+    },
+    {
+        "name": "men",
+        "image": "https://i.postimg.cc/NMFnkdhK/image-removebg-preview-3.png",
+        "isLarge": false
+    },
+    {
+        "name": "girl",
+        "image": "https://i.postimg.cc/g0N5hf79/image-removebg-preview-11.png",
+        "isLarge": false
+    },
+    {
+        "name": "boy",
+        "image": "https://i.postimg.cc/Hk1f10MN/assad-tanoli-s-RXik-XAZr-Ho-unsplash-removebg-preview.png",
+        "isLarge": false
+    },
+    {
+        "name": "summer",
+        "image": "https://i.postimg.cc/j56Nghc6/image-removebg-preview-1.png",
+        "isLarge": true
+    },
+    {
+        "name": "winter",
+        "image": "https://i.postimg.cc/3RP8GMmn/sir-simo-Tish-Sr-OO6p-E-unsplash-removebg-preview-1.png",
+        "isLarge": true
+    }
+]

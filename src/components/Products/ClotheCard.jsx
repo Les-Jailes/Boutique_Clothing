@@ -95,7 +95,7 @@ export const ClotheCard = ({ clothe }) => {
           {isSizePopupOpen && (
             <SizePopup
               handleSizeSelection={handleSizeSelection}
-              sizes={clothe.size}
+              sizes={clothe.sizes}
               isSizePopupOpen={isSizePopupOpen}
             />
           )}

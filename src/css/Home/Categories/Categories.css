@@ -1,0 +1,53 @@
+.categories-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.categories-section {
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: 300px 300px 300px 300px;
+    grid-template-rows: 300px 300px 300px;
+    grid-template-areas:
+        "summer summer boy men"
+        "summer summer winter winter"
+        "women girl winter winter"
+    ;
+    gap: 50px;
+}
+
+@media (max-width: 1440px) {
+    .categories-section {
+        grid-template-columns: 250px 250px 250px 250px;
+        grid-template-rows: 250px 250px 250px;
+    }
+}
+
+@media (max-width: 1210px) {
+    .categories-section {
+        grid-template-columns: 300px 300px 300px;
+        grid-template-rows: 300px 300px;
+        grid-template-areas:
+            "summer boy men"
+            "women girl winter"
+        ;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .categories-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+}
