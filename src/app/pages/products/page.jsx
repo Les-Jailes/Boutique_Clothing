@@ -149,7 +149,7 @@ const handleFilterButtonClick = () => {
 
   useEffect(() => {
     setPagination(createPagination(isFiltered ? filteredProducts : products));
-  }, [products, filteredProducts]);
+  }, [products, filteredProducts, isFiltered]);
 
   useEffect(() => {
     if (pagination.length > 1) {
