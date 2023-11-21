@@ -52,8 +52,8 @@ const QuantityProduct = ({ limit, quantity, idProduct, product }) => {
     let auxiliarQuantity = quantityProduct + 1;
     if (auxiliarQuantity >= limit) {
       if(limit != 10 && quantityProduct >= limit){
-        showErrorMessage("Out of stock", "Sorry, we only have " + size + " " + product.name + " in stock");
-      } 
+        showErrorMessage("Out of stock", "Sorry, we only have " + size + " \"" + product.name + "\" in stock");
+      }
       auxiliarQuantity = limit;
     }
 
