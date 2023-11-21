@@ -5,10 +5,22 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import "@/css/Cart/QuantityProducts.css";
 import PropTypes from "prop-types";
 import { CartContext } from "../Products/CartContext";
+import { showErrorMessage } from "@/utils/alerts";
 
-const QuantityProduct = ({ limit, quantity, idProduct }) => {
+const QuantityProduct = ({ limit, quantity, idProduct, product }) => {
   const { changeQuantity } = useContext(CartContext);
   const [quantityProduct, setQuantityProduct] = useState(quantity);
+
+  const validateLimit = () => {
+    let quantity = 0;
+    product.sizes.forEach(size => {
+      if(size.size === product.size && size.quantity < limit) {
+        limit = size.quantity;
+        quantity = size.quantity;
+      }
+    });
+    return quantity;
+  }
 
   useEffect(() => {
     setQuantityProduct(quantity);
@@ -35,9 +47,13 @@ const QuantityProduct = ({ limit, quantity, idProduct }) => {
   };
 
   const addProduct = () => {
+    const size = validateLimit();
+    
     let auxiliarQuantity = quantityProduct + 1;
-
     if (auxiliarQuantity >= limit) {
+      if(limit != 10 && quantityProduct >= limit){
+        showErrorMessage("Out of stock", "Sorry, we only have " + size + " " + product.name + " in stock");
+      } 
       auxiliarQuantity = limit;
     }
 

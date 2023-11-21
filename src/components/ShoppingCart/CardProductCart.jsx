@@ -36,7 +36,7 @@ const CardProductCart = ({ product, editable }) => {
         <p className="price-product">{`Price: ${product.price} $`}</p>
       </div>
       {editable && ( <div className="quantity-product-card-cart card-cart-container">
-      <QuantityProduct limit={10} quantity={product.quantity} idProduct={product.id} />
+      <QuantityProduct limit={10} quantity={product.quantity} idProduct={product.id} product={product} />
 
       </div> )}
       {editable && (<div className="delete-option-card-cart card-cart-container">
