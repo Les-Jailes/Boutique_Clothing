@@ -1,0 +1,128 @@
+.cover-container {
+    width: 100%;
+    height: calc(100vh - 100px);
+    padding: 2rem;
+}
+
+.slider-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.change-cover-button {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.change-cover-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.change-cover-button.left-button {
+    left: 10px;
+}
+
+.change-cover-button.right-button {
+    right: 10px;
+}
+
+.cover-element {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    transition: all 0.5s;
+    overflow: hidden;
+}
+
+.cover-element.center {
+    left: 0;
+    z-index: 1;
+    opacity: 1;
+}
+
+.cover-element.left {
+    left: -100%;
+    opacity: 0;
+}
+
+.cover-element.right {
+    left: 100%;
+    opacity: 0;
+}
+
+.cover-pharse {
+    font-size: 24px;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    background-color: #00000060;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.5s;
+    font-family: var(--font-family-poppins);
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    padding: 0 100px;
+}
+
+.cover-element:hover .cover-pharse {
+    opacity: 1;
+}
+
+@media (max-width: 1240px) {
+    .cover-container {
+        width: 100%;
+        height: calc(100vh - 140px);
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 980px) {
+    .cover-container {
+        width: 100%;
+        height: 600px;
+        padding: 1rem;
+    }
+    .cover-pharse {
+        font-size: 18px;
+        padding: 0 60px;
+    }
+}
+
+@media (max-width: 640px) {
+    .cover-container {
+        width: 100%;
+        height: 400px;
+        padding: 1rem;
+    }
+    .cover-pharse {
+        font-size: 18px;
+        padding: 0 60px;
+    }
+}

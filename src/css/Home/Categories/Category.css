@@ -1,0 +1,127 @@
+.cateogory-container {
+    width: 300px;
+    height: 300px;
+    background-color: #faebd7;
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 4px 0px #00000073;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.category-image {
+    width: auto;
+    height: 200px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: all 0.5s;
+}
+
+.cateogory-container.women {
+    background: var(--women-background-gradient);
+    grid-area: women;
+}
+
+.cateogory-container.men {
+    background: var(--men-background-gradient);
+    grid-area: men;
+}
+
+.category-name {
+    z-index: 10;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.cateogory-container.boy {
+    background: var(--boy-background-gradient);
+    grid-area: boy;
+}
+
+.cateogory-container.girl {
+    background: var(--girl-background-gradient);
+    grid-area: girl;
+}
+
+.cateogory-container.summer {
+    background: var(--summer-background-gradient);
+    grid-area: summer;
+}
+
+.cateogory-container.winter {
+    background: var(--winter-background-gradient);
+    grid-area: winter;
+}
+
+.cateogory-container.large {
+    width: 650px;
+    height: 650px;
+}
+
+.category-image.large {
+    width: auto;
+    height: 500px;
+}
+
+.cateogory-container:hover .category-image {
+    height: 350px;
+}
+
+.cateogory-container.large:hover .category-image.large {
+    height: 700px;
+}
+
+@media (max-width: 1440px) {
+    .cateogory-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .cateogory-container.large {
+        width: 550px;
+        height: 550px;
+    }
+
+    .cateogory-container:hover .category-image {
+        height: 280px;
+    }
+    
+    .cateogory-container.large:hover .category-image.large {
+        height: 600px;
+    }
+}
+
+@media (max-width: 1210px) {
+    .cateogory-container,
+    .cateogory-container.large {
+        width: 300px;
+        height: 300px;
+    }
+
+    .cateogory-container:hover .category-image,
+    .cateogory-container.large:hover .category-image.large {
+        height: 320px;
+    }
+
+    .category-image,
+    .category-image.large {
+        height: 200px;
+    }
+}
+
+@media (max-width: 410px) {
+    .cateogory-container,
+    .cateogory-container.large {
+        width: 250px;
+        height: 250px;
+    }
+
+    .cateogory-container:hover .category-image,
+    .cateogory-container.large:hover .category-image.large {
+        height: 280px;
+    }
+}

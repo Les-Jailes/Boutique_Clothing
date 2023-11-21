@@ -134,7 +134,7 @@ const handleFilterButtonClick = () => {
           ...new Set(response.data.flatMap((product) => product.color)),
         ];
         const uniqueSizes = [
-          ...new Set(response.data.flatMap((product) => product.size)),
+          ...new Set(response.data.flatMap((product) => product.sizes)),
         ];
 
         setCategories(uniqueCategories);
@@ -149,7 +149,7 @@ const handleFilterButtonClick = () => {
 
   useEffect(() => {
     setPagination(createPagination(isFiltered ? filteredProducts : products));
-  }, [products, filteredProducts]);
+  }, [products, filteredProducts, isFiltered]);
 
   useEffect(() => {
     if (pagination.length > 1) {
