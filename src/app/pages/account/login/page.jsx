@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation'
 import { validateEmail, validatePassword } from '@/utils/formValidations';
 import GoogleAuthButton from '@/components/GoogleAuthentication/GoogleAuthButton';
 import { showToast } from '@/components/Alerts/CustomToast'
+import { showAccountAlreadyExistsAlert, showAccountAlreadyExistsAlertSingIn } from '../signup/confirmationAlert'
+import api from '@/app/api/api'
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -62,8 +64,24 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let flag;
+    try{
+      alert(process.env.API_URL)
+      
+      alert(process.env.MONGO_URL)
+      const user = await api.get('/User/email/'+  emailInput);
+      alert(user)
+      flag = false;
+    }
+    catch(error){
+      alert(error)
+      flag = true;
+    }
     if (isEmailValid() && isPasswordValid()) {
-      signIn('credentials', { email: emailInput, password: passwordInput });
+      if(flag===true)showAccountAlreadyExistsAlertSingIn(router);
+      else{
+        signIn('credentials', { email: emailInput, password: passwordInput });
+      }
     }else{
       
     }
