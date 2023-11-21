@@ -26,7 +26,6 @@
   background-size: cover;
   background-position: center;
   gap: 3rem;
-  flex: 1;
 }
 .nf-top, .nf-bottom{
   display: flex;
