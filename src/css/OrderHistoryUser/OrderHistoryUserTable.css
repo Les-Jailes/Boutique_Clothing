@@ -1,15 +1,16 @@
-body {
-  padding-top: 50px;
-}
-
 table {
   margin: 0 auto;
-  width: 90%; /* Puedes ajustar el ancho según tus necesidades */
+  width: 90%;
   max-width: 700px;
 }
 
 tbody {
   text-align: center;
+}
+
+td .image1 {
+  background-position: center;
+  vertical-align: middle;
 }
 
 @media only screen and (max-width: 760px),
@@ -55,6 +56,10 @@ tbody {
     margin: 15px;
   }
 
+  th .thTable{
+    transform: translateY(1325px);
+  }
+
   td .image1 {
     background-position: center;
     vertical-align: middle;
@@ -71,6 +76,7 @@ tbody {
 
   td:nth-of-type(1):before {
     content: "Name of Product";
+    transform: translateY(50%);
   }
   td:nth-of-type(2):before {
     content: "Status";

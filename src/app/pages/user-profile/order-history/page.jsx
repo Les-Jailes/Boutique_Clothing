@@ -11,14 +11,14 @@ const OrderHistoryUser = () => {
       <table>
         <thead>
           <tr>
-            <th>Name of Product</th>
-            <th>Status</th>
-            <th>Order Date</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Type</th>
-            <th>Color</th>
-            <th>Size</th>
+            <th className="thTable">Name of Product</th>
+            <th className="thTable">Status</th>
+            <th className="thTable">Order Date</th>
+            <th className="thTable">Price</th>
+            <th className="thTable">Category</th>
+            <th className="thTable">Type</th>
+            <th className="thTable">Color</th>
+            <th className="thTable">Size</th>
           </tr>
         </thead>
 
