@@ -13,3 +13,50 @@
   --font-family-poppins: 'Poppins', sans-serif;
   --primary-color: #254B5E;
 }
+
+/*404 NOT FOUND PAGE STYLES*/
+.nf-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 62vh;
+  background-image: url('/bg-404.jpg');
+  background-size: cover;
+  background-position: center;
+  gap: 3rem;
+}
+.nf-top, .nf-bottom{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.nf-top{
+  font-size: 3rem;
+}
+.nf-bottom{
+  gap: 2rem;
+}
+.nf-message{
+  font-size: 1rem;
+  font-weight: bold;
+  max-width: 650px;
+  text-align: center;
+}
+.nf-button{
+  padding: .7rem 1.5rem;
+  background-color: #F1E6D2;
+  color: #111;
+  border-radius: 3px;
+  font-style: none;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all ease .4s;
+}
+.nf-button:hover{
+  color: #F1E6D2;
+  background-color: #111;
+}
