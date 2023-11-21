@@ -8,31 +8,29 @@ const NavFooter = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const modalRef = useRef(null);
 
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        closeModal();
+      }
+    };
+
+    const closeModal = () => {
+      setSelectedCategory(null);
+      setModalIsOpen(false);
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [modalIsOpen]);
+
   const openModal = (index) => {
-    console.log('Selected Index:', index);
     setSelectedCategory(index);
     setModalIsOpen(true);
   };
-
-  const closeModal = () => {
-    setSelectedCategory(null);
-    setModalIsOpen(false);
-  };
-
-  const handleOutsideClick = (e) => {
-    if (modalRef.current && !modalRef.current.contains(e.target)) {
-      closeModal();
-    }
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => handleOutsideClick(e);
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [modalIsOpen, handleOutsideClick]);
 
   const handleSubcategoryClick = (url) => {
     window.location.href = url;
@@ -40,11 +38,12 @@ const NavFooter = () => {
 
   return (
     <div className={style.container}>
-      {navFooterItems.map(({ title, id }, index) => (
+      {navFooterItems.map(({ title, id }) => (
         <div key={id} className={style.dropdownContainer}>
           <div
-            onClick={() => openModal(index)}
-            className={`${style.link} ${selectedCategory === index && style.selected} ${modalIsOpen && selectedCategory === index && style.modalOpen}`}
+            onClick={() => openModal(id)}
+            className={`${style.link} ${selectedCategory === id && style.selected} ${modalIsOpen && selectedCategory === id && style.modalOpen}`}
+            key={id}
           >
             {title}
           </div>
@@ -55,9 +54,9 @@ const NavFooter = () => {
         <div ref={modalRef} className={`${style.modal} ${modalIsOpen && style.modalOpen}`}>
           {navFooterItems[selectedCategory]?.subcategories && (
             <div className={style.horizontalSubcategories}>
-              {navFooterItems[selectedCategory].subcategories.map((subcategory, index) => (
-                <li className={style.waypoint} key={index}>
-                  <div className={style.subcategoryItem} onClick={() => handleSubcategoryClick(subcategory.url)}>
+              {navFooterItems[selectedCategory].subcategories.map((subcategory) => (
+                <li className={style.waypoint} key={subcategory.id}>
+                  <div className={style.subcategoryItem} onClick={() => handleSubcategoryClick(subcategory.url)} key={subcategory.id}>
                     {subcategory.img && (
                       <Image
                         src={subcategory.img}
