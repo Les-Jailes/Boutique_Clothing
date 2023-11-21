@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import MultiSlider from "@/components/Home/MostPolular/MultiSlider";
+import MultiSlider from "@/components/Home/OurProducts/MultiSlider";
 
-const MostPopular = () => {
+const OurProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -29,10 +29,10 @@ const MostPopular = () => {
   }, []);
 
   return (
-    <div className="most-popular-carousel">
+    <div className="our-products-carousel">
       <MultiSlider products={products} />
     </div>
   );
 };
 
-export default MostPopular;
+export default OurProducts;

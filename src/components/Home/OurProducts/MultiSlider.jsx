@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ClotheCard } from "@/components/Products/ClotheCard";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import PropTypes from "prop-types";
 
 const MultiSlider = ({ products }) => {
   let settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
@@ -20,7 +20,6 @@ const MultiSlider = ({ products }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2,
         },
       },
       {
@@ -30,18 +29,24 @@ const MultiSlider = ({ products }) => {
           slidesToScroll: 1,
         },
       },
-    ]
+    ],
   };
 
   return (
-    <Slider {...settings}>
-      {products.map((product, index) => (
-        <div key={index} className="slider-item">
-          <ClotheCard clothe={product} />
-        </div>
-      ))}
-    </Slider>
+    <div style={{ height: "400px" }}>
+      <Slider {...settings}>
+        {products.map((product) => (
+          <div key={product.code} className="slider-item">
+            <ClotheCard clothe={product} />
+          </div>
+        ))}
+      </Slider>
+    </div>
   );
+};
+
+MultiSlider.propTypes = {
+  products: PropTypes.array.isRequired,
 };
 
 export default MultiSlider;

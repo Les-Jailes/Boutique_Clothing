@@ -2,7 +2,7 @@ import CategorySection from "@/components/Home/Categories/Categories";
 import Cover from "@/components/Home/Cover/Cover";
 import categoriesHome from "@/utils/CategoriesHome.json";
 import "@/css/Home/Categories/Categories.css";
-import MostPopular from "@/components/Home/MostPolular/MostPopular";
+import OurProducts from "@/components/Home/OurProducts/OurProducts";
 import "@/css/Home/MostPopular/MostPopular.css";
 
 export default function Home() {
@@ -23,12 +23,12 @@ export default function Home() {
           })}
         </div>
       </div>
-      <div className="most-popular-container">
+      <div className="our-products-container">
         <h2 className="subtitle-home-page">OUR PRODUCTS</h2>
         <a href="/pages/products" className="go-products">
           View all
         </a>
-        <MostPopular />
+        <OurProducts />
       </div>
     </div>
   );
