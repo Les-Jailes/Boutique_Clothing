@@ -5,6 +5,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import api from "@/app/api/api";
 import { CartContext } from "@/components/Products/CartContext";
 import Swal from "sweetalert2";
+import { useSession } from 'next-auth/react';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -27,6 +28,7 @@ const CARD_ELEMENT_OPTIONS = {
 };
 
 function CheckoutPayment() {
+  const session = useSession()
   const { cart, clearCart, isCartLoaded } = useContext(CartContext);
   const stripe = useStripe();
   const elements = useElements();
@@ -34,20 +36,33 @@ function CheckoutPayment() {
   const [shippingInfo, setShippingInfo] = useState(null);
 
   useEffect(() => {
-    const info = JSON.parse(localStorage.getItem("shippingInfo"));
-    if (info) {
-      setShippingInfo(info);
+    if (session.status === 'unauthenticated') {
+      localStorage.setItem("showLogInRequiredForPayment", "true");
+      window.location.href = '/pages/account/login';
     }
-  }, []);
+  }, [session]);
 
   useEffect(() => {
     if (isCartLoaded && cart.totalProducts === 0) {
       setTimeout(() => {
         localStorage.setItem("showCartEmptyToast", "true");
         window.location.href = "/pages/products";
-      }, 500);
+      }, 300);
     }
   }, [cart.totalProducts, isCartLoaded]);
+
+  useEffect(() => {
+    const info = JSON.parse(localStorage.getItem("shippingInfo"));
+    const isShippingInfoComplete = info && info.fullname && info.phoneNumber && info.email && info.streetAddress && info.zipCode && info.country;
+    if (!isShippingInfoComplete) {
+      setTimeout(() => {
+        localStorage.setItem("showMissingDataCheckoutForm", "true");
+        window.location.href = '/pages/checkout'; 
+      }, 400);
+    } else {
+      setShippingInfo(info);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

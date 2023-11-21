@@ -1,15 +1,27 @@
 "use client";
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "@/css/Checkout/Checkout.css";
 import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { CartContext } from "@/components/Products/CartContext";
 import CheckoutForm from "@/components/Checkout/CheckoutForm";
 import Summary from "@/components/Checkout/Summary";
+import { showToast } from '@/components/Alerts/CustomToast'
 
 const Checkout = () => {
   const { cart } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const showCartEmptyToast = localStorage.getItem("showMissingDataCheckoutForm");
+    if (showCartEmptyToast === "true") {
+      showToast(
+        "Please complete the purchase form before completing the transaction.",
+        "info"
+      );
+      localStorage.removeItem("showMissingDataCheckoutForm");
+    }
+  }, []);
 
   const handleOpenning = () => {
     setIsOpen(!isOpen);
