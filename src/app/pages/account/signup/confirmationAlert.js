@@ -27,18 +27,10 @@ export function showAccountAlreadyExistsAlertSingIn(router) {
     confirmButtonText: 'OK',
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire({
-        title: 'You will be redirected to the sign-up page',
-        icon: 'success',
-        showConfirmButton: false,
-        timer: 500,
-      }).then(() => {
-        router.push('/pages/account/signup');
-      });
+      router.push('/pages/account/signup');
     }
   });
 }
-
 
 export function showAccountCreatedAlert() {
     Swal.fire({

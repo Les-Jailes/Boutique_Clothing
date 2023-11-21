@@ -1,4 +1,5 @@
 'use client'
+import 'dotenv/config'
 import React,{useState, useEffect} from 'react'
 import styles from './page.module.css'
 import { signIn, useSession } from 'next-auth/react'
@@ -18,7 +19,6 @@ const Login = () => {
   const [validation, setValidation] = useState({ email: { valid: true, message: '' }, password: { valid: true, message: '' } });
   const session = useSession()
   const router = useRouter()
-
   const isEmailValid = () => {
     if (emailInput.trim() === '') {
       setValidation((prev) => ({
@@ -66,15 +66,10 @@ const Login = () => {
     e.preventDefault();
     let flag;
     try{
-      alert(process.env.API_URL)
-      
-      alert(process.env.MONGO_URL)
       const user = await api.get('/User/email/'+  emailInput);
-      alert(user)
       flag = false;
     }
     catch(error){
-      alert(error)
       flag = true;
     }
     if (isEmailValid() && isPasswordValid()) {
@@ -91,7 +86,6 @@ const Login = () => {
   const handlePasswordToggle = () => {
     setPasswordVisible(!passwordVisible);
   };
-
 
   useEffect(() => {
     const [isValid, message] = validateEmail(emailInput);
