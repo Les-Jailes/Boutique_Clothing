@@ -110,6 +110,7 @@ function CheckoutPayment() {
             country: shippingInfo.country,
           },
         },
+        purchasedProducts: cart.products 
       };
 
       await api
