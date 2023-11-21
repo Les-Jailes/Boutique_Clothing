@@ -25,7 +25,14 @@ const OrderHistoryUser = () => {
         <tbody>
           <tr>
             <td>
-              <Image src="" alt="Product" width={180} height={180} priority />
+              <Image
+                src="/logo2.png"
+                alt="Product"
+                width={40}
+                height={40}
+                priority
+                className="image1"
+              />
               Product 1
             </td>
             <td>Comprado</td>
@@ -39,7 +46,13 @@ const OrderHistoryUser = () => {
 
           <tr>
             <td>
-              <Image src="" alt="Product" width={180} height={180} priority />
+              <Image
+                src="/logo2.png"
+                alt="Product"
+                width={25}
+                height={25}
+                priority
+              />
               Product 2
             </td>
             <td>Comprado</td>
