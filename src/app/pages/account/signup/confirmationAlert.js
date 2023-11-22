@@ -19,6 +19,19 @@ export function showAccountAlreadyExistsAlert(router) {
   });
 }
 
+export function showAccountAlreadyExistsAlertSingIn(router) {
+  Swal.fire({
+    title: 'This email does not have an account. Do you want to sign up first?',
+    icon: 'warning',
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'OK',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      router.push('/pages/account/signup');
+    }
+  });
+}
+
 export function showAccountCreatedAlert() {
     Swal.fire({
         title: "Account Created",
