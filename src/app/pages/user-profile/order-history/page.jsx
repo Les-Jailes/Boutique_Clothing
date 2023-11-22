@@ -1,31 +1,34 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import API from '@/app/api/api';
-import { IoMdCloseCircleOutline } from "react-icons/io";
-import { TbEditCircle } from "react-icons/tb";
+import React, { useState, useEffect, useCallback } from "react";
+import api from "@/app/api/api";
 import "@/css/OrderHistoryUser/OrderHistoryUserTable.css";
+import { useSession } from "next-auth/react";
 
-const GetProductForm = () => {
-  const [products, setProducts] = useState([]);
+const OrderHistoryUser = () => {
+  const session = useSession();
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await API.get("/CheckoutPayments");
-        console.log("Response:", response.data);
-        setProducts(response.data);
-      } catch (error) {
-        console.error("Axios Error:", error);
+  const getUser = useCallback(async () => {
+    try {
+      if (session && session.data && session.data.user) {
+        const u = await api.get('/User/email/' + session.data.user.email);
+        if(u.data !== null && u.data.__id !== undefined ){
+          alert(u.data.__id);
+          const c = await api.get("/CheckoutPayments/userId/" + u.data.__id);
+          return c.data;
+        }
+      } else {
+        return null;
       }
-    };
-
-    fetchProducts();
-  }, []);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      return null;
+    }
+  }, [session]);
 
   return (
-    <div className='container'>
-      <div className='table-container'>
+    <div className="container">
+      <div className="table-container">
         <table>
           <thead>
             <tr>
@@ -42,34 +45,9 @@ const GetProductForm = () => {
           </thead>
 
           <tbody>
-            {products.map((product) => (
-              <tr key={product._id.$oid}>
-                <td className='code'>{product.code}</td>
-                <td>{product.name}</td>
-                <td className='price'>${product.price}</td>
-                <td className='category'>{product.category}</td>
-                <td className='type'>{product.type}</td>
-                <td className='color'>{product.color?.join(', ')}</td>
-                <td className='size'>
-                  {product.sizes.map((size, index) => (
-                    <div key={index}>
-                      {`${size.size}: ${size.quantity}`}
-                    </div>
-                  ))}
-                </td>
-
-                <td className='image'>
-                  {product.path.length > 0 && (
-                    <img src={product.path[0]} alt={`Product 1`} style={{ width: '50px', height: '50px' }} />
-                  )}
-                </td>
-
-                <td>
-                  <IoMdCloseCircleOutline className='delete-button' />
-                  <TbEditCircle className='edit-button' />
-                </td>
-              </tr>
-            ))}
+            <td className="size">
+              <button onClick={getUser}>hello</button>
+            </td>
           </tbody>
         </table>
       </div>
@@ -77,4 +55,4 @@ const GetProductForm = () => {
   );
 };
 
-export default GetProductForm;
+export default OrderHistoryUser;
