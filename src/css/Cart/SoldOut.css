@@ -1,0 +1,10 @@
+.sold-out {
+    color: crimson;
+    min-inline-size: 16px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.sold-out-container {
+    width: 100%;
+}

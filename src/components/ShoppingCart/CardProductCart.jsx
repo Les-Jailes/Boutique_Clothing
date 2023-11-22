@@ -6,8 +6,9 @@ import { AiOutlineDelete } from "react-icons/ai";
 import Image from "next/image"
 import PropTypes from 'prop-types'
 import { CartContext } from "@/components/Products/CartContext";
+import SoldOut from "./SoldOut";
 
-const CardProductCart = ({ product, editable }) => {
+const CardProductCart = ({ product, editable, available }) => {
 
   const { removeFromCart } = useContext(CartContext);
 
@@ -38,9 +39,7 @@ const CardProductCart = ({ product, editable }) => {
             <p className="size-product">{`Size: ${product.size}`}</p>
             <p className="price-product">{`Price: ${product.price} $`}</p>
           </div>
-          <div className="sold-out-container">
-            <h3 className="sold-out"> SOLD OUT</h3>
-          </div>
+          {available &&  (<SoldOut />)}
         </div>
         
         
