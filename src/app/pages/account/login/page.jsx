@@ -1,4 +1,5 @@
 'use client'
+import 'dotenv/config'
 import React,{useState, useEffect} from 'react'
 import styles from './page.module.css'
 import { signIn, useSession } from 'next-auth/react'
@@ -8,6 +9,8 @@ import { useRouter } from 'next/navigation'
 import { validateEmail, validatePassword } from '@/utils/formValidations';
 import GoogleAuthButton from '@/components/GoogleAuthentication/GoogleAuthButton';
 import { showToast } from '@/components/Alerts/CustomToast'
+import { showAccountAlreadyExistsAlert, showAccountAlreadyExistsAlertSingIn } from '../signup/confirmationAlert'
+import api from '@/app/api/api'
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -16,7 +19,6 @@ const Login = () => {
   const [validation, setValidation] = useState({ email: { valid: true, message: '' }, password: { valid: true, message: '' } });
   const session = useSession()
   const router = useRouter()
-
   const isEmailValid = () => {
     if (emailInput.trim() === '') {
       setValidation((prev) => ({
@@ -62,8 +64,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let flag;
+    try{
+      const user = await api.get('/User/email/'+  emailInput);
+      flag = false;
+    }
+    catch(error){
+      flag = true;
+    }
     if (isEmailValid() && isPasswordValid()) {
-      signIn('credentials', { email: emailInput, password: passwordInput });
+      if(flag===true)showAccountAlreadyExistsAlertSingIn(router);
+      else{
+        signIn('credentials', { email: emailInput, password: passwordInput });
+      }
     }else{
       
     }
@@ -74,6 +87,16 @@ const Login = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+  useEffect(() => {
+    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForPayment");
+    if (showCartEmptyToast === "true") {
+      showToast(
+        "Please log in to purchase.",
+        "info"
+      );
+      localStorage.removeItem("showLogInRequiredForPayment");
+    }
+  }, []);
 
   useEffect(() => {
     const [isValid, message] = validateEmail(emailInput);

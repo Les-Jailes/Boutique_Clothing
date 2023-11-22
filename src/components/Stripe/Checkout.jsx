@@ -4,8 +4,8 @@ import "@/css/StripeStyles/Checkout.css";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import api from "@/app/api/api";
 import { CartContext } from "@/components/Products/CartContext";
-import Swal from 'sweetalert2';
-
+import Swal from "sweetalert2";
+import { useSession } from "next-auth/react";
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -28,23 +28,60 @@ const CARD_ELEMENT_OPTIONS = {
 };
 
 function CheckoutPayment() {
-  const { cart, clearCart } = useContext(CartContext);
+  const session = useSession();
+  const { cart, clearCart, isCartLoaded } = useContext(CartContext);
   const stripe = useStripe();
   const elements = useElements();
 
   const [shippingInfo, setShippingInfo] = useState(null);
 
+  const [redirected, setRedirected] = useState(false);
+
   useEffect(() => {
-    const info = JSON.parse(localStorage.getItem("shippingInfo"));
-    if (info) {
-      setShippingInfo(info);
+    if (!redirected && session.status === "unauthenticated") {
+      localStorage.setItem("showLogInRequiredForPayment", "true");
+      window.location.href = "/pages/account/login";
+      setRedirected(true);
     }
-  }, []);
+  }, [session, redirected]);
+
+  useEffect(() => {
+    if (!redirected && isCartLoaded && cart.totalProducts === 0) {
+      setTimeout(() => {
+        localStorage.setItem("showCartEmptyToast", "true");
+        window.location.href = "/pages/products";
+        setRedirected(true);
+      }, 400);
+    }
+  }, [cart.totalProducts, isCartLoaded, redirected]);
+
+  useEffect(() => {
+    if (!redirected) {
+      const info = JSON.parse(localStorage.getItem("shippingInfo"));
+      const isShippingInfoComplete =
+        info &&
+        info.fullname &&
+        info.phoneNumber &&
+        info.email &&
+        info.streetAddress &&
+        info.zipCode &&
+        info.country;
+      if (!isShippingInfoComplete) {
+        setTimeout(() => {
+          localStorage.setItem("showMissingDataCheckoutForm", "true");
+          window.location.href = "/pages/checkout";
+          setRedirected(true);
+        }, 1500);
+      } else {
+        setShippingInfo(info);
+      }
+    }
+  }, [redirected]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    console.log(shippingInfo)
+
+    console.log(shippingInfo);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -61,47 +98,64 @@ function CheckoutPayment() {
       },
     });
 
+    if (error) {
+      Swal.fire({
+        title: "Error!",
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
     if (!error) {
-      console.log(paymentMethod);
-      const { id: paymentMethodId  } = paymentMethod;
+      const { id: paymentMethodId } = paymentMethod;
 
       const checkoutData = {
-        paymentMethodId ,
+        paymentMethodId,
         amount: cart.total + cart.taxes,
         billingDetails: {
-            fullname: shippingInfo.fullname,
-            phoneNumber: shippingInfo.phoneNumber,
-            email: shippingInfo.email,
-            address: {
-              line1: shippingInfo.streetAddress,
-              postal_code: shippingInfo.zipCode,
-              country: shippingInfo.country,
-            },
-          }
+          fullname: shippingInfo.fullname,
+          phoneNumber: shippingInfo.phoneNumber,
+          email: shippingInfo.email,
+          address: {
+            line1: shippingInfo.streetAddress,
+            postal_code: shippingInfo.zipCode,
+            country: shippingInfo.country,
+          },
+        },
+        purchasedProducts: cart.products,
       };
 
       await api
         .post("/CheckoutPayment", checkoutData)
         .then((response) => {
-            console.log("Payment data sent successfully", response.data);
-            if (response.data.requiresAction) {
-              window.location.href = '/pages/checkout/payment';
-            } else {
+          if (response.data.requiresAction) {
+            window.location.href = "/pages/checkout/payment";
+          } else {
+            localStorage.removeItem("shippingInfo");
+            Swal.fire({
+              title: "Payment Successful!",
+              text: "Thank you for your preference.",
+              icon: "success",
+              confirmButtonText: "OK",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "/";
                 clearCart();
-                Swal.fire({
-                    title: 'Payment Successful!',
-                    text: 'Thank you for your preference.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                  }).then((result) => {
-                    if (result.isConfirmed) {
-                      window.location.href = '/';
-                    }
-                  });
-            }
+              }
+            });
+          }
         })
         .catch((error) => {
-          console.error("Error sending payment data to API", error);
+          const errorMessage =
+            error.response?.data?.message || "Unknown error occurred";
+          Swal.fire({
+            title: "Payment Error",
+            text: errorMessage,
+            icon: "error",
+            confirmButtonText: "OK",
+          });
         });
     }
   };
