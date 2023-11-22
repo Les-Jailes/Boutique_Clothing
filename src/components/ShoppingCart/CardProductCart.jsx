@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "@/css/Cart/CardProductCart.css";
 import QuantityProduct from "./QuantityProduct";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -7,8 +7,29 @@ import Image from "next/image"
 import PropTypes from 'prop-types'
 import { CartContext } from "@/components/Products/CartContext";
 import SoldOut from "./SoldOut";
+import api from "@/app/api/api"
 
-const CardProductCart = ({ product, editable, available }) => {
+const CardProductCart = ({ product, editable}) => {
+  const [available, setAvailable] = useState(true);
+
+  useEffect(() => {
+    inStock();
+  }, []);
+
+  const inStock = async () => {
+    
+    try {
+      const productFound = await api.get('/Product/' + product._id);
+      const sizes = productFound.data.sizes;
+      const selectedQuantity = product.quantity;
+
+      const sizeFound = sizes.find((size) => size.size == product.size)      
+      setAvailable(sizeFound.quantity > selectedQuantity);
+      
+    } catch (error) {
+      
+    }
+  }
 
   const { removeFromCart } = useContext(CartContext);
 

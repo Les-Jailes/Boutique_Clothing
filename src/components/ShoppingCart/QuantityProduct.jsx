@@ -53,7 +53,6 @@ const QuantityProduct = ({ limit, quantity, idProduct, product }) => {
   };
 
   const addProduct = () => {
-    console.log(definedLimit);
     let auxiliarQuantity = quantityProduct + 1;
     if (auxiliarQuantity >= definedLimit) {
       if(definedLimit != 10 && quantityProduct >= definedLimit){
