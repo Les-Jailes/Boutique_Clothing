@@ -125,3 +125,23 @@
         padding: 20px 0;
     }
 }
+
+.sold-out {
+    color: crimson;
+    min-inline-size: 16px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.information-container-sold-out {
+    width: 100%;
+}
+
+.sold-out-container {
+    width: 100%;
+}
+
+.sold-out-container-information {
+    display: flex;
+    width: 100%;
+}

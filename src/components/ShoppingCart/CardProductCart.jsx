@@ -32,8 +32,18 @@ const CardProductCart = ({ product, editable }) => {
       </div>
       <div className="information-container card-cart-container">
         <h3 className="product-name">{product.name}</h3>
-        <p className="size-product">{`Size: ${product.size}`}</p>
-        <p className="price-product">{`Price: ${product.price} $`}</p>
+
+        <div className="sold-out-container-information">
+          <div className="information-container-sold-out">
+            <p className="size-product">{`Size: ${product.size}`}</p>
+            <p className="price-product">{`Price: ${product.price} $`}</p>
+          </div>
+          <div className="sold-out-container">
+            <h3 className="sold-out"> SOLD OUT</h3>
+          </div>
+        </div>
+        
+        
       </div>
       {editable && ( <div className="quantity-product-card-cart card-cart-container">
       <QuantityProduct limit={10} quantity={product.quantity} idProduct={product.id} product={product} />
