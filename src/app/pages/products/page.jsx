@@ -121,7 +121,7 @@ const handleFilterButtonClick = () => {
 
   useEffect(() => {
     axios
-      .get("https://boutique-clothing-api.onrender.com/Product")
+      .get("https://test-api-rest-bc.onrender.com/Product")
       .then((response) => {
         setProducts(response.data);
         const uniqueCategories = [
