@@ -5,6 +5,7 @@ import "@/css/Cart/CartCardSummary.css";
 import Image from "next/image";
 import { CartContext } from "@/components/Products/CartContext";
 import SoldOut from "@/components/ShoppingCart/SoldOut";
+import api from "@/app/api/api"
 
 const CartCardSummary = ({ product, showDeleteOption }) => {
   const [reducible, setReducible] = useState(true);
@@ -19,7 +20,6 @@ const CartCardSummary = ({ product, showDeleteOption }) => {
   }, []);
 
   const inStock = async () => {
-    console.log("in stock from summary cart");
     
     try {
       const productFound = await api.get('/Product/' + product._id);
@@ -28,10 +28,7 @@ const CartCardSummary = ({ product, showDeleteOption }) => {
 
       const sizeFound = sizes.find((size) => size.size == product.size)      
       setReducible(sizeFound.quantity > 0);
-      console.log(sizeFound.quantity > 0);
-      console.log(sizeFound);
       setAvailable(sizeFound.quantity >= selectedQuantity);
-      console.log(available);
       
     } catch (error) {
       

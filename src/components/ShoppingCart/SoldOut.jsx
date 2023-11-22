@@ -2,10 +2,16 @@ import React from 'react';
 import '@/css/Cart/SoldOut.css';
 
 const SoldOut = ({reducible, fixed}) => {
+
+  const getText = () => {
+    return reducible ? 'LIMITED STOCK' : 'SOLD OUT';
+  }
+
+  const text = getText();
+
   return (
-    <div className={`sold-out-container ${fixed ? 'fixed' : ''}`}>
-      
-      {(reducible ? <p className="sold-out">LIMITED STOCK</p> : <p className="sold-out">SOLD OUT</p>)}
+    <div className="sold-out-container">
+      <p className={`sold-out  ${fixed ? 'fixed' : ''}`}>{text}</p>
     </div>
   );
 };
