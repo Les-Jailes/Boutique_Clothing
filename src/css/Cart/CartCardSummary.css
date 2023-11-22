@@ -94,6 +94,9 @@
 @media (max-width: 500px) {
     .cart-card-container {
         width: calc(100% - 10px);
+        background-color: #D0D0D0;
+    }
+    .cart-card-container.available {
         background-color: #fff;
     }
 }
