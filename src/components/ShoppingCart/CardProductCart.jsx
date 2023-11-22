@@ -15,7 +15,7 @@ const CardProductCart = ({ product, editable}) => {
 
   useEffect(() => {
     inStock();
-  }, []);
+  }, [product.quantity]);
 
   const inStock = async () => {
     

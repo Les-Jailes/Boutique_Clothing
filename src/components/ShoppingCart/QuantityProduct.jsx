@@ -73,13 +73,6 @@ const QuantityProduct = ({ limit, quantity, idProduct, product }) => {
       auxiliarQuantity = 1;
     }
 
-    if (auxiliarQuantity >= definedLimit) {
-      if(definedLimit != 10 && quantityProduct >= definedLimit){
-        showErrorMessage("Out of stock", "Sorry, we only have " + definedLimit + " \"" + product.name + "\" in stock");
-      }
-      auxiliarQuantity = definedLimit;
-    }
-
     setQuantityProduct(auxiliarQuantity);
     changeQuantity(auxiliarQuantity, idProduct);
   };
