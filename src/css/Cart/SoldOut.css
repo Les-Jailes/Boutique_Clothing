@@ -4,7 +4,8 @@
     height: 100%;
     font-weight: bold;
     display: block;
-    font-size: 2.5vw;
+    font-size: 2vw; 
+    max-width: 100%;
 }
 
 .sold-out-container {
@@ -12,5 +13,12 @@
     height: 100%;
     display: flex;
     flex-direction: row;
+    position: inherit;
 }
 
+@media (max-width: 600px) {
+    .sold-out {
+      font-size: 5vw; 
+    }
+  }
+  

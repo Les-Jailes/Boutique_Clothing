@@ -1,12 +1,13 @@
-import React from 'react'
-import '@/css/Cart/SoldOut.css'
+import React from 'react';
+import '@/css/Cart/SoldOut.css';
 
-const SoldOut = () => {
+const SoldOut = (reducible) => {
   return (
     <div className="sold-out-container">
-        <p className="sold-out"> SOLD OUT</p>
+      
+      {(reducible.reducible ? <p className="sold-out">LIMITED STOCK</p> : <p className="sold-out">SOLD OUT</p>)}
     </div>
-  )
-}
+  );
+};
 
 export default SoldOut;

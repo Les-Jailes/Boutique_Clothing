@@ -11,6 +11,7 @@ import api from "@/app/api/api"
 
 const CardProductCart = ({ product, editable}) => {
   const [available, setAvailable] = useState(true);
+  const [reducible, setReducible] = useState(true);
 
   useEffect(() => {
     inStock();
@@ -24,7 +25,10 @@ const CardProductCart = ({ product, editable}) => {
       const selectedQuantity = product.quantity;
 
       const sizeFound = sizes.find((size) => size.size == product.size)      
-      setAvailable(sizeFound.quantity > selectedQuantity);
+      setReducible(sizeFound.quantity > 0);
+      console.log(sizeFound.quantity > 0);
+      console.log(sizeFound);
+      setAvailable(sizeFound.quantity >= selectedQuantity);
       
     } catch (error) {
       
@@ -60,12 +64,12 @@ const CardProductCart = ({ product, editable}) => {
             <p className="size-product">{`Size: ${product.size}`}</p>
             <p className="price-product">{`Price: ${product.price} $`}</p>
           </div>
-          {!available &&  (<SoldOut />)}
+          {!available &&  (<SoldOut reducible={reducible ? true : false}/>)}
         </div>
         
         
       </div>
-      {editable && ( <div className="quantity-product-card-cart card-cart-container">
+      {editable && reducible && ( <div className="quantity-product-card-cart card-cart-container">
       <QuantityProduct limit={10} quantity={product.quantity} idProduct={product.id} product={product} />
 
       </div> )}
