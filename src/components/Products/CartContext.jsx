@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const [isCartLoaded, setIsCartLoaded] = useState(false);
   const initialCartState = {
     products: [],
     total: 0,
@@ -26,6 +27,7 @@ export const CartProvider = ({ children }) => {
     if (cartData) {
       setCart(cartData);
     }
+    setIsCartLoaded(true);
   }, []);
 
   const addToCart = (newProduct) => {
@@ -121,7 +123,7 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, changeQuantity, clearCart }}>
+    <CartContext.Provider value={{ cart, isCartLoaded, addToCart, removeFromCart, changeQuantity, clearCart }}>
       {children}
     </CartContext.Provider>
   );

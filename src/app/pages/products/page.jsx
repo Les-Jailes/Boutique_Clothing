@@ -8,6 +8,7 @@ import { Pagination } from "@/components/Products/Pagination";
 import Filter from "@/components/filter/Filter";
 import styles from "./page.module.css";
 import api from '@/app/api/api'
+import { showToast } from "@/components/Alerts/CustomToast";
 
 export default function Page() {
   const [pagination, setPagination] = useState([]);
@@ -40,7 +41,7 @@ export default function Page() {
     }
     return false;
   };
-  
+
   const filterByColorOrSize = (product, checkedLabels, key) => {
     const selectedLabels = checkedLabels[key];
     if (selectedLabels && selectedLabels.length > 0) {
@@ -54,7 +55,7 @@ export default function Page() {
       return true;
     }
   };
-  
+
   const filterByPrice = (product, checkedLabels) => {
     const selectedPrice = checkedLabels.price;
     if (selectedPrice) {
@@ -62,57 +63,67 @@ export default function Page() {
       const checkedPrice = selectedPrice[0];
       if (checkedPrice) {
         try {
-          const [firstNumber, secondNumber] = checkedPrice.split(" - ").map(Number);
+          const [firstNumber, secondNumber] = checkedPrice
+            .split(" - ")
+            .map(Number);
           if (productPrice > firstNumber && productPrice < secondNumber) {
-            return true
-          }else {
-            return false
+            return true;
+          } else {
+            return false;
           }
-        } catch (error) {
-        }
+        } catch (error) {}
       }
-    }else{
-      return true
+    } else {
+      return true;
     }
   };
-  
-  
 
-const handleFilterButtonClick = () => {
-  const filteredItems = products.filter((product) => {
-    let categoryFilter = true;
-    let typeFilter = true;
-    let colorOrSizeFilter = true;
-    let priceFilter = true;
+  const handleFilterButtonClick = () => {
+    const filteredItems = products.filter((product) => {
+      let categoryFilter = true;
+      let typeFilter = true;
+      let colorOrSizeFilter = true;
+      let priceFilter = true;
 
-    if (checkedLabels.category && checkedLabels.category.length > 0) {
-      categoryFilter = filterByCategory(product, checkedLabels);
+      if (checkedLabels.category && checkedLabels.category.length > 0) {
+        categoryFilter = filterByCategory(product, checkedLabels);
+      }
+
+      if (checkedLabels.type && checkedLabels.type.length > 0) {
+        typeFilter = filterByType(product, checkedLabels);
+      }
+
+      if (
+        (checkedLabels.color && checkedLabels.color.length > 0) ||
+        (checkedLabels.size && checkedLabels.size.length > 0)
+      ) {
+        colorOrSizeFilter =
+          filterByColorOrSize(product, checkedLabels, "color") &&
+          filterByColorOrSize(product, checkedLabels, "size");
+      }
+
+      if (checkedLabels.price && checkedLabels.price.length > 0) {
+        priceFilter = filterByPrice(product, checkedLabels);
+      }
+
+      return categoryFilter && typeFilter && colorOrSizeFilter && priceFilter;
+    });
+
+    setFilteredProducts(filteredItems);
+    setCurrentlyPagination(0);
+    setLeftIsDisable(true);
+  };
+
+  useEffect(() => {
+    const showCartEmptyToast = localStorage.getItem("showCartEmptyToast");
+    if (showCartEmptyToast === "true") {
+      showToast(
+        "You need to add products to the cart before proceeding to purchase.",
+        "info"
+      );
+      localStorage.removeItem("showCartEmptyToast");
     }
-
-    if (checkedLabels.type && checkedLabels.type.length > 0) {
-      typeFilter = filterByType(product, checkedLabels);
-    }
-
-    if (
-      (checkedLabels.color && checkedLabels.color.length > 0) ||
-      (checkedLabels.size && checkedLabels.size.length > 0)
-    ) {
-      colorOrSizeFilter =
-        filterByColorOrSize(product, checkedLabels, "color") &&
-        filterByColorOrSize(product, checkedLabels, "size");
-    }
-
-    if (checkedLabels.price && checkedLabels.price.length > 0) {
-      priceFilter = filterByPrice(product, checkedLabels);
-    }
-
-    return categoryFilter && typeFilter && colorOrSizeFilter && priceFilter;
-  });
-
-  setFilteredProducts(filteredItems);
-  setCurrentlyPagination(0);
-  setLeftIsDisable(true);
-};
+  }, []);
 
   useEffect(() => {
     if (Object.keys(checkedLabels).length === 0) {
@@ -156,7 +167,7 @@ const handleFilterButtonClick = () => {
     if (pagination.length > 1) {
       setRightIsDisable(false);
     } else {
-      setRightIsDisable(true)
+      setRightIsDisable(true);
     }
   }, [pagination]);
 
@@ -184,7 +195,7 @@ const handleFilterButtonClick = () => {
 
   const handleRefreshClick = () => {
     window.location.reload();
-    setIsFiltered(false)
+    setIsFiltered(false);
   };
 
   useEffect(() => {
