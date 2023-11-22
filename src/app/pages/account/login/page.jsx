@@ -88,6 +88,17 @@ const Login = () => {
   };
 
   useEffect(() => {
+    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForPayment");
+    if (showCartEmptyToast === "true") {
+      showToast(
+        "Please log in to purchase.",
+        "info"
+      );
+      localStorage.removeItem("showLogInRequiredForPayment");
+    }
+  }, []);
+
+  useEffect(() => {
     const [isValid, message] = validateEmail(emailInput);
   
     setValidation(prev => ({
