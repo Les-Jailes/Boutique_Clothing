@@ -21,21 +21,23 @@ const Cart = () => {
     let flag = true;
     try {
       const productFound = await api.get('/Product/' + product._id);
+      console.log(productFound);
       const sizes = productFound.data.sizes;
-      const currentSize = product.size;
       const selectedQuantity = product.quantity;
 
-      sizes.forEach(size => {
-      
-        if (size.size == currentSize) {
-          if(size.quantity == 0 || selectedQuantity > size.quantity)
-          flag = false;
-        }
-      });
+      const sizeFound = sizes.find((size) => size.size == product.size)
+      console.log("Found");
+      console.log(sizeFound.quantity);
+
+      if(sizeFound.quantity < selectedQuantity){
+        flag = false;
+        console.log(selectedQuantity);
+        console.log(sizeFound.quantity);
+      } 
     } catch (error) {
       
     }
-    
+    console.log(flag);
     return flag;
   }
 
