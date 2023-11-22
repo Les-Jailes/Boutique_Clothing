@@ -73,22 +73,14 @@ td {
   overflow-x: auto;
 }
 
-.add-button {
+.container__your-products {
   margin: 15px;
   border: 10px;
-  background: rgba(243, 140, 210, 0.4);
-  ;
   border-radius: 5px;
   color: #000;
   font-size: 16px;
   padding: 10px;
-  cursor: pointer;
   transition: .3s;
-  transform: translateX(-15px);
-}
-
-.add-button:active {
-  transform: scale(0.9);
 }
 
 @media screen and (max-width: 1566px) {
