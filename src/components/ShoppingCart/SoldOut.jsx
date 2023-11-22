@@ -4,7 +4,7 @@ import '@/css/Cart/SoldOut.css'
 const SoldOut = () => {
   return (
     <div className="sold-out-container">
-        <h3 className="sold-out"> SOLD OUT</h3>
+        <p className="sold-out"> SOLD OUT</p>
     </div>
   )
 }

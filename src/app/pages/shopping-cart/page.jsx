@@ -7,6 +7,7 @@ import CheckOutButton from "@/components/ShoppingCart/CheckOutButton";
 import OrderSummary from "@/components/ShoppingCart/OrderSummary";
 import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { CartContext } from "@/components/Products/CartContext";
+import api from "@/app/api/api"
 
 const Cart = () => {
   const { cart } = useContext(CartContext);
@@ -16,13 +17,36 @@ const Cart = () => {
     setIsOpen(!isOpen);
   };
 
+  const inStock = async (product) => {
+    let flag = true;
+    try {
+      const productFound = await api.get('/Product/' + product._id);
+      const sizes = productFound.data.sizes;
+      const currentSize = product.size;
+      const selectedQuantity = product.quantity;
+
+      sizes.forEach(size => {
+      
+        if (size.size == currentSize) {
+          if(size.quantity == 0 || selectedQuantity > size.quantity)
+          flag = false;
+        }
+      });
+    } catch (error) {
+      
+    }
+    
+    return flag;
+  }
+
   return (
     <div className="shopping-cart-container">
       <div className="your-cart-container">
         <h2 className="your-cart-title">YOUR CART</h2>
         <div className="list-your-cart-container">
           {cart.products.map((product) => {
-            return <CardProductCart product={product} key={product.code} editable={true} available={true}/>;
+            
+            return <CardProductCart product={product} key={product.code} editable={true} available={inStock(product)}/>;
           })}
         </div>
       </div>

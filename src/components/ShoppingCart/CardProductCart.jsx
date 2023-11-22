@@ -17,7 +17,7 @@ const CardProductCart = ({ product, editable, available }) => {
   };
   
   return (
-    <div className="card-product-cart-container">
+    <div className={`card-product-cart-container ${available ? 'available' : ''}`}>
       <div className="image-card-product-cart-container card-cart-container">
         <div className={ ` background-image-product ${product.category} ` }>
           <Image
@@ -39,7 +39,7 @@ const CardProductCart = ({ product, editable, available }) => {
             <p className="size-product">{`Size: ${product.size}`}</p>
             <p className="price-product">{`Price: ${product.price} $`}</p>
           </div>
-          {available &&  (<SoldOut />)}
+          {!available &&  (<SoldOut />)}
         </div>
         
         

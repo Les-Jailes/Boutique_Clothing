@@ -6,25 +6,31 @@ import "@/css/Cart/QuantityProducts.css";
 import PropTypes from "prop-types";
 import { CartContext } from "../Products/CartContext";
 import { showErrorMessage } from "@/utils/alerts";
+import api from '@/app/api/api'
 
 const QuantityProduct = ({ limit, quantity, idProduct, product }) => {
   const { changeQuantity } = useContext(CartContext);
   const [quantityProduct, setQuantityProduct] = useState(quantity);
+  const [definedLimit, setDefinedLimit] = useState(limit);
 
-  const validateLimit = () => {
-    let quantity = 0;
-    product.sizes.forEach(size => {
-      if(size.size === product.size && size.quantity < limit) {
-        limit = size.quantity;
-        quantity = size.quantity;
-      }
-    });
-    return quantity;
+  const validateLimit = async () => {
+    try {
+      const productFound = await api.get('/Product/' + product._id);
+      const sizeFound = productFound.data.sizes.find((size) => size.size == product.size);
+      if(sizeFound.quantity < definedLimit) setDefinedLimit(sizeFound.quantity);
+    }
+    catch(error){
+      
+    }
   }
 
   useEffect(() => {
     setQuantityProduct(quantity);
   }, [quantity]);
+
+  useEffect(() => {
+    validateLimit();
+  }, []);
 
   const handleInputChange = (e) => {
     let inputValue = e.target.value;
@@ -47,14 +53,13 @@ const QuantityProduct = ({ limit, quantity, idProduct, product }) => {
   };
 
   const addProduct = () => {
-    const size = validateLimit();
-    
+    console.log(definedLimit);
     let auxiliarQuantity = quantityProduct + 1;
-    if (auxiliarQuantity >= limit) {
-      if(limit != 10 && quantityProduct >= limit){
-        showErrorMessage("Out of stock", "Sorry, we only have " + size + " \"" + product.name + "\" in stock");
+    if (auxiliarQuantity >= definedLimit) {
+      if(definedLimit != 10 && quantityProduct >= definedLimit){
+        showErrorMessage("Out of stock", "Sorry, we only have " + definedLimit + " \"" + product.name + "\" in stock");
       }
-      auxiliarQuantity = limit;
+      auxiliarQuantity = definedLimit;
     }
 
     setQuantityProduct(auxiliarQuantity);

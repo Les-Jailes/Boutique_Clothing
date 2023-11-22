@@ -7,6 +7,7 @@ import "@/css/Products/ProductsPage.css";
 import { Pagination } from "@/components/Products/Pagination";
 import Filter from "@/components/filter/Filter";
 import styles from "./page.module.css";
+import api from '@/app/api/api'
 
 export default function Page() {
   const [pagination, setPagination] = useState([]);
@@ -120,8 +121,8 @@ const handleFilterButtonClick = () => {
   }, [checkedLabels, products]);
 
   useEffect(() => {
-    axios
-      .get("https://test-api-rest-bc.onrender.com/Product")
+    api
+      .get("/Product")
       .then((response) => {
         setProducts(response.data);
         const uniqueCategories = [
