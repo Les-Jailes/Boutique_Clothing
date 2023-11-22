@@ -8,6 +8,55 @@
   --men-background-gradient: linear-gradient(135deg, #001480 0%, #00FFD1 100%);
   --girl-background-gradient: linear-gradient(135deg, #FF0080 0%, #F1E6D2 100%);
   --boy-background-gradient: linear-gradient(135deg, #00FFB3 0%, #00604E 100%);
+  --summer-background-gradient: linear-gradient(135deg, #00FFF0 0%, #F1E6D2 100%);
+  --winter-background-gradient: linear-gradient(135deg, #4697B4 0%, #F1E6D2 100%);
   --font-family-poppins: 'Poppins', sans-serif;
   --primary-color: #254B5E;
+}
+
+/*404 NOT FOUND PAGE STYLES*/
+.nf-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 62vh;
+  background-image: url('/bg-404.jpg');
+  background-size: cover;
+  background-position: center;
+  gap: 3rem;
+}
+.nf-top, .nf-bottom{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.nf-top{
+  font-size: 3rem;
+}
+.nf-bottom{
+  gap: 2rem;
+}
+.nf-message{
+  font-size: 1rem;
+  font-weight: bold;
+  max-width: 650px;
+  text-align: center;
+}
+.nf-button{
+  padding: .7rem 1.5rem;
+  background-color: #F1E6D2;
+  color: #111;
+  border-radius: 3px;
+  font-style: none;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all ease .4s;
+}
+.nf-button:hover{
+  color: #F1E6D2;
+  background-color: #111;
 }

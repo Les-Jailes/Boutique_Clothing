@@ -1,10 +1,11 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
-import { BiSolidUser, BiSolidUserCircle,BiSolidUserDetail } from 'react-icons/bi';
+import { BiSolidUser, BiSolidUserCircle, BiSolidUserDetail } from 'react-icons/bi';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { validateTextField, validateCiField } from '@/utils/formValidations';
-import '@/app/pages/user-profile/UserProfile.css'
+import '@/app/pages/user-profile/UserProfile.css';
 import api from '@/app/api/api';
 
 const Profile = () => {
@@ -14,7 +15,7 @@ const Profile = () => {
   const [email, setEmail] = useState('');
   const [gender, setGender] = useState('default');
   const [isEditing, setIsEditing] = useState(false);
-  const [user] = useState([])
+  const [user, setUser] = useState(null);
   const [validationMessages, setValidationMessages] = useState({
     ci: '',
     name: '',
@@ -114,36 +115,33 @@ const Profile = () => {
     }
   };
 
-
-  const getUser = async () => {
+  const getUser = useCallback(async () => {
     try {
-      const u = await api.get('/User/email/' + session.data.user.email);
-      return u.data;
+      if (session && session.data && session.data.user) {
+        const u = await api.get('/User/email/' + session.data.user.email);
+        return u.data;
+      } else {
+        return null;
+      }
     } catch (error) {
       console.error("Error fetching user:", error);
       return null;
     }
-  };
-
+  }, [session]);
 
   useEffect(() => {
-    const status = session.status;
-
     const fetchData = async () => {
-      if (session && status === 'authenticated') {
+      if (session && session.status === 'authenticated') {
         try {
-          const user = await getUser();
+          const fetchedUser = await getUser();
           setEmail(session.data.user.email);
-          if (user !== null && user.lastName !== undefined || user != null && user.name !== undefined
-            || user != null && user.gender !== undefined || user != null && user.ci !== undefined) {
-            setCi(user.ci);
-            setLastName(user.lastName);
-            setName(user.name);
-            setPassword(user.password);
-            setGender(user.gender);
-            
+          if (fetchedUser !== null && fetchedUser.lastName !== undefined || fetchedUser != null && fetchedUser.name !== undefined
+            || fetchedUser != null && fetchedUser.gender !== undefined || fetchedUser != null && fetchedUser.ci !== undefined) {
+            setCi(fetchedUser.ci);
+            setLastName(fetchedUser.lastName);
+            setName(fetchedUser.name);
+            setGender(fetchedUser.gender);
           }
-          
         } catch (error) {
           console.error("Error in fetching user data:", error);
         }
@@ -151,8 +149,7 @@ const Profile = () => {
     };
 
     fetchData();
-  }, [session]);
-
+  }, [session, getUser]);
 
   const handleSelectChange = (e) => {
     setGender(e.target.value);
@@ -254,7 +251,7 @@ const Profile = () => {
         </div>
 
         <div>
-        {session.status === 'authenticated' ? (
+        {session?.status === 'authenticated' ? (
           isEditing ? (
             <button className='button-edit' onClick={handleSave}>
               <span>Save Profile</span>
@@ -275,4 +272,5 @@ const Profile = () => {
     </div>
   );
 }
+
 export default Profile;

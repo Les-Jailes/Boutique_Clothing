@@ -132,7 +132,7 @@ export default function Page() {
 
   useEffect(() => {
     axios
-      .get("https://boutique-clothing-api.onrender.com/Product")
+      .get("https://test-api-rest-bc.onrender.com/Product")
       .then((response) => {
         setProducts(response.data);
         const uniqueCategories = [
@@ -160,7 +160,7 @@ export default function Page() {
 
   useEffect(() => {
     setPagination(createPagination(isFiltered ? filteredProducts : products));
-  }, [products, filteredProducts]);
+  }, [products, filteredProducts, isFiltered]);
 
   useEffect(() => {
     if (pagination.length > 1) {
