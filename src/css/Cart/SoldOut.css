@@ -8,6 +8,10 @@
     max-width: 100%;
 }
 
+.sold-out.fixed {
+    font-size: 1vw; 
+}
+
 .sold-out-container {
     width: 100%;
     height: 100%;
@@ -19,6 +23,10 @@
 @media (max-width: 600px) {
     .sold-out {
       font-size: 5vw; 
+    }
+
+    .sold-out.fixed {
+        font-size: 1vw;
     }
   }
   

@@ -37,7 +37,8 @@ const QuantityProduct = ({ limit, quantity, idProduct, product }) => {
     inputValue = inputValue.replace(/\D/g, '');
     if (inputValue.length > 0) {
       const parsedValue = parseInt(inputValue, 10);
-      const validValue = Math.min(Math.max(1, parsedValue), limit);
+      const validValue = Math.min(Math.max(1, parsedValue), definedLimit);
+      if(parsedValue > definedLimit && validValue < 10) showErrorMessage("Out of stock", "Sorry, we only have " + definedLimit + " \"" + product.name + "\" in stock");
       setQuantityProduct(validValue);
       changeQuantity(validValue, idProduct);
     } else {

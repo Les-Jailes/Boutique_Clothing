@@ -1,11 +1,42 @@
 "use client"
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import "@/css/Cart/CartCardSummary.css";
 import Image from "next/image";
 import { CartContext } from "@/components/Products/CartContext";
+import SoldOut from "@/components/ShoppingCart/SoldOut";
 
 const CartCardSummary = ({ product, showDeleteOption }) => {
+  const [reducible, setReducible] = useState(true);
+  const [available, setAvailable] = useState(true);
+
+  useEffect(() => {
+    inStock();
+  });
+
+  useEffect(() => {
+    inStock();
+  }, []);
+
+  const inStock = async () => {
+    console.log("in stock from summary cart");
+    
+    try {
+      const productFound = await api.get('/Product/' + product._id);
+      const sizes = productFound.data.sizes;
+      const selectedQuantity = product.quantity;
+
+      const sizeFound = sizes.find((size) => size.size == product.size)      
+      setReducible(sizeFound.quantity > 0);
+      console.log(sizeFound.quantity > 0);
+      console.log(sizeFound);
+      setAvailable(sizeFound.quantity >= selectedQuantity);
+      console.log(available);
+      
+    } catch (error) {
+      
+    }
+  }
 
 
   const { removeFromCart } = useContext(CartContext);
@@ -15,7 +46,7 @@ const CartCardSummary = ({ product, showDeleteOption }) => {
   };
 
   return (
-    <div className="cart-card-container">
+    <div className={`cart-card-container ${available ? 'available' : ''}`}>
       <div className="image-card-container">
         <div className={` image-background ${product.category} `}>
           <Image
@@ -31,9 +62,14 @@ const CartCardSummary = ({ product, showDeleteOption }) => {
       </div>
       <div className="information-card">
         <h3 className="card-cart-name">{product.name}</h3>
-        <p className="card-cart-price">{`Size: ${product.size}`}</p>
-        <p className="card-cart-quantity"> { `Quantity: ${ product.quantity } ` } </p>
-        <p className="card-cart-price">{`Price: ${product.price} $`}</p>
+        <div className="sold-out-container-information">
+          <div className="information-container-sold-out">
+            <p className="card-cart-price">{`Size: ${product.size}`}</p>
+            <p className="card-cart-quantity"> { `Quantity: ${ product.quantity } ` } </p>
+           <p className="card-cart-price">{`Price: ${product.price} $`}</p>
+          </div>
+          {!available &&  (<SoldOut reducible={reducible ? true : false} fixed={true}/>)}
+        </div>
       </div>
       {showDeleteOption && (
         <div className="card-option-container">

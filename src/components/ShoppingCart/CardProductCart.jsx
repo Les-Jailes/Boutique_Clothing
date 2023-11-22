@@ -26,8 +26,6 @@ const CardProductCart = ({ product, editable}) => {
 
       const sizeFound = sizes.find((size) => size.size == product.size)      
       setReducible(sizeFound.quantity > 0);
-      console.log(sizeFound.quantity > 0);
-      console.log(sizeFound);
       setAvailable(sizeFound.quantity >= selectedQuantity);
       
     } catch (error) {
@@ -64,7 +62,7 @@ const CardProductCart = ({ product, editable}) => {
             <p className="size-product">{`Size: ${product.size}`}</p>
             <p className="price-product">{`Price: ${product.price} $`}</p>
           </div>
-          {!available &&  (<SoldOut reducible={reducible ? true : false}/>)}
+          {!available &&  (<SoldOut reducible={reducible ? true : false} fixed={false}/>)}
         </div>
         
         
