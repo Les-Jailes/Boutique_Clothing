@@ -170,9 +170,6 @@ td {
 }
 
 @media screen and (max-width: 870px) {
-  body {
-      padding-top: 50px;
-  }
 
   table {
       margin: 0 auto;
@@ -215,7 +212,7 @@ td {
       margin: 15px;
       text-align: left;
   }
-  
+
 
   td {
       position: relative;
@@ -266,7 +263,7 @@ td {
   td:nth-of-type(7):before {
       content: "Size";
   }
-  
+
   td:nth-of-type(8):before {
       content: "Image";
   }
