@@ -15,9 +15,6 @@ const CartCardSummary = ({ product, showDeleteOption }) => {
     inStock();
   });
 
-  useEffect(() => {
-    inStock();
-  }, []);
 
   const inStock = async () => {
     
@@ -29,6 +26,7 @@ const CartCardSummary = ({ product, showDeleteOption }) => {
       const sizeFound = sizes.find((size) => size.size == product.size)      
       setReducible(sizeFound.quantity > 0);
       setAvailable(sizeFound.quantity >= selectedQuantity);
+      product.available = available
       
     } catch (error) {
       

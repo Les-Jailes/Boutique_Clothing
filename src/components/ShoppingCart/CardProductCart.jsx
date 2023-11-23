@@ -7,11 +7,13 @@ import Image from "next/image"
 import PropTypes from 'prop-types'
 import { CartContext } from "@/components/Products/CartContext";
 import SoldOut from "./SoldOut";
-import api from "@/app/api/api"
+import api from "@/app/api/api";
 
 const CardProductCart = ({ product, editable}) => {
   const [available, setAvailable] = useState(true);
   const [reducible, setReducible] = useState(true);
+  const { cart } = useContext(CartContext);
+  
 
   useEffect(() => {
     inStock();
@@ -27,6 +29,7 @@ const CardProductCart = ({ product, editable}) => {
       const sizeFound = sizes.find((size) => size.size == product.size)      
       setReducible(sizeFound.quantity > 0);
       setAvailable(sizeFound.quantity >= selectedQuantity);
+      product.available = available;
       
     } catch (error) {
       

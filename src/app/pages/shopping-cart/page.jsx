@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import "@/css/Cart/ShoppingCart.css";
 import CardProductCart from "@/components/ShoppingCart/CardProductCart";
 import CheckOutButton from "@/components/ShoppingCart/CheckOutButton";
@@ -12,6 +12,14 @@ import { CartContext } from "@/components/Products/CartContext";
 const Cart = () => {
   const { cart } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [isCheckoutAllowed, setIsCheckoutAllowed] = useState(true);
+
+  useCallback(() => {
+    
+    const hasUnavailable = cart.products.some(p => !p.available);
+    setIsCheckoutAllowed(!hasUnavailable);
+    
+  }, [cart]);
 
   const handleOpenning = () => {
     setIsOpen(!isOpen);
@@ -40,7 +48,7 @@ const Cart = () => {
             <AiOutlineUp color="white" size={18} />
           )}
         </button>
-        <CheckOutButton isOpen={isOpen}  />
+        <CheckOutButton isOpen={isOpen} disabled={!isCheckoutAllowed} />
         <OrderSummary
           quantityProducts={cart.products.length}
           totalProducts={cart.total}
