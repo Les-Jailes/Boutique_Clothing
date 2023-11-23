@@ -1,0 +1,238 @@
+/* OrderHistoryUserTable.module.css */
+
+.container {
+  border: solid 1px (255, 255, 255, 0.3);
+  padding: 40px 0 150px 0;
+}
+
+.title{
+  font-size: 55px;
+}
+
+.table {
+  color: #000;
+  font-size: 17px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.thead {
+  background: var(--primary-color);
+}
+
+.th {
+  padding: 20px 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.td {
+  padding: 25px;
+  border-bottom: solid 1px rgb(255, 255, 255, 0.2);
+}
+
+.table_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.container__your_products {
+  margin: 15px;
+  color: #000;
+  padding: 10px;
+}
+
+.tbody {
+  text-align: center;
+  background: #fff;
+}
+
+@media screen and (max-width: 1566px) {
+  .table {
+    max-width: 1500px;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1490px) {
+  .table {
+    max-width: 1450px;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1430px) {
+  .table {
+    max-width: 1400px;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1380px) {
+  .table {
+    max-width: 1350px;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1315px) {
+  .table {
+    max-width: 1270px;
+    width: 90%;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 1245px) {
+  .table {
+    max-width: 1200px;
+    width: 90%;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 1190px) {
+  .table {
+    max-width: 1150px;
+    width: 90%;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1115px) {
+  .table {
+    max-width: 1050px;
+    width: 90%;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .table {
+    max-width: 900px;
+    width: 90%;
+    font-size: 9px;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .table {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 700px;
+  }
+
+  .tbody {
+    text-align: center;
+    background: #fff;
+  }
+
+  .table,
+  .thead,
+  .tbody,
+  .th,
+  .td,
+  .tr {
+    display: block;
+  }
+
+  .thead .tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .tr {
+    margin: 15px 0 15px 0;
+    text-align: left;
+  }
+
+  .td {
+    position: relative;
+    padding-left: 50%;
+    margin: 15px;
+    border-bottom: transparent;
+  }
+
+  .image {
+    position: relative;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  .td:before {
+    position: absolute;
+    top: 0;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    transform: translateY(15px);
+    text-align: left;
+  }
+
+  .tr:nth-child(odd) {
+    background: var(--primary-color);
+    border: none;
+    color: #fff;
+  }
+ 
+
+  .td:nth-of-type(1):before {
+    content: "";
+  }
+
+  .td:nth-of-type(2):before {
+    content: "Name of Product";
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .td:nth-of-type(3):before {
+    content: "Price";
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .td:nth-of-type(4):before {
+    content: "Category";
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .td:nth-of-type(5):before {
+    content: "Type";
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .td:nth-of-type(6):before {
+    content: "Color";
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .td:nth-of-type(7):before {
+    content: "Size";
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .td:nth-of-type(8):before {
+    content: "Quantity";
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .td:nth-of-type(9):before {
+    content: "Date";
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
