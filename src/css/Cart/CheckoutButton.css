@@ -15,6 +15,20 @@
     font-family: var(--font-family-poppins);
 }
 
+.checkout-button.disabled, 
+.checkout-button.disabled:hover {
+
+  opacity: 0.5;
+  
+  background-color: #ccc;
+  border-color: #ccc;
+  color: #999;
+  cursor: not-allowed;
+  pointer-events: none;
+
+
+}
+
 .checkout-button:hover {
     background-color: #000;
     color: #fff;

@@ -5,26 +5,46 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import "@/css/Cart/QuantityProducts.css";
 import PropTypes from "prop-types";
 import { CartContext } from "../Products/CartContext";
+import { showErrorMessage } from "@/utils/alerts";
+import api from '@/app/api/api'
 
-const QuantityProduct = ({ limit, quantity, idProduct }) => {
+const QuantityProduct = ({ limit, quantity, idProduct, product }) => {
   const { changeQuantity } = useContext(CartContext);
   const [quantityProduct, setQuantityProduct] = useState(quantity);
+  const [definedLimit, setDefinedLimit] = useState(limit);
+
+  const validateLimit = async () => {
+    try {
+      const productFound = await api.get('/Product/' + product._id);
+      const sizeFound = productFound.data.sizes.find((size) => size.size == product.size);
+      if(sizeFound.quantity < definedLimit) setDefinedLimit(sizeFound.quantity);
+    }
+    catch(error){
+      
+    }
+  }
 
   useEffect(() => {
     setQuantityProduct(quantity);
   }, [quantity]);
+
+  useEffect(() => {
+    validateLimit();
+  }, []);
 
   const handleInputChange = (e) => {
     let inputValue = e.target.value;
     inputValue = inputValue.replace(/\D/g, '');
     if (inputValue.length > 0) {
       const parsedValue = parseInt(inputValue, 10);
-      const validValue = Math.min(Math.max(1, parsedValue), limit);
+      const validValue = Math.min(Math.max(1, parsedValue), definedLimit);
+      if(parsedValue > definedLimit && validValue < 10) showErrorMessage("Out of stock", "Sorry, we only have " + definedLimit + " \"" + product.name + "\" in stock");
       setQuantityProduct(validValue);
       changeQuantity(validValue, idProduct);
     } else {
       setQuantityProduct("")
     }
+    
   };
 
   const handleInputBlur = () => {
@@ -36,9 +56,11 @@ const QuantityProduct = ({ limit, quantity, idProduct }) => {
 
   const addProduct = () => {
     let auxiliarQuantity = quantityProduct + 1;
-
-    if (auxiliarQuantity >= limit) {
-      auxiliarQuantity = limit;
+    if (auxiliarQuantity >= definedLimit) {
+      if(definedLimit != 10 && quantityProduct >= definedLimit){
+        showErrorMessage("Out of stock", "Sorry, we only have " + definedLimit + " \"" + product.name + "\" in stock");
+      }
+      auxiliarQuantity = definedLimit;
     }
 
     setQuantityProduct(auxiliarQuantity);

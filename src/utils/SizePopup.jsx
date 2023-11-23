@@ -1,7 +1,7 @@
 import "@/css/Cart/SizePopUp.css";
 
 export const SizePopup = ({ handleSizeSelection, sizes, isSizePopupOpen }) => {
-  const sizeStrings = sizes.map((size) => size.size);
+  const sizeStrings = sizes.filter((size) => size.quantity > 0).map((size) => size.size);
 
   return (
     <div className={`size-popup-container ${isSizePopupOpen ? "is-open" : ""}`}>

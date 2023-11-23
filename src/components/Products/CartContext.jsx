@@ -31,6 +31,7 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   const addToCart = (newProduct) => {
+    newProduct.available = true;
 
     setCart((prevCart) => {
       const existingProductIndex = prevCart.products.findIndex(
