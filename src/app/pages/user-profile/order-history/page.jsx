@@ -61,7 +61,7 @@ const OrderHistoryUser = () => {
   return (
     <div className={styles.container}>
       <div className={styles.container__your_products}>
-        <h1 className={styles.title}> Your Products </h1>
+        <h1 className={styles.title}> Order History </h1>
       </div>
       <div className={styles.table_container}>
         <table className={styles.table}>
