@@ -13,6 +13,7 @@ import api from '@/app/api/api'
 const Summary = () => {
   const { cart } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
+  const { removeFromCart } = useContext(CartContext);
 
   useEffect(() => {
     verifyStock();
@@ -20,30 +21,27 @@ const Summary = () => {
 
   const verifyStock = async () => {
     const products = cart.products;
-    let showMessage = false;
     products.forEach(p => {
-      if(!inStock(p)) showMessage = true;
-      console.log(showMessage);
+      inStock(p);
     });
-    if(showMessage) showAlertMessage("Out of stock", "Modifying to the available quantity");
   }
 
   const inStock = async (product) => {
-    let flag = true;
       try {
         const productFound = await api.get('/Product/' + product._id);
         const sizes = productFound.data.sizes;
         const sizeFound = sizes.find((size) => size.size == product.size);
-        if(product.quantity > sizeFound.quantity)   {
+        if(sizeFound.quantity === 0){
+          removeFromCart(product);
+          showAlertMessageAutomatically("Sold outk", "Removing unavailable products")
+        } 
+        else if(product.quantity > sizeFound.quantity)   {
           product.quantity = sizeFound.quantity;
           showAlertMessageAutomatically("Out of stock", "Modifying to the available quantity")
-          flag = false;
-          return false;
         }
       } catch (error) {
         
       }
-    return flag;
   }
 
   return (
