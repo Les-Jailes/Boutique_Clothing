@@ -1,11 +1,15 @@
 "use client"
 import React, { createContext, useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import api from '@/app/api/api'
+import { showErrorMessage } from '@/utils/alerts';
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [isCartLoaded, setIsCartLoaded] = useState(false);
+  const [maxQuantity, setMaxQuantity] = useState(10);
+
   const initialCartState = {
     products: [],
     total: 0,
@@ -14,6 +18,19 @@ export const CartProvider = ({ children }) => {
     delivery: 0,
     currency: "$"
   };
+
+  const getMaxQuantity = async (product) => {
+    const foundProduct = await api.get('/Product/'+product._id);
+    console.log(foundProduct);
+    console.log(product);
+    foundProduct.data.sizes.forEach( (s) => {
+      console.log(s);
+      if(s.size == product.size){
+        
+        setMaxQuantity(s.quantity);
+      }
+    });
+  }
 
   const [cart, setCart] = useState(initialCartState);
 
@@ -32,6 +49,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (newProduct) => {
     newProduct.available = true;
+    getMaxQuantity(newProduct);
 
     setCart((prevCart) => {
       const existingProductIndex = prevCart.products.findIndex(
@@ -44,11 +62,17 @@ export const CartProvider = ({ children }) => {
   
       if (existingProductIndex >= 0) {
         updatedProducts = [...prevCart.products];
+        if (updatedProducts[existingProductIndex].quantity === maxQuantity) {
+          if (maxQuantity != 10) showErrorMessage("Out of stock", `Sorry, we only have ${maxQuantity} "${newProduct.name}" in stock`);
+          else showErrorMessage("Maximum of 10 Items per Size");
+        }
+        else {
         updatedProducts[existingProductIndex] = {
           ...updatedProducts[existingProductIndex],
           quantity: updatedProducts[existingProductIndex].quantity + 1
         };
         updatedTotal += parseFloat(newProduct.price);
+        }
       } else {
         const productWithId = { ...newProduct, quantity: 1, id: uuidv4() };
         updatedProducts = [...prevCart.products, productWithId];
