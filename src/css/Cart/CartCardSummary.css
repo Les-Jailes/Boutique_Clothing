@@ -1,11 +1,15 @@
 .cart-card-container {
     width: 100%;
-    background-color: #fff;
+    background-color: #D0D0D0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     font-family: var(--font-family-poppins);
+}
+
+.cart-card-container.available {
+    background-color: #fff;
 }
 
 .image-card-container {
@@ -90,6 +94,19 @@
 @media (max-width: 500px) {
     .cart-card-container {
         width: calc(100% - 10px);
+        background-color: #D0D0D0;
+    }
+    .cart-card-container.available {
         background-color: #fff;
     }
+}
+
+.information-container-sold-out {
+    width: 100%;
+    height: 100%;
+}
+
+.sold-out-container-information {
+    display: flex;
+    width: 100%;
 }

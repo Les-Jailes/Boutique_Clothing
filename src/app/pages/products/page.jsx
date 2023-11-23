@@ -7,6 +7,7 @@ import "@/css/Products/ProductsPage.css";
 import { Pagination } from "@/components/Products/Pagination";
 import Filter from "@/components/filter/Filter";
 import styles from "./page.module.css";
+import api from '@/app/api/api'
 import { showToast } from "@/components/Alerts/CustomToast";
 
 export default function Page() {
@@ -131,8 +132,8 @@ export default function Page() {
   }, [checkedLabels, products]);
 
   useEffect(() => {
-    axios
-      .get("https://test-api-rest-bc.onrender.com/Product")
+    api
+      .get("/Product")
       .then((response) => {
         setProducts(response.data);
         const uniqueCategories = [
@@ -197,6 +198,18 @@ export default function Page() {
     setIsFiltered(false);
   };
 
+  useEffect(() => {
+
+    const filteredProducts = filterProductsWithValidSizes(products);
+    setFilteredProducts(filteredProducts);
+  }, [products]);
+
+  const filterProductsWithValidSizes = (products) => {
+    return products.filter((product) => {
+      return product.sizes.some((size) => size.quantity > 0);
+    });
+  };
+
   return (
     <div className={styles.container}>
       <Filter
@@ -217,13 +230,13 @@ export default function Page() {
         handleRefreshClick={handleRefreshClick}
       />
       <div className="products-page">
-        <div className="product-container">
-          {pagination.length > 0 &&
-            pagination[currentlyPagination] &&
-            pagination[currentlyPagination].map((product) => (
-              <ClotheCard key={product.code} clothe={product} />
-            ))}
-        </div>
+      <div className="product-container">
+        {pagination.length > 0 &&
+          pagination[currentlyPagination] &&
+          filterProductsWithValidSizes(pagination[currentlyPagination]).map((product) => (
+            <ClotheCard key={product.code} clothe={product} />
+          ))}
+      </div>
         <Pagination
           currentlyPagination={currentlyPagination}
           changePaginationRight={handlePaginationRight}
