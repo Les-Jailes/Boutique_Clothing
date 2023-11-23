@@ -37,23 +37,7 @@ const CheckOutButton = ({ isOpen, disabled }) => {
         
         if(!p.available) flag = true;});
   setDisable(flag);
-    
-    
   }
-
-  const handleClick = () => {
-    
-    // Verificar disponibilidad
-    const unavailable = cart.products.some(p => !p.available);
-    
-    // Redireccionar si todo disponible
-    if(!unavailable) {
-      router.push('/pages/checkout');
-    } 
-    else {
-      showErrorMessage(":(");
-    }
-  };
   
   return (
     <a className={ `checkout-button ${!isOpen ? 'is-active' : ''} ${ disable ? 'disabled' : ''}`} href="/pages/checkout" >
