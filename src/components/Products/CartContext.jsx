@@ -21,13 +21,9 @@ export const CartProvider = ({ children }) => {
 
   const getMaxQuantity = async (product) => {
     const foundProduct = await api.get('/Product/'+product._id);
-    console.log(foundProduct);
-    console.log(product);
     foundProduct.data.sizes.forEach( (s) => {
-      console.log(s);
       if(s.size == product.size){
-        
-        setMaxQuantity(s.quantity);
+        if(s.quantity < 10) setMaxQuantity(s.quantity);
       }
     });
   }
