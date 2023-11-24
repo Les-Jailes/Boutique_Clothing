@@ -6,11 +6,20 @@ import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import { CartContext } from "@/components/Products/CartContext";
 import CheckoutForm from "@/components/Checkout/CheckoutForm";
 import Summary from "@/components/Checkout/Summary";
+import { useSession } from "next-auth/react";
 import { showToast } from '@/components/Alerts/CustomToast'
 
 const Checkout = () => {
+  const session = useSession();
   const { cart } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      localStorage.setItem("showLogInRequiredForPayment", "true");
+      window.location.href = "/pages/account/login";
+    }
+  }, [session]);
 
   useEffect(() => {
     const showCartEmptyToast = localStorage.getItem("showMissingDataCheckoutForm");

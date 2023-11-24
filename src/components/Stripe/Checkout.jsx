@@ -71,7 +71,7 @@ function CheckoutPayment() {
           localStorage.setItem("showMissingDataCheckoutForm", "true");
           window.location.href = "/pages/checkout";
           setRedirected(true);
-        }, 1500);
+        }, 1800);
       } else {
         setShippingInfo(info);
       }
