@@ -32,7 +32,7 @@ function CheckoutPayment() {
   const { cart, clearCart, isCartLoaded } = useContext(CartContext);
   const stripe = useStripe();
   const elements = useElements();
-
+  const [purchaseCompleted, setPurchaseCompleted] = useState(false);
   const [shippingInfo, setShippingInfo] = useState(null);
 
   const [redirected, setRedirected] = useState(false);
@@ -46,14 +46,14 @@ function CheckoutPayment() {
   }, [session, redirected]);
 
   useEffect(() => {
-    if (!redirected && isCartLoaded && cart.totalProducts === 0) {
+    if (!redirected && !purchaseCompleted && isCartLoaded && cart.totalProducts === 0) {
       setTimeout(() => {
         localStorage.setItem("showCartEmptyToast", "true");
         window.location.href = "/pages/products";
         setRedirected(true);
       }, 400);
     }
-  }, [cart.totalProducts, isCartLoaded, redirected]);
+  }, [cart.totalProducts, isCartLoaded, redirected, purchaseCompleted]);
 
   useEffect(() => {
     if (!redirected) {
@@ -143,6 +143,7 @@ function CheckoutPayment() {
               if (result.isConfirmed) {
                 window.location.href = "/";
                 clearCart();
+                setPurchaseCompleted(true);
               }
             });
           }
