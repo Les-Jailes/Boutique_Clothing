@@ -34,7 +34,7 @@ function CheckoutPayment() {
   const elements = useElements();
   const [purchaseCompleted, setPurchaseCompleted] = useState(false);
   const [shippingInfo, setShippingInfo] = useState(null);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [redirected, setRedirected] = useState(false);
 
   useEffect(() => {
@@ -46,10 +46,16 @@ function CheckoutPayment() {
   }, [session, redirected]);
 
   useEffect(() => {
-    if (!redirected && !purchaseCompleted && isCartLoaded && cart.totalProducts === 0) {
+    if (
+      !redirected &&
+      !purchaseCompleted &&
+      isCartLoaded &&
+      cart.totalProducts === 0
+    ) {
       setTimeout(() => {
         localStorage.setItem("showCartEmptyToast", "true");
         window.location.href = "/pages/products";
+        localStorage.removeItem("shippingInfo");
         setRedirected(true);
       }, 400);
     }
@@ -80,8 +86,7 @@ function CheckoutPayment() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(shippingInfo);
+    setIsSubmitting(true);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -105,6 +110,7 @@ function CheckoutPayment() {
         icon: "error",
         confirmButtonText: "OK",
       });
+      setIsSubmitting(false);
       return;
     }
 
@@ -139,12 +145,10 @@ function CheckoutPayment() {
               text: "Thank you for your preference.",
               icon: "success",
               confirmButtonText: "OK",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                window.location.href = "/";
-                clearCart();
-                setPurchaseCompleted(true);
-              }
+            }).finally(() => {
+              window.location.href = "/";
+              clearCart();
+              setPurchaseCompleted(true);
             });
           }
         })
@@ -157,6 +161,7 @@ function CheckoutPayment() {
             icon: "error",
             confirmButtonText: "OK",
           });
+          setIsSubmitting(false);
         });
     }
   };
@@ -169,7 +174,7 @@ function CheckoutPayment() {
         <CardElement options={CARD_ELEMENT_OPTIONS} />
       </div>
       <div className="div-button">
-        <button type="submit" className="buy-button">
+        <button type="submit" className="buy-button" disabled={isSubmitting}>
           Buy
         </button>
       </div>
