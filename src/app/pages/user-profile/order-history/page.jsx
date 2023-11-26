@@ -75,10 +75,23 @@ const OrderHistoryUser = () => {
             onClick={() => handleToggleTable(order._id)}
             className={styles.show_more_information}
           >
-            <p className={styles.order_id}>Order ID: {order._id}</p>
-            <p className={styles.date}>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
-            <p className={styles.total_amount}>Total Amount: ${order.amount.toFixed(2)}</p>
-            <p className={styles.total_products_purchased}>Total Products Purchased: {order.purchasedProducts.length}</p>
+            <div className={styles.order_id}>
+              <p className={styles.order_id__text}>Order ID:</p>
+              <p className={styles.order_id__value}>{order._id}</p>
+            </div>
+            <div className={styles.date}>
+              <p className={styles.date__text}>Date:</p>
+              <p className={styles.date__value}>{new Date(order.createdAt).toLocaleDateString()}</p>
+            </div>
+            <div className={styles.total_amount}>
+              <p className={styles.total_amount__text}>Total Amount:</p>
+              <p className={styles.total_amount__value}>${order.amount.toFixed(2)}</p>
+            </div>
+            <div className={styles.total_products_purchased}>
+            <p className={styles.total_products_purchased__text}>Total Products Purchased:</p>
+            <p className={styles.total_products_purchased__value}>{order.purchasedProducts.length}</p>
+            </div>
+            
             <p className={styles.arrow}>{selectedOrderId === order._id ? <AiOutlineUp /> : <AiOutlineDown />}</p>
           </div>
 
