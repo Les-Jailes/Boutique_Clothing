@@ -6,6 +6,8 @@ import styles from "@/css/OrderHistoryUser/OrderHistoryUserTable.module.css";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import "@/css/OrderHistoryLoader/OrderHistoryLoaderTable.css";
+import { AiOutlineUp } from "react-icons/ai";
+import { AiOutlineDown } from "react-icons/ai";
 import GoToProductsDelails from "@/components/OrderHistory/GoToProductsDetails";
 
 const OrderHistoryUser = () => {
@@ -13,6 +15,11 @@ const OrderHistoryUser = () => {
   const [userId, setUserId] = useState(null);
   const [checkoutUserId, setCheckoutUserId] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+
+  const handleToggleTable = (orderId) => {
+    setSelectedOrderId(orderId === selectedOrderId ? null : orderId);
+  };
 
   useEffect(() => {
     const getUserId = async () => {
@@ -27,8 +34,6 @@ const OrderHistoryUser = () => {
             );
             setUserId(userResponse.data._id);
             setCheckoutUserId(checkoutUser.data);
-          } else {
-            console.log("No se encontraron datos de usuario.");
           }
         }
       } catch (error) {
@@ -63,50 +68,89 @@ const OrderHistoryUser = () => {
       <div className={styles.container__your_products}>
         <h1 className={styles.title}> Order History </h1>
       </div>
-      <div className={styles.table_container}>
-        <table className={styles.table}>
-          <thead className={styles.thead}>
-            <tr className={styles.tr}>
-              <th className={styles.th}>Image</th>
-              <th className={styles.th}>Name of Product</th>
-              <th className={styles.th}>Price</th>
-              <th className={styles.th}>Category</th>
-              <th className={styles.th}>Type</th>
-              <th className={styles.th}>Color</th>
-              <th className={styles.th}>Size</th>
-              <th className={styles.th}>Quantity</th>
-              <th className={styles.th}>Date</th>
-            </tr>
-          </thead>
 
-          <tbody className={styles.tbody}>
-            {checkoutUserId.map((order) =>
-              order.purchasedProducts.map((product) => (
-                <tr className={styles.tr} key={product._id}>
-                  <td className={styles.image}>
-                    {product.path.length > 0 && (
-                      <Image
-                        src={product.path[0]}
-                        alt={`Product`}
-                        width={50}
-                        height={50}
-                      />
-                    )}
-                  </td>
-                  <td className={styles.td}>{product.name}</td>
-                  <td className={styles.td}>${product.price}</td>
-                  <td className={styles.td}>{product.category}</td>
-                  <td className={styles.td}>{product.type}</td>
-                  <td className={styles.td}>{product.color?.join(", ")}</td>
-                  <td className={styles.td}>{product.size}</td>
-                  <td className={styles.td}>{product.quantity}</td>
-                  <td className={styles.td}>{new Date(order.createdAt).toLocaleDateString()}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+      {checkoutUserId.map((order) => (
+        <div key={order._id} className={styles.orderContainer}>
+          <div
+            onClick={() => handleToggleTable(order._id)}
+            className={styles.show_more_information}
+          >
+            <p className={styles.order_id}>Order ID: {order._id}</p>
+            <p className={styles.date}>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
+            <p className={styles.total_amount}>Total Amount: ${order.amount.toFixed(2)}</p>
+            <p className={styles.total_products_purchased}>Total Products Purchased: {order.purchasedProducts.length}</p>
+            <p className={styles.arrow}>{selectedOrderId === order._id ? <AiOutlineUp /> : <AiOutlineDown />}</p>
+          </div>
+
+          {selectedOrderId === order._id && (
+            <div className={styles.table_container}>
+              <table className={styles.table}>
+                <thead className={styles.thead}>
+                  <tr className={styles.tr}>
+                    <th className={styles.th}>Image</th>
+                    <th className={styles.th}>Name of Product</th>
+                    <th className={styles.th}>Price</th>
+                    <th className={styles.th}>Category</th>
+                    <th className={styles.th}>Type</th>
+                    <th className={styles.th}>Color</th>
+                    <th className={styles.th}>Size</th>
+                    <th className={styles.th}>Quantity</th>
+                  </tr>
+                </thead>
+
+                <tbody className={styles.tbody}>
+                  {order.purchasedProducts.map((product) => (
+                    <tr className={styles.tr} key={product._id}>
+                      <td className={styles.image}>
+                        {product.path.length > 0 && (
+                          <Image
+                            src={product.path[0]}
+                            alt={`Product`}
+                            width={50}
+                            height={50}
+                          />
+                        )}
+                      </td>
+                      <td className={styles.td}>{product.name}</td>
+                      <td className={styles.td}>${product.price}</td>
+                      <td className={styles.td}>{product.category}</td>
+                      <td className={styles.td}>{product.type}</td>
+                      <td className={styles.td}>{product.color?.join(", ")}</td>
+                      <td className={styles.td}>{product.size}</td>
+                      <td className={styles.td}>{product.quantity}</td>
+                    </tr>
+                  ))}
+                </tbody>
+
+                <tfoot>
+                  <tr>
+                    <td>Total Quantity per Products:</td>
+                    <td>
+                      {order.purchasedProducts.reduce(
+                        (sum, product) => sum + product.quantity,
+                        0
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Total per product:</td>
+                    <td>
+                      $
+                      {order.purchasedProducts
+                        .reduce(
+                          (sum, product) =>
+                            sum + product.price * product.quantity,
+                          0
+                        )
+                        .toFixed(2)}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };
