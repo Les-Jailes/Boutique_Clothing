@@ -19,7 +19,13 @@
 }
 
 .show_more_information{
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 460px 460px 40px;
+  grid-template-rows: 50% 50%;
+  grid-template-areas: 
+  "orderId total quantity button"
+  "date total quantity button"
+  ;
 }
 
 .order_id,
@@ -27,36 +33,61 @@
 .total_amount,
 .total_products_purchased, 
 .arrow {
-  width: 50%; /* O ajusta el ancho según tus necesidades */
+  width: 100%; /* O ajusta el ancho según tus necesidades */
   padding: 10px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
 }
 
 .order_id,
 .date{
   display: flex;
-  flex-direction: column;
 }
 
+.order_id__value{
+  padding: 0px 0px 0px 10px;
+}
+
+.date__value{
+  padding: 0px 0px 0px 10px;
+}
 .order_id{
-  background-color: aquamarine;
+  grid-area: orderId;
 }
 
 .date{
-  background-color: burlywood;
+  grid-area: date;
 }
 
 .total_amount{
-  background-color: aqua;
+  grid-area: total;
+}
+
+.total_amount__text,
+.total_amount__value,
+.total_products_purchased__text,
+.total_products_purchased__value{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.order_id__text,
+.date__text,
+.total_amount__text,
+.total_products_purchased__text{
+  font-weight: bold;
 }
 
 .total_products_purchased{
-  background-color: cadetblue;
+  grid-area: quantity;
 }
 
 .arrow{
-  background-color: chocolate;
+  grid-area: button;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
 }
 
 .title{
@@ -180,13 +211,6 @@
   }
 
   .orderContainer {
-    overflow: hidden;
-    top: 60px;
-    right: calc(60px + 1rem);
-    background-color: #fff;
-    z-index: 10;
-    box-shadow: 0 0 6px #00000050;
-    font-family: var(--font-family-poppins);
     margin: 0px 15px 30px 15px;
     padding: 13px;
   }

@@ -108,6 +108,7 @@ const OrderHistoryUser = () => {
                     <th className={styles.th}>Color</th>
                     <th className={styles.th}>Size</th>
                     <th className={styles.th}>Quantity</th>
+                    <th className={styles.th}>Sub Total</th>
                   </tr>
                 </thead>
 
@@ -131,6 +132,7 @@ const OrderHistoryUser = () => {
                       <td className={styles.td}>{product.color?.join(", ")}</td>
                       <td className={styles.td}>{product.size}</td>
                       <td className={styles.td}>{product.quantity}</td>
+                      <td className={styles.td}>${(product.price * product.quantity).toFixed(2)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -157,6 +159,9 @@ const OrderHistoryUser = () => {
                         )
                         .toFixed(2)}
                     </td>
+                  </tr>
+                  <tr>
+                    <td>Taxes: $0</td>
                   </tr>
                 </tfoot>
               </table>
