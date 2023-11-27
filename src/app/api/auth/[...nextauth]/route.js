@@ -53,7 +53,7 @@ const authOptions = NextAuth({
               }
             } else {
               const newUser = {
-                ci: profile.sub,
+                ci: 'N/A',
                 name: profile.name.split(' ')[0],
                 lastName: profile.name.split(' ').slice(1).join(' ') || 'No lastname',
                 email: user.email,
