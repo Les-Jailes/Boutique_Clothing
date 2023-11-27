@@ -56,10 +56,10 @@ export default function Page() {
     }
   };
 
-  const filterBySize = (product, checkedLabels, key) => {
-    const selectedLabels = checkedLabels[key];
+  const filterBySize = (product, checkedLabels) => {
+    const selectedLabels = checkedLabels["size"];
     if (selectedLabels && selectedLabels.length > 0) {
-      for (const item of product[key]) {
+      for (const item of product["size"]) {
         if (selectedLabels.includes(item)) {
           return true;
         }
@@ -72,6 +72,7 @@ export default function Page() {
 
   const filterByPrice = (product, checkedLabels) => {
     const selectedPrice = checkedLabels.price;
+    console.log(selectedPrice)
     if (selectedPrice) {
       const productPrice = product.price;
       const checkedPrice = selectedPrice[0];
@@ -109,7 +110,7 @@ export default function Page() {
       }
 
       if ((checkedLabels.size && checkedLabels.size.length > 0)) {
-        sizeFilter = filterBySize(product, checkedLabels, "size");
+        sizeFilter = filterBySize(product, checkedLabels);
       }
       if ((checkedLabels.color && checkedLabels.color.length > 0)) {
         colorFilter = filterByColor(product, checkedLabels) 

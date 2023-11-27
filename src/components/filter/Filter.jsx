@@ -5,12 +5,15 @@ import FilterCheckbox from "./filterCheckbox/FilterCheckbox";
 import { HiArrowPath } from "react-icons/hi2";
 
 const Filter = ({ categories, types, colors, sizes, onFilterChange, onFilterButtonClick, handleRefreshClick }) => {
-  
+  const extractUniqueSizes = (data) => {
+    const uniqueSizes = [...new Set(Object.values(data).map(item => item.size && item.size.toLowerCase()))];
+    return uniqueSizes;
+  };
   const filters = [
     { title: "category", options: categories },
     { title: "type", options: types },
     { title: "color", options: colors  },
-    { title: "size", options: sizes  },
+    { title: "size", options: extractUniqueSizes(sizes)  },
     { title: "price", options: ["0 - 50", "51 - 100", "101 - 150", "151 - 300 ", "301 - 500"] },
   ];
 
