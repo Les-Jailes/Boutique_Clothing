@@ -18,56 +18,52 @@
   border-radius: 20px;
 }
 
-.show_more_information{
+.show_more_information {
   display: grid;
   grid-template-columns: auto 460px 460px 40px;
   grid-template-rows: 50% 50%;
-  grid-template-areas: 
-  "orderId total quantity button"
-  "date total quantity button"
-  ;
+  grid-template-areas:
+    "orderId total quantity button"
+    "date total quantity button";
 }
 
 .order_id,
-.date, 
+.date,
 .total_amount,
-.total_products_purchased, 
+.total_products_purchased,
 .arrow {
   width: 100%;
   padding: 10px;
 }
 
 .order_id,
-.date{
+.date {
   display: flex;
 }
 
-.order_id__value{
-  padding: 0px 0px 0px 10px;
+.order_id__value,
+.date__value,
+.total_amount__value,
+.total_products_purchased__value {
+  padding: 0px 0px 0px 5px;
 }
 
-.date__value{
-  padding: 0px 0px 0px 10px;
-}
-.order_id{
-  background-color: bisque;
+.order_id {
   grid-area: orderId;
 }
 
-.date{
-  background-color: rgb(230, 145, 42);
+.date {
   grid-area: date;
 }
 
-.total_amount{
-  background-color: rgb(137, 232, 96);
+.total_amount {
   grid-area: total;
 }
 
 .total_amount__text,
 .total_amount__value,
 .total_products_purchased__text,
-.total_products_purchased__value{
+.total_products_purchased__value {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,25 +73,23 @@
 .order_id__text,
 .date__text,
 .total_amount__text,
-.total_products_purchased__text{
+.total_products_purchased__text {
   font-weight: bold;
 }
 
-.total_products_purchased{
-  background-color: rgb(92, 121, 250);
+.total_products_purchased {
   grid-area: quantity;
 }
 
-.arrow{
+.arrow {
   grid-area: button;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow-x: auto;
-  background-color: aqua;
 }
 
-.title{
+.title {
   font-size: 55px;
 }
 
@@ -153,7 +147,7 @@
     width: 90%;
   }
 
-  .show_more_information{
+  .show_more_information {
     grid-template-columns: auto 360px 360px 40px;
   }
 }
@@ -179,7 +173,7 @@
     font-size: 14px;
   }
 
-  .show_more_information{
+  .show_more_information {
     grid-template-columns: auto 260px 260px 40px;
   }
 }
@@ -190,7 +184,7 @@
     width: 90%;
     font-size: 13px;
   }
-  .show_more_information{
+  .show_more_information {
     grid-template-columns: auto;
   }
 }
@@ -201,7 +195,7 @@
     width: 90%;
     font-size: 12px;
   }
-  .show_more_information{
+  .show_more_information {
     grid-template-columns: auto;
   }
 }
@@ -213,7 +207,7 @@
     font-size: 12px;
   }
 
-  .show_more_information{
+  .show_more_information {
     grid-template-columns: auto;
   }
 }
@@ -224,20 +218,19 @@
     width: 90%;
     font-size: 9px;
   }
-  .show_more_information{
+  .show_more_information {
     font-size: 12px;
     grid-template-columns: auto;
     grid-template-rows: 30% 30%;
-    grid-template-areas: 
-    "orderId quantity button"
-    "date quantity button"
-    "total quantity button"
-    ;
+    grid-template-areas:
+      "orderId quantity button"
+      "date quantity button"
+      "total quantity button";
   }
 
-  .total_amount{
+  .total_amount {
     display: flex;
-}
+  }
 }
 
 @media screen and (max-width: 870px) {
@@ -247,30 +240,7 @@
     max-width: 700px;
   }
 
-  .show_more_information{
-    grid-template-columns: auto;
-    grid-template-rows: 20% 20%;
-    grid-template-areas: 
-    "orderId"
-    "date"
-    "total"
-    "quantity"
-    "button"
-    ;
-  }
-
-  /*
-  .show_more_information{
-  display: grid;
-  grid-template-columns: auto 460px 460px 40px;
-  grid-template-rows: 50% 50%;
-  grid-template-areas: 
-  "orderId total quantity button"
-  "date total quantity button"
-  ;
-}
-  */
-  .total_products_purchased{
+  .total_products_purchased {
     display: flex;
   }
 
@@ -336,7 +306,6 @@
     border: none;
     color: #fff;
   }
- 
 
   .td:nth-of-type(1):before {
     content: "";
@@ -388,5 +357,18 @@
     content: "Date";
     text-transform: uppercase;
     font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 515px) {
+  .show_more_information {
+    grid-template-columns: auto;
+    grid-template-rows: 20% 20%;
+    grid-template-areas:
+      "orderId"
+      "date"
+      "total"
+      "quantity"
+      "button";
   }
 }
