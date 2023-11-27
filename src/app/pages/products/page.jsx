@@ -61,7 +61,6 @@ export default function Page() {
     if (selectedLabels && selectedLabels.length > 0) {
       for (const item of product["sizes"]) {
         const productSize = item.size
-        console.log(selectedLabels[0], productSize.toLowerCase())
         if (selectedLabels[0]=== (productSize.toLowerCase())) {
           return true;
         }
