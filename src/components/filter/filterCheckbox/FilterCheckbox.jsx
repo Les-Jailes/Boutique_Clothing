@@ -22,7 +22,7 @@ const FilterCheckbox = ({ title, options, onFilterChange}) => {
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>{title}</h1>
-        <FaSquareCaretDown size={25} className={styles.icon} onClick={()  => (console.log(options))} />
+        <FaSquareCaretDown size={25} className={styles.icon} onClick={toggleOptions} />
       </div>
       {isOptionsVisible && (
         <div className={styles.optionContainer}>

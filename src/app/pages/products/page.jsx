@@ -59,8 +59,10 @@ export default function Page() {
   const filterBySize = (product, checkedLabels) => {
     const selectedLabels = checkedLabels["size"];
     if (selectedLabels && selectedLabels.length > 0) {
-      for (const item of product["size"]) {
-        if (selectedLabels.includes(item)) {
+      for (const item of product["sizes"]) {
+        const productSize = item.size
+        console.log(selectedLabels[0], productSize.toLowerCase())
+        if (selectedLabels[0]=== (productSize.toLowerCase())) {
           return true;
         }
       }
@@ -72,7 +74,6 @@ export default function Page() {
 
   const filterByPrice = (product, checkedLabels) => {
     const selectedPrice = checkedLabels.price;
-    console.log(selectedPrice)
     if (selectedPrice) {
       const productPrice = product.price;
       const checkedPrice = selectedPrice[0];
