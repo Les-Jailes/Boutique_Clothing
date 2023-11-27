@@ -42,7 +42,21 @@ export default function Page() {
     return false;
   };
 
-  const filterByColorOrSize = (product, checkedLabels, key) => {
+  const filterByColor = (product, checkedLabels) => {
+    const selectedLabels = checkedLabels["color"];
+    if (selectedLabels && selectedLabels.length > 0) {
+      for (const item of product["color"]) {
+        if (selectedLabels.includes(item)) {
+          return true;
+        }
+      }
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const filterBySize = (product, checkedLabels, key) => {
     const selectedLabels = checkedLabels[key];
     if (selectedLabels && selectedLabels.length > 0) {
       for (const item of product[key]) {
@@ -82,7 +96,8 @@ export default function Page() {
     const filteredItems = products.filter((product) => {
       let categoryFilter = true;
       let typeFilter = true;
-      let colorOrSizeFilter = true;
+      let sizeFilter = true;
+      let colorFilter = true;
       let priceFilter = true;
 
       if (checkedLabels.category && checkedLabels.category.length > 0) {
@@ -93,20 +108,18 @@ export default function Page() {
         typeFilter = filterByType(product, checkedLabels);
       }
 
-      if (
-        (checkedLabels.color && checkedLabels.color.length > 0) ||
-        (checkedLabels.size && checkedLabels.size.length > 0)
-      ) {
-        colorOrSizeFilter =
-          filterByColorOrSize(product, checkedLabels, "color") &&
-          filterByColorOrSize(product, checkedLabels, "size");
+      if ((checkedLabels.size && checkedLabels.size.length > 0)) {
+        sizeFilter = filterBySize(product, checkedLabels, "size");
+      }
+      if ((checkedLabels.color && checkedLabels.color.length > 0)) {
+        colorFilter = filterByColor(product, checkedLabels) 
       }
 
       if (checkedLabels.price && checkedLabels.price.length > 0) {
         priceFilter = filterByPrice(product, checkedLabels);
       }
 
-      return categoryFilter && typeFilter && colorOrSizeFilter && priceFilter;
+      return categoryFilter && typeFilter && sizeFilter &&colorFilter && priceFilter;
     });
 
     setFilteredProducts(filteredItems);
