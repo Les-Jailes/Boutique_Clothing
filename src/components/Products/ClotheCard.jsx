@@ -11,16 +11,37 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { ColorClothe } from "./ColorClothe";
 import { SizePopup } from "@/utils/SizePopup";
 import { CartContext } from "./CartContext";
+import { useSession } from 'next-auth/react';
+import api from "@/app/api/api";
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSizePopupOpen, setIsSizePopupOpen] = useState(false);
   const cardRef = useRef(null);
   const { addToCart } = useContext(CartContext);
+  const session = useSession();
 
   const handleLike = () => {
     setIsLiked(!isLiked);
+    if(session.status === 'authenticated') addToDB();
   };
+
+  const addToDB = async () => {
+    try{
+      const user = await api.get('/User/email/' + session.data.user.email);
+    const products = user.data.wishlist;
+    products.push(clothe._id);
+    const body = {
+      wishlist: products
+    }
+    await api.put('/User/' + user.data._id, body);
+    console.log(body);
+    }
+    catch(error){
+      console.log(error);
+    }
+    
+  }
 
   const handleAddToCart = (selectedSize) => {
     addToCart({

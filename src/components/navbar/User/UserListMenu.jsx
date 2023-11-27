@@ -6,7 +6,7 @@ const UserListMenu = ({ isLogged, isOpen, handleLogOut }) => {
   return (
     <div className={ `user-list-container ${ isOpen ? 'is-open' : '' }` }>
       <SessionOption isLogged={ isLogged } />
-      <UserListOptions />
+      {isLogged && <UserListOptions />}
       <button className={ `log-out-option ${ isLogged ? 'is-logged' : '' }` } onClick={ handleLogOut } >
         Log out
       </button>
