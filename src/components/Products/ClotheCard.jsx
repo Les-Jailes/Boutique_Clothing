@@ -21,9 +21,27 @@ export const ClotheCard = ({ clothe }) => {
   const { addToCart } = useContext(CartContext);
   const session = useSession();
 
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      api.get('/User/email/' + session.data.user.email)
+        .then(response => {
+          const user = response.data;
+          const wishlist = user.wishlist;
+          const isProductInWishlist = wishlist.includes(clothe._id);
+          setIsLiked(isProductInWishlist);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }, [session.status, clothe._id]);
+
   const handleLike = () => {
     setIsLiked(!isLiked);
-    if(session.status === 'authenticated') addToDB();
+    if(session.status === 'authenticated'){
+      if(!isLiked) addToDB();
+      else removeFromDB();
+    } 
   };
 
   const addToDB = async () => {
@@ -42,6 +60,23 @@ export const ClotheCard = ({ clothe }) => {
     }
     
   }
+
+  const removeFromDB = async () => {
+    try {
+      const user = await api.get('/User/email/' + session.data.user.email);
+      const products = user.data.wishlist;
+  
+      const updatedWishlist = products.filter((productId) => productId !== clothe._id);
+  
+      const body = {
+        wishlist: updatedWishlist
+      };
+  
+      await api.put('/User/' + user.data._id, body);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleAddToCart = (selectedSize) => {
     addToCart({
