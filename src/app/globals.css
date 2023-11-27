@@ -22,7 +22,8 @@
   align-items: center;
   width: 100vw;
   height: 62vh;
-  background-image: url('/bg-404.jpg');
+  background: linear-gradient(rgba(5, 7, 12, 0.75), rgba(5, 7, 12, 0.75)), 
+  url('/bg-404.jpg') no-repeat center center fixed;
   background-size: cover;
   background-position: center;
   gap: 3rem;
