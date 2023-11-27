@@ -32,49 +32,49 @@ export const validatePassword = (password) => {
   return [true, ""];
 };
 
-  export const validateTextField = (text, typeOfText) =>{
-    if(!text || text === ""){
-        return [false, typeOfText + " cannot be empty"];
-    }
-    if(text.length>=25){
-      return [false, typeOfText + " cannot be more than 16 characters long."];
-    }
-    if (text.length < 3) {
-      return [false, typeOfText + " must be at least 3 characters long."];
-    }
-    const regex = /^[A-Za-z\s]+$/;
-    if (!regex.test(text)) {
-      return [false, typeOfText + " should only contain letters and spaces."];
-    }
-    return [true,""];
-  };
+export const validateTextField = (text, typeOfText) => {
+  if (!text || text === "") {
+    return [false, typeOfText + " cannot be empty"];
+  }
+  if (text.length >= 25) {
+    return [false, typeOfText + " cannot be more than 16 characters long."];
+  }
+  if (text.length < 3) {
+    return [false, typeOfText + " must be at least 3 characters long."];
+  }
+  const regex = /^[A-Za-z\s]+$/;
+  if (!regex.test(text)) {
+    return [false, typeOfText + " should only contain letters and spaces."];
+  }
+  return [true, ""];
+};
 
 export const validateNumberField = (ci, type) => {
   if (!ci || ci === "") {
     return [false, type + " field cannot be empty."];
   }
-  if(ci.length>=16){
+  if (ci.length >= 16) {
     return [false, type + " cannot be more than 16 characters long."];
   }
-  if(ci.charAt(0) == "0"){
+  if (ci.charAt(0) == "0") {
     return [false, type + " not valid"];
   }
   return [true, ""];
 }
 
-  export const validateCiField = (ci) => {
-    if (!ci || ci === "") {
-      return [false, "CI field cannot be empty."];
-    }
-    if (!/^\d+$/.test(ci)) {
-      return [false, "CI must contain only numbers."];
-    }  
-    if (ci.length >= 16) {
-      return [false, "CI cannot be more than 16 characters long."];
-    }    
-    if (ci.charAt(0) === "0") {
-      return [false, "CI not valid"];
-    }    
-    return [true, ""];
+export const validateCiField = (ci) => {
+  if (!ci || ci === "") {
+    return [false, "CI field cannot be empty."];
   }
+  if (!/^\d+$/.test(ci)) {
+    return [false, "CI must contain only numbers."];
+  }
+  if (ci.length < 6 || ci.length > 16) {
+    return [false, "CI must be between 6 and 16 characters long."];
+  }
+  if (ci.charAt(0) === "0") {
+    return [false, "CI not valid"];
+  }
+  return [true, ""];
+};
 
