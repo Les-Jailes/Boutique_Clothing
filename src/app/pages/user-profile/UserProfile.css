@@ -82,6 +82,10 @@ body {
   appearance: none;
 }
 
+.filter-bar option {
+  color: #000; 
+}
+
 .button-edit {
   text-align: center;
   border: 0;
