@@ -10,9 +10,10 @@ import styles from "@/app/pages/products/page.module.css";
 import api from '@/app/api/api'
 import { useSession } from "next-auth/react";
 import NoProductsFound from "./NoProductsFound";
+import { useRouter } from 'next/navigation';
 
 
-export default function Page(ids) {
+export default function Page() {
   const [pagination, setPagination] = useState([]);
   const [products, setProducts] = useState([]);
   const [currentlyPagination, setCurrentlyPagination] = useState(0);
@@ -22,14 +23,20 @@ export default function Page(ids) {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [empty, setEmpty] = useState(false);
+  const router = useRouter();
 
   const session  = useSession();
 
+  
   useEffect(() => {
-    if (session.status === 'authenticated') {
+    if (session.status !== "authenticated") {
+      window.location.href = "/pages/account/login";
+    } else {
       fillWishlistProducts();
     }
-  }, [session.status, products]);
+  }, [session.status], products);
+
+
 
   const fillWishlistProducts = async () => {
 
