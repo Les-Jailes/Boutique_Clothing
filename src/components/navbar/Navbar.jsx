@@ -11,11 +11,25 @@ import { signOut, useSession } from "next-auth/react";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const session = useSession();
+
+  useEffect(() => {
+    let test = window.location.pathname.includes("/pages/products/search");
+    console.log(test);
+    if (!test) {
+      setSearchTerm("");
+      localStorage.removeItem("lastSearch");
+    }
+  }, []);
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });
     window.location.href = "/pages/account/login";
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
   };
 
   const handleScroll = () => {
@@ -36,10 +50,56 @@ const Navbar = () => {
     }
   }, [session]);
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleLogoClick = () => {
+    setSearchTerm("");
+    localStorage.removeItem("lastSearch");
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim() === "") {
+      localStorage.removeItem("lastSearch");
+      window.location.href = `/pages/products`;
+    } else {
+      localStorage.setItem("lastSearch", searchTerm);
+      window.location.href = `/pages/products/search?query=${encodeURIComponent(
+        searchTerm
+      )}`;
+    }
+  };
+
+  useEffect(() => {
+    const lastSearch = localStorage.getItem("lastSearch");
+    if (lastSearch) {
+      setSearchTerm(lastSearch);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      const lastSearch = localStorage.getItem("lastSearch");
+      if (lastSearch) {
+        setSearchTerm(lastSearch);
+      } else {
+        setSearchTerm("");
+      }
+    };
+
+    window.addEventListener("popstate", handleRouteChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleRouteChange);
+    };
+  }, []);
+
   return (
     <div className={`${style.header} ${scrolled ? style.active : ""}`}>
       <div className={style.container}>
-        <Link href={"/"} className={style.logoLink}>
+        <Link href={"/"} onClick={handleLogoClick} className={style.logoLink}>
           <Image
             src="https://i.postimg.cc/FzHMbWPS/logo.png"
             alt="logo"
@@ -51,12 +111,23 @@ const Navbar = () => {
           />
         </Link>
         <div className={style.searchContainer}>
-          <form action="" className={style.searchBar}>
+          <form onSubmit={handleSearchSubmit} className={style.searchBar}>
             <input
               type="text"
               placeholder="Search ..."
               className={style.searchBarInput}
+              onChange={handleSearchChange}
+              value={searchTerm}
             />
+            {searchTerm && (
+              <button
+                onClick={clearSearch}
+                type="button"
+                className={style.clearButton}
+              >
+                X
+              </button>
+            )}
             <button type="submit" className={style.searchButton}>
               <div className={style.imgContainer}>
                 <AiOutlineSearch color="#fff" size={24} />
