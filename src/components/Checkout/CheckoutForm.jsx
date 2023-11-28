@@ -1,33 +1,33 @@
-'use client'
+"use client";
 import React from "react";
 import { useState } from "react";
 import '@/css/Checkout/CheckoutForm.css'
 import {AiOutlineFontSize, AiOutlineGlobal} from 'react-icons/ai'
 import {LuMap} from 'react-icons/lu'
 import {FiPhone} from 'react-icons/fi'
-import {validateNumberField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
+import {validateNumberField, validateTextField, validateStreetAddress} from '@/utils/formValidations'
 import CountryDropdown from "./CountryDropdown";
 import { GoArrowRight } from "react-icons/go";
-import Swal from 'sweetalert2';
-import { useRouter } from 'next/navigation'
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-
-
 
 const CheckoutForm = () => {
   const [fullname, setFullname] = useState("");
   const [validationFullname, setValidationFullname] = useState(false);
-  const [validFullnameMessage, setValidFullnameMessage] = useState('');
+  const [validFullnameMessage, setValidFullnameMessage] = useState("");
 
   const [countryCode, setCountryCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
+  const [validationStreetAddress, setValidationStreetAddress] = useState(false);
+  const [validationStreetAddressMessage, setValidationStreetAddressMessage] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [validationZipCode, setValidationZipCode] = useState(false);
-  const [validZipCodeMessage, setValidZipCodeMessage] = useState('');
+  const [validZipCodeMessage, setValidZipCodeMessage] = useState("");
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [validationPhoneNumber, setValidationPhoneNumber] = useState(false);
-  const [validPhoneNumberMessage, setValidPhoneNumberMessage] = useState('');
+  const [validPhoneNumberMessage, setValidPhoneNumberMessage] = useState("");
 
   const [age, setAge] = useState(true);
 
@@ -48,6 +48,22 @@ const CheckoutForm = () => {
     }
   };
 
+  const handleStreetAddressChange = (e) => {
+    const address = e.target.value;
+    setStreetAddress(address);
+    validateStreetAddressValue(address);
+  };
+
+  const validateStreetAddressValue = (address) => {
+    const [isValid, validationResult] = validateStreetAddress(address , "Street Address");
+    if (isValid) {
+      setValidationStreetAddress(false);
+    } else {
+      setValidationStreetAddress(true);
+      setValidationStreetAddressMessage(validationResult);
+    }
+  };
+
   const validatePhoneNumber = (phoneNumber) => {
     const [isValid, validationResult] = validateNumberField(phoneNumber, "Phone number");
     if (isValid) {
@@ -59,12 +75,15 @@ const CheckoutForm = () => {
   };
   const handlePhoneNumberChange = (e) => {
     const phoneNumber = e.target.value;
-    if(phoneNumber >= 0) setPhoneNumber(phoneNumber);
+    if (phoneNumber >= 0) setPhoneNumber(phoneNumber);
     validatePhoneNumber(phoneNumber);
-  }
+  };
 
   const validateZipCode = (zipCode) => {
-    const [isValid, validationResult] = validateNumberField(zipCode, "Zip code");
+    const [isValid, validationResult] = validateNumberField(
+      zipCode,
+      "Zip code"
+    );
     if (isValid) {
       setValidationZipCode(false);
     } else {
@@ -74,16 +93,15 @@ const CheckoutForm = () => {
   };
   const handleZipCodeChange = (e) => {
     const phoneNumber = e.target.value;
-    if(phoneNumber >= 0) setZipCode(phoneNumber);
+    if (phoneNumber >= 0) setZipCode(phoneNumber);
     validateZipCode(phoneNumber);
-  }
-  
+  };
+
   const handleCountryChange = (newCountryCode) => {
     setCountryCode(newCountryCode);
   };
 
   const session = useSession();
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,88 +131,99 @@ const CheckoutForm = () => {
 
   return (
     <div className="formContainer">
+      <form onSubmit={handleSubmit} className="form">
+        <h1>CHECKOUT</h1>
+        <div className="inputBox">
+          <AiOutlineFontSize className="icon" />
+          <input
+            className="input"
+            id="fullname"
+            label="Full name"
+            value={fullname}
+            placeholder="Fullname *"
+            onChange={handleFullnameChange}
+          />
+          <p className="validation">
+            {validationFullname ? validFullnameMessage : ""}
+          </p>
+        </div>
 
-    <form onSubmit={handleSubmit} className="form">
-  <h1>CHECKOUT</h1>
-  <div className="inputBox" >
+        <div className="inputBox">
+          <LuMap className="icon" />
+          <input
+            className="input"
+            id="streetAddress"
+            label="Street address"
+            value={streetAddress}
+            placeholder="Street Address *"
+            onChange={handleStreetAddressChange}
+          />
+          <p className="validation">
+            {validationStreetAddress ? validationStreetAddressMessage : ""}
+          </p>
+        </div>
+        <div className="inputBox">
+          <AiOutlineGlobal className="icon" />
+          <input
+            className="input"
+            id="zipCode"
+            label="Zip code"
+            value={zipCode}
+            placeholder="Zip Code *"
+            onChange={handleZipCodeChange}
+          />
+          <p className="validation">
+            {validationZipCode ? validZipCodeMessage : ""}
+          </p>
+        </div>
 
-  <AiOutlineFontSize className="icon" />
-  <input
-    className="input"
-    id="fullname"
-    label="Full name"
-    value={fullname}
-    placeholder="Fullname"
-    onChange={handleFullnameChange}
-  />
-  <p className="validation">{validationFullname ? validFullnameMessage : ''}</p>
-  </div>
-
-  <div className="inputBox" >
-    <LuMap className="icon" />
-  <input
-    className="input"
-    id="streetAddress"
-    label="Street address"
-    value={streetAddress}
-    placeholder="Street address"
-    onChange={(e) => setStreetAddress(e.target.value)}
-    
-  />
-  </div>
-  <div className="inputBox" >
-
-    <AiOutlineGlobal className="icon" />
-  <input
-    className="input"
-    id="zipCode"
-    label="Zip code"
-    value={zipCode}
-    placeholder="Zip code"
-    onChange={handleZipCodeChange}
-    
-  />
-  <p className="validation">{validationZipCode ? validZipCodeMessage : ''}</p>
-  </div>
-  
-  <div className="inputBox" >
-    <FiPhone className="icon" />
-  <input
-    type="text"
-    inputMode="numeric"
-    className="input"
-    id="phoneNumber"
-    label="Phone number"
-    value={phoneNumber}
-    placeholder="Phone number"
-    
+        <div className="inputBox">
+          <FiPhone className="icon" />
+          <input
+            type="text"
+            inputMode="numeric"
+            className="input"
+            id="phoneNumber"
+            label="Phone number"
+            value={phoneNumber}
+            placeholder="Phone Number *"
     onChange={handlePhoneNumberChange}
     
-  />
-  <p className="validation">{validationPhoneNumber ? validPhoneNumberMessage : ''}</p>
-  </div>
+          />
+          <p className="validation">
+            {validationPhoneNumber ? validPhoneNumberMessage : ""}
+          </p>
+        </div>
 
-  <div className="containerDropdown">
-    <CountryDropdown onCountryChange={handleCountryChange} />
-  </div>
-  
+        <div className="containerDropdown">
+          <CountryDropdown onCountryChange={handleCountryChange} />
+        </div>
 
-  <div className="checkboxContainer">
-  <input type="checkbox" className="checkbox" name="vehicle1" value={age} onChange={()=> handleChange()}/>
-  <label className="checkbox-label"> I am over 18 years old or have parental consent. </label>
-  </div>
+        <div className="checkboxContainer">
+          <input
+            type="checkbox"
+            className="checkbox"
+            name="vehicle1"
+            value={age}
+            onChange={() => handleChange()}
+          />
+          <label className="checkbox-label">
+            {" "}
+            I am over 18 years old or have parental consent.{" "}
+          </label>
+        </div>
 
-
-    
-
-    <button type="submit" variant="contained" color="primary" className="buttonNext">
-    <GoArrowRight className="iconNext" size={24}/>
-    Next
-  </button>
-    
-  
-</form>
-</div>
+        <button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="buttonNext"
+        >
+          <GoArrowRight className="iconNext" size={24} />
+          Next
+        </button>
+      </form>
+    </div>
   );
 };
 

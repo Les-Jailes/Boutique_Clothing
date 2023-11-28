@@ -82,29 +82,27 @@ body {
   appearance: none;
 }
 
+.filter-bar option {
+  color: #000; 
+}
+
 .button-edit {
-  text-align: center;
-  border: 0;
-  background-image: linear-gradient(150deg, #254b5e, #546eab, #a7d0d2);
-  border-radius: 20px;
-  color: #fff;
-  font-size: 16px;
-  padding: 5px;
+  padding: .7rem 1.5rem;
+  background-color: #F1E6D2;
+  color: #111;
+  border-radius: 13px;
+  font-style: none;
+  text-decoration: none;
+  font-weight: bold;
+  border-color: #000;
+  transition: all ease .4s;
   cursor: pointer;
-  transition: .3s;
 }
 
-.button-edit span {
-  display: inline-block;
+.button-edit:hover{
+  cursor: pointer;
+  color: #F1E6D2;
   background-color: #111;
-  padding: 16px 24px;
-  border-radius: 15px;
-  transition: .3s;
-}
-
-
-.button-edit:hover span{
-  background: none;
 }
 
 .button-edit:active {
@@ -567,8 +565,6 @@ body {
   .profile-container .input-box {
     width: 100%;
   }
-
-
 
   .input-box input,
   .filter-bar {
