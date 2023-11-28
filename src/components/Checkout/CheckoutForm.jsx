@@ -1,17 +1,13 @@
 "use client";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "@/css/Checkout/CheckoutForm.css";
 import { AiOutlineFontSize, AiOutlineGlobal } from "react-icons/ai";
 import { LuMap } from "react-icons/lu";
 import { FiPhone } from "react-icons/fi";
 import {
   validateNumberField,
-  validateEmail,
-  validatePassword,
-  validateTextField,
+  validateTextField
 } from "@/utils/formValidations";
-import CountryDropdown from "./CountryDropdown";
 import { GoArrowRight } from "react-icons/go";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
@@ -180,9 +176,11 @@ const CheckoutForm = () => {
           value={streetAddress}
           placeholderText="Street address"
           handleInput={(e) => setStreetAddress(e.target.value)}
+          inputType="text"
+          inputMode="text"
         />
 
-        <div className="inputBox input-countries">
+        <div className="input-countries">
           <AiOutlineGlobal className="icon" />
           <DropDownCountries
             options={listCountries}
