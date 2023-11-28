@@ -12,7 +12,6 @@ import api from '@/app/api/api'
 
 const Summary = () => {
   const { cart } = useContext(CartContext);
-  const [isOpen, setIsOpen] = useState(false);
   const { removeFromCart } = useContext(CartContext);
 
   useEffect(() => {
@@ -58,7 +57,6 @@ const Summary = () => {
         <div className="cart-container">
         <div className="list-cart-container">
           {cart.products.map((product) => {
-            console.log(product);
             return <CartCardSummary product={product} key={product.code} showDeleteOption={false}/>;
           })}
         </div>
