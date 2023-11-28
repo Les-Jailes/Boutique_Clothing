@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import api from "@/app/api/api";
-import styles from "@/css/OrderHistoryUser/OrderHistoryUserTable.module.css";
+import styles from "@/css/OrderHistoryUser/OrderHistoryPage.module.css";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
+import GoToProductsDetails from "@/components/OrderHistory/GoToProductsDetails";
+import OrderContainer from "@/components/OrderHistory/OrderContainer";
 import "@/css/OrderHistoryLoader/OrderHistoryLoaderTable.css";
-import { AiOutlineUp } from "react-icons/ai";
-import { AiOutlineDown } from "react-icons/ai";
-import GoToProductsDelails from "@/components/OrderHistory/GoToProductsDetails";
+import { Pagination } from "@/components/Products/Pagination";
+import createPagination from "@/utils/Pagination";
 
 const OrderHistoryUser = () => {
   const session = useSession();
@@ -16,6 +16,10 @@ const OrderHistoryUser = () => {
   const [checkoutUserId, setCheckoutUserId] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [pagination, setPagination] = useState([]);
+  const [currentlyPagination, setCurrentlyPagination] = useState(0);
+  const [leftIsDisable, setLeftIsDisable] = useState(true);
+  const [rightIsDisable, setRightIsDisable] = useState(true);
 
   const handleToggleTable = (orderId) => {
     setSelectedOrderId(orderId === selectedOrderId ? null : orderId);
@@ -40,12 +44,46 @@ const OrderHistoryUser = () => {
         console.error("Error fetching user:", error);
       }
     };
-
+    setCurrentlyPagination(0);
     getUserId();
     setTimeout(() => {
       setLoading(false);
     }, 3000);
   }, [session]);
+
+  useEffect(() => {
+    setPagination(createPagination(checkoutUserId));
+  }, [checkoutUserId]);
+
+  useEffect(() => {
+    if (pagination.length > 1) {
+      setRightIsDisable(false);
+    } else {
+      setRightIsDisable(true);
+    }
+  }, [pagination]);
+
+  const handlePaginationRight = () => {
+    let paginationNumber = currentlyPagination + 1;
+    if (paginationNumber < pagination.length) {
+      setCurrentlyPagination(paginationNumber);
+      setLeftIsDisable(false);
+    }
+    if (paginationNumber === pagination.length - 1) {
+      setRightIsDisable(true);
+    }
+  };
+
+  const handlePaginationLeft = () => {
+    let paginationNumber = currentlyPagination - 1;
+    if (paginationNumber >= 0) {
+      setCurrentlyPagination(paginationNumber);
+      setRightIsDisable(false);
+    }
+    if (paginationNumber === 0) {
+      setLeftIsDisable(true);
+    }
+  };
 
   if (loading) {
     return (
@@ -58,7 +96,7 @@ const OrderHistoryUser = () => {
   if (checkoutUserId.length === 0) {
     return (
       <span>
-        <GoToProductsDelails />
+        <GoToProductsDetails />
       </span>
     );
   }
@@ -68,107 +106,22 @@ const OrderHistoryUser = () => {
       <div className={styles.container__your_products}>
         <h1 className={styles.title}> Order History </h1>
       </div>
-
-      {checkoutUserId.map((order) => (
-        <div key={order._id} className={styles.orderContainer}>
-          <div
-            onClick={() => handleToggleTable(order._id)}
-            className={styles.show_more_information}
-          >
-            <div className={styles.order_id}>
-              <p className={styles.order_id__text}>Order ID:</p>
-              <p className={styles.order_id__value}>{order._id}</p>
-            </div>
-            <div className={styles.date}>
-              <p className={styles.date__text}>Date:</p>
-              <p className={styles.date__value}>{new Date(order.createdAt).toLocaleDateString()}</p>
-            </div>
-            <div className={styles.total_amount}>
-              <p className={styles.total_amount__text}>Total Amount:</p>
-              <p className={styles.total_amount__value}>${order.amount.toFixed(2)}</p>
-            </div>
-            <div className={styles.total_products_purchased}>
-            <p className={styles.total_products_purchased__text}>Total Products Purchased:</p>
-            <p className={styles.total_products_purchased__value}>{order.purchasedProducts.length}</p>
-            </div>
-            
-            <p className={styles.arrow}>{selectedOrderId === order._id ? <AiOutlineUp /> : <AiOutlineDown />}</p>
-          </div>
-
-          {selectedOrderId === order._id && (
-            <div className={styles.table_container}>
-              <table className={styles.table}>
-                <thead className={styles.thead}>
-                  <tr className={styles.tr}>
-                    <th className={styles.th}>Image</th>
-                    <th className={styles.th}>Name of Product</th>
-                    <th className={styles.th}>Price</th>
-                    <th className={styles.th}>Category</th>
-                    <th className={styles.th}>Type</th>
-                    <th className={styles.th}>Color</th>
-                    <th className={styles.th}>Size</th>
-                    <th className={styles.th}>Quantity</th>
-                    <th className={styles.th}>Sub Total</th>
-                  </tr>
-                </thead>
-
-                <tbody className={styles.tbody}>
-                  {order.purchasedProducts.map((product) => (
-                    <tr className={styles.tr} key={product._id}>
-                      <td className={styles.image}>
-                        {product.path.length > 0 && (
-                          <Image
-                            src={product.path[0]}
-                            alt={`Product`}
-                            width={50}
-                            height={50}
-                          />
-                        )}
-                      </td>
-                      <td className={styles.td}>{product.name}</td>
-                      <td className={styles.td}>${product.price}</td>
-                      <td className={styles.td}>{product.category}</td>
-                      <td className={styles.td}>{product.type}</td>
-                      <td className={styles.td}>{product.color?.join(", ")}</td>
-                      <td className={styles.td}>{product.size}</td>
-                      <td className={styles.td}>{product.quantity}</td>
-                      <td className={styles.td}>${(product.price * product.quantity).toFixed(2)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-
-                <tfoot>
-                  <tr>
-                    <td>Total Quantity per Products:</td>
-                    <td>
-                      {order.purchasedProducts.reduce(
-                        (sum, product) => sum + product.quantity,
-                        0
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Total per product:</td>
-                    <td>
-                      $
-                      {order.purchasedProducts
-                        .reduce(
-                          (sum, product) =>
-                            sum + product.price * product.quantity,
-                          0
-                        )
-                        .toFixed(2)}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Taxes: $0</td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          )}
-        </div>
+      {pagination.length > 0 &&
+            pagination[currentlyPagination].map((order) => (
+        <OrderContainer
+          key={order._id}
+          order={order}
+          selectedOrderId={selectedOrderId}
+          handleToggleTable={handleToggleTable}
+        />
       ))}
+        <Pagination
+          currentlyPagination={currentlyPagination}
+          changePaginationRight={handlePaginationRight}
+          changePaginationLeft={handlePaginationLeft}
+          leftIsDisable={leftIsDisable}
+          rightIsDisable={rightIsDisable}
+        />
     </div>
   );
 };
