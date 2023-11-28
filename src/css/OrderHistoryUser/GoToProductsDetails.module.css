@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 62vh;
+  background-image: url("/bg-goToProductsDetails.jpg");
+  background-size: cover;
+  background-position: center;
+  gap: 3rem;
+}
+.container__top,
+.container__bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.container__top {
+  font-size: 3rem;
+  text-shadow: 2px 2px 2px #000;
+}
+.container__bottom {
+  gap: 2rem;
+}
+.container__message {
+  font-size: 1rem;
+  font-weight: bold;
+  max-width: 650px;
+  text-align: center;
+}
+
+.container__button {
+  padding: 0.7rem 1.5rem;
+  background-color: #f1e6d2;
+  color: #111;
+  border-radius: 3px;
+  font-style: none;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all ease 0.4s;
+}
+
+.container__button:hover {
+  cursor: hand;
+  color: #f1e6d2;
+  background-color: #111;
+}
