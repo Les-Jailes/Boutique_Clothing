@@ -13,6 +13,8 @@ import { SizePopup } from "@/utils/SizePopup";
 import { CartContext } from "./CartContext";
 import { useSession } from 'next-auth/react';
 import api from "@/app/api/api";
+import Loader from '@/utils/Loader'
+import { showAlertMessageAutomatically } from "@/utils/alerts";
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -20,6 +22,8 @@ export const ClotheCard = ({ clothe }) => {
   const cardRef = useRef(null);
   const { addToCart } = useContext(CartContext);
   const session = useSession();
+  const [isLoading, setIsLoading] = useState(false); 
+  const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
     if (session.status === 'authenticated') {
@@ -37,11 +41,15 @@ export const ClotheCard = ({ clothe }) => {
   }, [session.status, clothe._id]);
 
   const handleLike = () => {
-    setIsLiked(!isLiked);
     if(session.status === 'authenticated'){
+      setIsLogged(true);
+      setIsLiked(!isLiked);
+      setIsLoading(true);
       if(!isLiked) addToDB();
       else removeFromDB();
-    } 
+    }
+    else setIsLogged(false);
+    
   };
 
   const addToDB = async () => {
@@ -53,11 +61,11 @@ export const ClotheCard = ({ clothe }) => {
       wishlist: products
     }
     await api.put('/User/' + user.data._id, body);
-    console.log(body);
     }
     catch(error){
       console.log(error);
     }
+    setIsLoading(false);
     
   }
 
@@ -76,6 +84,7 @@ export const ClotheCard = ({ clothe }) => {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   const handleAddToCart = (selectedSize) => {
@@ -108,6 +117,7 @@ export const ClotheCard = ({ clothe }) => {
 
   return (
     <div className="clothe-card-container">
+      {isLoading && <Loader isLoaderVisible={isLoading}/>}
       <div className={`card-image-section ${clothe.category.toLowerCase()}`}>
         <Image
           src={clothe.path[0]}
@@ -132,10 +142,10 @@ export const ClotheCard = ({ clothe }) => {
           <div className="section-card card-buttons">
             <button
               className="options-card like-card"
-              onClick={() => handleLike()}
+              onClick={handleLike}
             >
               {!isLiked ? (
-                <AiOutlineHeart color="red" />
+                <AiOutlineHeart color="red"/>
               ) : (
                 <AiFillHeart color="red" />
               )}

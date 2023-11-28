@@ -20,6 +20,7 @@ export default function Page() {
   const [leftIsDisable, setLeftIsDisable] = useState(true);
   const [rightIsDisable, setRightIsDisable] = useState(true);
 
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [empty, setEmpty] = useState(false);
@@ -29,12 +30,11 @@ export default function Page() {
 
   
   useEffect(() => {
-    if (session.status !== "authenticated") {
-      window.location.href = "/pages/account/login";
-    } else {
+    if (session.status === 'authenticated') {
       fillWishlistProducts();
     }
-  }, [session.status], products);
+  }, [session.status, products]);
+
 
 
 
@@ -49,7 +49,6 @@ export default function Page() {
       for(let productId of user.data.wishlist) {
       
         const response = await api.get(`/Product/${productId}`);
-        
         wishlistProducts.push(response.data);
         
       }
