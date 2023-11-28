@@ -31,7 +31,7 @@ export default function Page() {
     if (session.status === 'authenticated') {
       fillWishlistProducts();
     }
-  }, [session.status, products]);
+  }, [session.status, isLoading, products]);
 
   const fillWishlistProducts = async () => {
 
