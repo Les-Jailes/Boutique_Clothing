@@ -1,9 +1,9 @@
 import React from "react";
-import '@/css/UserOption/SessionOptions.css'
+import "@/css/UserOption/SessionOptions.css";
 
-const SessionOption = ({ isLogged }) => {
+const SessionOption = () => {
   return (
-    <div className={ `session-option-container ${ !isLogged ? 'is-not-logged' : '' }` }>
+    <div className="session-option-container is-not-logged">
       <a href="/pages/account/login" className="log-in-option">
         Log In
       </a>
@@ -11,7 +11,7 @@ const SessionOption = ({ isLogged }) => {
         Sign Up
       </a>
     </div>
-  )
+  );
 };
 
 export default SessionOption;

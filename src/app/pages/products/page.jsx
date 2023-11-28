@@ -26,6 +26,12 @@ export default function Page() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
 
+    const extractUniqueSizes = (data) => {
+    const uniqueSizes = [...new Set(Object.values(data).map(item => item.size && item.size.toLowerCase()))];
+    return uniqueSizes;
+  };
+  
+
   const filterByCategory = (product, checkedLabels) => {
     const selectedCategories = checkedLabels.category;
     if (selectedCategories && selectedCategories.length > 0) {
@@ -42,11 +48,26 @@ export default function Page() {
     return false;
   };
 
-  const filterByColorOrSize = (product, checkedLabels, key) => {
-    const selectedLabels = checkedLabels[key];
+  const filterByColor = (product, checkedLabels) => {
+    const selectedLabels = checkedLabels["color"];
     if (selectedLabels && selectedLabels.length > 0) {
-      for (const item of product[key]) {
+      for (const item of product["color"]) {
         if (selectedLabels.includes(item)) {
+          return true;
+        }
+      }
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const filterBySize = (product, checkedLabels) => {
+    const selectedLabels = checkedLabels["size"];
+    if (selectedLabels && selectedLabels.length > 0) {
+      for (const item of product["sizes"]) {
+        const productSize = item.size
+        if (selectedLabels[0]=== (productSize.toLowerCase())) {
           return true;
         }
       }
@@ -82,7 +103,8 @@ export default function Page() {
     const filteredItems = products.filter((product) => {
       let categoryFilter = true;
       let typeFilter = true;
-      let colorOrSizeFilter = true;
+      let sizeFilter = true;
+      let colorFilter = true;
       let priceFilter = true;
 
       if (checkedLabels.category && checkedLabels.category.length > 0) {
@@ -93,26 +115,32 @@ export default function Page() {
         typeFilter = filterByType(product, checkedLabels);
       }
 
-      if (
-        (checkedLabels.color && checkedLabels.color.length > 0) ||
-        (checkedLabels.size && checkedLabels.size.length > 0)
-      ) {
-        colorOrSizeFilter =
-          filterByColorOrSize(product, checkedLabels, "color") &&
-          filterByColorOrSize(product, checkedLabels, "size");
+      if ((checkedLabels.size && checkedLabels.size.length > 0)) {
+        sizeFilter = filterBySize(product, checkedLabels);
+      }
+      if ((checkedLabels.color && checkedLabels.color.length > 0)) {
+        colorFilter = filterByColor(product, checkedLabels) 
       }
 
       if (checkedLabels.price && checkedLabels.price.length > 0) {
         priceFilter = filterByPrice(product, checkedLabels);
       }
 
-      return categoryFilter && typeFilter && colorOrSizeFilter && priceFilter;
+      return categoryFilter && typeFilter && sizeFilter &&colorFilter && priceFilter;
     });
 
     setFilteredProducts(filteredItems);
     setCurrentlyPagination(0);
     setLeftIsDisable(true);
   };
+
+  const filters = [
+    { title: "category", options: categories },
+    { title: "type", options: types },
+    { title: "color", options: colors  },
+    { title: "size", options: extractUniqueSizes(sizes)  },
+    { title: "price", options: ["0 - 50", "51 - 100", "101 - 150", "151 - 300 ", "301 - 500"] },
+  ];
 
   useEffect(() => {
     const showCartEmptyToast = localStorage.getItem("showCartEmptyToast");
@@ -213,10 +241,7 @@ export default function Page() {
   return (
     <div className={styles.container}>
       <Filter
-        categories={categories}
-        types={types}
-        colors={colors}
-        sizes={sizes}
+        filters= {filters}
         onFilterChange={(title, selectedOptions) => {
           setCheckedLabels((prevLabels) => ({
             ...prevLabels,
