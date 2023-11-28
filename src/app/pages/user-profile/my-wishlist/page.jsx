@@ -1,17 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import createPagination from "@/utils/Pagination";
 import { ClotheCard } from "@/components/Products/ClotheCard";
 import "@/css/Products/ProductsPage.css";
 import { Pagination } from "@/components/Products/Pagination";
-import Filter from "@/components/filter/Filter";
 import styles from "@/app/pages/products/page.module.css";
 import api from '@/app/api/api'
 import { useSession } from "next-auth/react";
 import NoProductsFound from "./NoProductsFound";
 import { useRouter } from 'next/navigation';
-
+import Loader from '@/utils/Loader'
 
 export default function Page() {
   const [pagination, setPagination] = useState([]);
@@ -20,49 +18,43 @@ export default function Page() {
   const [leftIsDisable, setLeftIsDisable] = useState(true);
   const [rightIsDisable, setRightIsDisable] = useState(true);
 
-
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
   const [empty, setEmpty] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   const session  = useSession();
 
-  
+
   useEffect(() => {
     if (session.status === 'authenticated') {
+      setIsLoading(true);
       fillWishlistProducts();
     }
   }, [session.status, products]);
-
-
-
 
   const fillWishlistProducts = async () => {
 
     const wishlistProducts = [];
 
     try {
-  
       const user = await api.get('/User/email/' + session.data.user.email);
-      
+
       for(let productId of user.data.wishlist) {
-      
         const response = await api.get(`/Product/${productId}`);
         wishlistProducts.push(response.data);
-        
       }
       
       setProducts(wishlistProducts);
-            
+
     } catch (error) {
       console.log(error);
     }
 
-    if(wishlistProducts.length === 0){
-      setEmpty(true);
-    }
+    if(wishlistProducts.length === 0) setEmpty(true);
   
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -109,6 +101,7 @@ export default function Page() {
     <NoProductsFound />
   ) : (
     <div className={styles.container}>
+      {isLoading && <Loader isLoaderVisible={isLoading}/>}
       <div className="products-page">
         <h2 className="your-cart-title">YOUR WISHLIST</h2>
       <div className="product-container">
