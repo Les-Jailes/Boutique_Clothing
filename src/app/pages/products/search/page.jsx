@@ -18,18 +18,53 @@ const SearchPage = () => {
   const [types, setTypes] = useState([]);
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
-  const [searchMessage, setSearchMessage] = useState('');
+  const [searchMessage, setSearchMessage] = useState("");
 
   const [checkedLabels, setCheckedLabels] = useState({});
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
-  
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const searchQuery = queryParams.get("query");
+    if (searchQuery) {
+      fetchSearchResults(searchQuery);
+    }
+  }, []);
+
+  const fetchSearchResults = async (query) => {
+    try {
+      const response = await api.get(
+        `/Product/search?q=${encodeURIComponent(query)}`
+      );
+      const data = response.data;
+
+      if ("message" in data) {
+        setSearchMessage(data.message);
+      }
+
+      if (data.length > 0) {
+        setProducts(data);
+        setCategories([...new Set(data.map((product) => product.category))]);
+        setTypes([...new Set(data.map((product) => product.type))]);
+        setColors([...new Set(data.flatMap((product) => product.color))]);
+        setSizes([...new Set(data.flatMap((product) => product.sizes))]);
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+    }
+  };
+
   useEffect(() => {
     setPagination(createPagination(isFiltered ? filteredProducts : products));
   }, [products, filteredProducts, isFiltered]);
 
   const extractUniqueSizes = (data) => {
-    const uniqueSizes = [...new Set(Object.values(data).map(item => item.size && item.size.toLowerCase()))];
+    const uniqueSizes = [
+      ...new Set(
+        Object.values(data).map((item) => item.size && item.size.toLowerCase())
+      ),
+    ];
     return uniqueSizes;
   };
 
@@ -74,10 +109,10 @@ const SearchPage = () => {
   const filterByColor = (product, checkedLabels) => {
     const selectedLabels = checkedLabels["color"];
     if (selectedLabels && selectedLabels.length > 0) {
-        for (const item of product["color"]) {
-            if (selectedLabels.includes(item)) {
-              return true;
-            }
+      for (const item of product["color"]) {
+        if (selectedLabels.includes(item)) {
+          return true;
+        }
       }
       return false;
     } else {
@@ -89,8 +124,8 @@ const SearchPage = () => {
     const selectedLabels = checkedLabels["size"];
     if (selectedLabels && selectedLabels.length > 0) {
       for (const item of product["sizes"]) {
-        const productSize = item.size
-        if (selectedLabels[0]=== (productSize.toLowerCase())) {
+        const productSize = item.size;
+        if (selectedLabels[0] === productSize.toLowerCase()) {
           return true;
         }
       }
@@ -138,18 +173,20 @@ const SearchPage = () => {
         typeFilter = filterByType(product, checkedLabels);
       }
 
-      if ((checkedLabels.size && checkedLabels.size.length > 0)) {
+      if (checkedLabels.size && checkedLabels.size.length > 0) {
         sizeFilter = filterBySize(product, checkedLabels);
       }
-      if ((checkedLabels.color && checkedLabels.color.length > 0)) {
-        colorFilter = filterByColor(product, checkedLabels) 
+      if (checkedLabels.color && checkedLabels.color.length > 0) {
+        colorFilter = filterByColor(product, checkedLabels);
       }
 
       if (checkedLabels.price && checkedLabels.price.length > 0) {
         priceFilter = filterByPrice(product, checkedLabels);
       }
 
-      return categoryFilter && typeFilter && sizeFilter &&colorFilter && priceFilter;
+      return (
+        categoryFilter && typeFilter && sizeFilter && colorFilter && priceFilter
+      );
     });
 
     setFilteredProducts(filteredItems);
@@ -160,9 +197,12 @@ const SearchPage = () => {
   const filters = [
     { title: "category", options: categories },
     { title: "type", options: types },
-    { title: "color", options: colors  },
-    { title: "size", options: extractUniqueSizes(sizes)  },
-    { title: "price", options: ["0 - 50", "51 - 100", "101 - 150", "151 - 300 ", "301 - 500"] },
+    { title: "color", options: colors },
+    { title: "size", options: extractUniqueSizes(sizes) },
+    {
+      title: "price",
+      options: ["0 - 50", "51 - 100", "101 - 150", "151 - 300 ", "301 - 500"],
+    },
   ];
 
   useEffect(() => {
@@ -219,14 +259,14 @@ const SearchPage = () => {
         {products.length > 0 ? (
           <div className="product-container">
             {pagination[currentlyPagination] &&
-              filterProductsWithValidSizes(pagination[currentlyPagination]).map((product) => (
-                <ClotheCard key={product.code} clothe={product} />
-              ))}
+              filterProductsWithValidSizes(pagination[currentlyPagination]).map(
+                (product) => <ClotheCard key={product.code} clothe={product} />
+              )}
           </div>
         ) : (
           <div className="search-message">{searchMessage}</div>
         )}
-  
+
         {products.length > 0 && (
           <Pagination
             currentlyPagination={currentlyPagination}
@@ -239,7 +279,6 @@ const SearchPage = () => {
       </div>
     </div>
   );
-  
 };
 
 export default SearchPage;
