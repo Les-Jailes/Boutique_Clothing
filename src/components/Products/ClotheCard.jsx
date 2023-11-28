@@ -43,7 +43,6 @@ export const ClotheCard = ({ clothe }) => {
   const handleLike = () => {
     if(session.status === 'authenticated'){
       setIsLogged(true);
-      setIsLiked(!isLiked);
       setIsLoading(true);
       if(!isLiked) addToDB();
       else removeFromDB();
@@ -66,6 +65,7 @@ export const ClotheCard = ({ clothe }) => {
       console.log(error);
     }
     setIsLoading(false);
+    setIsLiked(true);
     
   }
 
@@ -85,6 +85,7 @@ export const ClotheCard = ({ clothe }) => {
       console.error(error);
     }
     setIsLoading(false);
+    setIsLiked(false);
   };
 
   const handleAddToCart = (selectedSize) => {

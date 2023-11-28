@@ -14,3 +14,8 @@
     flex-wrap: wrap;
     gap: 40px;
 }
+
+.your-wishlist-title {
+    text-align: center;
+    font-weight: bold; 
+  }

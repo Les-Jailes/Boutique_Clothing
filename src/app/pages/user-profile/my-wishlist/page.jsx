@@ -45,7 +45,8 @@ export default function Page() {
         wishlistProducts.push(response.data);
       }
       
-      setProducts(wishlistProducts);
+      const uniqueProducts = [...new Set(wishlistProducts)];
+      setProducts(uniqueProducts);
 
     } catch (error) {
       console.log(error);
@@ -103,7 +104,7 @@ export default function Page() {
     <div className={styles.container}>
       {isLoading && <Loader isLoaderVisible={isLoading}/>}
       <div className="products-page">
-        <h2 className="your-cart-title">YOUR WISHLIST</h2>
+        {!isLoading && <h2 className="your-wishlist-title">YOUR WISHLIST</h2>}
       <div className="product-container">
         {pagination.length > 0 &&
           pagination[currentlyPagination] &&
