@@ -9,31 +9,31 @@
     "submenu": [
       {
         "name": "Women",
-        "path": "/pages/categories/women"
+        "path": "/pages/products/women"
       },
       {
         "name": "Men",
-        "path": "/pages/categories/men"
+        "path": "/pages/products/men"
       },
       {
         "name": "Girl",
-        "path": "/pages/categories/girl"
+        "path": "/pages/products/girl"
       },
       {
         "name": "Boy",
-        "path": "/pages/categories/boy"
+        "path": "/pages/products/boy"
       },
       {
         "name": "Summer",
-        "path": "/pages/categories/summer"
+        "path": "/pages/products"
       },
       {
         "name": "Winter",
-        "path": "/pages/categories/winter"
+        "path": "/pages/products"
       },
       {
         "name": "Sales",
-        "path": "/pages/categories/sales"
+        "path": "/pages/products"
       }
     ],
     "path": "/pages/categories",
