@@ -66,6 +66,9 @@ export const validateCiField = (ci) => {
   if (!ci || ci === "") {
     return [false, "CI field cannot be empty."];
   }
+  if (ci.toUpperCase() === "N/A") {
+    return [true, ""];
+  }
   if (!/^\d+$/.test(ci)) {
     return [false, "CI must contain only numbers."];
   }
