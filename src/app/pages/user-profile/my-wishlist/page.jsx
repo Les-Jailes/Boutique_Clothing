@@ -29,7 +29,6 @@ export default function Page() {
 
   useEffect(() => {
     if (session.status === 'authenticated') {
-      setIsLoading(true);
       fillWishlistProducts();
     }
   }, [session.status, products]);
@@ -53,8 +52,9 @@ export default function Page() {
     }
 
     if(wishlistProducts.length === 0) setEmpty(true);
+    else setIsLoading(false);
+
   
-    setIsLoading(false);
   }
 
   useEffect(() => {
