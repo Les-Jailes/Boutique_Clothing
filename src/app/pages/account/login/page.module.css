@@ -136,6 +136,9 @@
     .formContainer{
         padding: 2rem 4rem;
     }
+    .validation{
+        font-size: 9px;
+    }
 }
 
 @media screen and (max-width: 500px){
@@ -143,5 +146,8 @@
         padding: 2rem 4rem;
         gap: 4rem;
         margin: 2rem;
+    }
+    .validation{
+        font-size: 9px;
     }
 }
