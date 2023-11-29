@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './page.module.css';
 import { AiOutlineUser, AiOutlineLock } from 'react-icons/ai';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import api from '@/app/api/api';
 
 const Page = () => {
+  const formRef = useRef(null);
   const [formData, setFormData] = useState({
     name: '',
     telephone: '',
@@ -65,6 +66,16 @@ const Page = () => {
           icon: 'success',
           confirmButtonText: 'OK',
         });
+        if (formRef.current) {
+          formRef.current.reset();
+        }
+        setFormData({
+          name: '',
+          telephone: '',
+          email: '',
+          comments: '',
+        });
+
         
       } catch (error) {
         console.error('Error submitting form:', error);
@@ -79,34 +90,36 @@ const Page = () => {
       email: '',
       comments: '',
     };
-
+  
     if (!data.name.trim()) {
       errors.name = 'Field can not be empty';
+    } else if (!/^[a-zA-Z]+$/.test(data.name)) {
+      errors.name = 'Only alphabetical letters are allowed';
     }
-
+  
     if (data.telephone.length > 10) {
       errors.telephone = 'Field can not be more than 10 characters';
     }
-
+  
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(data.email)) {
       errors.email = 'Email format not valid';
     } else if (data.email.length > 200) {
       errors.email = 'Field can not be more than 200 characters';
     }
-
+  
     if (!data.comments.trim()) {
       errors.comments = 'Field can not be empty';
     } else if (data.comments.length > 400) {
       errors.comments = 'Field can not be more than 400 characters';
     }
-
+  
     return errors;
   };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form ref={formRef} className={styles.form} onSubmit={handleSubmit}>
         <h1 className={styles.title}>CONTACT US</h1>
         <div className={styles.inputBox}>
           <AiOutlineUser className={styles.icon} />
@@ -126,7 +139,7 @@ const Page = () => {
         <div className={styles.inputBox}>
           <AiOutlineLock className={styles.icon} />
           <input
-            type="text"
+            type="number"
             placeholder="Telephone"
             className={styles.input}
             maxLength={10}
