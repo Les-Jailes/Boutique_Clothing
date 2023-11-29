@@ -31,7 +31,7 @@ const OrderSummary = ({ isOpen }) => {
       </div>
       <div className="tax-products-section order-summary-section">
         <p className="order-summary-name-section">Sales taxes</p>
-        <p className="order-summary-total-section">{`${taxes} ${currency}`}</p>
+        <p className="order-summary-total-section">{`${taxes.toFixed(2)} ${currency}`}</p>
       </div>
       <div className="delivery-products-section order-summary-section">
         <p className="order-summary-name-section">Delivery</p>
@@ -42,7 +42,7 @@ const OrderSummary = ({ isOpen }) => {
       <div className="total-order-section order-summary-section">
         <p className="order-summary-name-section">TOTAL</p>
         <p className="order-summary-total-section">
-          {`${total} ${currency}`}
+          {`${(total + taxes).toFixed(2)} ${currency}`}
         </p>
       </div>
     </div>

@@ -7,7 +7,7 @@ import { CartContext } from "@/components/Products/CartContext";
 import CheckoutForm from "@/components/Checkout/CheckoutForm";
 import Summary from "@/components/Checkout/Summary";
 import { useSession } from "next-auth/react";
-import { showToast } from '@/components/Alerts/CustomToast'
+import { showToast } from "@/components/Alerts/CustomToast";
 
 const Checkout = () => {
   const session = useSession();
@@ -22,7 +22,9 @@ const Checkout = () => {
   }, [session]);
 
   useEffect(() => {
-    const showCartEmptyToast = localStorage.getItem("showMissingDataCheckoutForm");
+    const showCartEmptyToast = localStorage.getItem(
+      "showMissingDataCheckoutForm"
+    );
     if (showCartEmptyToast === "true") {
       showToast(
         "Please complete the purchase form before completing the transaction.",
@@ -39,9 +41,7 @@ const Checkout = () => {
   return (
     <div className="shopping-cart-container">
       <div className="your-cart-container">
-        <div className="list-your-cart-container">
-        <CheckoutForm/>
-        </div>
+        <CheckoutForm />
       </div>
       <div className={`more-information-container ${isOpen ? "active" : ""}`}>
         <button
