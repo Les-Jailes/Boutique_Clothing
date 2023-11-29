@@ -21,7 +21,14 @@ const Profile = () => {
     name: '',
     lastName: ''
   });
-  const session = useSession()
+  
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      window.location.href = '/';
+    }
+  }, [status]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;

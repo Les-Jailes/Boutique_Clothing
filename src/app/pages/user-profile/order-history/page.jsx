@@ -11,7 +11,6 @@ import { Pagination } from "@/components/Products/Pagination";
 import createPagination from "@/utils/Pagination";
 
 const OrderHistoryUser = () => {
-  const session = useSession();
   const [userId, setUserId] = useState(null);
   const [checkoutUserId, setCheckoutUserId] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +19,14 @@ const OrderHistoryUser = () => {
   const [currentlyPagination, setCurrentlyPagination] = useState(0);
   const [leftIsDisable, setLeftIsDisable] = useState(true);
   const [rightIsDisable, setRightIsDisable] = useState(true);
+
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      window.location.href = '/';
+    }
+  }, [status]);
 
   const handleToggleTable = (orderId) => {
     setSelectedOrderId(orderId === selectedOrderId ? null : orderId);
