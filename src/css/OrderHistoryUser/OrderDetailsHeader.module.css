@@ -1,0 +1,144 @@
+/* OrderDetailsHeader.module.css */
+
+.show_more_information {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 460px 460px 40px;
+  grid-template-rows: 50% 50%;
+  grid-template-areas:
+    "orderId total quantity button"
+    "date total quantity button";
+}
+
+.order_id,
+.date,
+.total_amount,
+.total_products_purchased,
+.arrow {
+  width: 100%;
+  padding: 10px;
+}
+
+.date {
+  grid-area: date;
+}
+
+.total_products_purchased {
+  grid-area: quantity;
+}
+
+.arrow {
+  grid-area: button;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.order_id,
+.date {
+  display: flex;
+}
+
+.order_id__value,
+.date__value,
+.total_amount__value,
+.total_products_purchased__value {
+  padding: 0px 0px 0px 5px;
+}
+
+.order_id {
+  grid-area: orderId;
+}
+
+.order_id__text,
+.date__text,
+.total_amount__text,
+.total_products_purchased__text {
+  font-weight: bold;
+}
+
+.total_amount {
+  grid-area: total;
+}
+
+.total_amount__text,
+.total_amount__value,
+.total_products_purchased__text,
+.total_products_purchased__value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 1490px) {
+  .show_more_information {
+    grid-template-columns: auto 360px 360px 40px;
+  }
+}
+
+@media screen and (max-width: 1315px) {
+
+  .show_more_information {
+    grid-template-columns: auto 260px 260px 40px;
+  }
+}
+
+@media screen and (max-width: 1245px) {
+  
+  .show_more_information {
+    grid-template-columns: auto;
+  }
+}
+
+@media screen and (max-width: 1190px) {
+
+  .show_more_information {
+    grid-template-columns: auto;
+  }
+}
+
+@media screen and (max-width: 1115px) {
+
+  .show_more_information {
+    grid-template-columns: auto;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+
+  .show_more_information {
+    font-size: 12px;
+    grid-template-columns: auto;
+    grid-template-rows: 30% 30%;
+    grid-template-areas:
+      "orderId quantity button"
+      "date quantity button"
+      "total quantity button";
+  }
+  
+  .total_amount {
+    display: flex;
+  }
+
+}
+
+@media screen and (max-width: 870px) {
+  .total_products_purchased {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 518px) {
+  .show_more_information {
+    grid-template-columns: auto;
+    grid-template-rows: 20% 20%;
+    grid-template-areas:
+      "orderId"
+      "date"
+      "total"
+      "quantity"
+      "button";
+  }
+}

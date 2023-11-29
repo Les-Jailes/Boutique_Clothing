@@ -2,6 +2,7 @@ export const navFooterItems = [
     {
         id: 1,
         title: 'Women',
+        link: "/pages/products/women",
         subcategories: [
             { id: 11, name: 'Shirts', img: '/shirts.png', alt: 'Shirts Image', url: '/women/shirts' },
             { id: 12, name: 'Tshirts', img: '/t-shirts.png', alt: 'T- Shirts Image', url: '/women/t-shirts' },
@@ -18,6 +19,7 @@ export const navFooterItems = [
     {
         id: 2,
         title: 'Men',
+        link: "/pages/products/men",
         subcategories: [
             { id: 21, name: 'Shirts', img: '/shirts.png', alt: 'Shirts Image', url: '/men/shirts' },
             { id: 22, name: 'Tshirts', img: '/t-shirts.png', alt: 'T-Shirts Image', url: '/men/t-shirts' },
@@ -33,6 +35,7 @@ export const navFooterItems = [
     {
         id: 3,
         title: 'Boy',
+        link: "/pages/products/boy",
         subcategories: [
             { id: 31, name: 'Shirts', img: '/shirts.png', alt: 'Shirts Image', url: '/boy/shirts' },
             { id: 32, name: 'Tshirts', img: '/t-shirts.png', alt: 'T-Shirts Image', url: '/boy/t-shirts' },
@@ -48,6 +51,7 @@ export const navFooterItems = [
     {
         id: 4,
         title: 'Girl',
+        link: "/pages/products/girl",
         subcategories: [
             { id: 41, name: 'Tshirts', img: '/t-shirts.png', alt: 'T-Shirts Image', url: '/girl/t-shirts' },
             { id: 42, name: 'Sweaters', img: '/swearters.png', alt: 'Sweaters Image', url: '/girl/sweaters' },
@@ -63,11 +67,11 @@ export const navFooterItems = [
     {
         id: 5,
         title: 'Summer',
-        url: '/summer',
+        link: "/",
     },
     {
         id: 6,
         title: 'Sales',
-        url: '/sales',
+        link: "/",
     },
 ];
