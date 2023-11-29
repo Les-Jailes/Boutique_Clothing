@@ -49,6 +49,19 @@ export const validateTextField = (text, typeOfText) => {
   return [true, ""];
 };
 
+export const validateStreetAddress = (text, typeOfText) =>{
+  if(!text || text === ""){
+      return [false, typeOfText + " cannot be empty"];
+  }
+  if(text.length >= 120){
+    return [false, typeOfText + " cannot be more than 120 characters long."];
+  }
+  if (text.length < 2) {
+    return [false, typeOfText + " must be at least 2 characters long."];
+  }
+  return [true,""];
+};
+
 export const validateNumberField = (ci, type) => {
   if (!ci || ci === "") {
     return [false, type + " field cannot be empty."];
