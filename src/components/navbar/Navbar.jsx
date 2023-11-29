@@ -15,8 +15,7 @@ const Navbar = () => {
   const session = useSession();
 
   useEffect(() => {
-    let test = window.location.pathname.includes("/pages/products/search");
-    console.log(test);
+    let test = window.location.pathname.includes("/pages/searcher");
     if (!test) {
       setSearchTerm("");
       localStorage.removeItem("lastSearch");
@@ -66,7 +65,7 @@ const Navbar = () => {
       window.location.href = `/pages/products`;
     } else {
       localStorage.setItem("lastSearch", searchTerm);
-      window.location.href = `/pages/products/search?query=${encodeURIComponent(
+      window.location.href = `/pages/searcher?query=${encodeURIComponent(
         searchTerm
       )}`;
     }

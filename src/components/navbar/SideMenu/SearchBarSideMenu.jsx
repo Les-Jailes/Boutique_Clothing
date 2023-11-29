@@ -27,7 +27,7 @@ const SearchBarSideMenu = () => {
       window.location.href = `/pages/products`;
     } else {
       localStorage.setItem("lastSearch", searchTerm);
-      window.location.href = `/pages/products/search?query=${encodeURIComponent(
+      window.location.href = `/pages/searcher?query=${encodeURIComponent(
         searchTerm
       )}`;
     }
