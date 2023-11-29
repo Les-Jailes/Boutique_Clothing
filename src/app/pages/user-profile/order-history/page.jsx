@@ -20,13 +20,16 @@ const OrderHistoryUser = () => {
   const [leftIsDisable, setLeftIsDisable] = useState(true);
   const [rightIsDisable, setRightIsDisable] = useState(true);
 
-  const { data: session, status } = useSession();
+  const [isLoading, setIsLoading] = useState(true);
+  const session = useSession();
+  const [redirected, setRedirected] = useState(false);
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    if (!redirected && session.status === "unauthenticated") {
       window.location.href = '/';
+      setRedirected(true);
     }
-  }, [status]);
+  }, [session, redirected]);
 
   const handleToggleTable = (orderId) => {
     setSelectedOrderId(orderId === selectedOrderId ? null : orderId);
@@ -49,6 +52,8 @@ const OrderHistoryUser = () => {
         }
       } catch (error) {
         console.error("Error fetching user:", error);
+      }finally {
+        setIsLoading(false);
       }
     };
     setCurrentlyPagination(0);

@@ -21,14 +21,16 @@ const Profile = () => {
     name: '',
     lastName: ''
   });
-  
-  const { data: session, status } = useSession();
+  const [isLoading, setIsLoading] = useState(true);
+  const session = useSession();
+  const [redirected, setRedirected] = useState(false);
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    if (!redirected && session.status === "unauthenticated") {
       window.location.href = '/';
+      setRedirected(true);
     }
-  }, [status]);
+  }, [session, redirected]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -151,12 +153,22 @@ const Profile = () => {
           }
         } catch (error) {
           console.error("Error in fetching user data:", error);
+        }finally {
+          setIsLoading(false);
         }
+      } else {
+        setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
       }
     };
 
     fetchData();
   }, [session, getUser]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const handleSelectChange = (e) => {
     setGender(e.target.value);
@@ -168,6 +180,7 @@ const Profile = () => {
   ];
 
   return (
+    <div className='profile-container_user'>
     <div className='profile-container'>
       <form action=''>
         <h1>Profile</h1>
@@ -276,6 +289,7 @@ const Profile = () => {
           }
         </div>
       </form>
+    </div>
     </div>
   );
 }
