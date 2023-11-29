@@ -36,13 +36,13 @@ const CheckoutFieldWithValidation = ({
 };
 
 CheckoutFieldWithValidation.propTypes = {
-  icon: PropTypes.object.isRequired,
+  icon: PropTypes.func.isRequired,
   placeholderText: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   handleInput: PropTypes.func.isRequired,
   inputType: PropTypes.string.isRequired,
-  validationComponent: PropTypes.func.isRequired,
+  validationComponent: PropTypes.bool.isRequired,
   validationComponentMessage: PropTypes.string.isRequired,
   inputMode: PropTypes.string.isRequired,
 };
@@ -73,7 +73,7 @@ const CheckoutField = ({
 };
 
 CheckoutField.propTypes = {
-  icon: PropTypes.object.isRequired,
+  icon: PropTypes.func.isRequired,
   placeholderText: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -107,7 +107,7 @@ const DropdownField = ({
 };
 
 DropdownField.propTypes = {
-  icon: PropTypes.object.isRequired,
+  icon: PropTypes.func.isRequired,
   listOptions: PropTypes.array.isRequired,
   placeholderText: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -139,7 +139,7 @@ const DropdownFieldSubcity = ({
 };
 
 DropdownFieldSubcity.propTypes = {
-  icon: PropTypes.object.isRequired,
+  icon: PropTypes.func.isRequired,
   listOptions: PropTypes.array.isRequired,
   placeholderText: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -170,7 +170,7 @@ const CheckoutFieldNoEditable = ({
 };
 
 CheckoutFieldNoEditable.propTypes = {
-  icon: PropTypes.object.isRequired,
+  icon: PropTypes.func.isRequired,
   placeholderText: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,

@@ -37,7 +37,24 @@ export const validateTextField = (text, typeOfText) => {
     return [false, typeOfText + " cannot be empty"];
   }
   if (text.length >= 25) {
-    return [false, typeOfText + " cannot be more than 16 characters long."];
+    return [false, typeOfText + " cannot be more than 25 characters long."];
+  }
+  if (text.length < 3) {
+    return [false, typeOfText + " must be at least 3 characters long."];
+  }
+  const regex = /^[A-Za-z\s]+$/;
+  if (!regex.test(text)) {
+    return [false, typeOfText + " should only contain letters and spaces."];
+  }
+  return [true, ""];
+};
+
+export const validateFullNameField = (text, typeOfText) => {
+  if (!text || text === "") {
+    return [false, typeOfText + " cannot be empty"];
+  }
+  if (text.length >= 100) {
+    return [false, typeOfText + " cannot be more than 100 characters long."];
   }
   if (text.length < 3) {
     return [false, typeOfText + " must be at least 3 characters long."];

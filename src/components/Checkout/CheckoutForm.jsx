@@ -6,7 +6,7 @@ import { LuMap } from "react-icons/lu";
 import { FiPhone } from "react-icons/fi";
 import {
   validateNumberField,
-  validateTextField,
+  validateFullNameField,
 } from "@/utils/formValidations";
 import { GoArrowRight } from "react-icons/go";
 import Swal from "sweetalert2";
@@ -84,7 +84,7 @@ const CheckoutForm = () => {
     validateFullname(username);
   };
   const validateFullname = (text) => {
-    const [isValid, validationResult] = validateTextField(text, "Fullname");
+    const [isValid, validationResult] = validateFullNameField(text, "Fullname");
     if (isValid) {
       setValidationFullname(false);
     } else {
