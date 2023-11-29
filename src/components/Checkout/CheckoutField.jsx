@@ -88,7 +88,8 @@ const DropdownField = ({
   placeholderText,
   value,
   setValue,
-  handleClick
+  handleClick,
+  typeOption
 }) => {
   return (
     <div className="input-countries">
@@ -99,6 +100,7 @@ const DropdownField = ({
         value={value}
         setValue={setValue}
         handleClick={handleClick}
+        typeOption={typeOption}
       />
     </div>
   );
@@ -110,7 +112,8 @@ DropdownField.propTypes = {
   placeholderText: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  typeOption: PropTypes.string.isRequired
 };
 
 const DropdownFieldSubcity = ({

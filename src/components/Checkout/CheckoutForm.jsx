@@ -111,11 +111,6 @@ const CheckoutForm = () => {
     validatePhoneNumber(phoneNumber);
   };
 
-  const handleZipCodeChange = (e) => {
-    const phoneNumber = e.target.value;
-    setZipCode(phoneNumber);
-  };
-
   const session = useSession();
 
   const handleSubmit = (e) => {
@@ -265,6 +260,7 @@ const CheckoutForm = () => {
           value={country}
           setValue={setCountry}
           handleClick={handleCountryChange}
+          typeOption="Country"
         />
 
         {listCity && listCity.length > 0 ? (
@@ -275,6 +271,7 @@ const CheckoutForm = () => {
             value={city}
             setValue={setCity}
             handleClick={handleCityChange}
+            typeOption="city"
           />
         ) : (
           ""
