@@ -48,14 +48,13 @@ const Page = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm(formData);
     setErrors(validationErrors);
 
     if (Object.values(validationErrors).every((error) => !error)) {
       console.log('Form submitted successfully:', formData);
-      alert(formData.name);
     }
   };
 
