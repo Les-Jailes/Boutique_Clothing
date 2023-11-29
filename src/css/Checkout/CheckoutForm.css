@@ -134,3 +134,9 @@ input {
 .inputBox.input-countries {
   position: relative;
 }
+
+@media (max-width: 530px) {
+  .formContainer {
+    padding: 5px;
+  }
+}

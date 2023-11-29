@@ -18,8 +18,10 @@ import {
   CheckoutField,
   DropdownField,
   DropdownFieldSubcity,
+  CheckoutFieldNoEditable
 } from "./CheckoutField";
 import axios from "axios";
+import { CartContext } from "../Products/CartContext";
 
 const CheckoutForm = () => {
   const [fullname, setFullname] = useState("");
@@ -47,6 +49,8 @@ const CheckoutForm = () => {
   const [age, setAge] = useState(true);
 
   const router = useRouter();
+
+  const {calculateTax} = useContext(CartContext)
 
   const availableCountries = async () => {
     try {
@@ -194,7 +198,12 @@ const CheckoutForm = () => {
         `/Country/name/${countryName}/city/${cityName}`
       );
       setTaxes(cityObject.data.tax)
-      setListSubcity(cityObject.data.zipCodes);
+      calculateTax(cityObject.data.tax)
+      if (cityObject.data.zipCodes.length === 0) {
+        setZipCode("00000")
+      } else {
+        setListSubcity(cityObject.data.zipCodes);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -281,18 +290,16 @@ const CheckoutForm = () => {
               setValue={setSubcity}
               handleClick={handleSubcityChange}
             />
-            <CheckoutField
+            <CheckoutFieldNoEditable
               icon={AiOutlineGlobal}
               placeholderText="ZIP code"
               id="zipCode"
               value={zipCode}
-              handleInput={handleZipCodeChange}
               inputType="text"
-              inputMode="numeric"
             />
           </>
         ) : (
-          ""
+          " "
         )}
 
         <CheckoutFieldWithValidation

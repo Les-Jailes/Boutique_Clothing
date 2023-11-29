@@ -144,4 +144,34 @@ DropdownFieldSubcity.propTypes = {
   handleClick: PropTypes.func.isRequired
 };
 
-export { CheckoutFieldWithValidation, CheckoutField, DropdownField, DropdownFieldSubcity };
+const CheckoutFieldNoEditable = ({
+  icon: IconItem,
+  id,
+  value,
+  placeholderText,
+  inputType
+}) => {
+  return (
+    <div className="checkout-field-normal">
+      {IconItem && <IconItem color="#000000" size={24} />}
+      <input
+        className="check-input"
+        id={id}
+        value={value}
+        placeholder={placeholderText}
+        type={inputType}
+        readOnly
+      />
+    </div>
+  );
+};
+
+CheckoutFieldNoEditable.propTypes = {
+  icon: PropTypes.object.isRequired,
+  placeholderText: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  inputType: PropTypes.string.isRequired
+};
+
+export { CheckoutFieldWithValidation, CheckoutField, DropdownField, DropdownFieldSubcity, CheckoutFieldNoEditable };
