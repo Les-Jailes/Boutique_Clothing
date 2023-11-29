@@ -171,7 +171,7 @@ const Profile = () => {
         <div className='input-box'>
           <input
             type="text"
-            placeholder='CI'
+            placeholder='CI *'
             id='ci'
             value={ci}
             onChange={handleInputChange}
@@ -189,7 +189,7 @@ const Profile = () => {
         <div className='input-box'>
           <input
             type="text"
-            placeholder='Name'
+            placeholder='Name *'
             id='name'
             value={name}
             onChange={handleInputChange}
@@ -206,7 +206,7 @@ const Profile = () => {
         <div className='input-box'>
           <input
             type="text"
-            placeholder='Lastname'
+            placeholder='Lastname *'
             id='lastName'
             value={lastName}
             onChange={handleInputChange}
@@ -223,7 +223,7 @@ const Profile = () => {
         <div className='input-box'>
           <input
             type="text"
-            placeholder='Email'
+            placeholder='Email *'
             id='email'
             value={email}
             required

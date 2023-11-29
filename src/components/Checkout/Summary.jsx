@@ -12,7 +12,6 @@ import api from '@/app/api/api'
 
 const Summary = () => {
   const { cart } = useContext(CartContext);
-  const [isOpen, setIsOpen] = useState(false);
   const { removeFromCart } = useContext(CartContext);
 
   useEffect(() => {

@@ -9,7 +9,7 @@ const CategorySection = ({ category, image, isLarge }) => {
       className={`cateogory-container ${
         isLarge ? "large" : "small"
       } ${category}`}
-      href={ `/pages/categories?category=${ category }` }
+      href={ `/pages/products/${ category }` }
     >
       <h3 className="category-name">{category && category.toUpperCase()}</h3>
       <Image
