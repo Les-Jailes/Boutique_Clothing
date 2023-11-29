@@ -14,7 +14,7 @@ import { CartContext } from "./CartContext";
 import { useSession } from 'next-auth/react';
 import api from "@/app/api/api";
 import Loader from '@/utils/Loader'
-import { showAlertMessageAutomatically } from "@/utils/alerts";
+import { showAlertMessageAutomatically, showErrorMessage } from "@/utils/alerts";
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -52,8 +52,10 @@ export const ClotheCard = ({ clothe }) => {
       if(!isLiked) addToWishList();
       else removeFromWishList();
     }
-    else setIsLogged(false);
-    
+    else {
+      setIsLogged(false);
+      showAlertMessageAutomatically("You need to be logged in to add products to your wish list.");
+    }
   };
 
   const addToWishList = async () => {
