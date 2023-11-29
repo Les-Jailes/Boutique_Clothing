@@ -99,6 +99,17 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
+    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForWishlist");
+    if (showCartEmptyToast === "true") {
+      showToast(
+        "Please log in to see your wish list.",
+        "info"
+      );
+      localStorage.removeItem("showLogInRequiredForWishlist");
+    }
+  }, []);
+
+  useEffect(() => {
     const [isValid, message] = validateEmail(emailInput);
   
     setValidation(prev => ({

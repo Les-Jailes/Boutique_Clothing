@@ -8,8 +8,9 @@ import styles from "@/app/pages/products/page.module.css";
 import api from '@/app/api/api'
 import { useSession } from "next-auth/react";
 import NoProductsFound from "./NoProductsFound";
-import { useRouter } from 'next/navigation';
 import Loader from '@/utils/Loader'
+import { showToast } from '@/components/Alerts/CustomToast'
+
 
 export default function Page() {
   const [pagination, setPagination] = useState([]);
@@ -21,6 +22,13 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
 
   const session  = useSession();
+
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      localStorage.setItem("showLogInRequiredForWishlist", "true");
+      window.location.href = "/pages/account/login";
+    }
+  }, [session]);
 
 
   useEffect(() => {
