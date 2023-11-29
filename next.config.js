@@ -3,6 +3,6 @@ const nextConfig = {}
 
 module.exports = {
     images: {
-        domains: ['i.postimg.cc']
+        domains: ['i.postimg.cc', 'im3.ezgif.com',]
     }
 }
