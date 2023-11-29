@@ -1,7 +1,7 @@
 import React from "react";
 import "@/css/Checkout/CheckoutField.css";
 import PropTypes from "prop-types";
-import DropDownCountries from "./DropDownCountries";
+import { DropDownCountries, DropdownSubcity } from "./DropDownCountries";
 
 const CheckoutFieldWithValidation = ({
   icon: IconItem,
@@ -113,4 +113,35 @@ DropdownField.propTypes = {
   handleClick: PropTypes.func.isRequired
 };
 
-export { CheckoutFieldWithValidation, CheckoutField, DropdownField };
+const DropdownFieldSubcity = ({
+  icon: IconItem,
+  listOptions,
+  placeholderText,
+  value,
+  setValue,
+  handleClick
+}) => {
+  return (
+    <div className="input-countries">
+      {IconItem && <IconItem color="#000" size={24} />}
+      <DropdownSubcity
+        options={listOptions}
+        placeholderText={placeholderText}
+        value={value}
+        setValue={setValue}
+        handleClick={handleClick}
+      />
+    </div>
+  );
+};
+
+DropdownFieldSubcity.propTypes = {
+  icon: PropTypes.object.isRequired,
+  listOptions: PropTypes.array.isRequired,
+  placeholderText: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  setValue: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired
+};
+
+export { CheckoutFieldWithValidation, CheckoutField, DropdownField, DropdownFieldSubcity };

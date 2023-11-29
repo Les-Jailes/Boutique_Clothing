@@ -17,6 +17,7 @@ import {
   CheckoutFieldWithValidation,
   CheckoutField,
   DropdownField,
+  DropdownFieldSubcity,
 } from "./CheckoutField";
 
 const CheckoutForm = () => {
@@ -159,9 +160,32 @@ const CheckoutForm = () => {
   };
 
   const handleCountryChange = useCallback((selectedCountry) => {
+    setZipCode("")
+    setSubcity("")
+    setCity("")
     setCountry(selectedCountry)
     availableCities(selectedCountry)
   }, [country])
+
+  const handleCityChange = useCallback((selectedCity) => {
+    setZipCode("")
+    setSubcity("")
+    availableSubcities(country, selectedCity)
+  }, [city])
+
+  const handleSubcityChange = useCallback((selectedSubcity) => {
+    setSubcity(selectedSubcity.subCityName)
+    setZipCode(selectedSubcity.zipCode)
+  }, [subcity])
+
+  const availableSubcities = async (countryName, cityName) => {
+    try {
+      const cityObject = await api.get(`/Country/name/${countryName}/city/${cityName}`)
+      setListSubcity(cityObject.data.zipCodes)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const uniqueCitiesNames = (cities) => {
     console.log(cities + " ----------------");
@@ -182,7 +206,7 @@ const CheckoutForm = () => {
       const listCities = uniqueCitiesNames(listAvailableCities.data);
       setListCity(listCities);
     } catch (error) {
-      console.error("Error in obtaining the list of countries:", error);
+      console.error(error);
     }
   };
 
@@ -228,14 +252,16 @@ const CheckoutForm = () => {
           placeholderText="Choose your city"
           value={city}
           setValue={setCity}
+          handleClick={handleCityChange}
         />
 
-        <DropdownField
+        <DropdownFieldSubcity
           icon={AiOutlineGlobal}
           listOptions={listSubcity}
           placeholderText="Choose your subcity"
           value={subcity}
           setValue={setSubcity}
+          handleClick={handleSubcityChange}
         />
 
         <CheckoutFieldWithValidation
