@@ -48,7 +48,7 @@ export const ClotheCard = ({ clothe }) => {
   const handleLike = () => {
     if(session.status === 'authenticated'){
       setIsLogged(true);
-      //setIsLoading(true);
+      setIsLoading(true);
       if(!isLiked) addToWishList();
       else removeFromWishList();
     }
@@ -57,7 +57,6 @@ export const ClotheCard = ({ clothe }) => {
   };
 
   const addToWishList = async () => {
-    setIsLiked(true);
 
     let wishlist = [];
       if(localStorage.getItem('wishlist')) {
@@ -79,12 +78,12 @@ export const ClotheCard = ({ clothe }) => {
     catch(error){
       console.log(error);
     }
-    //setIsLoading(false);
+    setIsLiked(true);
+    setIsLoading(false);
     
   }
 
   const removeFromWishList = async () => {
-    setIsLiked(false);
 
     let wishlist = JSON.parse(localStorage.getItem('wishlist'));
   
@@ -105,8 +104,8 @@ export const ClotheCard = ({ clothe }) => {
     } catch (error) {
       console.error(error);
     }
-    
-    //setIsLoading(false);
+    setIsLiked(false);
+    setIsLoading(false);
 
   };
 
