@@ -27,12 +27,17 @@ export const ClotheCard = ({ clothe }) => {
 
   useEffect(() => {
     if (session.status === 'authenticated') {
+      let wishlist = [];
+      if(localStorage.getItem('wishlist')) {
+    wishlist = JSON.parse(localStorage.getItem('wishlist'));
+    }
+    const isProductInWishlist = wishlist.find(u => u._id === clothe._id);;
+          setIsLiked(isProductInWishlist);
       api.get('/User/email/' + session.data.user.email)
         .then(response => {
           const user = response.data;
           const wishlist = user.wishlist;
-          const isProductInWishlist = wishlist.find(u => u._id === clothe._id);;
-          setIsLiked(isProductInWishlist);
+          
         })
         .catch(error => {
           console.error(error);
@@ -43,15 +48,25 @@ export const ClotheCard = ({ clothe }) => {
   const handleLike = () => {
     if(session.status === 'authenticated'){
       setIsLogged(true);
-      setIsLoading(true);
-      if(!isLiked) addToDB();
-      else removeFromDB();
+      //setIsLoading(true);
+      if(!isLiked) addToWishList();
+      else removeFromWishList();
     }
     else setIsLogged(false);
     
   };
 
-  const addToDB = async () => {
+  const addToWishList = async () => {
+    setIsLiked(true);
+
+    let wishlist = [];
+      if(localStorage.getItem('wishlist')) {
+    wishlist = JSON.parse(localStorage.getItem('wishlist'));
+    }
+
+    wishlist.push(clothe);
+
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
     try{
       const user = await api.get('/User/email/' + session.data.user.email);
     const products = user.data.wishlist;
@@ -64,12 +79,18 @@ export const ClotheCard = ({ clothe }) => {
     catch(error){
       console.log(error);
     }
-    setIsLoading(false);
-    setIsLiked(true);
+    //setIsLoading(false);
     
   }
 
-  const removeFromDB = async () => {
+  const removeFromWishList = async () => {
+    setIsLiked(false);
+
+    let wishlist = JSON.parse(localStorage.getItem('wishlist'));
+  
+  wishlist = wishlist.filter(p => p._id !== clothe._id);
+
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
     try {
       const user = await api.get('/User/email/' + session.data.user.email);
       const products = user.data.wishlist;
@@ -84,8 +105,9 @@ export const ClotheCard = ({ clothe }) => {
     } catch (error) {
       console.error(error);
     }
-    setIsLoading(false);
-    setIsLiked(false);
+    
+    //setIsLoading(false);
+
   };
 
   const handleAddToCart = (selectedSize) => {
