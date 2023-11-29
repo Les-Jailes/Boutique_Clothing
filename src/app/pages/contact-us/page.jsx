@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import styles from './page.module.css';
 import { AiOutlineUser, AiOutlineLock } from 'react-icons/ai';
 import Image from 'next/image';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -54,7 +56,18 @@ const Page = () => {
     setErrors(validationErrors);
 
     if (Object.values(validationErrors).every((error) => !error)) {
-      console.log('Form submitted successfully:', formData);
+      try {
+        const response = await axios.post('http://localhost:5000/Email', formData);
+        Swal.fire({
+          title: 'Success!',
+          text: `Email from ${formData.email} has been correctly sent.`,
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+        
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
     }
   };
 
