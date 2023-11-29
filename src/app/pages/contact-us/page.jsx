@@ -5,6 +5,7 @@ import { AiOutlineUser, AiOutlineLock } from 'react-icons/ai';
 import Image from 'next/image';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import api from '@/app/api/api';
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -57,7 +58,7 @@ const Page = () => {
 
     if (Object.values(validationErrors).every((error) => !error)) {
       try {
-        const response = await axios.post('http://localhost:5000/Email', formData);
+        const response = await api.post('/Email', formData);
         Swal.fire({
           title: 'Success!',
           text: `Email from ${formData.email} has been correctly sent.`,
