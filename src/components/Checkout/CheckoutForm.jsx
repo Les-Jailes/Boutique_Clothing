@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import "@/css/Checkout/CheckoutForm.css";
 import { AiOutlineFontSize, AiOutlineGlobal } from "react-icons/ai";
 import { LuMap } from "react-icons/lu";
@@ -19,6 +19,7 @@ import {
   DropdownField,
   DropdownFieldSubcity,
 } from "./CheckoutField";
+import axios from "axios";
 
 const CheckoutForm = () => {
   const [fullname, setFullname] = useState("");
@@ -32,8 +33,6 @@ const CheckoutForm = () => {
   const [countryCode, setCountryCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
-  const [validationZipCode, setValidationZipCode] = useState(false);
-  const [validZipCodeMessage, setValidZipCodeMessage] = useState("");
 
   const [phoneNumber, setPhoneNumber] = useState("");
   const [validationPhoneNumber, setValidationPhoneNumber] = useState(false);
@@ -42,6 +41,8 @@ const CheckoutForm = () => {
   const [listCountries, setListCountries] = useState([]);
   const [listCity, setListCity] = useState([]);
   const [listSubcity, setListSubcity] = useState([]);
+
+  const [taxes, setTaxes] = useState(0)
 
   const [age, setAge] = useState(true);
 
@@ -106,22 +107,9 @@ const CheckoutForm = () => {
     validatePhoneNumber(phoneNumber);
   };
 
-  const validateZipCode = (zipCode) => {
-    const [isValid, validationResult] = validateNumberField(
-      zipCode,
-      "Zip code"
-    );
-    if (isValid) {
-      setValidationZipCode(false);
-    } else {
-      setValidationZipCode(true);
-      setValidZipCodeMessage(validationResult);
-    }
-  };
   const handleZipCodeChange = (e) => {
     const phoneNumber = e.target.value;
-    if (phoneNumber >= 0) setZipCode(phoneNumber);
-    validateZipCode(phoneNumber);
+    setZipCode(phoneNumber);
   };
 
   const session = useSession();
@@ -131,7 +119,6 @@ const CheckoutForm = () => {
     if (
       !validationFullname &&
       !validationPhoneNumber &&
-      !validationZipCode &&
       age === "verified"
     ) {
       localStorage.setItem(
@@ -159,36 +146,61 @@ const CheckoutForm = () => {
     setAge("verified");
   };
 
-  const handleCountryChange = useCallback((selectedCountry) => {
-    setZipCode("")
-    setSubcity("")
-    setCity("")
-    setCountry(selectedCountry)
-    availableCities(selectedCountry)
-  }, [country])
+  const handleCountryChange = useCallback(
+    (selectedCountry) => {
+      setZipCode("");
+      setSubcity("");
+      setCity("");
+      setListSubcity([])
+      setListCity([])
+      setTaxes(0)
+      setCountry(selectedCountry);
+      availableCities(selectedCountry);
+      getAbbreviationCountry(selectedCountry)
+    },
+    [country]
+  );
 
-  const handleCityChange = useCallback((selectedCity) => {
-    setZipCode("")
-    setSubcity("")
-    availableSubcities(country, selectedCity)
-  }, [city])
-
-  const handleSubcityChange = useCallback((selectedSubcity) => {
-    setSubcity(selectedSubcity.subCityName)
-    setZipCode(selectedSubcity.zipCode)
-  }, [subcity])
-
-  const availableSubcities = async (countryName, cityName) => {
+  const getAbbreviationCountry = async (countryName) => {
     try {
-      const cityObject = await api.get(`/Country/name/${countryName}/city/${cityName}`)
-      setListSubcity(cityObject.data.zipCodes)
+      let countryObject = await axios.get(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
+      setCountryCode(countryObject.data[0].altSpellings[0])
     } catch (error) {
       console.error(error)
     }
   }
 
+  const handleCityChange = useCallback(
+    (selectedCity) => {
+      setZipCode("");
+      setSubcity("");
+      setListSubcity([])
+      availableSubcities(country, selectedCity);
+    },
+    [city]
+  );
+
+  const handleSubcityChange = useCallback(
+    (selectedSubcity) => {
+      setSubcity(selectedSubcity.subCityName);
+      setZipCode(selectedSubcity.zipCode);
+    },
+    [subcity]
+  );
+
+  const availableSubcities = async (countryName, cityName) => {
+    try {
+      const cityObject = await api.get(
+        `/Country/name/${countryName}/city/${cityName}`
+      );
+      setTaxes(cityObject.data.tax)
+      setListSubcity(cityObject.data.zipCodes);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const uniqueCitiesNames = (cities) => {
-    console.log(cities + " ----------------");
     if (cities && cities.listCountry && cities.listCountry.length > 0) {
       return cities.listCountry.reduce((acc, current) => {
         if (!acc.includes(current.cityName)) {
@@ -212,8 +224,8 @@ const CheckoutForm = () => {
 
   return (
     <div className="formContainer">
+      <h1>CHECKOUT</h1>
       <form onSubmit={handleSubmit} className="form">
-        <h1>CHECKOUT</h1>
 
         <CheckoutFieldWithValidation
           icon={AiOutlineFontSize}
@@ -246,35 +258,42 @@ const CheckoutForm = () => {
           handleClick={handleCountryChange}
         />
 
-        <DropdownField
-          icon={AiOutlineGlobal}
-          listOptions={listCity}
-          placeholderText="Choose your city"
-          value={city}
-          setValue={setCity}
-          handleClick={handleCityChange}
-        />
+        {listCity && listCity.length > 0 ? (
+          <DropdownField
+            icon={AiOutlineGlobal}
+            listOptions={listCity}
+            placeholderText="Choose your city"
+            value={city}
+            setValue={setCity}
+            handleClick={handleCityChange}
+          />
+        ) : (
+          ""
+        )}
 
-        <DropdownFieldSubcity
-          icon={AiOutlineGlobal}
-          listOptions={listSubcity}
-          placeholderText="Choose your subcity"
-          value={subcity}
-          setValue={setSubcity}
-          handleClick={handleSubcityChange}
-        />
-
-        <CheckoutFieldWithValidation
-          icon={AiOutlineGlobal}
-          placeholderText="ZIP code"
-          id="zipCode"
-          value={zipCode}
-          handleInput={handleZipCodeChange}
-          inputType="text"
-          validationComponent={validationZipCode}
-          validationComponentMessage={validZipCodeMessage}
-          inputMode="numeric"
-        />
+        {listSubcity && listSubcity.length > 0 ? (
+          <>
+            <DropdownFieldSubcity
+              icon={AiOutlineGlobal}
+              listOptions={listSubcity}
+              placeholderText="Choose your subcity"
+              value={subcity}
+              setValue={setSubcity}
+              handleClick={handleSubcityChange}
+            />
+            <CheckoutField
+              icon={AiOutlineGlobal}
+              placeholderText="ZIP code"
+              id="zipCode"
+              value={zipCode}
+              handleInput={handleZipCodeChange}
+              inputType="text"
+              inputMode="numeric"
+            />
+          </>
+        ) : (
+          ""
+        )}
 
         <CheckoutFieldWithValidation
           icon={FiPhone}

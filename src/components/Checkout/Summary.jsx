@@ -58,7 +58,6 @@ const Summary = () => {
         <div className="cart-container">
         <div className="list-cart-container">
           {cart.products.map((product) => {
-            console.log(product);
             return <CartCardSummary product={product} key={product.code} showDeleteOption={false}/>;
           })}
         </div>

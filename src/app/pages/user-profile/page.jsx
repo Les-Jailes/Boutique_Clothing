@@ -100,7 +100,6 @@ const Profile = () => {
         };
 
         const userUpdateResponse = await api.put(`/User/${userId}`, data);
-        console.log('PUT request successful:', userUpdateResponse.data);
         
         setValidationMessages({
           ci: '',

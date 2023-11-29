@@ -1,6 +1,7 @@
 .formContainer {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   padding: 2rem 3rem;
   background-color: #f1f1f1;
   border-radius: 20px;
