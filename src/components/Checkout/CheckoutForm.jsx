@@ -1,25 +1,32 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "@/css/Checkout/CheckoutForm.css";
 import { AiOutlineFontSize, AiOutlineGlobal } from "react-icons/ai";
 import { LuMap } from "react-icons/lu";
 import { FiPhone } from "react-icons/fi";
 import {
   validateNumberField,
-  validateTextField
+  validateTextField,
 } from "@/utils/formValidations";
 import { GoArrowRight } from "react-icons/go";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import DropDownCountries from "./DropDownCountries";
 import api from "@/app/api/api";
-import { CheckoutFieldWithValidation, CheckoutField } from "./CheckoutField";
+import {
+  CheckoutFieldWithValidation,
+  CheckoutField,
+  DropdownField,
+} from "./CheckoutField";
 
 const CheckoutForm = () => {
   const [fullname, setFullname] = useState("");
   const [validationFullname, setValidationFullname] = useState(false);
   const [validFullnameMessage, setValidFullnameMessage] = useState("");
+
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [subcity, setSubcity] = useState("");
 
   const [countryCode, setCountryCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
@@ -32,6 +39,8 @@ const CheckoutForm = () => {
   const [validPhoneNumberMessage, setValidPhoneNumberMessage] = useState("");
 
   const [listCountries, setListCountries] = useState([]);
+  const [listCity, setListCity] = useState([]);
+  const [listSubcity, setListSubcity] = useState([]);
 
   const [age, setAge] = useState(true);
 
@@ -114,10 +123,6 @@ const CheckoutForm = () => {
     validateZipCode(phoneNumber);
   };
 
-  const handleCountryChange = (newCountryCode) => {
-    setCountryCode(newCountryCode);
-  };
-
   const session = useSession();
 
   const handleSubmit = (e) => {
@@ -153,6 +158,34 @@ const CheckoutForm = () => {
     setAge("verified");
   };
 
+  const handleCountryChange = useCallback((selectedCountry) => {
+    setCountry(selectedCountry)
+    availableCities(selectedCountry)
+  }, [country])
+
+  const uniqueCitiesNames = (cities) => {
+    console.log(cities + " ----------------");
+    if (cities && cities.listCountry && cities.listCountry.length > 0) {
+      return cities.listCountry.reduce((acc, current) => {
+        if (!acc.includes(current.cityName)) {
+          acc.push(current.cityName);
+        }
+        return acc;
+      }, []);
+    }
+    return [];
+  };
+
+  const availableCities = async (countryName) => {
+    try {
+      const listAvailableCities = await api.get(`/Country/name/${countryName}`);
+      const listCities = uniqueCitiesNames(listAvailableCities.data);
+      setListCity(listCities);
+    } catch (error) {
+      console.error("Error in obtaining the list of countries:", error);
+    }
+  };
+
   return (
     <div className="formContainer">
       <form onSubmit={handleSubmit} className="form">
@@ -180,13 +213,30 @@ const CheckoutForm = () => {
           inputMode="text"
         />
 
-        <div className="input-countries">
-          <AiOutlineGlobal className="icon" />
-          <DropDownCountries
-            options={listCountries}
-            placeholderText="Choose your country"
-          />
-        </div>
+        <DropdownField
+          icon={AiOutlineGlobal}
+          listOptions={listCountries}
+          placeholderText="Choose your country"
+          value={country}
+          setValue={setCountry}
+          handleClick={handleCountryChange}
+        />
+
+        <DropdownField
+          icon={AiOutlineGlobal}
+          listOptions={listCity}
+          placeholderText="Choose your city"
+          value={city}
+          setValue={setCity}
+        />
+
+        <DropdownField
+          icon={AiOutlineGlobal}
+          listOptions={listSubcity}
+          placeholderText="Choose your subcity"
+          value={subcity}
+          setValue={setSubcity}
+        />
 
         <CheckoutFieldWithValidation
           icon={AiOutlineGlobal}

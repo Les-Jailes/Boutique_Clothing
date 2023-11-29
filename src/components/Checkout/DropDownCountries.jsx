@@ -1,29 +1,29 @@
-'use client'
+"use client"
 
-import React, { useState } from "react";
-import '@/css/Checkout/DropDownCountries.css'
-import PropTypes from 'prop-types'
+import React, { useState } from "react"
+import "@/css/Checkout/DropDownCountries.css"
+import PropTypes from "prop-types"
 
-const DropDownCountries = ({ options, placeholderText }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [filteredOptions, setFilteredOptions] = useState([]);
+const DropDownCountries = ({ options, placeholderText, value, setValue, handleClick }) => {
+  const [filteredOptions, setFilteredOptions] = useState([])
   const [isOpen, setIsOpen] = useState(false)
 
   const handleInputChange = (event) => {
-    const value = event.target.value
-    setInputValue(value)
+    const auxiliarValue = event.target.value
+    setValue(auxiliarValue)
 
     const filtered = options.filter((option) =>
-      option.toLowerCase().includes(value.toLowerCase())
+      option.toLowerCase().includes(auxiliarValue.toLowerCase())
     )
 
-    setFilteredOptions(filtered);
-    setIsOpen(true);
+    setFilteredOptions(filtered)
+    setIsOpen(true)
   }
 
-  const handleOptionClick = (value) => {
-    setInputValue(value)
+  const handleOptionClick = (selectedValue) => {
+    setValue(selectedValue)
     setIsOpen(false)
+    handleClick(selectedValue)
   }
 
   const handleBlur = () => {
@@ -34,17 +34,22 @@ const DropDownCountries = ({ options, placeholderText }) => {
     <>
       <input
         type="text"
-        value={inputValue}
+        value={value}
         onChange={handleInputChange}
         onBlur={handleBlur}
-				placeholder={placeholderText}
+        placeholder={placeholderText}
+        className="checkout-search-input"
       />
       {isOpen && (
         <ul className="options-list">
           {filteredOptions.map((option, index) => (
-            <li key={index} onClick={() => handleOptionClick(option)} className="option-list">
-            {option}
-          </li>
+            <li
+              key={index}
+              onMouseDown={() => handleOptionClick(option)}
+              className="option-list"
+            >
+              {option}
+            </li>
           ))}
         </ul>
       )}
@@ -54,7 +59,10 @@ const DropDownCountries = ({ options, placeholderText }) => {
 
 DropDownCountries.propTypes = {
   options: PropTypes.array.isRequired,
-  placeholderText: PropTypes.string.isRequired
+  placeholderText: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  setValue: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired
 }
 
-export default DropDownCountries;
+export default DropDownCountries

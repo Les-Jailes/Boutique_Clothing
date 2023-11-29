@@ -4,7 +4,8 @@
 }
 
 .checkout-field,
-.checkout-field-normal {
+.checkout-field-normal,
+.input-countries {
     width: 100%;
     height: 30px;
     display: grid;
@@ -12,14 +13,19 @@
     border-bottom: 1.5px solid #000;
 }
 
-.check-input {
+.input-countries {
+    position: relative;
+}
+
+.check-input,
+.checkout-search-input {
     font-size: 18px;
 }
 
 .check-field-validation {
     font-size: 12px;
     width: 100%;
-    height: 20px;
+    height: auto;
     color: #f00;
     line-height: 20px;
     padding: 0 10px;
