@@ -117,6 +117,7 @@ const Navbar = () => {
               className={style.searchBarInput}
               onChange={handleSearchChange}
               value={searchTerm}
+              maxLength={200}
             />
             {searchTerm && (
               <button

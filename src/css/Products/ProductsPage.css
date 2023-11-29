@@ -19,6 +19,43 @@
   gap: 40px;
 }
 
+@keyframes rotatingBorder {
+  0%,
+  100% {
+    border-color: black;
+  }
+  25% {
+    border-color: red;
+  }
+  50% {
+    border-color: blue;
+  }
+  75% {
+    border-color: green;
+  }
+}
+
+@keyframes rotatingBorderAndContent {
+  0% {
+    border-color: black;
+    transform: rotate(0deg);
+  }
+  25% {
+    border-color: red;
+  }
+  50% {
+    border-color: blue;
+    transform: rotate(180deg);
+  }
+  75% {
+    border-color: green;
+  }
+  100% {
+    border-color: black;
+    transform: rotate(360deg);
+  }
+}
+
 .search-message {
   font-size: 2rem;
   font-weight: bold;
@@ -29,6 +66,14 @@
   text-align: center;
   max-width: 80%;
   margin: auto;
+}
+
+.search-message.loading {
+  animation: rotatingBorderAndContent 2s infinite linear;
+}
+
+.search-message.has-text {
+  animation: rotatingBorder 3s infinite linear;
 }
 
 .container {

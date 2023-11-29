@@ -19,6 +19,7 @@ const SearchPage = () => {
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
   const [searchMessage, setSearchMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [checkedLabels, setCheckedLabels] = useState({});
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -32,16 +33,17 @@ const SearchPage = () => {
     }
   }, []);
 
+  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
   const fetchSearchResults = async (query) => {
+    setIsLoading(true);
+    let message;
     try {
       const response = await api.get(
         `/Product/search?q=${encodeURIComponent(query)}`
       );
       const data = response.data;
-
-      if ("message" in data) {
-        setSearchMessage(data.message);
-      }
+      message = data.message;
 
       if (data.length > 0) {
         setProducts(data);
@@ -50,9 +52,15 @@ const SearchPage = () => {
         setColors([...new Set(data.flatMap((product) => product.color))]);
         setSizes([...new Set(data.flatMap((product) => product.sizes))]);
       }
+
     } catch (error) {
       console.error("Error fetching search results:", error);
+    } 
+    await delay(1000);
+    if (message !== "") {
+      setSearchMessage(message);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -264,7 +272,13 @@ const SearchPage = () => {
               )}
           </div>
         ) : (
-          <div className="search-message">{searchMessage}</div>
+          <div
+            className={`search-message ${isLoading ? "loading" : ""} ${
+              searchMessage ? "has-text" : ""
+            }`}
+          >
+            {searchMessage}
+          </div>
         )}
 
         {products.length > 0 && (

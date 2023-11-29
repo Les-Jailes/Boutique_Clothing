@@ -57,7 +57,7 @@
 }
 
 .searchBarInput {
-    width: calc(100% - 40px);
+    width: calc(100% - 75px);
     height: 100%;
     background-color: transparent;
     border: none;

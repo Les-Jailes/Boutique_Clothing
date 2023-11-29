@@ -44,6 +44,7 @@ const SearchBarSideMenu = () => {
           placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
+          maxLength={200}
         />
         {searchTerm && (
           <button onClick={clearSearch} type="button" className="clear-button">
