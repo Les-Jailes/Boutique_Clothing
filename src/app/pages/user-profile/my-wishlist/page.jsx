@@ -17,12 +17,8 @@ export default function Page() {
   const [currentlyPagination, setCurrentlyPagination] = useState(0);
   const [leftIsDisable, setLeftIsDisable] = useState(true);
   const [rightIsDisable, setRightIsDisable] = useState(true);
-
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [isFiltered, setIsFiltered] = useState(false);
   const [empty, setEmpty] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
 
   const session  = useSession();
 
@@ -30,22 +26,44 @@ export default function Page() {
   useEffect(() => {
     if (session.status === 'authenticated') {
       fillWishlistProducts();
+      setPagination(createPagination(products));
     }
   }, [session.status, isLoading, products]);
 
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      setPagination(createPagination(products));
+      validatePagination();
+    }
+  }, [currentlyPagination, products]);
+
+  const validatePagination = () => {
+    if( pagination.length >= 1 && pagination.length === currentlyPagination){
+      
+      setCurrentlyPagination(currentlyPagination - 1);
+    } 
+  }
+
+  function getUniqueProducts(products) {
+    const unique = [];
+    products.forEach(product => {
+      if (!unique.find(u => u._id === product._id)) {
+        unique.push(product); 
+      }
+    });  
+    return unique;
+  }
+
   const fillWishlistProducts = async () => {
 
-    const wishlistProducts = [];
+    let wishlistProducts = [];
 
     try {
       const user = await api.get('/User/email/' + session.data.user.email);
 
-      for(let productId of user.data.wishlist) {
-        const response = await api.get(`/Product/${productId}`);
-        wishlistProducts.push(response.data);
-      }
+      wishlistProducts = user.data.wishlist;
       
-      const uniqueProducts = [...new Set(wishlistProducts)];
+      const uniqueProducts = getUniqueProducts(wishlistProducts);
       setProducts(uniqueProducts);
 
     } catch (error) {
@@ -55,12 +73,7 @@ export default function Page() {
     if(wishlistProducts.length === 0) setEmpty(true);
     else setIsLoading(false);
 
-  
   }
-
-  useEffect(() => {
-    setPagination(createPagination(isFiltered ? filteredProducts : products));
-  }, [products, filteredProducts, isFiltered]);
 
   useEffect(() => {
     if (pagination.length > 1) {
@@ -109,7 +122,7 @@ export default function Page() {
         {pagination.length > 0 &&
           pagination[currentlyPagination] &&
           filterProductsWithValidSizes(pagination[currentlyPagination]).map((product) => (
-            <ClotheCard key={product.code} clothe={product} />
+            <ClotheCard key={product._id} clothe={product} />
           ))}
       </div>
         <Pagination

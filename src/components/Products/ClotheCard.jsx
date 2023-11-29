@@ -31,7 +31,7 @@ export const ClotheCard = ({ clothe }) => {
         .then(response => {
           const user = response.data;
           const wishlist = user.wishlist;
-          const isProductInWishlist = wishlist.includes(clothe._id);
+          const isProductInWishlist = wishlist.find(u => u._id === clothe._id);;
           setIsLiked(isProductInWishlist);
         })
         .catch(error => {
@@ -55,7 +55,7 @@ export const ClotheCard = ({ clothe }) => {
     try{
       const user = await api.get('/User/email/' + session.data.user.email);
     const products = user.data.wishlist;
-    products.push(clothe._id);
+    products.push(clothe);
     const body = {
       wishlist: products
     }
@@ -74,7 +74,7 @@ export const ClotheCard = ({ clothe }) => {
       const user = await api.get('/User/email/' + session.data.user.email);
       const products = user.data.wishlist;
   
-      const updatedWishlist = products.filter((productId) => productId !== clothe._id);
+      const updatedWishlist = products.filter((product) => product._id !== clothe._id);
   
       const body = {
         wishlist: updatedWishlist
