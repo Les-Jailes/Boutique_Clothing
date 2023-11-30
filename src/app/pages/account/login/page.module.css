@@ -137,6 +137,10 @@
     .formContainer{
         padding: 2rem 4rem;
     }
+    
+    .validation{
+        font-size: 9px;
+    }
 }
 
 @media screen and (max-width: 500px){
@@ -182,6 +186,9 @@
         border-radius: 10px;
         
     }
+    .validation{
+        font-size: 9px;
+    }
 }
 @media screen and (max-height: 800px){
     .container{
@@ -198,5 +205,8 @@
     }
     .bottomSignUp{
         display: flex;
+    }
+    .validation{
+        font-size: 9px;
     }
 }
