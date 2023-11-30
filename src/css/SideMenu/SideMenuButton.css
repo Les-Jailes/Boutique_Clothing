@@ -1,9 +1,6 @@
 .side-menu-button-container {
     width: 60px;
     height: 60px;
-    position: absolute;
-    top: 0;
-    right: 1em;
     cursor: pointer;
 }
 

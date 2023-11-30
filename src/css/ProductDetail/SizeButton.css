@@ -1,0 +1,15 @@
+.size-button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.size-button:hover,
+.size-button.selected {
+    scale: 1.1;
+    background-color: #000;
+    color: #fff;
+}

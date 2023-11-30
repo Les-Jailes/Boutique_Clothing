@@ -13,6 +13,7 @@ const CheckoutFieldWithValidation = ({
   validationComponent,
   validationComponentMessage,
   inputMode,
+  maxLength
 }) => {
   return (
     <div className="checkout-field-with-validation">
@@ -26,6 +27,7 @@ const CheckoutFieldWithValidation = ({
           onChange={handleInput}
           type={inputType}
           inputMode={inputMode}
+          maxLength={maxLength}
         />
       </div>
       <p className="check-field-validation">

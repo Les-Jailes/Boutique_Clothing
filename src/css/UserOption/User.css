@@ -1,7 +1,4 @@
 .user-option-button {
-    position: absolute;
-    top: 0;
-    right: calc(120px + 1em);
     width: 60px;
     height: 60px;
     border: none;

@@ -1,0 +1,46 @@
+.product-option-carousel {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+.product-option-carousel.is-active,
+.product-option-carousel:hover {
+    box-shadow: 0 0 10px #00000060;
+    scale: 1.1;
+}
+
+.product-option-carousel.women {
+    background: var(--women-background-gradient);
+}
+
+.product-option-carousel.men {
+    background: var(--men-background-gradient);
+}
+
+.product-option-carousel.boy {
+    background: var(--boy-background-gradient);
+}
+
+.product-option-carousel.girl {
+    background: var(--girl-background-gradient);
+}
+
+.product-option-carousel.summer {
+    background: var(--summer-background-gradient);
+}
+
+.product-option-carousel.winter {
+    background: var(--winter-background-gradient);
+}
+
+.option-carousel-image {
+    width: auto;
+    height: 60px;
+}

@@ -63,7 +63,12 @@ function CheckoutPayment() {
 
   useEffect(() => {
     if (!redirected) {
-      const info = JSON.parse(localStorage.getItem("shippingInfo"));
+      let info = JSON.parse(localStorage.getItem("shippingInfo"));
+
+      if (info && !info.zipCode) {
+        info = { ...info, zipCode: '00000' };
+      }
+      
       const isShippingInfoComplete =
         info &&
         info.fullname &&

@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 import CartListSummary from "./CartListSummary";
 import "@/css/Cart/CartButton.css";
 import { CartContext } from "@/components/Products/CartContext";
+import QuantityPopUp from "./QuantityPopUp";
 
 const CartButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,6 +57,11 @@ const CartButton = () => {
   return (
     <>
       <button ref={cartButtonRef} className="cart-button" onClick={handleOpen}>
+        {cart.totalProducts && cart.totalProducts > 0 ? (
+          <QuantityPopUp quantity={cart.totalProducts} />
+        ) : (
+          ""
+        )}
         <AiOutlineShoppingCart color="black" size={24} />
       </button>
       <div onClick={(e) => e.stopPropagation()}>

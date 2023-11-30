@@ -4,15 +4,14 @@ import "@/css/Checkout/CheckoutForm.css";
 import { AiOutlineFontSize, AiOutlineGlobal } from "react-icons/ai";
 import { LuMap } from "react-icons/lu";
 import { FiPhone } from "react-icons/fi";
-import {
+import { 
   validateNumberField,
   validateFullNameField,
 } from "@/utils/formValidations";
 import { GoArrowRight } from "react-icons/go";
 import Swal from "sweetalert2";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import api from "@/app/api/api";
+import api from "@/app/api/api"; 
 import {
   CheckoutFieldWithValidation,
   CheckoutField,
@@ -47,8 +46,6 @@ const CheckoutForm = () => {
   const [taxes, setTaxes] = useState(0);
 
   const [age, setAge] = useState(true);
-
-  const router = useRouter();
 
   const { calculateTax } = useContext(CartContext);
 
@@ -167,7 +164,7 @@ const CheckoutForm = () => {
           country: countryCode,
         })
       );
-      router.push("/pages/checkout/payment");
+      window.location.href = "/pages/checkout/payment";
     } else if (!validateForm()) {
       Swal.fire({
         icon: "error",
@@ -284,6 +281,7 @@ const CheckoutForm = () => {
           validationComponent={validationFullname}
           validationComponentMessage={validFullnameMessage}
           inputMode="text"
+          maxLength={100}
         />
 
         <CheckoutField
