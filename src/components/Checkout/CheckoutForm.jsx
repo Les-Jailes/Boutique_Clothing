@@ -11,7 +11,7 @@ import {
 import { GoArrowRight } from "react-icons/go";
 import Swal from "sweetalert2";
 import { useSession } from "next-auth/react";
-import api from "@/app/api/api";
+import api from "@/app/api/api"; 
 import {
   CheckoutFieldWithValidation,
   CheckoutField,
