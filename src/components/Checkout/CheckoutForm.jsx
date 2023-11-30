@@ -10,7 +10,6 @@ import {
 } from "@/utils/formValidations";
 import { GoArrowRight } from "react-icons/go";
 import Swal from "sweetalert2";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import api from "@/app/api/api";
 import {
@@ -47,8 +46,6 @@ const CheckoutForm = () => {
   const [taxes, setTaxes] = useState(0);
 
   const [age, setAge] = useState(true);
-
-  const router = useRouter();
 
   const { calculateTax } = useContext(CartContext);
 
@@ -167,7 +164,7 @@ const CheckoutForm = () => {
           country: countryCode,
         })
       );
-      router.push("/pages/checkout/payment");
+      window.location.href = "/pages/checkout/payment";
     } else if (!validateForm()) {
       Swal.fire({
         icon: "error",
