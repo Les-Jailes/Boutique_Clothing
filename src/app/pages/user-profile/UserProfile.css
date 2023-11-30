@@ -1,17 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
+.profile-container_user {
+  display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-image: url('https://i.pinimg.com/originals/bc/03/dd/bc03dd204fa7ba0cdbb02f91ebd37777.jpg');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover;
 }
 
 .profile-container {
