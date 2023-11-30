@@ -3,6 +3,7 @@
 import api from "@/app/api/api";
 import Product from "@/components/ProductDetail/Product";
 import React, { useEffect, useState } from "react";
+import '@/css/ProductDetail/ProductPage.css'
 
 export default function Page() {
   const [id, setId] = useState(null);

@@ -1,11 +1,12 @@
 import React from 'react'
+import '@/css/ProductDetail/ProductDetails.css'
 
 const ProductDetails = ({description}) => {
 	return (
 		<div className="product-details-container">
-			<h2 className="product-details-subtitle">
+			<p className="product-details-subtitle">
 				Product details
-			</h2>
+			</p>
 			<p className="product-description-container">
 				{
 					description

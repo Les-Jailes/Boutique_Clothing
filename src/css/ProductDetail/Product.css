@@ -1,0 +1,80 @@
+.product-detail-container {
+    width: 100%;
+    min-height: auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    font-family: var(--font-family-poppins);
+}
+
+.left-product-detail-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.options-carousel-product-image {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.right-product-detail-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.clothe-name-product-detail {
+    font-size: 32px;
+}
+
+.clothe-price-product-detail {
+    width: 100%;
+    display: block;
+    font-size: 24px;
+}
+
+.options-product-detail {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.add-cart-button {
+    border: 1px solid #000;
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    transition: all 0.5s;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.add-cart-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.add-wishlist-button {
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
+    transition: all 0.5s;
+    border: none;
+    cursor: pointer;
+}

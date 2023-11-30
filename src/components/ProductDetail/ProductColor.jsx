@@ -1,4 +1,5 @@
 import React from "react";
+import '@/css/ProductDetail/ProductColor.css'
 
 const ProductColor = ({color}) => {
   return (

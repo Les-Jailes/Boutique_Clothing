@@ -1,5 +1,6 @@
 import React from "react";
 import SizeButton from "./SizeButton";
+import '@/css/ProductDetail/ProductSize.css'
 
 const ProductSize = ({ sizes }) => {
   return (
