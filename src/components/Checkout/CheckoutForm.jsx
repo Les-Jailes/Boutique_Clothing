@@ -284,6 +284,7 @@ const CheckoutForm = () => {
           validationComponent={validationFullname}
           validationComponentMessage={validFullnameMessage}
           inputMode="text"
+          maxLength={100}
         />
 
         <CheckoutField
