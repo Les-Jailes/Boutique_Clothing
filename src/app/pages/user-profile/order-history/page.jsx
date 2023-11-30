@@ -11,7 +11,6 @@ import { Pagination } from "@/components/Products/Pagination";
 import createPagination from "@/utils/Pagination";
 
 const OrderHistoryUser = () => {
-  const session = useSession();
   const [userId, setUserId] = useState(null);
   const [checkoutUserId, setCheckoutUserId] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +19,18 @@ const OrderHistoryUser = () => {
   const [currentlyPagination, setCurrentlyPagination] = useState(0);
   const [leftIsDisable, setLeftIsDisable] = useState(true);
   const [rightIsDisable, setRightIsDisable] = useState(true);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const session = useSession();
+  const [redirected, setRedirected] = useState(false);
+
+  useEffect(() => {
+    if (!redirected && session.status === "unauthenticated") {
+      window.location.href = '/pages/account/login';
+      setRedirected(true);
+      localStorage.setItem("showLogInRequiredForOrderHistory", "true");
+    }
+  }, [session, redirected]);
 
   const handleToggleTable = (orderId) => {
     setSelectedOrderId(orderId === selectedOrderId ? null : orderId);
@@ -42,13 +53,15 @@ const OrderHistoryUser = () => {
         }
       } catch (error) {
         console.error("Error fetching user:", error);
+      }finally {
+        setIsLoading(false);
       }
     };
     setCurrentlyPagination(0);
     getUserId();
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 4000);
   }, [session]);
 
   useEffect(() => {
