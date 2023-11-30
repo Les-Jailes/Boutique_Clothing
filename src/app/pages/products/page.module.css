@@ -3,6 +3,10 @@
     margin-bottom: 6rem;
 }
 
+.container__loader{
+    margin-bottom: 35rem;
+}
+
 .your-cart-title {
     width: 100%;
     height: 80px;

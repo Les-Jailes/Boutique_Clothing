@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import createPagination from "@/utils/Pagination";
 import { ClotheCard } from "@/components/Products/ClotheCard";
@@ -9,8 +9,10 @@ import Filter from "@/components/filter/Filter";
 import styles from "./page.module.css";
 import api from '@/app/api/api'
 import { showToast } from "@/components/Alerts/CustomToast";
+import Loader from '@/utils/Loader'
 
 export default function Page() {
+  const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState([]);
   const [products, setProducts] = useState([]);
   const [currentlyPagination, setCurrentlyPagination] = useState(0);
@@ -25,6 +27,7 @@ export default function Page() {
   const [checkedLabels, setCheckedLabels] = useState({});
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
+  const productsContainerRef = useRef();
 
     const extractUniqueSizes = (data) => {
     const uniqueSizes = [...new Set(Object.values(data).map(item => item.size && item.size.toLowerCase()))];
@@ -160,6 +163,8 @@ export default function Page() {
   }, [checkedLabels, products]);
 
   useEffect(() => {
+    setLoading(true);
+
     api
       .get("/Product")
       .then((response) => {
@@ -184,6 +189,9 @@ export default function Page() {
       })
       .catch((error) => {
         console.error("Error: ", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -204,6 +212,10 @@ export default function Page() {
     if (paginationNumber < pagination.length) {
       setCurrentlyPagination(paginationNumber);
       setLeftIsDisable(false);
+      window.scrollTo({
+        top: productsContainerRef.current.offsetTop,
+        behavior: "smooth",
+      });
     }
     if (paginationNumber === pagination.length - 1) {
       setRightIsDisable(true);
@@ -215,6 +227,10 @@ export default function Page() {
     if (paginationNumber >= 0) {
       setCurrentlyPagination(paginationNumber);
       setRightIsDisable(false);
+      window.scrollTo({
+        top: productsContainerRef.current.offsetTop,
+        behavior: "smooth",
+      });
     }
     if (paginationNumber === 0) {
       setLeftIsDisable(true);
@@ -240,6 +256,11 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.container__loader}>
+      {loading && <Loader isLoaderVisible={loading}/>}
+      </div>
+      {!loading && (
+        <>
       <Filter
         filters= {filters}
         onFilterChange={(title, selectedOptions) => {
@@ -255,13 +276,14 @@ export default function Page() {
         handleRefreshClick={handleRefreshClick}
       />
       <div className="products-page">
-      <div className="product-container">
-        {pagination.length > 0 &&
-          pagination[currentlyPagination] &&
-          filterProductsWithValidSizes(pagination[currentlyPagination]).map((product) => (
-            <ClotheCard key={product.code} clothe={product} />
-          ))}
-      </div>
+        <div ref={productsContainerRef} className="product-container">
+          {pagination.length > 0 &&
+            pagination[currentlyPagination] && filterProductsWithValidSizes(
+              pagination[currentlyPagination]
+            ).map((product) => (
+              <ClotheCard key={product.code} clothe={product} />
+            ))}
+        </div>
         <Pagination
           currentlyPagination={currentlyPagination}
           changePaginationRight={handlePaginationRight}
@@ -270,6 +292,8 @@ export default function Page() {
           rightIsDisable={rightIsDisable}
         />
       </div>
+      </>
+      )}
     </div>
   );
 }
