@@ -151,3 +151,8 @@
         font-size: 12px;
     }
 }
+
+.add-to-wish-list {
+    background-color: none;
+    width: 25;
+}
