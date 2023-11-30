@@ -20,6 +20,7 @@
 .form{
     display: flex;
     flex-direction: column;
+    margin: 0;
 }
 .form:hover{
     
@@ -136,12 +137,76 @@
     .formContainer{
         padding: 2rem 4rem;
     }
+    
+    .validation{
+        font-size: 9px;
+    }
 }
 
 @media screen and (max-width: 500px){
+    .googleAuthButtonDiv{
+        margin: 5px;
+    }
+    .button {
+        margin: 0;
+    }
+    .container{
+        overflow: hidden;
+    }
     .formContainer{
-        padding: 2rem 4rem;
-        gap: 4rem;
-        margin: 2rem;
+        padding: 1rem 2rem;
+        gap: 0;
+        margin: 0;
+        height: 600px;
+        overflow: hidden;
+    }
+    .bottomSignUp{
+        margin: 0;
+        display: flex;
+        gap: 0;
+        align-items: center;
+        flex-direction: column;
+        justify-content: start;
+    }
+    
+    .signUpTxt{
+        font-size: 12px;
+        text-wrap: nowrap;
+        margin: 0;
+    }
+    .signUpButton{
+        margin: 0;
+        text-wrap: nowrap;
+        font-size: 12px;
+        color: #000;
+        background: transparent;
+        padding: 5px 8px;
+        border: none;
+        transition: 0.3s ease;
+        border-radius: 10px;
+        
+    }
+    .validation{
+        font-size: 9px;
+    }
+}
+@media screen and (max-height: 800px){
+    .container{
+        
+        z-index: -1;
+    }
+    .formContainer{
+        padding: 5px 20px;
+        gap: 2px;
+        margin: 0;
+        overflow: hidden;
+        height: 450px;
+        z-index: 1;
+    }
+    .bottomSignUp{
+        display: flex;
+    }
+    .validation{
+        font-size: 9px;
     }
 }
