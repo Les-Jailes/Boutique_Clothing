@@ -4,7 +4,7 @@ import api from "@/app/api/api";
 import Product from "@/components/ProductDetail/Product";
 import React, { useEffect, useState } from "react";
 import '@/css/ProductDetail/ProductPage.css'
-import OtherRecomendations from "@/components/ProductDetail/OtherRecomendations";
+import OtherRecomendations from "@/components/ProductDetail/OtherRecomendations"; 
 import Loader from "@/utils/Loader";
 
 export default function Page() {
