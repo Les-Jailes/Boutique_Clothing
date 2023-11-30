@@ -23,6 +23,7 @@ const Navbar = () => {
   }, []);
 
   const handleSignOut = async () => {
+    localStorage.setItem('wishlist', JSON.stringify([]));
     await signOut({ redirect: false });
     window.location.href = "/pages/account/login";
   };
