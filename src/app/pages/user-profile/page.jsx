@@ -7,7 +7,7 @@ import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { validateTextField, validateCiField } from '@/utils/formValidations';
 import '@/app/pages/user-profile/UserProfile.css';
 import api from '@/app/api/api';
-
+import "@/css/OrderHistoryLoader/OrderHistoryLoaderTable.css";
 const Profile = () => {
   const [ci, setCi] = useState('');
   const [name, setName] = useState('');
@@ -167,7 +167,11 @@ const Profile = () => {
   }, [session, getUser]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="container-loader">
+        <span className="loader"></span>
+      </div>
+    );
   }
 
   const handleSelectChange = (e) => {
