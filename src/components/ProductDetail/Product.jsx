@@ -94,7 +94,7 @@ const Product = ({ product }) => {
   const removeFromWishList = async () => {
     let wishlist = JSON.parse(localStorage.getItem("wishlist"));
 
-    wishlist = wishlist.filter((p) => p._id !== clothe._id);
+    wishlist = wishlist.filter((p) => p._id !== product._id);
 
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
     try {
@@ -102,7 +102,7 @@ const Product = ({ product }) => {
       const products = user.data.wishlist;
 
       const updatedWishlist = products.filter(
-        (product) => product._id !== clothe._id
+        (product) => product._id !== product._id
       );
 
       const body = {
