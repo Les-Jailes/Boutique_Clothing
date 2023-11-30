@@ -27,8 +27,9 @@ const Profile = () => {
 
   useEffect(() => {
     if (!redirected && session.status === "unauthenticated") {
-      window.location.href = '/';
+      window.location.href = '/pages/account/login';
       setRedirected(true);
+      localStorage.setItem("showLogInRequiredForProfile", "true");
     }
   }, [session, redirected]);
 
@@ -158,7 +159,7 @@ const Profile = () => {
       } else {
         setTimeout(() => {
         setIsLoading(false);
-      }, 3000);
+      }, 4000);
       }
     };
 

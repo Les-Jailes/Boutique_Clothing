@@ -26,8 +26,9 @@ const OrderHistoryUser = () => {
 
   useEffect(() => {
     if (!redirected && session.status === "unauthenticated") {
-      window.location.href = '/';
+      window.location.href = '/pages/account/login';
       setRedirected(true);
+      localStorage.setItem("showLogInRequiredForOrderHistory", "true");
     }
   }, [session, redirected]);
 
@@ -60,7 +61,7 @@ const OrderHistoryUser = () => {
     getUserId();
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 4000);
   }, [session]);
 
   useEffect(() => {
