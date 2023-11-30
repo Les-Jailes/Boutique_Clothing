@@ -4,6 +4,7 @@ import api from "@/app/api/api";
 import Product from "@/components/ProductDetail/Product";
 import React, { useEffect, useState } from "react";
 import '@/css/ProductDetail/ProductPage.css'
+import OtherRecomendations from "@/components/ProductDetail/OtherRecomendations";
 
 export default function Page() {
   const [id, setId] = useState(null);
@@ -43,13 +44,13 @@ export default function Page() {
   return (
     <div className="product-page">
       {loading ? (
-        "Cargando..."
+        "Loading..."
       ) : (
         <>
           {product ? (
-            <Product product={product} />
+            <><Product product={product} /><OtherRecomendations category={product.category} productId={id} /></>
           ) : (
-            "Detalles del producto no disponibles"
+            "Product details not available"
           )}
         </>
       )}
