@@ -16,7 +16,6 @@ import { useSession } from 'next-auth/react';
 import api from "@/app/api/api";
 import Loader from '@/utils/Loader'
 import { showAlertMessageAutomatically } from "@/utils/alerts";
-import PropTypes from 'prop-types'
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
