@@ -5,15 +5,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .subtitle-other-recomendations {
     font-size: 48px;
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translate(-50%, 0);
 }
 
 .other-recomendations-container {
@@ -37,6 +32,8 @@
 @media (max-width: 630px) {
     .subtitle-other-recomendations {
         font-size: 24px;
+        padding: 10px;
+        text-align: center;
     }
 }
 

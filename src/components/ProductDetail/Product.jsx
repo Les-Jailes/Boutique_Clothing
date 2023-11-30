@@ -33,7 +33,7 @@ const Product = ({ product }) => {
         size: size,
       });
       setSize("");
-      location.reload()
+      location.reload();
     } else {
       Swal.fire({
         icon: "error",

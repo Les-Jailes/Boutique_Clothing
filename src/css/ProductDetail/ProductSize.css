@@ -15,3 +15,22 @@
     flex-wrap: wrap;
     gap: 20px;
 }
+
+@media (max-width: 530px) {
+    .product-sizes-container {
+        padding: 0 20px;
+    }
+
+    .subtitle-product-detail {
+        font-size: 18px;
+    }
+    
+    .sizes-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+}

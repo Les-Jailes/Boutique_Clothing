@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+    padding: 0 10px;
 }
 
 .product-details-subtitle {
@@ -20,4 +21,24 @@
     width: 100%;
     line-height: 1.5;
     text-align: justify;
+}
+
+@media (max-width: 870px) {
+    .product-details-subtitle {
+        font-size: 24px;
+    }
+
+    .product-description-container {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 530px) {
+    .product-details-subtitle {
+        font-size: 16px;
+    }
+
+    .product-description-container {
+        font-size: 12px;
+    }
 }
