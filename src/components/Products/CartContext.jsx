@@ -143,8 +143,19 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const calculateTax = async (taxPercent) => {
+    let percent = taxPercent / 100
+    let totalTax = cart.total * percent
+    const updateCart = {
+      ...cart,
+      taxes: totalTax
+    }
+
+    setCart(updateCart)
+    localStorage.setItem('cart', JSON.stringify(updateCart))
+  }
   return (
-    <CartContext.Provider value={{ cart, isCartLoaded, addToCart, removeFromCart, changeQuantity, clearCart }}>
+    <CartContext.Provider value={{ cart, isCartLoaded, addToCart, removeFromCart, changeQuantity, clearCart, calculateTax }}>
       {children}
     </CartContext.Provider>
   );
