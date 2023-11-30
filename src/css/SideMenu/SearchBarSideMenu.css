@@ -1,43 +1,54 @@
 .search-bar-side-menu-container {
-    width: 100%;
-    height: 60px;
-    position: relative;
-    display: none;
+  width: 100%;
+  height: 60px;
+  position: relative;
+  display: none;
 }
 
 .search-bar-side-menu {
-    width: calc(100% - 40px);
-    height: 40px;
-    border: 1px solid #000;
-    display: grid;
-    grid-template-columns: auto 40px;
-    border-radius: 40px;
-    overflow: hidden;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  width: calc(100% - 40px);
+  height: 40px;
+  border: 1px solid #000;
+  display: grid;
+  grid-template-columns: auto 40px;
+  border-radius: 40px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.clear-button {
+  font-weight: bold;
+  font-size: 15px;
+  position: absolute;
+  right: 60px;
+  top: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .search-bar-input {
-    width: 100%;
-    height: 100%;
-    border-radius: 40px 0 0 40px;
-    border: none;
-    padding: 0 10px;
-    outline: none;
-    font-family: var(--font-family-poppins);
-    font-size: 14px;
+  width: calc(100% - 40px);
+  height: 100%;
+  border-radius: 40px 0 0 40px;
+  border: none;
+  padding: 0 10px;
+  outline: none;
+  font-family: var(--font-family-poppins);
+  font-size: 14px;
 }
 
 .search-bar-button-sm {
-    background-color: #000;
-    border: none;
-    cursor: pointer;
+  background-color: #000;
+  border: none;
+  cursor: pointer;
 }
 
 @media (max-width: 630px) {
-    .search-bar-side-menu-container {
-        display: block;
-    }
+  .search-bar-side-menu-container {
+    display: block;
+  }
 }

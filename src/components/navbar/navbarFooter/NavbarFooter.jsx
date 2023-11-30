@@ -38,12 +38,16 @@ const NavFooter = () => {
     window.location.href = url;
   };
 
+  const handleCategoryClick = (link) => {
+    window.location.href = link;
+  };
+
   return (
     <div className={style.container}>
       {navFooterItems.map(({ title, id, link }) => (
-      <Link key={id} href={link} className={style.link}>
-        {title}
-      </Link>
+        <div key={id} className={style.link} onClick={() => handleCategoryClick(link)}>
+          {title}
+        </div>
       
       ))}
       {show && (

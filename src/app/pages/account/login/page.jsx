@@ -103,6 +103,7 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
+
     const showCartEmptyToast = localStorage.getItem("showLogInRequiredForWishlist");
     if (showCartEmptyToast === "true") {
       showToast(
@@ -110,6 +111,24 @@ const Login = () => {
         "info"
       );
       localStorage.removeItem("showLogInRequiredForWishlist");
+    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForOrderHistory");
+    if (showCartEmptyToast === "true") {
+      showToast(
+        "Please log in to see your order history.",
+        "info"
+      );
+      localStorage.removeItem("showLogInRequiredForOrderHistory");
+    }
+  }, []);
+
+  useEffect(() => {
+    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForProfile");
+    if (showCartEmptyToast === "true") {
+      showToast(
+        "Please log in to see your profile.",
+        "info"
+      );
+      localStorage.removeItem("showLogInRequiredForProfile");
     }
   }, []);
 
