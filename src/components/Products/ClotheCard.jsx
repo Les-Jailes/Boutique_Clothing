@@ -6,11 +6,12 @@ import {
   AiFillHeart,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import Image from 'next/image';
+import Image from "next/image";
 import { useState, useEffect, useRef, useContext } from "react";
 import { ColorClothe } from "./ColorClothe";
 import { SizePopup } from "@/utils/SizePopup";
 import { CartContext } from "./CartContext";
+import PropTypes from 'prop-types'
 import { useSession } from 'next-auth/react';
 import api from "@/app/api/api";
 import Loader from '@/utils/Loader'
@@ -127,7 +128,11 @@ export const ClotheCard = ({ clothe }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (cardRef.current && !cardRef.current.contains(event.target) && isSizePopupOpen) {
+      if (
+        cardRef.current &&
+        !cardRef.current.contains(event.target) &&
+        isSizePopupOpen
+      ) {
         setIsSizePopupOpen(false);
       }
     };
@@ -139,22 +144,27 @@ export const ClotheCard = ({ clothe }) => {
     };
   }, [isSizePopupOpen]);
 
+  const handleRedirection = () => {
+    let url = `/pages/page-details?id=${clothe._id}`;
+    window.location.href = url;
+  };
+
   return (
     <div className="clothe-card-container">
       {isLoading && <Loader isLoaderVisible={isLoading}/>}
-      <div className={`card-image-section ${clothe.category.toLowerCase()}`}>
+      <div className={`card-image-section ${clothe.category.toLowerCase()}`} onClick={() => handleRedirection()}>
         <Image
           src={clothe.path[0]}
           alt="Clothe image"
           className="clothe-image"
-          draggable={ false }
+          draggable={false}
           width={400}
           height={400}
         />
       </div>
       <div className="information-container">
         <div className="section-card clothe-information">
-          <h3 className="clothe-name">{clothe.name}</h3>
+          <h3 className="clothe-name" onClick={() => handleRedirection()}>{clothe.name}</h3>
           <p className="clothe-price">{clothe.price} $</p>
         </div>
         <div className="container-more-information-and-buttons">
@@ -177,7 +187,9 @@ export const ClotheCard = ({ clothe }) => {
             <button
               ref={cardRef}
               className="options-card shop-card"
-              onClick={() => {handleSizeSelection();}}
+              onClick={() => {
+                handleSizeSelection();
+              }}
             >
               <AiOutlineShoppingCart color="white" />
             </button>
@@ -194,3 +206,7 @@ export const ClotheCard = ({ clothe }) => {
     </div>
   );
 };
+
+ClotheCard.propTypes = {
+  clothe: PropTypes.object.isRequired
+}

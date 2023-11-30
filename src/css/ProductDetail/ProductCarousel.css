@@ -1,0 +1,108 @@
+.product-carousel-container {
+    width: 600px;
+    height: auto;
+    position: relative;
+}
+
+.left-button-carousel,
+.right-button-carousel {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    font-size: 40px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: block;
+    transition: all 0.5s;
+}
+
+.left-button-carousel.disable,
+.right-button-carousel.disable {
+    display: none;
+}
+
+.left-button-carousel {
+    left: 10px;
+}
+
+.right-button-carousel {
+    right: 10px;
+}
+
+.product-image-container {
+    width: 450px;
+    height: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.product-image-container.women {
+    background: var(--women-background-gradient);
+}
+
+.product-image-container.men {
+    background: var(--men-background-gradient);
+}
+
+.product-image-container.boy {
+    background: var(--boy-background-gradient);
+}
+
+.product-image-container.girl {
+    background: var(--girl-background-gradient);
+}
+
+.product-image-container.summer {
+    background: var(--summer-background-gradient);
+}
+
+.product-image-container.winter {
+    background: var(--winter-background-gradient);
+}
+
+.image-carousel {
+    width: auto;
+    height: 450px;
+}
+
+@media (max-width: 1340px) {
+    .product-carousel-container {
+        width: 100%;
+    }
+
+    .product-image-container {
+        width: 350px;
+        height: 350px;
+    }
+
+    .image-carousel {
+        width: auto;
+        height: 300px;
+    }
+}
+
+@media (max-width: 530px) {
+    .left-button-carousel {
+        left: 0;
+    }
+    
+    .right-button-carousel {
+        right: 0;
+    }
+
+    .product-image-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    .image-carousel {
+        width: auto;
+        height: 250px;
+    }
+}

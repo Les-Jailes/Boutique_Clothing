@@ -1,0 +1,44 @@
+.other-recomendations-carousel {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtitle-other-recomendations {
+    font-size: 48px;
+}
+
+.other-recomendations-container {
+    width: 100%;
+    height: 800px;
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+}
+
+.clothe-card-container {
+    margin: auto;
+}
+
+@media (max-width: 630px) {
+    .subtitle-other-recomendations {
+        font-size: 24px;
+        padding: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 540px) {
+    .other-recomendations-container {
+        height: 600px;
+    }
+}

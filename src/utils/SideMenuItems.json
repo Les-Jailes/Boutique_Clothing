@@ -45,11 +45,6 @@
     "isVisibleAllTime": true
   },
   {
-    "name": "Settings",
-    "path": "/pages/settings",
-    "isVisibleAllTime": true
-  },
-  {
     "name": "About us",
     "path": "/pages/about-us",
     "isVisibleAllTime": true
