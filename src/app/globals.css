@@ -22,7 +22,7 @@
   align-items: center;
   width: 100vw;
   height: 62vh;
-  background-image: url('/bg-404.png');
+  background: url('/bg-404.png') no-repeat center center fixed;
   background-size: cover;
   background-position: center;
   gap: 3rem;

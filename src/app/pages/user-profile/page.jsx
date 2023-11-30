@@ -7,7 +7,7 @@ import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { validateTextField, validateCiField } from '@/utils/formValidations';
 import '@/app/pages/user-profile/UserProfile.css';
 import api from '@/app/api/api';
-
+import "@/css/OrderHistoryLoader/OrderHistoryLoaderTable.css";
 const Profile = () => {
   const [ci, setCi] = useState('');
   const [name, setName] = useState('');
@@ -21,7 +21,17 @@ const Profile = () => {
     name: '',
     lastName: ''
   });
-  const session = useSession()
+  const [isLoading, setIsLoading] = useState(true);
+  const session = useSession();
+  const [redirected, setRedirected] = useState(false);
+
+  useEffect(() => {
+    if (!redirected && session.status === "unauthenticated") {
+      window.location.href = '/pages/account/login';
+      setRedirected(true);
+      localStorage.setItem("showLogInRequiredForProfile", "true");
+    }
+  }, [session, redirected]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -143,12 +153,26 @@ const Profile = () => {
           }
         } catch (error) {
           console.error("Error in fetching user data:", error);
+        }finally {
+          setIsLoading(false);
         }
+      } else {
+        setTimeout(() => {
+        setIsLoading(false);
+      }, 4000);
       }
     };
 
     fetchData();
   }, [session, getUser]);
+
+  if (isLoading) {
+    return (
+      <div className="container-loader">
+        <span className="loader"></span>
+      </div>
+    );
+  }
 
   const handleSelectChange = (e) => {
     setGender(e.target.value);
@@ -160,6 +184,7 @@ const Profile = () => {
   ];
 
   return (
+    <div className='profile-container_user'>
     <div className='profile-container'>
       <form action=''>
         <h1>Profile</h1>
@@ -268,6 +293,7 @@ const Profile = () => {
           }
         </div>
       </form>
+    </div>
     </div>
   );
 }

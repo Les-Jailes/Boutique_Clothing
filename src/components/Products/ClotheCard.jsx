@@ -11,15 +11,104 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { ColorClothe } from "./ColorClothe";
 import { SizePopup } from "@/utils/SizePopup";
 import { CartContext } from "./CartContext";
+import { useSession } from 'next-auth/react';
+import api from "@/app/api/api";
+import Loader from '@/utils/Loader'
+import { showAlertMessageAutomatically, showErrorMessage } from "@/utils/alerts";
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSizePopupOpen, setIsSizePopupOpen] = useState(false);
   const cardRef = useRef(null);
   const { addToCart } = useContext(CartContext);
+  const session = useSession();
+  const [isLoading, setIsLoading] = useState(false); 
+  const [isLogged, setIsLogged] = useState(false);
+
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      let wishlist = [];
+      if(localStorage.getItem('wishlist')) {
+    wishlist = JSON.parse(localStorage.getItem('wishlist'));
+    }
+    const isProductInWishlist = wishlist.find(u => u._id === clothe._id);;
+          setIsLiked(isProductInWishlist);
+      api.get('/User/email/' + session.data.user.email)
+        .then(response => {
+          const user = response.data;
+          const wishlist = user.wishlist;
+          
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }, [session.status, clothe]);
 
   const handleLike = () => {
-    setIsLiked(!isLiked);
+    if(session.status === 'authenticated'){
+      setIsLogged(true);
+      setIsLoading(true);
+      if(!isLiked) addToWishList();
+      else removeFromWishList();
+    }
+    else {
+      setIsLogged(false);
+      showAlertMessageAutomatically("You need to be logged in to add products to your wish list.");
+    }
+  };
+
+  const addToWishList = async () => {
+
+    let wishlist = [];
+      if(localStorage.getItem('wishlist')) {
+    wishlist = JSON.parse(localStorage.getItem('wishlist'));
+    }
+
+    wishlist.push(clothe);
+
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    try{
+      const user = await api.get('/User/email/' + session.data.user.email);
+    const products = user.data.wishlist;
+    products.push(clothe);
+    const body = {
+      wishlist: products
+    }
+    await api.put('/User/' + user.data._id, body);
+    }
+    catch(error){
+      console.log(error);
+    }
+    setIsLiked(true);
+    setIsLoading(false);
+    
+  }
+
+  const removeFromWishList = async () => {
+
+    let wishlist = JSON.parse(localStorage.getItem('wishlist'));
+  
+  wishlist = wishlist.filter(p => p._id !== clothe._id);
+
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    try {
+      const user = await api.get('/User/email/' + session.data.user.email);
+      const products = user.data.wishlist;
+  
+      const updatedWishlist = products.filter((product) => product._id !== clothe._id);
+  
+      const body = {
+        wishlist: updatedWishlist
+      };
+  
+      await api.put('/User/' + user.data._id, body);
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLiked(false);
+    setIsLoading(false);
+
   };
 
   const handleAddToCart = (selectedSize) => {
@@ -52,6 +141,7 @@ export const ClotheCard = ({ clothe }) => {
 
   return (
     <div className="clothe-card-container">
+      {isLoading && <Loader isLoaderVisible={isLoading}/>}
       <div className={`card-image-section ${clothe.category.toLowerCase()}`}>
         <Image
           src={clothe.path[0]}
@@ -76,10 +166,10 @@ export const ClotheCard = ({ clothe }) => {
           <div className="section-card card-buttons">
             <button
               className="options-card like-card"
-              onClick={() => handleLike()}
+              onClick={handleLike}
             >
               {!isLiked ? (
-                <AiOutlineHeart color="red" />
+                <AiOutlineHeart color="red"/>
               ) : (
                 <AiFillHeart color="red" />
               )}
