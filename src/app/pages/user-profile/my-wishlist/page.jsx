@@ -47,8 +47,9 @@ export default function Page() {
 
   const validatePagination = () => {
     if( pagination.length >= 1 && pagination.length === currentlyPagination){
-      
+      if(currentlyPagination - 1 === 0)setLeftIsDisable(true);
       setCurrentlyPagination(currentlyPagination - 1);
+      
     } 
   }
 
@@ -84,10 +85,12 @@ export default function Page() {
   }
 
   useEffect(() => {
-    if (pagination.length > 1) {
-      setRightIsDisable(false);
-    } else {
-      setRightIsDisable(true);
+    if(currentlyPagination === 0) {
+      if (pagination.length > 1) {
+        setRightIsDisable(false);
+      } else {
+        setRightIsDisable(true);
+      }
     }
   }, [pagination]);
 
