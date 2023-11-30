@@ -1,6 +1,7 @@
 import CartButton from "../Cart/CartButton";
 import SideMenu from "../SideMenu/SideMenu";
 import User from "../User/User";
+import '@/css/Navbar/MenuItems.css'
 
 const MenuItems = ({ isLogged, handleLogOut }) => {
 

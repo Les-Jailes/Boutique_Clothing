@@ -1,4 +1,4 @@
-import { FaFacebook, FaGlobe, FaInstagram, FaPinterest,  } from "react-icons/fa";
+import { FaFacebook, FaGlobe, FaInstagram, FaPinterest, } from "react-icons/fa";
 export const onlineShop = [
     {
         title: 'Home',
@@ -40,17 +40,17 @@ export const socialLinks = [
     {
         icon: <FaGlobe />,
         url: "/",
-      },
-      {
+    },
+    {
         icon: <FaFacebook />,
         url: "https://www.facebook.com/lesjailes06/",
-      },
-      {
+    },
+    {
         icon: <FaInstagram />,
         url: "https://instagram.com/boutique_clothing_06?igshid=MzMyNGUyNmU2YQ==",
-      },
-      {
+    },
+    {
         icon: <FaPinterest />,
         url: "https://pin.it/5fWfuYx",
-      },
+    },
 ]

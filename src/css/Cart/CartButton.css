@@ -3,8 +3,6 @@
     height: 60px;
     border: none;
     background-color: transparent;
-    position: absolute;
-    top: 0;
-    right: calc(60px + 1em);
     cursor: pointer;
+    position: relative;
 }

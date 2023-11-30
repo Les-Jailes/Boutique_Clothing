@@ -71,7 +71,7 @@ export const navFooterItems = [
     },
     {
         id: 6,
-        title: 'Sales',
+        title: 'Winter',
         link: "/",
     },
 ];
