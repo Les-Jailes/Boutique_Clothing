@@ -11,6 +11,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { ColorClothe } from "./ColorClothe";
 import { SizePopup } from "@/utils/SizePopup";
 import { CartContext } from "./CartContext";
+import PropTypes from 'prop-types'
 
 export const ClotheCard = ({ clothe }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -117,3 +118,7 @@ export const ClotheCard = ({ clothe }) => {
     </div>
   );
 };
+
+ClotheCard.propTypes = {
+  clothe: PropTypes.object.isRequired
+}

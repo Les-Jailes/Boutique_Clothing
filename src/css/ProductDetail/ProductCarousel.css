@@ -1,5 +1,5 @@
 .product-carousel-container {
-    width: 500px;
+    width: 600px;
     height: auto;
     position: relative;
 }
@@ -15,6 +15,7 @@
     background-color: transparent;
     cursor: pointer;
     display: block;
+    transition: all 0.5s;
 }
 
 .left-button-carousel.disable,
@@ -31,8 +32,8 @@
 }
 
 .product-image-container {
-    width: 350px;
-    height: 400px;
+    width: 450px;
+    height: 500px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -67,5 +68,5 @@
 
 .image-carousel {
     width: auto;
-    height: 300px;
+    height: 450px;
 }
