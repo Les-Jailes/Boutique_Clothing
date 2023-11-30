@@ -9,6 +9,7 @@ import Filter from "@/components/filter/Filter";
 import styles from "./page.module.css";
 import api from '@/app/api/api'
 import { showToast } from "@/components/Alerts/CustomToast";
+import Loader from '@/utils/Loader'
 
 export default function Page() {
   const [loading, setLoading] = useState(true);
@@ -255,7 +256,9 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
-      {loading && <p>Cargando...</p>}
+      <div className={styles.container__loader}>
+      {loading && <Loader isLoaderVisible={loading}/>}
+      </div>
       {!loading && (
         <>
       <Filter
