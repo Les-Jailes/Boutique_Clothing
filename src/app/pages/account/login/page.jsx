@@ -104,13 +104,14 @@ const Login = () => {
 
   useEffect(() => {
 
-    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForWishlist");
-    if (showCartEmptyToast === "true") {
+    const showEmptyToast = localStorage.getItem("showLogInRequiredForWishlist");
+    if (showEmptyToast === "true") {
       showToast(
         "Please log in to see your wish list.",
         "info"
       );
       localStorage.removeItem("showLogInRequiredForWishlist");
+    }
     const showCartEmptyToast = localStorage.getItem("showLogInRequiredForOrderHistory");
     if (showCartEmptyToast === "true") {
       showToast(

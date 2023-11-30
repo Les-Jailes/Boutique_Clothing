@@ -43,7 +43,7 @@ export const ClotheCard = ({ clothe }) => {
           console.error(error);
         });
     }
-  }, [session.status, clothe._id]);
+  }, [session.status, clothe]);
 
   const handleLike = () => {
     if(session.status === 'authenticated'){
