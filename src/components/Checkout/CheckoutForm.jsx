@@ -4,7 +4,7 @@ import "@/css/Checkout/CheckoutForm.css";
 import { AiOutlineFontSize, AiOutlineGlobal } from "react-icons/ai";
 import { LuMap } from "react-icons/lu";
 import { FiPhone } from "react-icons/fi";
-import {
+import { 
   validateNumberField,
   validateFullNameField,
 } from "@/utils/formValidations";
