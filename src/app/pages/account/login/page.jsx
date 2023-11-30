@@ -99,6 +99,28 @@ const Login = () => {
   }, []);
 
   useEffect(() => {
+    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForOrderHistory");
+    if (showCartEmptyToast === "true") {
+      showToast(
+        "Please log in to see your order history.",
+        "info"
+      );
+      localStorage.removeItem("showLogInRequiredForOrderHistory");
+    }
+  }, []);
+
+  useEffect(() => {
+    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForProfile");
+    if (showCartEmptyToast === "true") {
+      showToast(
+        "Please log in to see your profile.",
+        "info"
+      );
+      localStorage.removeItem("showLogInRequiredForProfile");
+    }
+  }, []);
+
+  useEffect(() => {
     const [isValid, message] = validateEmail(emailInput);
   
     setValidation(prev => ({
