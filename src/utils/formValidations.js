@@ -36,8 +36,8 @@ export const validateTextField = (text, typeOfText) => {
   if (!text || text === "") {
     return [false, typeOfText + " cannot be empty"];
   }
-  if (text.length >= 25) {
-    return [false, typeOfText + " cannot be more than 25 characters long."];
+  if (text.length >= 100) {
+    return [false, typeOfText + " cannot be more than 100 characters long."];
   }
   if (text.length < 3) {
     return [false, typeOfText + " must be at least 3 characters long."];

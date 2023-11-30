@@ -10,7 +10,7 @@
 }
 .formContainer{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   gap: 5rem;
   padding: 2rem 6rem;
@@ -118,8 +118,9 @@ cursor: pointer;
 }
 
 @media screen and (max-width: 500px){
-  .formContainer{
+  .formContainer {
       padding: 2rem 4rem;
+      height: 90%;
   }
 }
 
