@@ -1,4 +1,13 @@
 .quantity-pop-up {
-    width: 30px;
-    height: 30px;
+    width: 23px;
+    height: 23px;
+    background-color: #f00;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 23px;
+    text-align: center;
+    font-size: 12px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
 }
