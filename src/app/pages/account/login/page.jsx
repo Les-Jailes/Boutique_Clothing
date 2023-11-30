@@ -65,8 +65,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let flag;
+    let user;
     try{
-      const user = await api.get('/User/email/'+  emailInput);
+      user = await api.get('/User/email/'+  emailInput);
       flag = false;
     }
     catch(error){
@@ -75,6 +76,9 @@ const Login = () => {
     if (isEmailValid() && isPasswordValid()) {
       if(flag===true)showAccountAlreadyExistsAlertSingIn(router);
       else{
+        if(user.data.wishlist) localStorage.setItem('wishlist', JSON.stringify(user.data.wishlist));
+        else localStorage.setItem('wishlist', JSON.stringify([]));
+        console.log(JSON.parse(localStorage.getItem('wishlist')));
         signIn('credentials', { email: emailInput, password: passwordInput });
       }
     }else{
