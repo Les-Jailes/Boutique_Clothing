@@ -5,6 +5,7 @@ import Product from "@/components/ProductDetail/Product";
 import React, { useEffect, useState } from "react";
 import '@/css/ProductDetail/ProductPage.css'
 import OtherRecomendations from "@/components/ProductDetail/OtherRecomendations";
+import Loader from "@/utils/Loader";
 
 export default function Page() {
   const [id, setId] = useState(null);
@@ -44,7 +45,7 @@ export default function Page() {
   return (
     <div className="product-page">
       {loading ? (
-        "Loading..."
+        <Loader isLoaderVisible={loading} />
       ) : (
         <>
           {product ? (

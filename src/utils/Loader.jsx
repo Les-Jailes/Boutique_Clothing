@@ -1,6 +1,6 @@
 import '@/css/Loader/Loader.css'
 
-const Loader = (isLoaderVisible) => {
+const Loader = ({isLoaderVisible}) => {
 
   return (
     <div id="loader-wrapper" className={isLoaderVisible ? 'visible' : 'hidden'}>
