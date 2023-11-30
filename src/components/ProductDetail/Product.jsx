@@ -128,7 +128,6 @@ const Product = ({ product }) => {
         size: size,
       });
       setSize("");
-      location.reload();
     } else {
       Swal.fire({
         icon: "error",
