@@ -144,7 +144,7 @@ export const ClotheCard = ({ clothe }) => {
     };
   }, [isSizePopupOpen]);
 
-  const handleRedirection = (event) => {
+  const handleRedirection = () => {
     let url = `/pages/page-details?id=${clothe._id}`;
     window.location.href = url;
   };
@@ -152,7 +152,7 @@ export const ClotheCard = ({ clothe }) => {
   return (
     <div className="clothe-card-container">
       {isLoading && <Loader isLoaderVisible={isLoading}/>}
-      <div className={`card-image-section ${clothe.category.toLowerCase()}`}>
+      <div className={`card-image-section ${clothe.category.toLowerCase()}`} onClick={() => handleRedirection()}>
         <Image
           src={clothe.path[0]}
           alt="Clothe image"
@@ -164,7 +164,7 @@ export const ClotheCard = ({ clothe }) => {
       </div>
       <div className="information-container">
         <div className="section-card clothe-information">
-          <h3 className="clothe-name" onClick={(event) => handleRedirection(event)}>{clothe.name}</h3>
+          <h3 className="clothe-name" onClick={() => handleRedirection()}>{clothe.name}</h3>
           <p className="clothe-price">{clothe.price} $</p>
         </div>
         <div className="container-more-information-and-buttons">

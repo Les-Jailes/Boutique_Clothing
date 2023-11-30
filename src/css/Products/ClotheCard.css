@@ -20,6 +20,7 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--border-radius);
+    cursor: pointer;
 }
 
 .card-image-section.women {
