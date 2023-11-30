@@ -10,6 +10,7 @@ const DropDownCountries = ({
   value,
   setValue,
   handleClick,
+  typeOption
 }) => {
   const [filteredOptions, setFilteredOptions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +25,10 @@ const DropDownCountries = ({
 
     setFilteredOptions(filtered);
     setIsOpen(true);
+
+    if (filtered.length === 1 && auxiliarValue.toLowerCase() === filtered[0].toLowerCase()) {
+      handleOptionClick(filtered[0]);
+    }
   };
 
   const handleOptionClick = (selectedValue) => {
@@ -48,15 +53,19 @@ const DropDownCountries = ({
       />
       {isOpen && (
         <ul className="options-list">
-          {filteredOptions.map((option, index) => (
-            <li
-              key={index}
-              onMouseDown={() => handleOptionClick(option)}
-              className="option-list"
-            >
-              {option}
-            </li>
-          ))}
+          {filteredOptions && filteredOptions.length > 0 ? (
+            filteredOptions.map((option, index) => (
+              <li
+                key={index}
+                onMouseDown={() => handleOptionClick(option)}
+                className="option-list"
+              >
+                {option}
+              </li>
+            ))
+          ) : (
+            `${value} is not an available ${typeOption.toLowerCase()}`
+          )}
         </ul>
       )}
     </>
@@ -69,6 +78,7 @@ DropDownCountries.propTypes = {
   value: PropTypes.string.isRequired,
   setValue: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
+  typeOption: PropTypes.string.isRequired
 };
 
 const DropdownSubcity = ({
@@ -84,13 +94,20 @@ const DropdownSubcity = ({
   const handleInputChange = (event) => {
     const auxiliarValue = event.target.value;
     setValue(auxiliarValue);
-  
+
     const filtered = options.filter((option) =>
       option.subCityName.toLowerCase().includes(auxiliarValue.toLowerCase())
     );
-  
+
     setFilteredOptions(filtered);
     setIsOpen(true);
+
+    if (
+      filtered.length === 1 &&
+      auxiliarValue.toLowerCase() === filtered[0].subCityName.toLowerCase()
+    ) {
+      handleOptionClick(filtered[0]);
+    }
   };
 
   const handleOptionClick = (selectedValue) => {
@@ -115,15 +132,19 @@ const DropdownSubcity = ({
       />
       {isOpen && (
         <ul className="options-list">
-          {filteredOptions.map((option, index) => (
-            <li
-              key={index}
-              onMouseDown={() => handleOptionClick(option)}
-              className="option-list"
-            >
-              {option.subCityName}
-            </li>
-          ))}
+          {filteredOptions && filteredOptions.length > 0 ? (
+            filteredOptions.map((option, index) => (
+              <li
+                key={index}
+                onMouseDown={() => handleOptionClick(option)}
+                className="option-list"
+              >
+                {option.subCityName}
+              </li>
+            ))
+          ) : (
+            `${value} is not an available subcity`
+          )}
         </ul>
       )}
     </>

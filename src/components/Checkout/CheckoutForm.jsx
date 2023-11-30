@@ -6,7 +6,7 @@ import { LuMap } from "react-icons/lu";
 import { FiPhone } from "react-icons/fi";
 import {
   validateNumberField,
-  validateTextField,
+  validateFullNameField,
 } from "@/utils/formValidations";
 import { GoArrowRight } from "react-icons/go";
 import Swal from "sweetalert2";
@@ -18,7 +18,7 @@ import {
   CheckoutField,
   DropdownField,
   DropdownFieldSubcity,
-  CheckoutFieldNoEditable
+  CheckoutFieldNoEditable,
 } from "./CheckoutField";
 import axios from "axios";
 import { CartContext } from "../Products/CartContext";
@@ -44,13 +44,13 @@ const CheckoutForm = () => {
   const [listCity, setListCity] = useState([]);
   const [listSubcity, setListSubcity] = useState([]);
 
-  const [taxes, setTaxes] = useState(0)
+  const [taxes, setTaxes] = useState(0);
 
   const [age, setAge] = useState(true);
 
   const router = useRouter();
 
-  const {calculateTax} = useContext(CartContext)
+  const { calculateTax } = useContext(CartContext);
 
   const availableCountries = async () => {
     try {
@@ -84,7 +84,7 @@ const CheckoutForm = () => {
     validateFullname(username);
   };
   const validateFullname = (text) => {
-    const [isValid, validationResult] = validateTextField(text, "Fullname");
+    const [isValid, validationResult] = validateFullNameField(text, "Fullname");
     if (isValid) {
       setValidationFullname(false);
     } else {
@@ -111,19 +111,50 @@ const CheckoutForm = () => {
     validatePhoneNumber(phoneNumber);
   };
 
-  const handleZipCodeChange = (e) => {
-    const phoneNumber = e.target.value;
-    setZipCode(phoneNumber);
+  const session = useSession();
+
+  const validateDropdownField = (field, fieldValue, options) => {
+    if (!fieldValue || !options.includes(fieldValue)) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: `Please select a valid ${field}.`,
+      });
+      return false;
+    }
+    return true;
   };
 
-  const session = useSession();
+  const validateForm = () => {
+    const isCountryValid = validateDropdownField(
+      "country",
+      country,
+      listCountries
+    );
+    if (!isCountryValid) return false;
+
+    const isCityValid = validateDropdownField("city", city, listCity);
+    if (!isCityValid) return false;
+
+    if (listSubcity.length > 0) {
+      const isSubcityValid = validateDropdownField(
+        "subcity",
+        subcity,
+        listSubcity.map((subcity) => subcity.subCityName)
+      );
+      if (!isSubcityValid) return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
       !validationFullname &&
       !validationPhoneNumber &&
-      age === "verified"
+      age === "verified" &&
+      validateForm()
     ) {
       localStorage.setItem(
         "shippingInfo",
@@ -137,6 +168,12 @@ const CheckoutForm = () => {
         })
       );
       router.push("/pages/checkout/payment");
+    } else if (!validateForm()) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please check that the country, city or subcity sections are correct",
+      });
     } else {
       Swal.fire({
         icon: "error",
@@ -155,30 +192,32 @@ const CheckoutForm = () => {
       setZipCode("");
       setSubcity("");
       setCity("");
-      setListSubcity([])
-      setListCity([])
-      setTaxes(0)
+      setListSubcity([]);
+      setListCity([]);
+      setTaxes(0);
       setCountry(selectedCountry);
       availableCities(selectedCountry);
-      getAbbreviationCountry(selectedCountry)
+      getAbbreviationCountry(selectedCountry);
     },
     [country]
   );
 
   const getAbbreviationCountry = async (countryName) => {
     try {
-      let countryObject = await axios.get(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
-      setCountryCode(countryObject.data[0].altSpellings[0])
+      let countryObject = await axios.get(
+        `https://restcountries.com/v3.1/name/${countryName}?fullText=true`
+      );
+      setCountryCode(countryObject.data[0].altSpellings[0]);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   const handleCityChange = useCallback(
     (selectedCity) => {
       setZipCode("");
       setSubcity("");
-      setListSubcity([])
+      setListSubcity([]);
       availableSubcities(country, selectedCity);
     },
     [city]
@@ -197,10 +236,10 @@ const CheckoutForm = () => {
       const cityObject = await api.get(
         `/Country/name/${countryName}/city/${cityName}`
       );
-      setTaxes(cityObject.data.tax)
-      calculateTax(cityObject.data.tax)
+      setTaxes(cityObject.data.tax);
+      calculateTax(cityObject.data.tax);
       if (cityObject.data.zipCodes.length === 0) {
-        setZipCode("00000")
+        setZipCode("00000");
       } else {
         setListSubcity(cityObject.data.zipCodes);
       }
@@ -235,7 +274,6 @@ const CheckoutForm = () => {
     <div className="formContainer">
       <h1>CHECKOUT</h1>
       <form onSubmit={handleSubmit} className="form">
-
         <CheckoutFieldWithValidation
           icon={AiOutlineFontSize}
           placeholderText="Full name"
@@ -265,6 +303,7 @@ const CheckoutForm = () => {
           value={country}
           setValue={setCountry}
           handleClick={handleCountryChange}
+          typeOption="Country"
         />
 
         {listCity && listCity.length > 0 ? (
@@ -275,6 +314,7 @@ const CheckoutForm = () => {
             value={city}
             setValue={setCity}
             handleClick={handleCityChange}
+            typeOption="city"
           />
         ) : (
           ""
