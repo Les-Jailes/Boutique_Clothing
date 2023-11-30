@@ -56,8 +56,8 @@ const Summary = () => {
         />
         <div className="cart-container">
         <div className="list-cart-container">
-          {cart.products.map((product) => {
-            return <CartCardSummary product={product} key={product.code} showDeleteOption={false}/>;
+          {cart.products.map((product, index) => {
+            return <CartCardSummary product={product} key={index} showDeleteOption={false}/>;
           })}
         </div>
         </div>

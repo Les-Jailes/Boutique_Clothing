@@ -11,6 +11,8 @@
     position: relative;
     transition: all 0.5s;
     margin: 0 auto;
+
+    z-index: 1;
 }
 
 .cart-container {
