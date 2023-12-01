@@ -6,7 +6,7 @@ import styles from "@/css/OrderHistoryUser/OrderDetailsTable.module.css";
 import { Pagination } from "@/components/Products/Pagination";
 import createPagination from "@/utils/Pagination";
 
-const OrderDetailsTable = ({ purchasedProducts }) => {
+const OrderDetailsTable = ({ purchasedProducts, orderDetails }) => {
   const [pagination, setPagination] = useState([]);
   const [currentlyPagination, setCurrentlyPagination] = useState(0);
   const [leftIsDisable, setLeftIsDisable] = useState(true);
@@ -46,6 +46,23 @@ const OrderDetailsTable = ({ purchasedProducts }) => {
     }
   };
 
+  const totalCalculator = (products) => {
+    let total = 0;
+    products.forEach((product) => {
+      const quantity = product.quantity
+      const productPrice = product.price
+
+      total += quantity * productPrice
+    });
+  
+    return total;
+  }
+
+  const taxCalculator = () => {
+    let totalPerProducts = totalCalculator(purchasedProducts);
+    return orderDetails.amount - totalPerProducts;
+  };
+
   return (
     <>
       <div className={styles.tfoot}>
@@ -71,7 +88,9 @@ const OrderDetailsTable = ({ purchasedProducts }) => {
           </p>
         </div>
         <div>
-          <p>Taxes: $0</p>
+          {
+            `Taxes: ${taxCalculator().toFixed(2)} $`
+          }
         </div>
       </div>
       <table className={styles.table}>

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import MultiSlider from "../Home/OurProducts/MultiSlider";
 import axios from "axios";
 import "@/css/ProductDetail/OtherRecomendations.css";
+import Loader from "@/utils/Loader";
 
 const OtherRecomendations = ({ category, productId }) => {
   const [products, setProducts] = useState([]);
@@ -28,12 +29,19 @@ const OtherRecomendations = ({ category, productId }) => {
 
   return (
     <div className="other-recomendations-carousel">
-      <h2 className="subtitle-other-recomendations">OTHER RECOMENDATIONS</h2>
-      <div className="other-recomendations-container">
-        <MultiSlider products={products} />
-      </div>
+      <h2 className="subtitle-other-recomendations">OTHER RECOMMENDATIONS</h2>
+      {
+        products && products.length > 0 ? (
+          <div className="other-recomendations-container">
+            <MultiSlider products={products} />
+          </div>
+        ) : (
+          <Loader isLoaderVisible={true} />
+        )
+      }
     </div>
   );
+  
 };
 
 export default OtherRecomendations;
