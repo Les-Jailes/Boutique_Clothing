@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MultiSlider from "@/components/Home/OurProducts/MultiSlider";
+import Loader from "@/utils/Loader";
 
 const OurProducts = () => {
   const [products, setProducts] = useState([]);
@@ -30,7 +31,13 @@ const OurProducts = () => {
 
   return (
     <div className="our-products-carousel">
-      <MultiSlider products={products} />
+      {
+        products && products.length > 0 ? (
+          <MultiSlider products={products} />
+        ) : (
+          <Loader isLoaderVisible={true} />
+        )
+      }
     </div>
   );
 };
