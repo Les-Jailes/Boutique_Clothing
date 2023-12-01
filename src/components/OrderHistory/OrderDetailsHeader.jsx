@@ -5,15 +5,14 @@ import { AiOutlineUp, AiOutlineDown } from "react-icons/ai";
 import styles from "@/css/OrderHistoryUser/OrderDetailsHeader.module.css";
 
 
-const OrderDetailsHeader = ({ order, selectedOrderId }) => {
-
-  const orderIdNumbersOnly = order._id.replace(/\D/g, '');
+const OrderDetailsHeader = ({ order, selectedOrderId, index, totalOrders }) => {
+  const orderIdNumber = totalOrders - index;
 
   return (
     <div className={styles.show_more_information}>
       <div className={styles.order_id}>
-        <p className={styles.order_id__text}>Order ID:</p>
-        <p className={styles.order_id__value}>{orderIdNumbersOnly}</p>
+        <p className={styles.order_id__text}>N°:</p>
+        <p className={styles.order_id__value}>{orderIdNumber}</p>
       </div>
       <div className={styles.date}>
         <p className={styles.date__text}>Date:</p>

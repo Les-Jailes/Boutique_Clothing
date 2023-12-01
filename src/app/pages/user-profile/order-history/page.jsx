@@ -53,7 +53,7 @@ const OrderHistoryUser = () => {
         }
       } catch (error) {
         console.error("Error fetching user:", error);
-      }finally {
+      } finally {
         setIsLoading(false);
       }
     };
@@ -63,6 +63,12 @@ const OrderHistoryUser = () => {
       setLoading(false);
     }, 4000);
   }, [session]);
+
+  useEffect(() => {
+    if (checkoutUserId.length > 0) {
+      checkoutUserId.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+  }, [checkoutUserId]);
 
   useEffect(() => {
     setPagination(createPagination(checkoutUserId));
@@ -120,21 +126,23 @@ const OrderHistoryUser = () => {
         <h1 className={styles.title}> Order History </h1>
       </div>
       {pagination.length > 0 &&
-            pagination[currentlyPagination].map((order) => (
-        <OrderContainer
-          key={order._id}
-          order={order}
-          selectedOrderId={selectedOrderId}
-          handleToggleTable={handleToggleTable}
-        />
-      ))}
-        <Pagination
-          currentlyPagination={currentlyPagination}
-          changePaginationRight={handlePaginationRight}
-          changePaginationLeft={handlePaginationLeft}
-          leftIsDisable={leftIsDisable}
-          rightIsDisable={rightIsDisable}
-        />
+        pagination[currentlyPagination].map((order, index) => (
+          <OrderContainer
+            key={order._id}
+            order={order}
+            selectedOrderId={selectedOrderId}
+            handleToggleTable={handleToggleTable}
+            index={index}
+            totalOrders={checkoutUserId.length}
+          />
+        ))}
+      <Pagination
+        currentlyPagination={currentlyPagination}
+        changePaginationRight={handlePaginationRight}
+        changePaginationLeft={handlePaginationLeft}
+        leftIsDisable={leftIsDisable}
+        rightIsDisable={rightIsDisable}
+      />
     </div>
   );
 };

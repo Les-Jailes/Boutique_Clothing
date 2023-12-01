@@ -5,13 +5,11 @@ import OrderDetailsHeader from "./OrderDetailsHeader";
 import OrderDetailsTable from "./OrderDetails";
 import styles from "@/css/OrderHistoryUser/OrderContainer.module.css";
 
-const OrderContainer = ({ order, selectedOrderId, handleToggleTable }) => {
+const OrderContainer = ({ order, selectedOrderId, handleToggleTable, index, totalOrders }) => {
   return (
     <div className={styles.orderContainer}>
-      <div
-        onClick={() => handleToggleTable(order._id)}
-      >
-        <OrderDetailsHeader order={order} selectedOrderId={selectedOrderId} />
+      <div onClick={() => handleToggleTable(order._id)}>
+        <OrderDetailsHeader order={order} selectedOrderId={selectedOrderId} index={index} totalOrders={totalOrders} />
       </div>
 
       {selectedOrderId === order._id && (
