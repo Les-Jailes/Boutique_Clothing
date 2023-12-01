@@ -7,6 +7,7 @@ import { FiPhone } from "react-icons/fi";
 import { 
   validateNumberField,
   validateFullNameField,
+  validateStreetAddress,
 } from "@/utils/formValidations";
 import { GoArrowRight } from "react-icons/go";
 import Swal from "sweetalert2";
@@ -33,6 +34,8 @@ const CheckoutForm = () => {
 
   const [countryCode, setCountryCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
+  const [validationStreetAddress, setValidationStreetAddress] = useState(false);
+  const [validationStreetAddressMessage, setValidationStreetAddressMessage] = useState("");
   const [zipCode, setZipCode] = useState("");
 
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -87,6 +90,22 @@ const CheckoutForm = () => {
     } else {
       setValidationFullname(true);
       setValidFullnameMessage(validationResult);
+    }
+  };
+
+  const handleStreetAddressChange = (e) => {
+    const address = e.target.value;
+    setStreetAddress(address);
+    validateStreetAddressValue(address);
+  };
+
+  const validateStreetAddressValue = (address) => {
+    const [isValid, validationResult] = validateStreetAddress(address , "Street Address");
+    if (isValid) {
+      setValidationStreetAddress(false);
+    } else {
+      setValidationStreetAddress(true);
+      setValidationStreetAddressMessage(validationResult);
     }
   };
 
@@ -273,7 +292,7 @@ const CheckoutForm = () => {
       <form onSubmit={handleSubmit} className="form">
         <CheckoutFieldWithValidation
           icon={AiOutlineFontSize}
-          placeholderText="Full name"
+          placeholderText="Full name *"
           id="fullname"
           value={fullname}
           handleInput={handleFullnameChange}
@@ -284,20 +303,23 @@ const CheckoutForm = () => {
           maxLength={100}
         />
 
-        <CheckoutField
+        <CheckoutFieldWithValidation
           icon={LuMap}
           id="streetAddress"
           value={streetAddress}
-          placeholderText="Street address"
-          handleInput={(e) => setStreetAddress(e.target.value)}
+          placeholderText="Street address *"
+          handleInput={handleStreetAddressChange}
+          validationComponent={validationStreetAddress}
+          validationComponentMessage={validationStreetAddressMessage}
           inputType="text"
           inputMode="text"
+          maxLength={120}
         />
 
         <DropdownField
           icon={AiOutlineGlobal}
           listOptions={listCountries}
-          placeholderText="Choose your country"
+          placeholderText="Choose your country *"
           value={country}
           setValue={setCountry}
           handleClick={handleCountryChange}
@@ -342,7 +364,7 @@ const CheckoutForm = () => {
 
         <CheckoutFieldWithValidation
           icon={FiPhone}
-          placeholderText="Phone number"
+          placeholderText="Phone number *"
           id="phoneNumber"
           value={phoneNumber}
           handleInput={handlePhoneNumberChange}
