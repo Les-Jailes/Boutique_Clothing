@@ -14,7 +14,7 @@ const OrderContainer = ({ order, selectedOrderId, handleToggleTable, index, tota
 
       {selectedOrderId === order._id && (
         <div className={styles.table_container}>
-          <OrderDetailsTable purchasedProducts={order.purchasedProducts} />
+          <OrderDetailsTable purchasedProducts={order.purchasedProducts} orderDetails={order} />
         </div>
       )}
     </div>
