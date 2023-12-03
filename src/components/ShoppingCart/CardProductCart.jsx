@@ -8,16 +8,19 @@ import PropTypes from 'prop-types'
 import { CartContext } from "@/components/Products/CartContext";
 import SoldOut from "./SoldOut";
 import api from "@/app/api/api";
+import Loader from "@/utils/Loader";
+import loading from "@/app/pages/about-us/loading";
 
 const CardProductCart = ({ product, editable}) => {
   const [available, setAvailable] = useState(true);
   const [reducible, setReducible] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const { cart } = useContext(CartContext);
   
 
   useEffect(() => {
     inStock();
-  }, [product.quantity]);
+  });
 
   const inStock = async () => {
     
@@ -30,6 +33,7 @@ const CardProductCart = ({ product, editable}) => {
       setReducible(sizeFound.quantity > 0);
       setAvailable(sizeFound.quantity >= selectedQuantity);
       product.available = available;
+      setIsLoading(false);
       
     } catch (error) {
       
@@ -44,6 +48,7 @@ const CardProductCart = ({ product, editable}) => {
   
   return (
     <div className={`card-product-cart-container ${available ? 'available' : ''}`}>
+      {isLoading && <Loader isLoaderVisible={isLoading}/>}
       <div className="image-card-product-cart-container card-cart-container">
         <div className={ ` background-image-product ${product.category} ` }>
           <Image
