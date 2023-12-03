@@ -179,6 +179,7 @@ const Profile = () => {
   };
 
   const genderOptions = [
+    
     { value: 'Rather not say', label: 'Rather not say' },
     { value: 'Male', label: 'Male' },
     { value: 'Female', label: 'Female' },
