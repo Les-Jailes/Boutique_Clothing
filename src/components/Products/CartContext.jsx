@@ -43,7 +43,7 @@ export const CartProvider = ({ children }) => {
     setIsCartLoaded(true);
   }, []);
 
-  const addToCart = (newProduct) => {
+  const addToCart = async (newProduct) => {
     newProduct.available = true;
     getMaxQuantity(newProduct);
 
@@ -65,9 +65,10 @@ export const CartProvider = ({ children }) => {
         else {
         updatedProducts[existingProductIndex] = {
           ...updatedProducts[existingProductIndex],
-          quantity: updatedProducts[existingProductIndex].quantity + 1
-        };
-        updatedTotal += parseFloat(newProduct.price);
+            quantity: updatedProducts[existingProductIndex].quantity + 1,
+          };
+          updatedTotal += parseFloat(newProduct.price);
+          updatedTotalProducts += 1;
         }
       } else {
         const productWithId = { ...newProduct, quantity: 1, id: uuidv4() };
@@ -78,9 +79,9 @@ export const CartProvider = ({ children }) => {
   
       const updatedCart = {
         ...prevCart,
-        products: updatedProducts.map(product => ({
+        products: updatedProducts.map((product) => ({
           ...product,
-          id: product.id || uuidv4()
+          id: product.id || uuidv4(),
         })),
         total: updatedTotal,
         totalProducts: updatedTotalProducts,
@@ -89,7 +90,7 @@ export const CartProvider = ({ children }) => {
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       return updatedCart;
     });
-  };
+  };  
   
 
   const removeFromCart = (productToRemove) => {
