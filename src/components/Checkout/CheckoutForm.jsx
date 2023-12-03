@@ -48,7 +48,7 @@ const CheckoutForm = () => {
 
   const [taxes, setTaxes] = useState(0);
 
-  const [age, setAge] = useState(true);
+  const [age, setAge] = useState(false);
 
   const { calculateTax } = useContext(CartContext);
 
@@ -169,7 +169,7 @@ const CheckoutForm = () => {
     if (
       !validationFullname &&
       !validationPhoneNumber &&
-      age === "verified" &&
+      age &&
       validateForm()
     ) {
       localStorage.setItem(
@@ -200,7 +200,7 @@ const CheckoutForm = () => {
   };
 
   const handleChange = () => {
-    setAge("verified");
+    setAge(!age);
   };
 
   const handleCountryChange = useCallback(
@@ -379,7 +379,7 @@ const CheckoutForm = () => {
             type="checkbox"
             className="checkbox"
             name="vehicle1"
-            value={age}
+            checked={age}
             onChange={() => handleChange()}
           />
           <label className="checkbox-label">
