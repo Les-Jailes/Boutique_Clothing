@@ -182,7 +182,7 @@ const Login = () => {
               onChange={(e) => handleInputChange(e, 'email')}
               value={emailInput}
               maxLength={100}
-              placeholder="Email"
+              placeholder="Email *"
               className={styles.input}
               required
             />
@@ -194,7 +194,7 @@ const Login = () => {
             <AiOutlineLock className={styles.icon} />
             <input
               type={passwordVisible ? 'text' : 'password'}
-              placeholder="Password"
+              placeholder="Password *"
               className={styles.input}
               value={passwordInput}
               onChange={(e) => handleInputChange(e, 'password')}
