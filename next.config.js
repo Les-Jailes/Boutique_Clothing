@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
-
-module.exports = {
-    images: {
-        domains: ['i.postimg.cc', 'im3.ezgif.com']
-    }
+const nextConfig = {
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "**"
+			}
+		]
+	}
 }
 
+module.exports = nextConfig

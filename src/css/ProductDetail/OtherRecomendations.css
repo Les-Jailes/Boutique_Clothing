@@ -16,6 +16,7 @@
     height: 800px;
     position: relative;
     overflow: hidden;
+    margin-top: 40px;
 }
 
 .slider-item {
@@ -27,6 +28,22 @@
 
 .clothe-card-container {
     margin: auto;
+}
+
+.more-products {
+    margin-top: 40px;
+    border: 1px solid #000;
+    width: 200px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 10px;
+    transition: all 0.5s;
+}
+
+.more-products:hover {
+    background-color: #000;
+    color: #fff;
 }
 
 @media (max-width: 630px) {

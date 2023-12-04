@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import createPagination from "@/utils/Pagination";
 import { ClotheCard } from "@/components/Products/ClotheCard";
 import "@/css/Products/ProductsPage.css";
