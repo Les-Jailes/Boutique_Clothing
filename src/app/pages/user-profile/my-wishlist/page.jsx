@@ -9,7 +9,6 @@ import api from '@/app/api/api'
 import { useSession } from "next-auth/react";
 import NoProductsFound from "./NoProductsFound";
 import Loader from '@/utils/Loader'
-import { showToast } from '@/components/Alerts/CustomToast'
 
 
 export default function Page() {
@@ -76,7 +75,7 @@ export default function Page() {
       setProducts(uniqueProducts);
 
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 
     if(wishlistProducts.length === 0) setEmpty(true);
