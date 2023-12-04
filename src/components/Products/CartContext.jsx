@@ -41,7 +41,7 @@ export const CartProvider = ({ children }) => {
       setCart(cartData);
     }
     setIsCartLoaded(true);
-  }, [localStorage]);
+  }, []);
 
 const addToCart = async (newProduct) => {
   newProduct.available = true;
