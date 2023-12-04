@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "@/app/api/api";
 import MultiSlider from "@/components/Home/OurProducts/MultiSlider";
 import Loader from "@/utils/Loader";
 
@@ -9,8 +9,8 @@ const OurProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://boutique-clothing-api.onrender.com/Product")
+    api
+      .get("/Product")
       .then((response) => {
         const allProducts = response.data;
         const randomIndexes = [];
@@ -31,10 +31,9 @@ const OurProducts = () => {
 
   return (
     <div className="our-products-carousel">
-      {
-        products && products.length > 0 ? (
-          <MultiSlider products={products} />
-        ) : (
+      {products && products.length > 0 ? (
+        <MultiSlider products={products} />
+      ) : (
           <Loader isLoaderVisible={true} />
         )
       }
