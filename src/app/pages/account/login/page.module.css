@@ -14,11 +14,12 @@
   flex-direction: column;
   background-color: #fff;
   border-radius: 20px;
+  width: 400px;
+  padding: 40px;
 }
 .form {
   display: flex;
   flex-direction: column;
-  padding: 10px 80px 10px 80px;
 }
 
 .title {
@@ -93,13 +94,16 @@
 }
 .button:hover {
   background: #000;
-  color: white;
+  color: #ffffff;
 }
 
 .bottomSignUp {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 20px;
   align-items: center;
+  width: 100%;
+  margin: auto;
 }
 
 .signUpTxt {
@@ -126,10 +130,6 @@
 }
 
 @media screen and (max-width: 500px) {
-  .formContainer {
-    padding: 2rem 4rem;
-  }
-
   .validation {
     font-size: 9px;
   }
@@ -149,7 +149,6 @@
     overflow: hidden;
   }
   .formContainer {
-    padding: 1rem 2rem;
     gap: 0;
     margin: 0;
     height: 600px;
@@ -185,28 +184,5 @@
   }
   .form {
     padding: 10px 15px 10px 15px;
-  }
-}
-@media screen and (max-height: 800px) {
-  .container {
-    z-index: -1;
-  }
-  .formContainer {
-    padding: 5px 20px;
-    gap: 2px;
-    margin: 0;
-    overflow: hidden;
-    height: 450px;
-    z-index: 1;
-  }
-  .bottomSignUp {
-    display: flex;
-  }
-  .validation {
-    font-size: 9px;
-  }
-
-  .text {
-    margin-top: 20px;
   }
 }
