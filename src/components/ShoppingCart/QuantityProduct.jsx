@@ -103,6 +103,7 @@ QuantityProduct.propTypes = {
   limit: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
   idProduct: PropTypes.string.isRequired,
+  product: PropTypes.object.isRequired
 };
 
 export default QuantityProduct;

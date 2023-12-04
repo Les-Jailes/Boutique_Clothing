@@ -15,8 +15,7 @@ import { useSession } from "next-auth/react";
 import api from "@/app/api/api";
 import Loader from "@/utils/Loader";
 import {
-  showAlertMessageAutomatically,
-  showErrorMessage,
+  showAlertMessageAutomatically
 } from "@/utils/alerts";
 
 const Product = ({ product }) => {
@@ -85,7 +84,7 @@ const Product = ({ product }) => {
       };
       await api.put("/User/" + user.data._id, body);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     setIsLiked(true);
     setIsLoading(false);

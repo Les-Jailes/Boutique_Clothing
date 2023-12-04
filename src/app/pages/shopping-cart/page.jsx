@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useContext, useEffect, useCallback } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import "@/css/Cart/ShoppingCart.css";
 import CardProductCart from "@/components/ShoppingCart/CardProductCart";
 import CheckOutButton from "@/components/ShoppingCart/CheckOutButton";
@@ -33,7 +33,7 @@ const Cart = () => {
         <h2 className="your-cart-title">YOUR CART</h2>
         <div className="list-your-cart-container">
           {cart.products.map((product) => {
-            return <CardProductCart product={product} key={product.code} editable={true}/>;
+            return <CardProductCart product={product} key={product.id} editable={true}/>;
           })}
         </div>
       </div>

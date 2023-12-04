@@ -79,7 +79,7 @@ export const ClotheCard = ({ clothe }) => {
     await api.put('/User/' + user.data._id, body);
     }
     catch(error){
-      console.log(error);
+      console.error(error);
     }
     setIsLiked(true);
     setIsLoading(false);
