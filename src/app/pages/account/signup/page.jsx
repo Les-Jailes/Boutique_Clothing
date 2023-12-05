@@ -6,7 +6,7 @@ import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible, AiOutli
 import {PiIdentificationCardLight} from 'react-icons/pi'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import {validateNumberField, validateEmail, validatePassword, validateTextField} from '@/utils/formValidations'
+import {validateEmail, validatePassword, validateTextField, validateCiField} from '@/utils/formValidations'
 import api from '@/app/api/api'
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import bcrypt from "bcryptjs";
@@ -144,7 +144,7 @@ export default function SignUp() {
     }
   };
   const validateCiInput = (ci) => {
-    const [isValid, validationResult] = validateNumberField(ci, "CI");
+    const [isValid, validationResult] = validateCiField(ci, "CI");
     if (isValid) {
       setValidationCi(false);
     } else {
@@ -166,29 +166,29 @@ export default function SignUp() {
           <h1 className={styles.title}>Sign Up</h1>
           <div className={styles.inputBox}>
           <AiOutlineUser className={styles.icon}/>
-            <input type="text" onChange={handleNameChange} value={nameInput} placeholder='Name' className={styles.input} maxLength={100} pattern="[A-Za-z\s]+"  required/>
+            <input type="text" onChange={handleNameChange} value={nameInput} placeholder='Name *' className={styles.input} maxLength={100} pattern="[A-Za-z\s]+"  required/>
             <p className={styles.validation}>{validationName ? validNameMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
           <AiOutlineFontSize className={styles.icon}/>
-            <input type="text" onChange={handleLastNameChange} value={lastNameInput} placeholder='Last Name' className={styles.input} maxLength={100} pattern="[A-Za-z\s]+" required/>
+            <input type="text" onChange={handleLastNameChange} value={lastNameInput} placeholder='Last Name *' className={styles.input} maxLength={100} pattern="[A-Za-z\s]+" required/>
             <p className={styles.validation}>{validationLastName ? validLastNameMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
           <AiOutlineMail className={styles.icon}/>
-            <input type="email" onChange={handleEmailChange} value={emailInput} maxLength={100} placeholder='Email' className={styles.input} required/>
+            <input type="email" onChange={handleEmailChange} value={emailInput} maxLength={100} placeholder='Email *' className={styles.input} required/>
             <p className={styles.validation}>{validationEmail ? valiEmailMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
           <PiIdentificationCardLight className={styles.icon}/>
-            <input type="text" onChange={handleCiChange} value={ciInput} placeholder='CI' className={styles.input} maxLength={16} inputMode='numeric' required/>
+            <input type="text" onChange={handleCiChange} value={ciInput} placeholder='CI *' className={styles.input} maxLength={16} inputMode='numeric' required/>
             <p className={styles.validation}>{validationCi ? validCiMessage : ''}</p>
           </div>
           <div className={styles.inputBox}>
             <AiOutlineLock className={styles.icon} />
             <input
               type={passwordVisible ? 'text' : 'password'}
-              placeholder="Password"
+              placeholder="Password *"
               className={styles.input}
               value={passwordInput}
               onChange={handlePasswordChange}

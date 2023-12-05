@@ -1,29 +1,39 @@
-'use client'
-import 'dotenv/config'
-import React,{useState, useEffect} from 'react'
-import styles from './page.module.css'
-import { signIn, useSession } from 'next-auth/react'
-import Link from 'next/link'
-import {AiOutlineUser,AiOutlineLock, AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
-import { useRouter } from 'next/navigation'
-import { validateEmail, validatePassword } from '@/utils/formValidations';
-import GoogleAuthButton from '@/components/GoogleAuthentication/GoogleAuthButton';
-import { showToast } from '@/components/Alerts/CustomToast'
-import { showAccountAlreadyExistsAlert, showAccountAlreadyExistsAlertSingIn } from '../signup/confirmationAlert'
-import api from '@/app/api/api'
+"use client";
+import "dotenv/config";
+import React, { useState, useEffect } from "react";
+import styles from "./page.module.css";
+import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
+import {
+  AiOutlineUser,
+  AiOutlineLock,
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+} from "react-icons/ai";
+import { useRouter } from "next/navigation";
+import { validateEmail, validatePassword } from "@/utils/formValidations";
+import GoogleAuthButton from "@/components/GoogleAuthentication/GoogleAuthButton";
+import { showToast } from "@/components/Alerts/CustomToast";
+import {
+  showAccountAlreadyExistsAlertSingIn,
+} from "../signup/confirmationAlert";
+import api from "@/app/api/api";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [emailInput, setEmailInput] = useState('');
-  const [passwordInput, setPasswordInput] = useState('');
-  const [validation, setValidation] = useState({ email: { valid: true, message: '' }, password: { valid: true, message: '' } });
-  const session = useSession()
-  const router = useRouter()
+  const [emailInput, setEmailInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const [validation, setValidation] = useState({
+    email: { valid: true, message: "" },
+    password: { valid: true, message: "" },
+  });
+  const session = useSession();
+  const router = useRouter();
   const isEmailValid = () => {
-    if (emailInput.trim() === '') {
+    if (emailInput.trim() === "") {
       setValidation((prev) => ({
         ...prev,
-        email: { valid: true, message: '' },
+        email: { valid: true, message: "" },
       }));
       return true;
     }
@@ -37,10 +47,10 @@ const Login = () => {
   };
 
   const isPasswordValid = () => {
-    if (passwordInput.trim() === '') {
+    if (passwordInput.trim() === "") {
       setValidation((prev) => ({
         ...prev,
-        password: { valid: true, message: '' },
+        password: { valid: true, message: "" },
       }));
       return true;
     }
@@ -55,9 +65,9 @@ const Login = () => {
 
   const handleInputChange = (e, inputType) => {
     const updatedInput = e.target.value;
-    if (inputType === 'email') {
+    if (inputType === "email") {
       setEmailInput(updatedInput);
-    } else if (inputType === 'password') {
+    } else if (inputType === "password") {
       setPasswordInput(updatedInput);
     }
   };
@@ -66,25 +76,21 @@ const Login = () => {
     e.preventDefault();
     let flag;
     let user;
-    try{
-      user = await api.get('/User/email/'+  emailInput);
+    try {
+      user = await api.get("/User/email/" + emailInput);
       flag = false;
-    }
-    catch(error){
+    } catch (error) {
       flag = true;
     }
     if (isEmailValid() && isPasswordValid()) {
-      if(flag===true)showAccountAlreadyExistsAlertSingIn(router);
-      else{
-        if(user.data.wishlist) localStorage.setItem('wishlist', JSON.stringify(user.data.wishlist));
-        else localStorage.setItem('wishlist', JSON.stringify([]));
-        console.log(JSON.parse(localStorage.getItem('wishlist')));
-        signIn('credentials', { email: emailInput, password: passwordInput });
+      if (flag === true) showAccountAlreadyExistsAlertSingIn(router);
+      else {
+        if (user.data.wishlist)
+          localStorage.setItem("wishlist", JSON.stringify(user.data.wishlist));
+        else localStorage.setItem("wishlist", JSON.stringify([]));
+        signIn("credentials", { email: emailInput, password: passwordInput });
       }
-    }else{
-      
     }
-
   };
 
   const handlePasswordToggle = () => {
@@ -92,84 +98,78 @@ const Login = () => {
   };
 
   useEffect(() => {
-    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForPayment");
+    const showCartEmptyToast = localStorage.getItem(
+      "showLogInRequiredForPayment"
+    );
     if (showCartEmptyToast === "true") {
-      showToast(
-        "Please log in to purchase.",
-        "info"
-      );
+      showToast("Please log in to purchase.", "info");
       localStorage.removeItem("showLogInRequiredForPayment");
     }
   }, []);
 
   useEffect(() => {
-
     const showEmptyToast = localStorage.getItem("showLogInRequiredForWishlist");
     if (showEmptyToast === "true") {
-      showToast(
-        "Please log in to see your wish list.",
-        "info"
-      );
+      showToast("Please log in to see your wish list.", "info");
       localStorage.removeItem("showLogInRequiredForWishlist");
     }
-    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForOrderHistory");
+    const showCartEmptyToast = localStorage.getItem(
+      "showLogInRequiredForOrderHistory"
+    );
     if (showCartEmptyToast === "true") {
-      showToast(
-        "Please log in to see your order history.",
-        "info"
-      );
+      showToast("Please log in to see your order history.", "info");
       localStorage.removeItem("showLogInRequiredForOrderHistory");
     }
   }, []);
 
   useEffect(() => {
-    const showCartEmptyToast = localStorage.getItem("showLogInRequiredForProfile");
+    const showCartEmptyToast = localStorage.getItem(
+      "showLogInRequiredForProfile"
+    );
     if (showCartEmptyToast === "true") {
-      showToast(
-        "Please log in to see your profile.",
-        "info"
-      );
+      showToast("Please log in to see your profile.", "info");
       localStorage.removeItem("showLogInRequiredForProfile");
     }
   }, []);
 
   useEffect(() => {
     const [isValid, message] = validateEmail(emailInput);
-  
-    setValidation(prev => ({
-      ...prev, 
-      email: {valid: isValid, message}
+
+    setValidation((prev) => ({
+      ...prev,
+      email: { valid: isValid, message },
     }));
-  
   }, [emailInput]);
-  
+
   useEffect(() => {
     const [isValid, message] = validatePassword(passwordInput);
-     
-    setValidation(prev => ({
-     ...prev,
-     password: {valid: isValid, message}
+
+    setValidation((prev) => ({
+      ...prev,
+      password: { valid: isValid, message },
     }));
-  
   }, [passwordInput]);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-    const showToastParam = queryParams.get('showToast');
+    const showToastParam = queryParams.get("showToast");
 
-    if (showToastParam === 'true') {
-      showToast(`"An account with this email already exists. Please log in with your existing account."`, "error");
-      queryParams.delete('showToast');
+    if (showToastParam === "true") {
+      showToast(
+        `"An account with this email already exists. Please log in with your existing account."`,
+        "error"
+      );
+      queryParams.delete("showToast");
       window.history.replaceState(null, null, "?" + queryParams.toString());
     }
   }, []);
-  
+
   useEffect(() => {
-    if(session.status === "authenticated") {
-      router.push("/")
+    if (session.status === "authenticated") {
+      router.push("/");
     }
-  }, [session, router])
- 
+  }, [session, router]);
+
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
@@ -179,30 +179,30 @@ const Login = () => {
             <AiOutlineUser className={styles.icon} />
             <input
               type="email"
-              onChange={(e) => handleInputChange(e, 'email')}
+              onChange={(e) => handleInputChange(e, "email")}
               value={emailInput}
               maxLength={100}
-              placeholder="Email"
+              placeholder="Email *"
               className={styles.input}
               required
             />
             <p className={styles.validation}>
-              {validation.email.valid ? '' : validation.email.message}
+              {validation.email.valid ? "" : validation.email.message}
             </p>
           </div>
           <div className={styles.inputBox}>
             <AiOutlineLock className={styles.icon} />
             <input
-              type={passwordVisible ? 'text' : 'password'}
-              placeholder="Password"
+              type={passwordVisible ? "text" : "password"}
+              placeholder="Password *"
               className={styles.input}
               value={passwordInput}
-              onChange={(e) => handleInputChange(e, 'password')}
+              onChange={(e) => handleInputChange(e, "password")}
               maxLength={20}
               required
             />
             <p className={styles.validation}>
-              {validation.password.valid ? '' : validation.password.message}
+              {validation.password.valid ? "" : validation.password.message}
             </p>
             {passwordVisible ? (
               <AiOutlineEyeInvisible
@@ -217,18 +217,20 @@ const Login = () => {
             )}
           </div>
           <button className={styles.button}>Log in</button>
-          <p className={styles.text} >or Log In with</p>
-          <div className={styles.googleAuthButtonDiv} >
+          <p className={styles.text}>or Log In with</p>
+          <div className={styles.googleAuthButtonDiv}>
             <GoogleAuthButton />
           </div>
         </form>
         <div className={styles.bottomSignUp}>
           <p className={styles.signUpTxt}>Don&apos;t you have an account?</p>
-          <Link href={"/pages/account/signup"} className={styles.signUpButton}>Sign Up</Link>
-      </div>
+          <Link href={"/pages/account/signup"} className={styles.signUpButton}>
+            Sign Up
+          </Link>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

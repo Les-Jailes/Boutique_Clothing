@@ -4,7 +4,7 @@ import "@/css/Checkout/CheckoutForm.css";
 import { AiOutlineFontSize, AiOutlineGlobal } from "react-icons/ai";
 import { LuMap } from "react-icons/lu";
 import { FiPhone } from "react-icons/fi";
-import { 
+import {
   validateNumberField,
   validateFullNameField,
   validateStreetAddress,
@@ -12,10 +12,9 @@ import {
 import { GoArrowRight } from "react-icons/go";
 import Swal from "sweetalert2";
 import { useSession } from "next-auth/react";
-import api from "@/app/api/api"; 
+import api from "@/app/api/api";
 import {
   CheckoutFieldWithValidation,
-  CheckoutField,
   DropdownField,
   DropdownFieldSubcity,
   CheckoutFieldNoEditable,
@@ -35,7 +34,8 @@ const CheckoutForm = () => {
   const [countryCode, setCountryCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [validationStreetAddress, setValidationStreetAddress] = useState(false);
-  const [validationStreetAddressMessage, setValidationStreetAddressMessage] = useState("");
+  const [validationStreetAddressMessage, setValidationStreetAddressMessage] =
+    useState("");
   const [zipCode, setZipCode] = useState("");
 
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -46,9 +46,7 @@ const CheckoutForm = () => {
   const [listCity, setListCity] = useState([]);
   const [listSubcity, setListSubcity] = useState([]);
 
-  const [taxes, setTaxes] = useState(0);
-
-  const [age, setAge] = useState(true);
+  const [age, setAge] = useState(false);
 
   const { calculateTax } = useContext(CartContext);
 
@@ -100,7 +98,10 @@ const CheckoutForm = () => {
   };
 
   const validateStreetAddressValue = (address) => {
-    const [isValid, validationResult] = validateStreetAddress(address , "Street Address");
+    const [isValid, validationResult] = validateStreetAddress(
+      address,
+      "Street Address"
+    );
     if (isValid) {
       setValidationStreetAddress(false);
     } else {
@@ -169,7 +170,7 @@ const CheckoutForm = () => {
     if (
       !validationFullname &&
       !validationPhoneNumber &&
-      age === "verified" &&
+      age &&
       validateForm()
     ) {
       localStorage.setItem(
@@ -200,7 +201,7 @@ const CheckoutForm = () => {
   };
 
   const handleChange = () => {
-    setAge("verified");
+    setAge(!age);
   };
 
   const handleCountryChange = useCallback(
@@ -210,7 +211,6 @@ const CheckoutForm = () => {
       setCity("");
       setListSubcity([]);
       setListCity([]);
-      setTaxes(0);
       setCountry(selectedCountry);
       availableCities(selectedCountry);
       getAbbreviationCountry(selectedCountry);
@@ -252,7 +252,6 @@ const CheckoutForm = () => {
       const cityObject = await api.get(
         `/Country/name/${countryName}/city/${cityName}`
       );
-      setTaxes(cityObject.data.tax);
       calculateTax(cityObject.data.tax);
       if (cityObject.data.zipCodes.length === 0) {
         setZipCode("00000");
@@ -379,7 +378,7 @@ const CheckoutForm = () => {
             type="checkbox"
             className="checkbox"
             name="vehicle1"
-            value={age}
+            checked={age}
             onChange={() => handleChange()}
           />
           <label className="checkbox-label">

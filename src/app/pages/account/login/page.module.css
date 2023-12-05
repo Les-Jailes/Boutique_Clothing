@@ -1,78 +1,76 @@
-.container{
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url("/bg-login.png");
-    background-size: cover;
-    background-position: center;
-    font-family: var(--font-family-poppins);
+.container {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/bg-login.png");
+  background-size: cover;
+  background-position: center;
+  font-family: var(--font-family-poppins);
 }
-.formContainer{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    gap: 5rem;
-    padding: 2.3rem 6rem;
-    background-color: #fff;
-    border-radius: 20px;
+.formContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 20px;
+  width: 400px;
+  padding: 40px;
 }
-.form{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
+.form {
+  display: flex;
+  flex-direction: column;
 }
 
-.title{
-    font-size: 36px;
-    color: #0b0217;
-    text-align: center;
-    margin-bottom: 2rem;
+.title {
+  font-size: 36px;
+  color: #0b0217;
+  text-align: center;
 }
-.inputBox{
-    position: relative;
-    margin: 15px auto;
-    width: 100%;
-    height: 25px;
+.inputBox {
+  position: relative;
+  margin: 15px auto;
+  width: 100%;
+  height: 25px;
 }
-.input{
-    height: 100%;
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    padding-left: 30px;
-    color: #000000;
-    transition: all 0.2s ease;
-    border-bottom: 1.5px solid #000000;
+.input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding-left: 30px;
+  color: #000000;
+  transition: all 0.2s ease;
+  border-bottom: 1.5px solid #000000;
 }
 .text {
-    text-align: center;
-    color: black;   
-    font-size: 14px;
-    font-weight: 300px;
-    margin-top: 44px;
+  text-align: center;
+  color: black;
+  font-size: 14px;
+  font-weight: 300px;
+  margin-top: 44px;
 }
 .googleAuthButtonDiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
-.input:focus{
-    border-color: #646464;
+.input:focus {
+  border-color: #646464;
 }
-.icon{
+.icon {
   color: #000000;
   position: absolute;
   top: 40%;
   transform: translateY(-50%);
   font-size: 20px;
 }
-.icon:focus{
-    color: #b1b1b1;
+.icon:focus {
+  color: #b1b1b1;
 }
-.iconLock{
+.iconLock {
   color: #000000;
   position: absolute;
   top: 40%;
@@ -81,129 +79,110 @@
   right: 5%;
   cursor: pointer;
 }
-.iconLock:focus{
-    color: #b1b1b1;
+.iconLock:focus {
+  color: #b1b1b1;
 }
-
 
 .button {
-    background: transparent;
-    margin-top: 30px;
-    width: 100%;
-    padding: 10px 0;
-    border-radius: 30px;
-    border: 0.1rem solid #000;
-    transition: 0.5s ease;
+  background: transparent;
+  margin-top: 30px;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 30px;
+  border: 0.1rem solid #000;
+  transition: 0.5s ease;
 }
 .button:hover {
-    background: #000;
-    color: white;
+  background: #000;
+  color: #ffffff;
+}
+
+.bottomSignUp {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+}
+
+.signUpTxt {
+  padding: 15px;
+  font-size: 12px;
+}
+.signUpButton {
+  text-align: none;
+  font-size: 14px;
+  color: #000;
+  background: transparent;
+  padding: 10px 15px;
+  border: none;
+  transition: 0.3s ease;
+  border-radius: 30px;
+}
+.signUpButton:hover {
+  border: 0.1rem solid #000;
+}
+
+.validation {
+  font-size: 12px;
+  color: rgb(185, 17, 17);
+}
+
+@media screen and (max-width: 500px) {
+  .validation {
+    font-size: 9px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .googleAuthButtonDiv {
+    margin: 5px;
+  }
+  .text {
+    margin-top: 5px;
+  }
+  .button {
+    margin-top: 15px;
+  }
+  .container {
+    overflow: hidden;
+  }
+  .formContainer {
+    gap: 0;
+    margin: 0;
+    height: 600px;
+    overflow: hidden;
+  }
+  .bottomSignUp {
+    margin: 0;
+    display: flex;
+    gap: 0;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
-.bottomSignUp{
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    align-items: center;
-}
-
-.signUpTxt{
+  .signUpTxt {
     font-size: 12px;
-}
-.signUpButton{
-    text-align: none;
-    font-size: 14px;
+    text-wrap: nowrap;
+    margin: 0;
+  }
+  .signUpButton {
+    margin: 0;
+    text-wrap: nowrap;
+    font-size: 12px;
     color: #000;
     background: transparent;
-    padding: 10px 15px;
+    padding: 5px 8px;
     border: none;
     transition: 0.3s ease;
-    border-radius: 30px;
-    
-}
-.signUpButton:hover{
-    border: 0.1rem solid #000;
-}
-
-.validation{
-    font-size: 12px;
-    color: rgb(185, 17, 17);
-}
-
-@media screen and (max-width: 500px){
-    .formContainer{
-        padding: 2rem 4rem;
-    }
-    
-    .validation{
-        font-size: 9px;
-    }
-}
-
-@media screen and (max-width: 500px){
-    .googleAuthButtonDiv{
-        margin: 5px;
-    }
-    .button {
-        margin: 0;
-    }
-    .container{
-        overflow: hidden;
-    }
-    .formContainer{
-        padding: 1rem 2rem;
-        gap: 0;
-        margin: 0;
-        height: 600px;
-        overflow: hidden;
-    }
-    .bottomSignUp{
-        margin: 0;
-        display: flex;
-        gap: 0;
-        align-items: center;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-    
-    .signUpTxt{
-        font-size: 12px;
-        text-wrap: nowrap;
-        margin: 0;
-    }
-    .signUpButton{
-        margin: 0;
-        text-wrap: nowrap;
-        font-size: 12px;
-        color: #000;
-        background: transparent;
-        padding: 5px 8px;
-        border: none;
-        transition: 0.3s ease;
-        border-radius: 10px;
-        
-    }
-    .validation{
-        font-size: 9px;
-    }
-}
-@media screen and (max-height: 800px){
-    .container{
-        
-        z-index: -1;
-    }
-    .formContainer{
-        padding: 5px 20px;
-        gap: 2px;
-        margin: 0;
-        overflow: hidden;
-        height: 450px;
-        z-index: 1;
-    }
-    .bottomSignUp{
-        display: flex;
-    }
-    .validation{
-        font-size: 9px;
-    }
+    border-radius: 10px;
+  }
+  .validation {
+    font-size: 9px;
+  }
+  .form {
+    padding: 10px 15px 10px 15px;
+  }
 }
